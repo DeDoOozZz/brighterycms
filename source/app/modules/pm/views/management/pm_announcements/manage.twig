@@ -1,0 +1,46 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.announce }}</h3>
+
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,true,'role="form" class="form-horizontal"  method ="post"') }}
+        {{ error }}
+
+        {#<form role="form" class="form-horizontal" role="form">#}
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="field-1">{{ lang.title }}</label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" for="field-1" id="name"  name="title"
+                                      value="{{ helper.form.value('title', item.title) }}">
+                </div>
+            </div>
+
+            <div class="form-group-separator"></div>
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="field-5">{{ lang.content }}</label>
+
+                <div class="col-sm-10">
+                    <textarea class="form-control" cols="5" id="field-5" name="content"  >{{ helper.form
+                             .value('content', item.content) }}</textarea>
+                </div>
+            </div>
+
+            <div class="form-group-separator"></div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-info btn-single pull-right" value ="{{ lang.submit }}">
+            </div>
+
+
+
+        </form>
+
+        {{ helper.form.close() }}
+    </div>
+</div>
+

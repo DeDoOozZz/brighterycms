@@ -1,0 +1,31 @@
+
+<section class="main-section-page" style="margin-top: 165px;">
+    <div class="container">
+        <h4 class="career-main-title">List of Doctors</h4>
+        {% for item in items %}
+            <div class="row doctors-blocks">
+
+                <div class="col-sm-2 doctor-image ">
+                    <img src="{{helper.uri.cdn()}}users/{{item.image}}" style="width:128px;height:128px;">  
+
+                </div>
+                <div class="col-sm-6 doctor-details">
+                    <h2><span>{{item.fullname}}</span></h2>
+                    <p>{{item.description}}</p>
+                    <div class="reservation-details">
+                        <span class="reservation-details-title"><i class="fa fa-stethoscope"></i>Specification</span>
+                        <span class="reservation-details-content">{{item.specification}}</span>
+                    </div>
+                    <div class="reservation-details">
+                        <span class="reservation-details-title"><i class="fa fa-map-marker"></i>Location</span>
+                        <span class="reservation-details-content">{{item.address}}</span>
+                    </div>
+                    <div class="reservation-doctors">
+                        <a href="{{ helper.uri.url('clinic_reservations/get_schedule',item.user_id) }}">View doctor Schedule</a>
+                    </div>
+                </div>
+
+            </div>
+        {%endfor%}
+    </div>
+</section>

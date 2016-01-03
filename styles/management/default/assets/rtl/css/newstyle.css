@@ -1,0 +1,427 @@
+body{
+    direction: rtl;
+}
+.col-md-1,.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-sm-1,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12{
+    float: right;
+}
+/* SIDEBAR */
+.sidebar-menu.fixed .sidebar-menu-inner {
+    right: 0;
+}
+.sidebar-menu .logo-env .logo {
+    float: right;
+}
+.sidebar-menu .logo-env .settings-icon {
+    float: left;
+}
+.settings-pane .user-info .user-details {
+    padding-right: 20px;
+    padding-left: 0;
+}
+.settings-pane .user-info .user-details .user-links a+a {
+    margin-right: 8px;
+    margin-left: 0;
+}
+.settings-pane .links-block.left-sep {
+    border-right: 1px solid #323435;
+    border-left: 0;
+    padding-left: 0;
+    padding-right: 75px;
+}
+.list-unstyled {
+    padding-right: 0;
+}
+.settings-pane .links-block {
+    text-align: right;
+}
+.user-info-navbar .user-info-menu.left-links {
+    float: right;
+}
+.user-info-navbar .user-info-menu>li {
+    float: right;
+}
+ul.user-info-menu.right-links.list-inline.list-unstyled {
+    float: left;
+}
+.sidebar-menu .main-menu li.has-sub>a:after {
+    position: relative;
+    display: inline-block;
+    font-family: FontAwesome;
+    content: '\f106';
+    float: left;
+    color: #6d747a;
+    margin-left: 0;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    -webkit-transition: all 150ms ease-in-out;
+    -moz-transition: all 150ms ease-in-out;
+    -o-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+}
+.sidebar-menu .main-menu li.has-sub>a:before{
+    content: "";
+    margin: 0;
+}
+.sidebar-menu .main-menu a>i {
+    display: inline-block;
+    margin-right: 0;
+    margin-left: 10px;
+}
+/* NAVBAR*/
+.dropdown-menu {
+    right: 0;
+}
+.user-info-navbar .user-info-menu>li .dropdown-menu.user-profile-menu, .navbar.horizontal-menu .navbar-inner>.nav>li .dropdown-menu.user-profile-menu {
+    left: -1px;
+    right: auto;
+    width: 250px;
+}
+.user-info-navbar .user-info-menu>li.search-form .search-field, .navbar.horizontal-menu .navbar-inner>.nav>li.search-form .search-field {
+    left: 15px;
+    right: unset;
+}
+.user-info-navbar .user-info-menu>li .dropdown-menu, .navbar.horizontal-menu .navbar-inner>.nav>li .dropdown-menu {
+    margin-right: -1px;
+    margin-left: 0;
+}
+#chat.fixed .chat-inner {
+    left: 0;
+    right: unset;
+}
+#chat .chat-inner {
+    border-right: 1px solid #ddd;
+    border-left: 0
+}
+#chat .chat-header .chat-close {
+    left: 25px;
+    right: unset;
+}
+.dropdown-menu {
+    left: unset;
+    text-align: right;
+    float: right;
+}
+.dropdown-menu>li>a>i {
+    margin-left: 5px;
+    margin-right: 0;
+}
+/* Content */
+.panel .panel-heading>.panel-title {
+    float: right;
+}
+.panel .panel-heading>.panel-options {
+    float: left;
+}
+.btn-for-search{
+    left: 15px;
+    right: unset;
+}
+.btnn-for-search{
+    float: left !important;
+}
+th {
+    text-align: right;
+}
+.text-right {
+    text-align: left;
+}
+.input-group-addon:first-child {
+    border-left: 0;
+    border-right: 1px solid #dedede;
+}
+.close {
+    float: left;
+}
+.tabs-vertical-env.tabs-vertical-bordered .nav.tabs-vertical {
+    left: -1px;
+    right: unset;
+}
+.tabs-vertical-env.tabs-vertical-bordered .nav.tabs-vertical>li.active>a {
+    border-left-color: #fff;
+    border-right-color: #ddd;
+}
+.patient-edit-profile{
+    float: left !important;
+}
+.show-diseases,
+.show-xrays,
+.show-xrays{
+    float: left !important;
+}
+input[type=radio], input[type=checkbox] {
+    margin: 4px;
+    margin-top: 1px \9;
+    line-height: normal;
+}
+/*PAGINAGING*/
+.pagination {
+    padding-right: 0;
+}
+.pagination>li>a, .pagination>li>span {
+    float: right;
+    margin-right: -1px;
+    margin-left: 0;
+}
+
+/* FOOTER */
+footer.main-footer .footer-text {
+    float: right;
+}
+footer.main-footer .go-up {
+    float: left;
+}
+
+
+
+
+
+
+
+
+/*   OLD STYLE */
+.error ul {
+    padding-left: 0;
+}
+li.error_message {
+    list-style: none;
+    line-height: 30px;
+    background-color: #cc3f44;
+    color: #fff;
+    padding: 0 10px;
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+.fa-times-circle:before {
+    margin-right: 5px;
+}
+
+.page-error-search {
+    width: 300px;
+    float: right;
+    margin-bottom: 20px;
+}
+.page-error-search form.form-half {
+    width: 100%;
+}
+
+.gallery-env .album-images .album-image .name {
+    float: left;
+    width: 100%;
+    margin: 0 !important;
+}
+
+span.store_block_option {
+    color: #8dc63f !important;
+    float: right;
+}
+
+span.store_block_option i.fa-money {
+    margin-right: 3px;
+}
+
+.inistalled {
+    position: relative;
+    padding: 10px;
+    background: silver !important;
+    margin-bottom: 20px;
+    opacity: 0.7;
+}
+
+.gallery-env .gallery-sidebar ul {
+    margin:0;
+}
+
+.sidebar_store_list{
+    padding: 0;
+}
+
+.sidebar_store_list li{
+    list-style: none;
+    display:block;
+    margin-bottom:5px;
+}
+
+.sidebar_store_list li a{
+    border-bottom: 0 !important;  
+    padding-left:15px !important;
+}
+
+.wishlist_store{
+    background-color: #d5080f !important;
+    color: #fff !important;
+    line-height: 0px;
+    width: 100%;
+}
+
+.balance_store{
+    background-color:#8dc63f !important;
+    color: #fff !important;
+    line-height: 0px;
+    width: 100%;
+}
+
+.badge-money{
+    color:#8dc63f !important;
+    float:right;
+}
+
+.bage_wishlist{
+    color:#d5080f !important;
+    float:right;
+}
+
+.notification_menu{
+    font-size:18px !important;
+}
+
+.module_oprations {
+    float: left;
+    width: 100%;
+    margin: 15px 0;
+}
+
+.update_operations{
+    float:right;
+}
+
+.unistall_operations{
+    float: left;
+} 
+
+.module_description {
+    float: left;
+    padding-bottom: 15px;
+    margin-bottom:15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.album-images row module_imgs{
+    float: left;
+}
+article{
+    float:left;
+}
+
+.profile-env {
+    float: left;
+    margin: 0 15px !important;
+}
+.load_more{
+    color: #8dc63f  !important;
+}
+
+.name{
+    margin: 15px 0 !important;
+}
+span.name{
+    margin: 15px 0 !important;
+}
+.panel-options-review {
+    margin: 10px 0;
+    text-align: center;
+    float: left;
+    width: 100%;
+    cursor: pointer;
+}
+.btn+.btn {
+    margin-left: 0;
+}
+.add_review i {
+    font-size: 40px;
+    color: #68b828;
+}
+.col-sm-12.add_review {
+    text-align: center;
+}
+.col-sm-12.add_review i{
+    cursor: pointer;
+}
+.Patient-title{
+    color:#68b828 !important;
+}
+.patient-details-title {
+    font-weight: bold;
+    color: #777;
+}
+.modal-content.patient {
+    min-height: 300px;
+}
+.patient-block-details {
+    float: left;
+    width: 100%;
+    margin: 10px 0;
+}
+.patient-group-separator {
+    display: block;
+    border-bottom: 1px solid #dedede;
+    float: left;
+    width: 100%;
+    margin: 10px 0;
+}
+a.patient-name {
+    color: #68b828 !important;
+    font-size: 17px;
+}
+a.patient-name:hover{
+    text-decoration: underline;
+}
+.select-disease {
+    width: 80% !important;
+    margin-left: 15px !important;
+}
+.cancel-button{
+    float:right;
+    margin-left: 10px;
+}
+.add-patient-option{
+    color:#fff !important;
+    margin-left: 0 !important;
+}
+.add-patient-option-span{
+    text-align: center ;
+    margin-top:10px ;
+    color:#979898;
+}
+.to-show-exception-time {
+    margin: 15px 0;
+    float: left;
+    display: none;
+}
+/*.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+  float: left;
+  width: 100%;
+}*/
+.user-info-list li{
+    margin-bottom: 10px;
+}
+.margin-10 {margin-bottom: 10px}
+.user-info-navbar .user-info-menu>li>a {
+    border:none;
+}

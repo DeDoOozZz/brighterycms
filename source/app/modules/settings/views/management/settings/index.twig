@@ -1,0 +1,280 @@
+<div class="">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.general_settings }}</h3>
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,false,'role="form" id="setting" class="form-horizontal"') }}
+        {{ error }}
+
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="tabs-vertical-env">
+
+                    <ul class="nav tabs-vertical">
+                        <li class="active"><a href="#home" data-toggle="tab">{{ lang.general_settings }}</a></li>
+                        <li><a href="#styles" data-toggle="tab">{{ lang.styles }}</a></li>
+                        <li><a href="#seo" data-toggle="tab">{{ lang.seo }}</a></li>
+                        <li><a href="#status" data-toggle="tab">{{ lang.site_status }}</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="home">
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="title">{{ lang.title }}</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="title" placeholder="{{ lang.title }}"
+                                           name="title"
+                                           value="{{ item.title }}">
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="limit">{{ lang.paging_limit }}</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="limit"
+                                           placeholder="{{ lang.paging_limit }}"
+                                           value="{{ item.limit }}" id="limit">
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"
+                                       for="webmaster_email">{{ lang.webmaster_email }}</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="{{ lang.webmaster_email }}"
+                                           name="webmaster_email"
+                                           value="{{ item.webmaster_email }}" id="webmaster_email">
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="timezone">{{ lang.timezone }}</label>
+
+                                <div class="col-sm-10">
+                                    {{ helper.form.dropdown('timezone', timezones, helper.form.value('timezone', item.timezone), 'class="form-control" id="timezone" ') }}
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+
+
+                            <div class="form-group">
+                                <label for="description" class="col-sm-2 control-label">{{ lang.description }}</label>
+
+                                <div class="col-sm-10">
+                                    <textarea id="description" cols="5" name="description" class="form-control"
+                                              placeholder="{{ lang.description }}">{{ item.description }}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="keywords">{{ lang.keywords }}</label>
+
+                                <div class="col-sm-10">
+                                    <script type="text/javascript">
+                                        jQuery(document).ready(function ($) {
+                                            $("#keywords").select2({
+//                            placeholder: 'Choose your favorite US Countries',
+                                                tags: true,
+                                                tokenSeparators: [',', ' ']
+                                            });
+                                        });
+                                    </script>
+                                    <input class="form-control" id="keywords" name="keywords"
+                                           value="{{ item.keywords }}" id="keywords"
+                                           placeholder="{{ lang.keywords }}"/>
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+
+
+                        </div>
+                        <div class="tab-pane" id="styles">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"
+                                       for="management_style">{{ lang.management_style }}</label>
+
+                                <div class="col-sm-10">
+                                    {{ helper.form.dropdown('management_style', management_styles, helper.form.value('management_style', item.management_style), 'class="form-control" id="management_style" ') }}
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"
+                                       for="frontend_style">{{ lang.frontend_style }}</label>
+
+                                <div class="col-sm-10">
+                                    {{ helper.form.dropdown('frontend_style', frontend_styles, helper.form.value('frontend_style', item.frontend_style), 'class="form-control" id="frontend_style" ') }}
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"
+                                       for="frontend_layout">{{ lang.frontend_layout }}</label>
+
+                                <div class="col-sm-10">
+                                    {{ helper.form.dropdown('frontend_layout', frontend_layouts, helper.form.value('frontend_layout', item.frontend_layout), 'class="form-control" id="frontend_layout" ') }}
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"
+                                       for="management_layout">{{ lang.management_layout }}</label>
+
+                                <div class="col-sm-10">
+                                    {{ helper.form.dropdown('management_layout', management_layouts, helper.form.value('management_layout', item.management_layout), 'class="form-control" id="management_layout" ') }}
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+
+                        </div>
+                        <div class="tab-pane" id="seo">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"
+                                       for="alexa_verification">{{ lang.alexa_verification }}</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="alexa_verification"
+                                           placeholder="{{ lang.alexa_verification }}" name="alexa_verification"
+                                           value="{{ item.alexa_verification }}">
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"
+                                       for="bing_verification">{{ lang.bing_verification }}</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="bing_verification"
+                                           placeholder="{{ lang.bing_verification }}" name="bing_verification"
+                                           value="{{ item.bing_verification }}">
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"
+                                       for="yandex_verification">{{ lang.yandex_verification }}</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="yandex_verification"
+                                           placeholder="{{ lang.yandex_verification }}" name="yandex_verification"
+                                           value="{{ item.yandex_verification }}">
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"
+                                       for="google_verification">{{ lang.google_verification }}</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="google_verification"
+                                           placeholder="{{ lang.google_verification }}" name="google_verification"
+                                           value="{{ item.google_verification }}">
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="fb_app_id">{{ lang.fb_app_id }}</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="fb_app_id"
+                                           placeholder="{{ lang.fb_app_id }}"
+                                           name="fb_app_id" value="{{ item.fb_app_id }}">
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+
+
+                        </div>
+                        <div class="tab-pane" id="status">
+                            <div class="form-group">
+                                <label for="field-5" class="col-sm-2 control-label">{{ lang.site_status }}</label>
+
+                                <div class="col-sm-10">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" {% if item.site_status==1 %} checked="checked" {% endif %}
+                                                   name="site_status" value="1">
+                                            {{ lang.on }}
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" {% if item.site_status==0 %} checked="checked" {% endif %}
+                                                   name="site_status" value="0">
+                                            {{ lang.off }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+
+                            <div class="form-group">
+                                <label for="closing_message"
+                                       class="col-sm-2 control-label">{{ lang.closing_message }}</label>
+
+                                <div class="col-sm-10">
+                <textarea id="closing_message" cols="5" class="form-control"
+                          name="closing_message">{{ item.closing_message }}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group-separator"></div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-10">
+                <a href="{{ helper.uri.url('management/settings/index') }}"
+                   class="btn btn-danger cancel-button">{{ lang.cancel }}</a>
+                <button type="submit" class="btn btn-secondary" style="float: right;">{{ lang.submit }}</button>
+            </div>
+        </div>
+        {{ helper.form.close() }}
+
+
+    </div>
+</div>
+
+<script>
+    $('#frontend_style').on('change', function () {
+        $.get('{{ helper.uri.url('management/settings/get_layouts') }}/frontend/' + $("#frontend_style").val(), function (res) {
+            $("#frontend_layout").html(res);
+        });
+    });
+    $('#management_style').on('change', function () {
+        $.get('{{ helper.uri.url('management/settings/get_layouts') }}/management/' + $("#management_style").val(), function (res) {
+            $("#management_layout").html(res);
+        });
+    });
+
+</script>

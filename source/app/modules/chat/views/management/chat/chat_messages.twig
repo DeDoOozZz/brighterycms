@@ -1,0 +1,111 @@
+{#<li class="time">Thursday 04, December '14</li>#}
+{% for item in conversations %}
+    {% if user.user_id == item.user_id %}
+        <li class="me">
+            <div class="message-entry">
+                <p>{{ item.message }}</p>
+            </div>
+            <div class="user-info">
+                <a href="#">
+                    <img src="{{ helper.uri.cdn('users', item.image ) }}" width="30" height="30" alt="user-image"/>
+                </a>
+            </div>
+        </li>
+
+    {% else %}
+        <li>
+            <div class="user-info">
+                <a href="#">
+                    <img src="{{ helper.uri.cdn('users', item.image ) }}" width="30" height="30" alt="user-image"/>
+                </a>
+            </div>
+            <div class="message-entry">
+                <p>{{ item.message }}</p>
+            </div>
+        </li>
+    {% endif %}
+{% endfor %}
+
+
+
+
+
+{#<li>#}
+    {#<div class="user-info">#}
+        {#<a href="#">#}
+            {#<img src="{{ constant('STYLE_IMAGES') }}/user-1.png" width="30" height="30"#}
+                 {#alt="user-image"/>#}
+        {#</a>#}
+    {#</div>#}
+    {#<div class="message-entry">#}
+        {#<p>Warmth his law design say are person. Pronounce suspected in belonging conveying ye#}
+            {#repulsive.</p>#}
+    {#</div>#}
+{#</li>#}
+
+{#<li class="me">#}
+    {#<div class="message-entry">#}
+        {#<p>Comfort reached gay perhaps chamber his six detract besides add. Moonlight newspaper.</p>#}
+
+        {#<p>Timed voice share led his widen noisy young.</p>#}
+
+        {#<p>His six detract besides add moonlight newspaper.</p>#}
+    {#</div>#}
+    {#<div class="user-info">#}
+        {#<a href="#">#}
+            {#<img src="{{ constant('STYLE_IMAGES') }}/user-4.png" width="30" height="30"#}
+                 {#alt="user-image"/>#}
+        {#</a>#}
+    {#</div>#}
+{#</li>#}
+
+{#<li>#}
+    {#<div class="user-info">#}
+        {#<a href="#">#}
+            {#<img src="{{ constant('STYLE_IMAGES') }}/user-1.png" width="30" height="30"#}
+                 {#alt="user-image"/>#}
+        {#</a>#}
+    {#</div>#}
+    {#<div class="message-entry">#}
+        {#<p>Hello John, how are you?</p>#}
+    {#</div>#}
+{#</li>#}
+
+{#<li class="me">#}
+    {#<div class="message-entry">#}
+        {#<p>Hi Art, I am fine :) How about you?</p>#}
+    {#</div>#}
+    {#<div class="user-info">#}
+        {#<a href="#">#}
+            {#<img src="{{ constant('STYLE_IMAGES') }}/user-4.png" width="30" height="30"#}
+                 {#alt="user-image"/>#}
+        {#</a>#}
+    {#</div>#}
+{#</li>#}
+
+{#<li>#}
+    {#<div class="user-info">#}
+        {#<a href="#">#}
+            {#<img src="{{ constant('STYLE_IMAGES') }}/user-1.png" width="30" height="30"#}
+                 {#alt="user-image"/>#}
+        {#</a>#}
+    {#</div>#}
+    {#<div class="message-entry">#}
+        {#<p>Hello John, how are you?</p>#}
+    {#</div>#}
+{#</li>#}
+
+{#<li class="time">Today 17:12</li>#}
+
+{#<li class="me">#}
+    {#<div class="message-entry">#}
+        {#<p>Hi Art, I am fine :) How about you?</p>#}
+
+    {#</div>#}
+    {#<div class="user-info">#}
+        {#<a href="#">#}
+            {#<img src="{{ constant('STYLE_IMAGES') }}/user-4.png" width="30" height="30"#}
+                 {#alt="user-image"/>#}
+        {#</a>#}
+    {#</div>#}
+{#</li>#}

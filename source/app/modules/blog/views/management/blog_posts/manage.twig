@@ -1,0 +1,79 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.blog_posts }}</h3>
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,true,'role="form" class="form-horizontal"') }}
+        {{ error }}
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="title">{{ lang.category }}</label>
+            <div class="col-sm-10">
+                {{ helper.form.dropdown('blog_category_id', blog_category, helper.form.value('blog_category_id', item.blog_category_id), 'class="form-control select2"') }}
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="title">{{ lang.title }}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="title" placeholder="{{ lang.title }}" name="title"
+                       value="{{ helper.form.value('title', item.title) }}">
+            </div>
+        </div> 
+
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="seo">{{ lang.seo }}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="seo" placeholder="{{ lang.seo }}" name="seo"
+                       value="{{ helper.form.value('seo', item.seo) }}">
+            </div>
+        </div> 
+
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="image">{{ lang.image }}</label>
+
+            <div class="col-sm-10">
+                <input type="file" class="form-control" id="image" placeholder="{{ lang.image }}" name="image">
+            </div>
+        </div>
+
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="short_content">{{ lang.short_content }}</label>
+            <div class="col-sm-10">
+                <textarea  class="form-control" id="short_content" placeholder="{{ lang.short_content }}" name="short_content">{{ helper.form.value('short_content', item.short_content) }}</textarea>
+            </div>
+        </div>
+
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="content">{{ lang.content }}</label>
+            <div class="col-sm-10">
+                <textarea  class="form-control" id="content" placeholder="{{ lang.content }}" name="content" style="height:110px;">{{ helper.form.value('content', item.content) }}</textarea>
+            </div>
+        </div>
+
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-10">
+                <a href="{{ helper.uri.url('management/blog_posts/index') }}" class="btn btn-danger cancel-button">{{lang.cancel}}</a>
+                <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+            </div>
+        </div>
+        {{ helper.form.close() }}
+
+    </div>
+</div>
+
+
+

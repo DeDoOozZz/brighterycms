@@ -1,0 +1,52 @@
+@media only screen and (max-width : 700px) {
+    .container {
+        width: 100%;
+    }
+    .patient_list {
+        float: none;
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    .right-side {
+        width: 100%;
+        float: none;
+    }
+    .patient_list_title {
+        width: 60%;
+        padding-top: 15px;
+    }
+    .patient_list_title span {
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 18px;
+    }
+    .late-patients h2 {
+
+        width: 60%;
+
+    }
+    .patient_list_header, .list-patient {
+        width: 95%;
+        margin: auto;
+    }
+    .patient_list_header{
+        margin-bottom: 22px;
+    }
+    .late-patients > ul {
+        width: 95%;
+        margin: 10px auto;
+    }
+    .reservation-note h2 {
+        font-size: 18px;
+    }
+    header {
+        float: none;
+    }
+    .reservation-calender{
+        display: none;
+    }
+    .welcome-screen-logo {
+        text-align: center;
+    }
+}

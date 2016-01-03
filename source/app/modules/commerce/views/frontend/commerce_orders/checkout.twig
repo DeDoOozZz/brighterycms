@@ -1,0 +1,80 @@
+
+<!-- cart-page section 
+            ================================================== -->
+<section class="user-dashboard-section">
+    <div class="container">
+        <div class="col-sm-3 dashboard-sidebar">
+            <div class="dashboard-user-portfolio">
+                <div class="col-sm-3 dashboard-user-img">
+                    <img src="{{constant("STYLE_IMAGES")}}/user.jpg">
+                </div>
+                <div class="col-sm-9">
+                    <h4>Muhammad</h4>
+                    <h5>{{item.email}}</h5>
+                </div>
+            </div>
+            <ul>
+                <li>
+                    <i class="fa fa-cogs"></i>
+                    <a href="#">Account Setting</a>
+                </li>
+                <li>
+                    <i class="fa fa-opencart"></i>
+                    <a href="{{ helper.uri.url('commerce_cart' ) }}">My Cart</a>
+                </li>
+                <li>
+                    <i class="fa fa-gratipay"></i>
+                    <a href="{{ helper.uri.url('commerce_wishlist' ) }}">My Wishlist</a>
+                </li>
+                <li>
+                    <i class="fa fa-book"></i>
+                    <a href="{{ helper.uri.url('commerce_orders/my_orders' ) }}">My Orders</a>
+                </li>
+                <li>
+                    <i class="fa fa-retweet"></i>
+                    <a href="{{ helper.uri.url('commerce_sharing' ) }}">My Shares</a>
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-sm-8 order-list">
+            {% for order in orders %} 
+                <div class="accord-elem">
+                    <div class="accord-title">
+                        <a class="accord-link" href="#"></a>
+                        <h2><span class="" style="width: 30%; display: inline-block;">Order #{{order.commerce_order_id}}</span>  <span span class="" style="width: 30%; display: inline-block;">Total: {{order.total}} $</span> <span span class="" style="width: 30%; display: inline-block;">{{order.created}}</span></h2>
+                    </div>
+                    <div class="accord-content">
+
+                        <div class="col-sm-8">
+                            {%for product in order_details.getOrderProducts(order.commerce_order_id) %} 
+                                <div class="sub_accord-content row">
+                                    <span class="col-sm-6"> 
+                                        <a href="{{ helper.uri.url('commerce_product/index', product.commerce_product_id ) }}" class="commerce-product-block"> <img src="{{helper.uri.cdn('commerce', products.getProductPrimaryImage(product.commerce_product_id))}}" alt=""></a>
+                                    </span>
+                                    <span class="col-sm-6">
+                                        <a href="{{ helper.uri.url('commerce_product/index', product.commerce_product_id ) }}">{{product.name}}</a> <br>
+                                        Price: ${{product.price}}<br>
+                                        Qty: {{product.qty}}<br>
+                                    </span>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="col-sm-4 order-details">
+                            <span> <span class="order-details-title">Payment Method:</span> {{payment.name}}</span>
+                            <span> <span class="order-details-title">Subtotal:</span> {{order.subtotal}}</span>
+                            <span> <span class="order-details-title">Total:</span> {{order.total}}</span>
+                            <span> <span class="order-details-title">Shipping Address:</span> {{order.shipping_address}}</span>
+                            <span> <span class="order-details-title">Billing Address:</span> {{order.billing_address}}</span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+
+<!-- End cart-page section -->

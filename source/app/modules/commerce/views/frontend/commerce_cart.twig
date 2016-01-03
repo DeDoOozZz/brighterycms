@@ -1,0 +1,91 @@
+
+<!-- cart-page section 
+            ================================================== -->
+<section class="cart-section-page">
+    <div class="container">
+        <div class="cart-products col-sm-8">
+            <h1>Shopping cart</h1>
+            <div class="cart-table-header row">
+                <div class="col-sm-8">
+                    <span>Products</span>
+                </div>
+                <div class="col-sm-2">
+                    <span>Qty</span>
+                </div>
+                <div class="col-sm-2">
+                    <span>Price</span>
+                </div>
+            </div>
+            {% for item in items %} 
+                <div class="cart-table-body row">
+                    <div class="col-sm-2">
+                        <a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}" class="commerce-product-block" style="height: auto;">
+                            <img src="{{helper.uri.cdn('commerce', product_model.getProductPrimaryImage(item.commerce_product_id))}}">
+                        </a>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}" class="commerce-single-pro-title">{{item.name}}</a>
+                        <span class="commerce-pro-cat">More: <a href="{{ helper.uri.url('commerce_category/index', item.commerce_category_id ) }}">{{category.title}}</a></span>
+                        <span class="cart-product-option">
+                            <a href="{{ helper.uri.url('commerce_cart/remove', item.commerce_cart_id ) }}" class=""><i class="fa fa-trash-o"></i> Remove</a>
+                            
+                            <a href="{{ helper.uri.url('commerce_cart/to_wishlist', item.commerce_cart_id ) }}" class=""><i class="fa fa-heart"></i> to wishlist</a>
+                        </span>
+                    </div>
+
+                    <div class="col-sm-2">
+                        {{ helper.form.open(null,false,true,'role="form"') }}
+                        <input type="number" value="{{item.qty}}" class="update-quantity" data-id="{{ item.commerce_cart_id }}">
+                        {{ helper.form.close() }}
+                    </div>
+                    <div class="col-sm-2 cart-product-price">
+                        <span>${{ cart.discount(item.price, item.discount) * item.qty }} </span>
+                    </div>
+                </div>
+            {% endfor %}
+            
+            <a href="{{ helper.uri.url('commerce_home') }}" class="continue-shopping">Continue Shopping</a>
+
+        </div>
+        <div class="col-sm-4 cart-conclusion-price">
+            <div class="sub-conclusion-price">
+                <div>
+                    <span class="cart-conclusion-price-title">Sub Total Price</span>
+                    <span class="cart-price">${{cart.total()}}</span>
+                </div>
+                <div>
+                    <span class="cart-conclusion-price-title">+Shipping</span>
+                    <span class="cart-price">0.00</span>
+                </div>
+                <div class="cart-total-price">
+                    <span class="cart-conclusion-price-title">Total Price</span>
+                    <span class="cart-price">${{cart.total()}}</span>
+                </div>
+                <a href="{{ helper.uri.url('commerce_orders' ) }}" class="to-checkout">Checkout</a>
+            </div>
+
+            {#<div class="sub-conclusion-price cart-coupon">#}
+                {#<h3>Do you have a discount code?</h3>#}
+                {#<form class="discount-code-form">#}
+                    {#<input type="text" placeholder="Enter Coupon Code">#}
+                    {#<input type="submit" value="Use">#}
+                {#</form>#}
+            {#</div>#}
+
+        </div>
+    </div>
+</section>
+
+<!-- End cart-page section -->
+
+
+
+<script>
+$(document).ready(function(){
+  $('.update-quantity').change(function(){
+      window.location = '{{ helper.uri.url('commerce_cart/update') }}/'+ $(this).data('id') + '/' + $(this).val();
+  });  
+});
+
+
+</script>

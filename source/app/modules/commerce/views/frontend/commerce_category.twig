@@ -1,0 +1,44 @@
+<section class="projects-page-section category_page blog-section">
+    <div class="container">
+        <h2 class="main-product-block">{{item.title}}</h2>
+
+        <div class="commerce-categories-home iso-call">
+
+                {% for item in products %}     
+                    <div class="cat_{{ sub_cat.commerce_category_id }} col-sm-3">
+                        <div class=" commerce-block-home">
+                            <a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}" class="commerce-product-block"> <img src="{{helper.uri.cdn('commerce', product_model.getProductPrimaryImage(item.commerce_product_id))}}" alt=""></a>
+                            <div class="commerce-product-content">
+                                <h3><a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}">{{item.name}}</a></h3>
+                                <span class="commerce-product-details"> {{item.description}}</span>
+                                <span class="commerce-product-price"><span class="commerce-product-before-sale">{{item.price}}</span>{{ product.discount (item.price, item.discount) }}</span>
+                                {% if item.discount %}<span class="commerce-product-sale-price">-{{item.discount}}%</span>{% endif %}
+                            </div>
+                        </div> 
+                   </div>
+                {% endfor %}
+
+        </div>
+
+        {#<div class="blog-box">#}
+            {#<ul class="pagination-list">#}
+                {#<li><a href="#" class="prev-pag">prev</a></li>#}
+                {#<li><a href="#" class="active">1</a></li>#}
+                {#<li><a href="#">2</a></li>#}
+                {#<li><a href="#">3</a></li>#}
+                {#<li><a href="#" class="next-pag">next</a></li>#}
+            {#</ul>#}
+        {#</div>#}
+    </div>
+
+</section>    
+
+<script>
+    $('.add-to-cart').click(function () {
+        var prod = $(this);
+        cart.add($(this).data('id'), function () {
+            prod.attr('src', '{{ constant("STYLE_IMAGES")}}/remove-cart.png');
+        });
+
+    });
+</script>

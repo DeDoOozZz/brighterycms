@@ -1,0 +1,7 @@
+RewriteEngine on
+
+RewriteRule ^(cdn)($|/) - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-z][a-z])/?(.*)$ index.php/$2?lang=$1 [NC,QSA,L]
+RewriteCond $1 !^(index\.php|cdn|robots\.txt|styles|generator\.php|source)
+RewriteRule ^(.*)$ index.php/$1 [L]

@@ -1,0 +1,60 @@
+<div class="row">
+    {% for item in items %}
+        <div class="col-md-3">
+
+            <div class="panel panel-color statues" id = "main" style="position: relative;">
+
+                <!-- panel head -->
+                <div class="panel-heading ui-sortable-handle" style="background-color:{{item.color}}; ">
+                    <div class="panel-title" style="color: #fff;">{{item.title}}</div>
+                </div>
+
+                <!-- panel body -->
+                <div class="panel-body">
+
+
+                    <ul class="uk-nestable grouped-nestables" data-uk-nestable="{group:'veggie-fruits',maxDepth:1}">
+
+                            {% for issue in issue_model.issue_statues(item.pm_issue_statues_id) %}
+
+
+                            <li class="uk-nestable-list-item">
+                                <div class="uk-nestable-item">
+                                    <div class="uk-nestable-handle"></div>
+                                    <div data-nestable-action="toggle"></div>
+                                    <div class="list-label" id="issue">
+                                        <a href="{{ helper.uri.url('management/pm_issue_details/index', issue.pm_issue_id) }} ">
+                                            <span>{{issue.title}}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+    {%endfor%}
+
+</div>
+
+<!-- Imported styles on this page -->
+<link rel="stylesheet" href="{{ constant('STYLE_JS') }}/uikit/uikit.css">
+
+<!-- Imported scripts on this page -->
+<script src="{{ constant('STYLE_JS') }}/jquery-ui/jquery-ui.min.js"></script>
+<script src="{{ constant('STYLE_JS') }}/uikit/js/uikit.min.js"></script>
+
+<script src="{{ constant('STYLE_JS') }}/uikit/js/addons/nestable.min.js"></script>
+
+<script type="text/javascript">
+
+    $('.uk-nestable').on('change.uk.nestable',function(){
+        console.log('nnnnn');
+    });
+
+</script>

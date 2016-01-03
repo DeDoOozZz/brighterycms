@@ -1,0 +1,244 @@
+<!-- dashboard-page section 
+            ================================================== -->
+<section class="user-dashboard-section">
+    <div class="container">
+        <div class="col-sm-3 dashboard-sidebar">
+            <div class="dashboard-user-portfolio">
+                <div class="col-sm-3 dashboard-user-img">
+                    <img src="{{ helper.uri.cdn('users', input.cookie('image')) }}">
+                </div>
+                <div class="col-sm-9">
+                    <h4>{{item.fullname}}</h4>
+                    <h5>{{item.email}}</h5>
+                </div>
+            </div>
+            <ul>
+                <li>
+                    <i class="fa fa-cogs"></i>
+                    <a href="#">Account Setting</a>
+                </li>
+                <li>
+                    <i class="fa fa-opencart"></i>
+                    <a href="{{ helper.uri.url('commerce_cart' ) }}">My Cart</a>
+                </li>
+                <li>
+                    <i class="fa fa-gratipay"></i>
+                    <a href="{{ helper.uri.url('commerce_wishlist' ) }}">My Wishlist</a>
+                </li>
+                <li>
+                    <i class="fa fa-book"></i>
+                    <a href="{{ helper.uri.url('commerce_orders/my_orders' ) }}">My Orders</a>
+                </li>
+                <li>
+                    <i class="fa fa-retweet"></i>
+                    <a href="{{ helper.uri.url('commerce_sharing' ) }}">My Shares</a>
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-sm-9 dashboard-content">
+            <h3>Account Settings</h3>
+            <div class="dashboard-content-block">
+                <h4><i class="fa fa-expeditedssl"></i> Account information</h4>
+                <span class="dashboard-edit" data-toggle="modal" data-target="#account_info"><i class="fa fa-pencil-square-o"></i></span>
+                <div class="dashboard-content-block-item">
+                    <span class="col-sm-2">Email</span>
+                    <span class="col-sm-10">{{item.email}}</span>
+                </div>
+                <div class="dashboard-content-block-item">
+                    <span class="col-sm-2">Password</span>
+                    <span class="col-sm-10">********</span>
+                </div>
+            </div>
+
+            <div class="dashboard-content-block">
+                <h4><i class="fa fa-user"></i> Personal information</h4>
+                <span class="dashboard-edit" data-toggle="modal" data-target="#personal_info"><i class="fa fa-pencil-square-o"></i></span>
+                <div class="dashboard-content-block-item">
+                    <span class="col-sm-2">Fullname</span>
+                    <span class="col-sm-10">{{item.fullname}}</span>
+                </div>
+                <div class="dashboard-content-block-item">
+                    <span class="col-sm-2">Gender</span>
+                    <span class="col-sm-10">{{item.gender}}</span>
+                </div>
+                <div class="dashboard-content-block-item">
+                    <span class="col-sm-2">birthdate</span>
+                    <span class="col-sm-10">{{item.birthdate}}</span>
+                </div>
+                <div class="dashboard-content-block-item">
+                    <span class="col-sm-2">Address</span>
+                    <span class="col-sm-10">address</span>
+                </div>
+                <div class="dashboard-content-block-item">
+                    <span class="col-sm-2">Phone</span>
+                    <span class="col-sm-10">phone</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+{#     account information     #}
+<div class="modal fade" id="account_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><spanaria-hidden="true">&times;</span></button>
+                <h4 class="modal-title " id="myModalLabel">Account Information</h4>
+            </div>
+            <div class="modal-body">
+                <div class="for-show-account-info">
+                    <form role="form" class="form-horizontal dashboard-forms">
+                        <div class="form-group">
+                            <label for="field-5" class="col-sm-3 control-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="text" placeholder="Email" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div>
+
+                        <div class="form-group">
+                            <label for="field-5" class="col-sm-3 control-label">Old Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" placeholder="Password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div>
+
+                        <div class="form-group">
+                            <label for="field-5" class="col-sm-3 control-label">New Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" placeholder="Password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div>
+
+                        <div class="form-group">
+                            <label for="field-5" class="col-sm-3 control-label">Confirm Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" placeholder="Password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div>
+
+                        <div class="form-group">
+                            <label for="field-5" class="col-sm-3 control-label"></label>
+                            <div class="col-sm-9">
+                                <input type="submit" value="Change" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>            
+{#     Personal information     #}
+<div class="modal fade" id="personal_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><spanaria-hidden="true">&times;</span></button>
+                <h4 class="modal-title " id="myModalLabel">Personal Information</h4>
+            </div>
+            <div class="modal-body">
+                <div class="for-show-personal-info">
+                    <form role="form" class="form-horizontal dashboard-forms">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="fullname">Fullname</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control validate[required]" id="fullname" placeholder="{{ lang.fullname }}" name="fullname"
+                                       value="{{ helper.form.value('fullname', item.fullname) }}">
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div> 
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="gender">Gender</label>
+                            <div class="col-sm-10">
+                                {#                                    {{ helper.form.dropdown('gender', menu, helper.form.value('gender', item.gender), 'class="form-control select2"') }}
+                                #}  
+                                <input type="radio"> Female <br>
+                                <input type="radio"> Male <br>
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div>
+
+                        <div class="form-group dashboard-birthdate">
+                            <label class="col-sm-2 control-label" for="phone">Birthdate</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="datepicker" placeholder="birthdate" name="phone"
+                                       value="{{ helper.form.value('birthdate', phone.birthdate) }}">
+                                <i class="fa fa-calendar calendar-form"></i>
+
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Phone</label>
+                            <div class="col-md-9">
+                                <input class="form-control" name="address" id="address" type="text" placeholder="Phone">
+                            </div>
+                            <span class="add-another-option-phone col-sm-1"><i class="fa fa-plus-square"></i></span>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-md-9">
+                                <div class="show-phone-option"></div>
+                            </div>
+
+                        </div>
+                        <div class="form-group-separator"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Address</label>
+                            <div class="col-md-9">
+                                <input class="form-control" name="address" id="address" type="text" placeholder="Address">
+                            </div>
+                            <span class="add-another-option-address col-sm-1"><i class="fa fa-plus-square"></i></span>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-md-9">
+                                <div class="show-address-option"></div>
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div>
+
+                        <div class="form-group">
+                            <label for="field-5" class="col-sm-2 control-label"></label>
+                            <div class="col-sm-10">
+                                <input type="submit" value="Change" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    
+
+<!-- End dashboard-page section -->
+<script>
+    {#   $(function () {
+           $("#datepicker").datepicker();
+       });
+   #}
+       $(document).ready(function () {
+           $(".add-another-option-phone ").click(function () {
+               $(".show-phone-option").append('<input name="address" id="address" type="text" placeholder="add another phone" class="form-control">');
+           });
+           $(".add-another-option-address ").click(function () {
+               $(".show-address-option").append('<input name="address" id="address" type="text" placeholder="add another address" class="form-control">');
+           });
+
+
+       });
+</script>

@@ -1,0 +1,191 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.clinic_reservations }}</h3>
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,true,'role="form" class="form-horizontal"') }}
+        {{ error }}
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="clinic_schedule_id">{{ lang.doctor }}</label>
+            <div class="col-sm-10">
+                {{ helper.form.dropdown('clinic_schedule_id', schedule, helper.form.value('clinic_schedule_id', item.clinic_schedule_id), 'class="form-control select" ') }} 
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="date">{{ lang.date }}</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <input type="text" class="form-control datepicker" id="date" placeholder="{{ lang.date }}" name="date" value="{{ helper.form.value('date', item.date) }}" data-format="yyyy-mm-dd"> 
+                    <div class="input-group-addon">
+                        <i class="linecons-calendar"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group-separator"></div> 
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-10">
+                <button type="button" class="btn btn-secondary search-time" style="float: right;">{{lang.search}}</button>
+            </div>
+        </div>
+        <div class="search-result">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="time">{{ lang.time }}</label>
+                <div class="col-sm-10">
+                    <div class="col-sm-3" data-toggle="modal" data-target="#myModal">
+                        <div class="time-block">
+                              <i class="fa fa-unlock"></i> 8:15
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="time-block not-available">
+                              <i class="fa fa-unlock"></i> 8:15
+                        </div>
+                    </div>
+                    <div class="col-sm-3" data-toggle="modal" data-target="#myModal">
+                        <div class="time-block">
+                              <i class="fa fa-unlock"></i> 8:15
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="time-block not-available">
+                              <i class="fa fa-unlock"></i> 8:15
+                        </div>
+                    </div>
+                    <div class="col-sm-3" data-toggle="modal" data-target="#myModal">
+                        <div class="time-block">
+                              <i class="fa fa-unlock"></i> 8:15
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="time-block not-available">
+                              <i class="fa fa-unlock"></i> 8:15
+                        </div>
+                    </div>
+                    <div class="col-sm-3" data-toggle="modal" data-target="#myModal">
+                        <div class="time-block">
+                              <i class="fa fa-unlock"></i> 8:15
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="time-block not-available">
+                              <i class="fa fa-unlock"></i> 8:15
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group-separator"></div> 
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+
+                <div class="col-sm-10">
+                    <a href="{{ helper.uri.url('management/clinic_reservations/index') }}" class="btn btn-danger cancel-button">{{lang.cancel}}</a>
+                    <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+                </div>
+            </div>
+        </div>
+
+        {{ helper.form.close() }}
+
+    </div>
+</div>
+
+<div class="modal fade reservation-schedule-details" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><spanaria-hidden="true">&times;</span></button>
+                <h4 class="modal-title " id="myModalLabel">{{lang.reservation_details}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="clinic_patient_id">{{ lang.clinic_patient_id }}</label>
+                    <div class="col-sm-10">
+                        {{ helper.form.dropdown('clinic_patient_id', patient, helper.form.value('clinic_patient_id', item.clinic_patient_id), 'class="form-control select" ') }} 
+                    </div>
+                </div>
+                <div class="form-group-separator"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="clinic_reservation_status_id">{{ lang.clinic_reservation_status_id }}</label>
+                    <div class="col-sm-10">
+                        {{ helper.form.dropdown('clinic_reservation_status', clinic_reservation_status, helper.form.value('clinic_reservation_status', item.clinic_reservation_status), 'class="form-control select" ') }}
+                    </div>
+                </div>
+                <div class="form-group-separator"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"></label>
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>   
+<script src="{{ constant('STYLE_JS') }}/select2/select2.min.js"></script>
+<script src="{{ constant('STYLE_JS') }}/timepicker/bootstrap-timepicker.min.js"></script>
+<script type="text/javascript">
+                            jQuery(document).ready(function ($)
+                            {
+                                $(".select").select2({
+                                    placeholder: '{{lang.select_specifications}} ',
+                                    allowClear: true
+                                }).on('select2-open', function ()
+                                {
+                                    // Adding Custom Scrollbar
+                                    $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                });
+
+                                $(".search-time").click(function () {
+                                    $(".search-result").show();
+                                });
+
+                            });
+
+</script>
+<style>
+    .search-result{
+        display: none;
+    }
+    .reservation-schedule-details {
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        border-color: #f5f5f5;
+        padding: 30px;
+        float: left;
+        width: 100%;
+    }
+    .reservation-schedule-details .modal-content {
+        padding: 20px 0;
+        float: left;
+        width: 100%;
+    }
+     .reservation-schedule-details .form-group {
+        margin-bottom: 15px;
+        float: left;
+        width: 100%;
+    }
+    .time-block{
+        cursor: pointer;
+        margin: 10px;
+        font-size: 13px;
+        color:#555;
+        background-color: #dedede;
+        line-height: 30px;
+        padding: 0 10px;
+    }
+    .not-available{
+        color:silver;
+        background-color: #f1f1f1;
+    }
+    
+</style>

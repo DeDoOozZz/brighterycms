@@ -1,0 +1,156 @@
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.all_announces }}</h3>
+
+        <div class="panel-options">
+            <a href="{{ helper.uri.url('management/pm_announcements/manage') }}" class="btn btn-secondary" style="color:#fff;">{{ lang.add_announce }}</a>
+        </div>
+    </div>
+    <div class="panel-body">
+
+        <table class="table table-bordered table-striped" id="datatable">
+            <thead>
+
+            <tr>
+                <th>{{ lang.title }}</th>
+                <th>{{ lang.content }}</th>
+                <th>{{ lang.date }}</th>
+                <th>{{ lang.operations }}</th>
+            </tr>
+            </thead>
+
+
+            <tbody class="middle-align">
+            {% for item in items %}
+            <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.content }}</td>
+                <td>{{ item.time }}</td>
+
+                <td>
+                    <a href="" class="btn btn-info  show-preview" rel="{{ item.pm_announce_id }}" data-toggle="modal"  data-target="#myModal2" style="color:#fff;">{{ lang.preview }}</a>
+                    <a href="" class="btn btn-danger delete_msg" data-toggle="modal" data-url_id="{{ helper.uri.url('management/pm_announcements/delete', item.pm_announce_id )}}" data-target="#deleteMsg1" style="color:#fff;">{{ lang.delete }}</a>
+                    <a href="{{ helper.uri.url('management/pm_announcements/manage', item.pm_announce_id )}}" class="btn btn-secondary  edit"  >{{ lang.edit }}</a>
+
+
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    {{ pagination }}
+    </div>
+
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-dialog">
+
+                <div class="preview"></div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="deleteMsg1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{lang.system_msg}}</h4>
+                </div>
+                <div class="modal-body">
+                    <a>{{lang.delete_item}}</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">{{ lang.no }}</button>
+
+                    <a id="delete_id" class="btn btn-danger" href="">{{lang.delete}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="edit1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="edit1">{{ lang.edit_announce }}</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" class="form-horizontal" id="edit_announce">
+
+                        <div class="form-group">
+                            <label for="field-4" class="col-sm-3 control-label">{{ lang.title }}</label>
+
+                            <div class="col-sm-9">
+                                <input type="text" id="title" cols="5" value ="{{ item.title }}" class="form-control" name="title" autocomplete="off">
+                            </div>
+
+                        </div>
+                        <div class="form-group-separator"></div>
+
+
+                        <div class="form-group">
+
+                            <label for="field-5" class="col-sm-3 control-label">{{ lang.content }}</label>
+
+                            <div class="col-sm-9">
+                                <textarea id="content" cols="5" class="form-control" name="name" autofocus >{{ item.content }}</textarea>
+                            </div>
+                        </div>
+                        <input type="hidden" id="edit_id">
+                        <div class="form-group-separator"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-10">
+
+                                <a id="submit_id" class="btn btn-secondary " href="">{{lang.submit}}</a>
+                                {#<input type="submit" id="submit_id" class="btn btn-info"  value ="{{ lang.submit }}">#}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script type="text/javascript">
+
+    $('.show-preview').click(function () {
+        $.get('{{ helper.uri.url('management/pm_announcements/preview/') }}' + $(this).attr('rel'), function (data) {
+
+            $('.preview').html(data);
+        });
+    });
+
+    $(document).on("click", ".delete_msg", function () {
+        var full_url = $(this).data('url_id');
+        $("#delete_id").attr('href', full_url);
+    });
+
+    $(document).on("click", ".edit", function () {
+        var ann_id = $(this).data('ann_id');
+        var content = $(this).data('content');
+        var title = $(this).data('title');
+
+        $("#edit_id").val( ann_id);
+        $("#title").val(title);
+        $("#content").val( content);
+        var full_url = $(this).data('url_id');
+        $("#submit_id").attr('href', full_url);
+    });
+    $('#edit_announce').submit(function(){
+        $.post('{{ helper.uri.url('management/pm_announcements/manage' )}}'
+        + $("#edit_id").val(), $(this).serialize(), function(response){
+
+        });
+
+        return false; //3shan my3mlsh request bel submit
+    });
+</script>

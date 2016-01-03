@@ -1,0 +1,199 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.products }}</h3>
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,true,'role="form" class="form-horizontal"') }}
+        {{ error }}
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="title">{{ lang.title }}</label>
+            <div class="col-sm-10">
+
+                <input type="text" class="form-control" id="title" placeholder="{{ lang.title }}" name="title"
+                       value="{{ helper.form.value('title', item.title) }}">
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <input type="checkbox" id="type" name="fixed"  value="1" {% if (helper.form.value('fixed')==1 )%}checked  {%endif%} {% if item.fixed_price_status==1%} checked  {%endif%} /> 
+            <label class="col-sm-2 control-label" for="fixed">{{ lang.fixed }}</label>
+            <div class="col-sm-10">
+
+
+                <input type="text" class="form-control" id="fixed" placeholder="{{ lang.price}}" name="fixed_price"
+                       style="display: none" value="{{ helper.form.value('fixed_price', item.fixed_price) }}">
+
+                {% if (helper.form.value('fixed')==1 )%} 
+                    <script type="text/javascript"> $('#fixed').show();</script>
+                {%endif%}
+
+
+                {% if item.fixed_price_status==1%}<script type="text/javascript"> $('#fixed').show();</script>{%endif%}
+            </div>
+        </div>
+
+        <div class="form-group-separator"></div>
+        <input type="checkbox" id="type1" name="sfixedd" value="1" {% if (helper.form.value('sfixedd')==1 )%}checked  {%endif%}   {% if item.subscription_price_status==1%} checked  {%endif%}>
+        <label class="col-sm-2 control-label" for="subscripe">{{ lang.subscription }}</label>
+
+
+
+        <div id="table" style="display: none">
+            <a id="add"  class="btn btn-secondary" style="color: #FFF;">
+                {{ lang.add }}
+            </a>
+            <table class="table brightery_table"  >
+                <thead>
+                    <tr>
+
+                        <th>period</th>
+                        <th>{{ lang.price }}</th>
+                        <th class="no-sorting">{{ lang.operations }}</th>
+                    </tr>
+                </thead>
+                <tbody id="body">
+
+                    {%for item in items %}
+
+
+                        <tr id="data_{{item.count}}">
+                            <td>
+
+                                <input TYPE="NUMBER" min="0" max="1000" rel="{{item.count}}" class="name" name="n[{{item.count}}]"  value="{{helper.form.value('n[' ~ item.count ~']',item.period)}}" SIZE="7">
+                                <select name="s[{{item.count}}]" >
+                                    <option>Month</option>
+                                    <option>Year</option>
+                                </select>
+
+
+                            </td>
+                            <td>  
+                                <input type="text" class="form-control" id="fixed" placeholder="{{ lang.price}}" name="price[{{item.count}}]"
+                                       value="{{helper.form.value('price[' ~ item.count ~']',item.perice)}}">
+                            </td>
+
+                            <td>
+
+                                <a href="#" class="btn btn-secondary btn-sm delete_msg delete_row" rel="{{item.count}}"  data-toggle="modal" data-target="#deleteMsg" style="color:#fff;">{{lang.delete}}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% if (helper.form.value('sfixedd')==1 )%} 
+            <script type="text/javascript"> $('#table').show();</script>
+        {%endif%}
+        
+        {% if item.subscription_price_status==1%}  <script type="text/javascript"> $('#table').show();</script>  {%endif%}
+        <div class="form-group-separator"></div>
+        <br>
+        <br>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-10">
+                <button type="submit" id="submit" class="btn btn-secondary">{{ lang.submit }}</button>
+            </div>
+        </div>
+
+        {{ helper.form.close() }}
+
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#type').change(function () {
+            if ($('#type').is(':checked')) {
+
+                $('#fixed').show();
+            } else {
+                $('#fixed').hide();
+            }
+        });
+    });
+
+
+    $(function () {
+        $('#type1').change(function () {
+            if ($('#type1').is(':checked')) {
+                $('#table').show();
+            } else {
+                $('#table').hide();
+            }
+        });
+    });
+
+    $(function () {
+        del();
+        var $increment = $('.brightery_table tbody tr').length;
+
+
+
+        $('#add').click(function () {
+
+
+            $('#body').append('  <tr id="data_' + $increment + '" >' +
+                    '<td>' +
+                    ' <INPUT TYPE="NUMBER" MIN="0" MAX="1000" STEP="2" rel="' + $increment + '" name="n[' + $increment + '] SIZE="7">' +
+                    '  <select name="s[' + $increment + ']">' +
+                    ' <option>Day</option>' +
+                    ' <option>Month</option>' +
+                    ' <option>Year</option>' +
+                    ' </select>' +
+                    '</td>' +
+                    '<td> ' +
+                    ' <input type="text" class="form-control" id="fixed" placeholder="{{ lang.price}}" name="price[' + $increment + ']" value="">' +
+                    ' </td>' +
+                    '<td>' +
+                    ' <a href="#" class="btn btn-secondary btn-sm delete_msg delete_row"  rel="' + $increment + '" data-toggle="modal" data-target="#deleteMsg" style="color:#fff;">{{lang.delete}}</a>' +
+                    ' </td>' +
+                    ' </tr>');
+            $increment++;
+            del();
+
+        });
+
+
+
+        function del() {
+            $('.delete_row').click(function () {
+                var msg = $(this).attr('rel');
+
+                $("#data_" + msg).remove();
+
+
+
+            });
+        }
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    $(function () {
+        $('#submit').click(function () {
+            $.ajax({url: "<?=base_url('management/brightery_products/manage')?>", success: function (result) {
+                    $("#div1").html(result);
+                }});
+        })
+    });
+
+
+
+</script>
+
+

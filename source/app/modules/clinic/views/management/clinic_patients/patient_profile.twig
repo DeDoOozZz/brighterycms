@@ -1,0 +1,58 @@
+<div class="modal_errors"></div>
+{{ helper.form.open(null,false,false,'role="form" class="form-horizontal" id="manage_patient_notes" ') }}
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">{{lang.note}}</label>
+
+    <div class="col-sm-10">
+        <textarea class="form-control" id="note" placeholder="{{ lang.note }}" name="note">{{ helper.form.value('note', note.note) }}</textarea>
+    </div>
+</div>
+
+
+<div class="patient-group-separator"></div>
+<div class="form-group">
+    <label class="col-sm-2 control-label"></label>
+
+    <div class="col-sm-10">
+        <a onclick="$('#myModal3').modal('hide')" class="btn btn-danger cancel-button">{{lang.cancel}}</a>
+        <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+    </div>
+</div>
+{{ helper.form.close()}}
+<script type="text/javascript">
+    jQuery(document).ready(function ($)
+    {
+
+        $("#manage_patient_notes").submit(function () {
+            $.post('{{ helper.uri.url('management/clinic_patients_notes/manage')}}/{{ op }}/{{ id }}', $(this).serialize(), function (res) {
+                obj = jQuery.parseJSON(res);
+                if (obj.sucess == 0) {
+                    $('.modal_errors').html(obj.errors);
+                } else {
+                    $('#myModal3').modal('hide');
+                    if ('{{ op }}' == 'add'){
+                        $('.data_note tbody').append('<tr class="note_'+ obj.id +'"><td>'+ obj.note +'</td>'
+                                + '<td>'
+                                + '<a href="#" class="btn btn-secondary btn-sm show-notes" href="#" data-toggle="modal" data-target="#myModal3" rel="edit" data-id="' + obj.id + '">{{lang.edit}}</a>'
+                                + '<a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patients_notes/delete') }}/'+ obj.id +'">{{ lang.delete }}</a>'
+                                + '</td></tr>');
+                    }
+                    else
+                    {
+                        $('.data_note tbody tr.note_' + obj.id).html('<td>'+ obj.note +'</td>'
+                                + '<td>'
+                                + '<a href="#" class="btn btn-secondary btn-sm show-notes" href="#" data-toggle="modal" data-target="#myModal3" rel="edit" data-id="' + obj.id + '">{{lang.edit}}</a>'
+                                + '<a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patients_notes/delete') }}/'+ obj.id +'">{{ lang.delete }}</a>'
+                                + '</td>');
+                        
+                    }
+                }
+
+            });
+            return false;
+
+        });
+        
+    });
+</script>

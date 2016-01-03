@@ -1,0 +1,1232 @@
+{#--------------------------------------------------------Personal Inforamtions-----------------------------------------------------------#}
+<div class="row">
+    {{ helper.form.open(null,false,true,'role="form" id="updatePersonal" class="form-horizontal"') }}
+    {{ error }}
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{lang.personal_informations}}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="date_of_birth">{{lang.date_of_birth}}</label>
+                    <div class="col-sm-9">
+                        <input type="text" data-format="yyyy-mm-dd" class="form-control datepicker"
+                               id="date_of_birth" placeholder="{{ item_personal.date_of_birth }}"
+                               name="date_of_birth"
+                               value="{{ helper.form.value('date_of_birth', item_personal.date_of_birth)}}">
+                    </div>
+                </div>
+                <input type="hidden" value="{{item_personal.resume_id}}" name='resume_id'>
+                <div class="form-group-separator"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{lang.nationality}}</label>
+                    <div class="col-sm-10">
+                        {{ helper.form.dropdown('nationality_id', item_Nationality, helper.form.value('nationality_id', item_personal.nationality_id), 'class="form-control select2 " ') }}
+                    </div>
+                </div>
+
+                <div class="form-group-separator"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{lang.marital_status}}</label>
+                    <div class="col-sm-10">
+                        {{ helper.form.dropdown('marital_status_id', item_Martial, helper.form.value('marital_status_id', item_personal.marital_status_id), 'class="form-control select2" ') }}
+                    </div>
+                </div>
+
+                <div class="form-group-separator"></div>
+
+                <div class="col-sm-10">
+                    <input type="submit" class="btn btn-secondary ">
+                </div>
+            </div>
+        </div>
+    </div>
+    {{helper.form.close}}
+</div>
+{#--------------------------------------------------------Contacts------------------------------------------------------------------------#}
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{lang.contacts}}</h3>
+
+                <div class="panel-options">
+                    <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#myModal2" style="color:#fff;">{{lang.add_info}}</a>
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <!-- Combined Table -->
+                        <table class="table table-bordered table-striped table-condensed table-hover new_contact">
+                            <thead>
+                                <tr>
+                                    <th>{{lang.method}}</th>
+                                    <th>{{lang.value}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in item_contacts %}
+                                    <tr>
+                                        <td>{{item.contact_method}}</td>
+                                        <td>{{item.contact_detail}}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{lang.generate_contacts}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" class="form-horizontal" role="form" id="Contacts">
+                                <div class="form-group">
+                                    <div class="col-sm-3">
+                                        <select class="form-control" name="contact_method" id="contact_method">
+                                            <option></option>
+                                            <option>{{lang.phone}}</option>
+                                            <option>{{lang.email}}</option>
+                                            <option>{{lang.facebook}}</option>
+                                            <option>{{lang.twitter}}</option>
+                                            <option>{{lang.google}}</option>
+                                            <option>{{lang.linkedin}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="contact_detail" class="validate[required] form-control" id="field-1" placeholder="{{lang.value}}">
+                                    </div>
+                                </div>
+                                <div class="form-group-separator"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"></label>
+
+                                    <input type="hidden" name="resume_id" class="form-control" id="resume_id" value="{{item_personal.resume_id}}">
+                                    <div class="col-sm-10">
+                                        <input id="sub_contact" type="submit" class="submit btn btn-secondary">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{#--------------------------------------------------------Locations-----------------------------------------------------------------------#}
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{lang.locations}}</h3>
+
+                <div class="panel-options">
+                    <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#myModal3" style="color:#fff;">{{lang.add_info}}</a>
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <!-- Combined Table -->
+                        <table class="table table-bordered table-striped table-condensed table-hover new_location">
+                            <thead>
+                                <tr>
+                                    <th>{{lang.address}}</th>
+                                    <th>{{lang.location}}</th>
+                                    <th>{{lang.longitude}}</th>
+                                    <th>{{lang.latitude}}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for item in item_locations %}
+                                    <tr>
+                                        <td>{{item.address}}</td>
+                                        <td>{{item.location}}</td>
+                                        <td>{{item.long}}</td>
+                                        <td>{{item.lat}}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{lang.generate_locations}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" class="form-horizontal" role="form" id="Locations">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="field-1">{{lang.address}}</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="field-1" placeholder="" name="address">
+                                    </div>
+                                </div>
+
+                                <div class="form-group-separator"></div>
+                                <div class="form-group">
+                                    <label for="field-5" class="col-sm-2 control-label">{{lang.location}}</label>
+
+                                    <div class="col-sm-10">
+                                        <textarea id="field-5" cols="5" class="form-control" name="location"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-separator"></div>
+
+                                <div class="form-group">
+                                    <label for="field-5" class="col-sm-2 control-label">{{lang.map}}</label>
+
+                                    <div class="col-sm-10">
+                                        <div class="google-map-env field-5">
+                                            <div class="gmap full-page-google-map">
+                                                <div id="map-1"></div>
+                                            </div>
+
+                                            <!-- Map Toolbar -->
+                                            <div class="map-toolbar">
+
+                                                <div class="col-sm-13 text-right">
+                                                    <input type="text" name="long" class="form-control" id="field-1" placeholder="{{lang.longitude}}">
+                                                    &nbsp;
+                                                    <input type="text" name="lat" class="form-control" id="field-1" placeholder="{{lang.latitude}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group-separator"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"></label>
+                                    <input type="hidden" name="resume_id" class="form-control" id="resume_id" value="{{item_personal.resume_id}}">
+                                    <div class="col-sm-10">
+                                        <input type="submit" class="btn btn-secondary ">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{#--------------------------------------------------------Work History--------------------------------------------------------------------#}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ lang.work_history }}</h3>
+
+                <div class="panel-options">
+                    <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#myModal4" style="color:#fff;">{{ lang.add_info }}</a>
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <!-- Combined Table -->
+                        <table class="table table-bordered table-striped table-condensed table-hover new_work">
+                            <thead>
+                                <tr>
+                                    <th>{{lang.company}}</th>
+                                    <th>{{lang.category}}</th>
+                                    <th>{{lang.position}}</th>
+                                    <th>{{lang.time_period}}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for item in item_work %}
+                                    <tr>
+                                        <td>{{item.company}} </td>
+                                        <td>{{item.category}} </td>
+                                        <td>{{item.title}} </td>
+                                        {% if item.from and item.to %}
+                                            <td>{{item.from}} {{ lang.to }} {{item.to}}</td>
+                                        {% else %}
+                                            <td>{{item.from}} {{item.to}}</td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{lang.generate_works}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" class="form-horizontal" role="form" id="Works">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="field-1">{{lang.company}}</label>
+
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="company" id="field-1" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group-separator"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">{{lang.category}}</label>
+
+                                    <div class="col-xs-9">
+                                        <select class="form-control" name="category" id="category">
+                                            <option value=""></option>
+                                            <option value="Data Center">Data Center</option>
+                                            <option value="Reconstruction & Maintenance">Reconstruction & Maintenance</option>
+                                            <option value="Web Solutions">Web Solutions</option>
+                                            <option value="Training Center">Training Center</option>
+                                            <option value="Advertising Agency">Advertising Agency</option>
+                                            <option value="Communications">Communications</option>
+                                            <option value="Software">Software</option>
+                                            <option value="Data Center">Data Center</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group-separator"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="field-1">{{lang.position}}</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="title" id="field-1" placeholder="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group-separator"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="field-1">{{lang.responsability}}</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="field-1" name="responsbilities" placeholder="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group-separator"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="field-1">{{lang.nationality}}</label>
+                                    <div class="col-sm-9">
+                                        {{ helper.form.dropdown('nationality_id', item_Nationality, helper.form.value('nationality_id'), 'class="form-control select2 "') }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group-separator"></div>
+
+                                <div class="form-group">
+                                    <label for="field-5" class="col-sm-3 control-label">{{lang.description}}</label>
+
+                                    <div class="col-sm-9">
+                                        <textarea id="field-5" cols="5" name="desc" class="form-control"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-separator"></div>
+
+                                <div class="form-group">
+
+                                    <label for="field-5" class="col-sm-3 control-label">{{lang.time_period}}</label>
+
+                                    <div class="col-sm-4">
+                                        <input type="text" data-format="yyyy-mm-dd" class="form-control datepicker" id="from" name="from">
+                                    </div>
+
+                                    <div class="col-sm-1" style="text-align:center; line-height: 30px">
+                                        <span style="display:inline-block;">
+                                            {{lang.to}}
+                                        </span>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <input type="text" data-format="yyyy-mm-dd" class="form-control datepicker" id="to" name="to">
+                                    </div>
+                                </div>
+
+                                <div class="form-group-separator"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"></label>
+                                    <input type="hidden" name="resume_id" class="form-control" id="resume_id" value="{{item_personal.resume_id}}">
+                                    <div class="col-sm-9">
+                                        <input type="submit" class="btn btn-secondary ">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{#--------------------------------------------------------Skills--------------------------------------------------------------------------#}
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ lang.skills }}</h3>
+
+                <div class="panel-options">
+                    <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#myModal5" style="color:#fff;">{{ lang.add_info }}</a>
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <!-- Combined Table -->
+                        <table class="table table-bordered table-striped table-condensed table-hover new_skill">
+                            <thead>
+                                <tr>
+                                    <th>{{ lang.skill }}</th>
+                                    <th>{{ lang.category }}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for item in item_skills %}
+                                    <tr>
+                                        <td>{{ item.content }}</td>
+                                        <td>{{ item.category }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{ lang.generate_skills }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" class="form-horizontal" role="form" id="Skills">
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="field-1">{{lang.skill}}</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="field-1" placeholder="" name="content">
+                                    </div>
+                                </div>
+
+                                <div class="form-group-separator"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="field-1">{{lang.category}}</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="field-1" placeholder="" name="category" >
+                                    </div>
+                                </div>
+                                <div class="form-group-separator"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"></label>
+                                    <input type="hidden" name="resume_id" class="form-control" id="resume_id" value="{{item_personal.resume_id}}">
+                                    <div class="col-sm-10">
+                                        <input type="submit" class="btn btn-secondary ">
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{#--------------------------------------------------------Education-----------------------------------------------------------------------#}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{lang.education}}</h3>
+
+                <div class="panel-options">
+                    <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#myModal6"
+                       style="color:#fff;">{{lang.add_info}}</a>
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <!-- Combined Table -->
+                        <table class="table table-bordered table-striped table-condensed table-hover new_edu">
+                            <thead>
+                                <tr>
+                                    <th>{{lang.degree}}</th>
+                                    <th>{{lang.school}}</th>
+                                    <th>{{lang.field}}</th>
+                                    <th>{{lang.time_period}}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for item in item_education %}
+                                    <tr>
+                                        <td>{{item.degree}}</td>
+                                        <td>{{item.school}}</td>
+                                        <td>{{item.field}}</td>
+                                        {% if item.from_year and item.to_year %}
+                                            <td>{{item.from_year}}-{{item.from_month}} {{lang.to}} {{item.to_year}}-{{item.to_month}}</td>
+                                        {% else %}
+                                            <td>{{item.from_year}} {{item.from_month}} {{item.to_year}} {{item.to_month}}</td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{ lang.generate_education }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" class="form-horizontal" id="Educations">
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">{{lang.degree}}</label>
+
+                                    <div class="col-xs-9">
+                                        <select class="form-control" name="degree" id="degree">
+                                            <option></option>
+                                            <option>Prep School</option>
+                                            <option>Primary School</option>
+                                            <option>Secondary School</option>
+                                            <option>Bachelor</option>
+                                            <option>Diploma</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-separator"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="field-1">{{ lang.school }}</label>
+
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="field-1" placeholder="" name="school">
+                                    </div>
+                                </div>
+
+                                <div class="form-group-separator"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"
+                                           for="field-1">{{lang.field_of_study}}</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="field-1" placeholder="" name="field">
+                                    </div>
+                                </div>
+
+                                <div class="form-group-separator"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="field-1">{{lang.grade}}</label>
+
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="field-1" placeholder="" name="grade">
+                                    </div>
+                                </div>
+
+                                <div class="form-group-separator"></div>
+
+                                <div class="form-group">
+                                    <label for="field-5" class="col-sm-3 control-label">{{lang.time_period}}</label>
+                                    <div class="col-sm-9">
+                                        <div class="col-sm-2">
+                                            <span>
+                                                {{lang.from}}
+                                            </span>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <select class=" form-control" name="from-month" id="from-month">
+                                                <option value=""></option>
+                                                <option value="1">January</option>
+                                                <option value="2">February</option>
+                                                <option value="3">March</option>
+                                                <option value="4">April</option>
+                                                <option value="5">May</option>
+                                                <option value="6">June</option>
+                                                <option value="7">July</option>
+                                                <option value="8">August</option>
+                                                <option value="9">September</option>
+                                                <option value="10">October</option>
+                                                <option value="11">November</option>
+                                                <option value="12">December</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <select class="form-control" name="from-year" id="from-year">
+                                                <option value=""></option>
+                                                {% for i in 1980..2020 %}
+                                                    <option value="{{i}}">{{i}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="field-5" class="col-sm-3 control-label"></label>            
+                                    <div class="col-sm-9">
+                                        <div class="col-sm-2">
+                                            <span>
+                                                {{lang.to}}
+                                            </span>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <select class=" form-control" name="to-month" id="to-month">
+                                                <option value=""></option>
+                                                <option value="1">January</option>
+                                                <option value="2">February</option>
+                                                <option value="3">March</option>
+                                                <option value="4">April</option>
+                                                <option value="5">May</option>
+                                                <option value="6">June</option>
+                                                <option value="7">July</option>
+                                                <option value="8">August</option>
+                                                <option value="9">September</option>
+                                                <option value="10">October</option>
+                                                <option value="11">November</option>
+                                                <option value="12">December</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <select class=" form-control" name="to-year" id="to-year">
+                                                <option value=""></option>
+                                                {% for i in 1980..2020 %}
+                                                    <option value="{{i}}">{{i}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-separator"></div>
+                                <input type="hidden" name="resume_id" class="form-control" id="resume_id" value="{{item_personal.resume_id}}">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"></label>
+                                    <div class="col-sm-9">
+                                        <input type="submit" class="btn btn-secondary ">
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{#--------------------------------------------------------Activities----------------------------------------------------------------------#}
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{lang.activities}}</h3>
+
+                <div class="panel-options">
+                    <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#myModal7"
+                       style="color:#fff;">{{lang.add_info}}</a>
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <!-- Combined Table -->
+                        <table class="table table-bordered table-striped table-condensed table-hover new_activity">
+                            <thead>
+                                <tr>
+                                    <th>{{lang.activity}}</th>
+                                    <th>{{lang.role}}</th>
+                                    <th>{{lang.time_period}}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for item in item_activities %}
+                                    <tr>
+                                        <td>{{item.activity}}</td>
+                                        <td>{{item.role}}</td>
+                                        {% if item.from and item.to %}
+                                            <td>{{item.from}} {{lang.to}} {{item.to}}</td>
+                                        {% else %}
+                                            <td>{{item.from}} {{item.to}}</td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="myModal7" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{ lang.generate_activities }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" class="form-horizontal" role="form" id="Activities">
+                                <div class="form-group">
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="field-1" placeholder="{{lang.activity}}" name="activity">
+                                    </div>
+
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="field-1" placeholder="{{lang.role}}" name="role">
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group-separator"></div>
+
+                                <div class="form-group">
+                                    <label for="field-5" class="col-sm-3 control-label">{{lang.description}}</label>
+
+                                    <div class="col-sm-9">
+                                        <textarea id="field-5" cols="5" class="form-control " name="desc"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-separator"></div>
+
+                                <div class="form-group">
+
+                                    <label for="field-5" class="col-sm-3 control-label">{{lang.time_period}}</label>
+
+                                    <div class="col-sm-4">
+                                        <input type="text" data-format="yyyy-mm-dd" class="form-control datepicker" id="from_activity" name="from">
+                                    </div>
+
+                                    <div class="col-sm-1" style="text-align:center; line-height: 30px">
+                                        <span style="display:inline-block;">
+                                            {{lang.to}}
+                                        </span>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <input type="text" data-format="yyyy-mm-dd" class="form-control datepicker" id="to_activity" name="to">
+                                    </div>
+                                </div>
+
+                                <div class="form-group-separator"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"></label>
+                                    <input type="hidden" name="resume_id" class="form-control" id="resume_id" value="{{item_personal.resume_id}}">
+                                    <div class="col-sm-10">
+                                        <input type="submit" class="btn btn-secondary ">
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{#--------------------------------------------------------Languages-----------------------------------------------------------------------#}
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{lang.language}}</h3>
+
+                <div class="panel-options">
+                    <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#myModal8" style="color:#fff;">{{lang.add_info}}</a>
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <!-- Combined Table -->
+                        <table class="table table-bordered table-striped table-condensed table-hover new_language">
+                            <thead>
+                                <tr>
+                                    <th>{{lang.language}}</th>
+                                    <th>{{lang.level}}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for item in item_languages %}
+                                    <tr>
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.level}}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal fade" id="myModal8" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{lang.generate_language}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" class="form-horizontal" role="form" id="Languages">
+                                <div class="form-group">
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="field-1" placeholder="{{lang.language}}" name="name">
+                                    </div>
+
+                                    <div class="col-sm-8">
+                                        <select class="form-control" name="level" id="level">
+                                            <option value=""></option>
+                                            <option value="Mother Tongue">Mother Tongue</option>
+                                            <option value="Very Good">Very Good</option>
+                                            <option value="Little Knowledge">Little Knowledge</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group-separator"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"></label>
+                                    <input type="hidden" name="resume_id" class="form-control" id="resume_id" value="{{item_personal.resume_id}}">
+                                    <div class="col-sm-10">
+                                        <input type="submit" class="btn btn-secondary">
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{#--------------------------------------------------------Hobbies-------------------------------------------------------------------------#}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{lang.hobbies}}</h3>
+                <div class="panel-options">
+                    <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#myModal9" style="color:#fff;">{{lang.add_info}}</a>
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <!-- Combined Table -->
+                        <table class="table table-bordered table-striped table-condensed table-hover new_hobby">
+                            <thead>
+                                <tr>
+                                    <th>{{lang.hobbies}}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for item in item_hobbies %}
+                                    <tr>
+                                        <td>{{item.name}}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="myModal9" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{lang.generate_hobbies}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" class="form-horizontal" role="form" id="Hobbies">
+                                <div class="form-group">
+                                    <label for="field-5" class="col-sm-3 control-label">{{lang.your_hobby}}</label>
+
+                                    <div class="col-sm-9">
+                                        <textarea id="field-5" cols="5" class="form-control" name="name"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group-separator"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"></label>
+                                    <input type="hidden" name="resume_id" class="form-control" id="resume_id" value="{{item_personal.resume_id}}">
+                                    <div class="col-sm-10">
+                                        <input type="submit" class="btn btn-secondary ">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    {#------------------------------------Personal Information-------------------------------------#}
+        $(document).ready(function () {
+            $('#updatePersonal').submit(function () {
+    {#                alert('kda byro7 3al function');#}
+                // process the form
+                $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url: '{{helper.uri.url('management/resumes/updatePersonal')}}', // the url where we want to POST
+                    data: $(this).serialize(), // our data object
+                    dataType: 'json', // what type of data do we expect back from the server
+                    encode: true
+                })
+    {#                alert('AY 7AGA');#}
+    {#                alert(data);#}
+                return false;
+            });
+        });
+    
+    {#------------------------------------Contacts-------------------------------------#}
+        $(document).ready(function () {
+            $('#Contacts').submit(function () {
+    {#                alert('data');#}
+                // process the form
+                $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url: '{{helper.uri.url('management/resumes/addcontacts')}}', // the url where we want to POST
+                    data: $(this).serialize(), // our data object
+                    dataType: 'json', // what type of data do we expect back from the server
+                    encode: true
+                })
+                        .done(function (data) {
+                            if (data)
+                            {
+                                var contact_detail = $("input[name$='contact_detail']").val();
+                                var contact_method = $("#contact_method").val();
+                                $('.new_contact tr').last().after('<tr><td>' + contact_method + '</td><td>' + contact_detail + '</td></tr>');
+                            }
+                            console.log(data);
+                            if (data === 1)
+                                $('#myModal2').modal('hide');
+                            // here we will handle errors and validation messages
+                        });
+                // stop the form from submitting the normal way and refreshing the page
+                event.preventDefault();
+                return false;
+            });
+        });
+
+    {#------------------------------------Locations-------------------------------------#}
+        $(document).ready(function () {
+            $('#Locations').submit(function () {
+                // process the form
+                $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url: '{{helper.uri.url('management/resumes/addlocations')}}', // the url where we want to POST
+                    data: $(this).serialize(), // our data object
+                    dataType: 'json', // what type of data do we expect back from the server
+                    encode: true
+                })
+                        // using the done promise callback
+                        .done(function (data) {
+                            // log data to the console so we can see
+                            if (data)
+                            {
+                                var address = $("input[name$='address']").val();
+                                var location = $("textarea[name$='location']").val();
+                                var long = $("input[name$='long']").val();
+                                var lat = $("input[name$='lat']").val();
+                                $('.new_location tr').last().after('<tr><td>' + address + '</td><td>' + location + '</td><td>' + long + '</td><td>' + lat + '</td></tr>');
+                            }
+                            console.log(data);
+                            if (data === 1)
+                                $('#myModal3').modal('hide');
+                            // here we will handle errors and validation messages
+                        });
+                // stop the form from submitting the normal way and refreshing the page
+                event.preventDefault();
+                return false;
+            });
+        });
+    {#------------------------------------Works-------------------------------------#}
+        $(document).ready(function () {
+            $('#Works').submit(function () {
+                // process the form
+                $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url: '{{helper.uri.url('management/resumes/addworks')}}', // the url where we want to POST
+                    data: $(this).serialize(), // our data object
+                    dataType: 'json', // what type of data do we expect back from the server
+                    encode: true
+                })
+                        // using the done promise callback
+                        .done(function (data) {
+                            // log data to the console so we can see
+                            if (data)
+                            {
+                                var company = $("input[name$='company']").val();
+                                var category = $("#category").val();
+                                var title = $("input[name$='title']").val();
+                                var from = $("input[name$='from']").val();
+                                var to = $("input[name$='to']").val();
+                                $('.new_work tr').last().after('<tr><td>' + company + '</td><td>' + category + '</td><td>' + title + '</td><td>' + from + ' {{lang.to}} ' + to + '</td></tr>');
+                            }
+                            console.log(data);
+                            if (data === 1)
+                                $('#myModal4').modal('hide');
+                            // here we will handle errors and validation messages
+                        });
+                // stop the form from submitting the normal way and refreshing the page
+                event.preventDefault();
+                return false;
+            });
+        });
+
+    {#------------------------------------Skills-------------------------------------#}        
+        $(document).ready(function () {
+            $('#Skills').submit(function () {
+                // process the form
+                $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url: '{{helper.uri.url('management/resumes/addskills')}}', // the url where we want to POST
+                    data: $(this).serialize(), // our data object
+                    dataType: 'json', // what type of data do we expect back from the server
+                    encode: true
+                })
+                        // using the done promise callback
+                        .done(function (data) {
+                            // log data to the console so we can see
+                            if (data)
+                            {
+                                var content = $("input[name$='content']").val();
+                                var category = $("input[name$='category']").val();
+                                $('.new_skill tr').last().after('<tr><td>' + content + '</td><td>' + category + '</td></tr>');
+                            }
+                            console.log(data);
+                            if (data === 1)
+                                $('#myModal5').modal('hide');
+                            // here we will handle errors and validation messages
+                        });
+                // stop the form from submitting the normal way and refreshing the page
+                event.preventDefault();
+                return false;
+            });
+        });
+
+    {#------------------------------------Educations-------------------------------------#}        
+        $(document).ready(function () {
+            $('#Educations').submit(function () {
+                // process the form
+                $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url: '{{helper.uri.url('management/resumes/addedu')}}', // the url where we want to POST
+                    data: $(this).serialize(), // our data object
+                    dataType: 'json', // what type of data do we expect back from the server
+                    encode: true
+                })
+                        // using the done promise callback
+                        .done(function (data) {// log data to the console so we can see
+                            if (data)
+                            {
+                                var degree = $("#degree").val();
+                                var school = $("input[name$='school']").val();
+                                var field = $("input[name$='field']").val();
+                                var from_month = $("#from-month").val();
+                                var from_year = $("#from-year").val();
+                                var to_month = $("#to-month").val();
+                                var to_year = $("#to-year").val();
+                                $('.new_edu tr').last().after('<tr><td>' + degree + '</td><td>' + school + '</td><td>' + field + '</td><td>' + from_year + '-' + from_month + ' {{lang.to}} ' + to_year + '-' + to_month + '</td></tr>');
+                            }
+                            console.log(data); // here we will handle errors and validation messages
+                            if (data === 1)
+                                $('#myModal6').modal('hide');
+                        });
+                // stop the form from submitting the normal way and refreshing the page
+                event.preventDefault();
+                return false;
+            });
+        });
+
+    {#------------------------------------Activities-------------------------------------#}        
+        $(document).ready(function () {
+            $('#Activities').submit(function () {
+                // process the form
+                $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url: '{{helper.uri.url('management/resumes/addactivity')}}', // the url where we want to POST
+                    data: $(this).serialize(), // our data object
+                    dataType: 'json', // what type of data do we expect back from the server
+                    encode: true
+                })
+                        // using the done promise callback
+                        .done(function (data) {// log data to the console so we can see
+                            if (data)
+                            {
+                                var activity = $("input[name$='activity']").val();
+                                var role = $("input[name$='role']").val();
+                                var from = $("#from_activity").val();
+                                var to = $("#to_activity").val();
+                                $('.new_activity tr').last().after('<tr><td>' + activity + '</td><td>' + role + '</td><td>' + from + ' {{lang.to}} ' + to + '</td></tr>');
+                            }
+                            console.log(data); // here we will handle errors and validation messages
+                            if (data === 1)
+                                $('#myModal7').modal('hide');
+                        });
+                // stop the form from submitting the normal way and refreshing the page
+                event.preventDefault();
+                return false;
+            });
+        });
+
+    {#------------------------------------Languages-------------------------------------#}        
+        $(document).ready(function () {
+            $('#Languages').submit(function () {
+                // process the form
+                $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url: '{{helper.uri.url('management/resumes/addlanguage')}}', // the url where we want to POST
+                    data: $(this).serialize(), // our data object
+                    dataType: 'json', // what type of data do we expect back from the server
+                    encode: true
+                })
+                        // using the done promise callback
+                        .done(function (data) {// log data to the console so we can see
+                            if (data)
+                            {
+                                var name = $("input[name$='name']").val();
+                                var level = $("#level").val();
+                                $('.new_language tr').last().after('<tr><td>' + name + '</td><td>' + level + '</td></tr>');
+                            }
+                            console.log(data);// here we will handle errors and validation messages
+                            if (data === 1)
+                                $('#myModal8').modal('hide');
+                        });
+                // stop the form from submitting the normal way and refreshing the page
+                event.preventDefault();
+                return false;
+            });
+        });
+
+    {#------------------------------------Hobbies-------------------------------------#}
+        $(document).ready(function () {
+            $('#Hobbies').submit(function () {// process the form
+                $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url: '{{helper.uri.url('management/resumes/addhobby')}}', // the url where we want to POST
+                    data: $(this).serialize(), // our data object
+                    dataType: 'json', // what type of data do we expect back from the server
+                    encode: true
+                })// using the done promise callback
+                        .done(function (data) {// log data to the console so we can see
+                            if (data)
+                            {
+                                var name = $("textarea[name$='name']").val();
+                                $('.new_hobby tr').last().after('<tr><td>' + name + '</td></tr>');
+                            }
+                            console.log(data);// here we will handle errors and validation messages
+                            if (data === 1)
+                                $('#myModal9').modal('hide');
+                        });// stop the form from submitting the normal way and refreshing the page
+                event.preventDefault();
+                return false;
+            });
+        });
+
+    {#------------------------------------DatePicker-------------------------------------#}
+        $(function () {
+            $('.date-picker').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: 'yy-mm-01',
+                onClose: function (dateText, inst) {
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                    $(this).datepicker('setDate', new Date(year, month, 1));
+                }
+            });
+        });
+</script>
+<style>
+    .ui-datepicker-calendar {
+        display: none;
+    }
+    p {
+        font-family:verdana;
+        font-size:11px;
+    }
+</style>

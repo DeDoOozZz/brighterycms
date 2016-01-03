@@ -1,0 +1,37 @@
+<!-- projects-page section 
+                  ================================================== -->
+<section class="projects-page-section">
+    <div class="container">
+        <ul class="filter">
+            <li><a class="active" href="#" data-filter="">Show All</a></li>
+            {% for item in categories %}           
+            <li><a href="#" data-filter=".cat_{{item.portfolio_category_id}}">{{item.title}}</a></li>
+            {% endfor %}
+        </ul>
+        <div class="project-box iso-call col3">
+            {% for item in portfolio %}   
+                <div class="project-post  cat_{{item.portfolio_category_id}}">
+                    <a href="{{ helper.uri.url('portfolio/portfolio_item', item.seo ) }}">
+                        <img src="{{helper.uri.cdn('portfolio', item.image )}}" alt="">
+                    </a>
+                    <div class="hover-box">
+                        <h2><a href="{{ helper.uri.url('portfolio/portfolio_item', item.seo ) }}">{{item.title}}</a></h2>
+                        <span>{{item.description}}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- End projects-page section -->
+<style>
+    section.projects-page-section {
+        margin-top: 120px;
+    }
+    .project-post > a {
+    display: block;
+    height: 200px;
+    overflow: hidden;
+}
+</style>
+

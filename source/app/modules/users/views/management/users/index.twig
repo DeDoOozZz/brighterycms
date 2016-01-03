@@ -1,0 +1,101 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{lang.users}}</h3>
+        <div class="panel-options">
+            <a href="{{ helper.uri.url('management/users/manage') }}" class="btn btn-secondary" style="color: #FFF;">{{lang.add}}</a>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped" id="datatable">
+            <thead>
+                <tr>
+                    <th>{{lang.fullname}}</th>
+                    <th>{{lang.email}}</th>
+                    <th>{{lang.image}}</th>
+                    <th class="no-sorting">{{lang.operations}}</th>
+                </tr>
+            </thead>
+            <tbody class="middle-align">
+                {% for item in items %}
+                    <tr>
+                        <td>{{item.fullname}}</td>
+                        <td>{{item.email}}</td>
+                        <td><img src="{{helper.uri.cdn()}}users/{{item.image}}" height="42" width="42"></td>  
+                        <td>
+                            <a class="btn btn-info btn-sm " href="{{ helper.uri.url('management/users/manage', item.user_id ) }}">{{lang.edit}}</a>
+                            {%if item.resume_id%}
+                                <a class="btn btn-info btn-sm " href="{{helper.uri.url('management/resumes/manage', item.resume_id)}}">{{lang.resume}}</a>
+                                <a href="#" class="btn btn-secondary btn-sm delete_msg_r" data-url_id="{{helper.uri.url('management/resumes/deleteR', item.resume_id )}}" data-toggle="modal" data-target="#deleteMsgR" style="color:#fff;">{{lang.delete_resume}}</a>
+                            {%else%}
+                                <a href="#" class="btn btn-danger btn-sm addResume_msg" data-url="{{helper.uri.url('management/resumes/add', item.user_id)}}" data-toggle="modal" data-target="#addResumeMsg" style="color:#fff;">{{lang.resume}}</a>
+                            {%endif%}
+                            <a href="#" class="btn btn-secondary btn-sm delete_msg" data-url_id="{{helper.uri.url('management/users/delete', item.user_id )}}" data-toggle="modal" data-target="#deleteMsg" style="color:#fff;">{{lang.delete}}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="modal fade" id="deleteMsg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{lang.system_msg}}</h4>
+            </div>
+            <div class="modal-body">
+                <a>{{lang.delete_item}}</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">{{lang.no}}</button>
+                <a id="delete_id" class="btn btn-danger" href="">{{lang.delete}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteMsgR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{lang.system_msg}}</h4>
+            </div>
+            <div class="modal-body">
+                <a>{{lang.delete_item_r}}</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">{{lang.no}}</button>
+                <a id="delete_id_r" class="btn btn-danger" href="">{{lang.delete}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addResumeMsg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{lang.addResumeMsg}}</h4>
+            </div>
+            <div class="modal-body">
+                <a>{{lang.addResumeMsg}}</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">{{lang.no}}</button>
+                <a id="addResume_id" class="btn btn-danger" href="">{{lang.yes}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{#<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $("#datatable").dataTable();
+    });
+    $(document).on("click", ".delete_msg_r", function () {
+        var full_url = $(this).data('url_id');
+        $("#delete_id_r").attr('href', full_url);
+    });
+</script>
+#}

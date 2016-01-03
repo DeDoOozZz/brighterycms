@@ -1,0 +1,88 @@
+<form id="search_form">
+    <section class="projects-page-section category_page blog-section">
+        <div class="container">
+
+            <div class="advanced_search_sidebar col-sm-3">
+
+                <div class="seach-sidebar-block">
+                    <span><i class="fa fa-server"></i> Category</span>
+                    <div class="search-list-categories">
+                        <div class="search-advanced-blocked">
+                            <input type="text" id="search-nodata" name="search-nodata" class="search-block" placeholder="Search Category"  data-list=".highlight_list" autocomplete="off"><i class="fa fa-search advanced-search-icon"></i>
+                        </div>
+                        <ul class="vertical highlight_list">
+                            {% for item in categories %}
+                                <li><input type="checkbox" class="category" name="category_id[]" value="{{item.commerce_category_id}}" {{helper.form.checked('category_id', item.commerce_category_id )}}> {{item.title}}</li>
+                                {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="seach-sidebar-block">
+                    <span> © Brand</span>
+                    <div class="search-list-categories">
+                        <div class="search-advanced-blocked">
+                            <input type="text" id="search-brand" name="search-brand" class="search-block" placeholder="Search Brand" data-list=".highlight_list" autocomplete="off"><i class="fa fa-search advanced-search-icon"></i>
+                        </div>
+                        <ul class="vertical highlight_list">
+                            {% for brand in brands %}
+                                <li><input type="checkbox" class="brand" name="brand_id[]" value="{{brand.commerce_brand_id}}" {{helper.form.checked('brand_id', brand.commerce_brand_id )}}> {{brand.name}}</li>
+                                {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="seach-sidebar-block">
+                    <span><i class="fa fa-money"></i> Price</span>
+                    From <input type="text" name="from_price" value="{{input.get('from_price')}}">
+                    To <input type="text" name="to_price" value="{{input.get('to_price')}}">
+                    <button type="submit" class="submit-price">GO</button>
+                </div>
+
+            </div>
+            <div class="commerce-categories-home col-sm-9">
+                <div class="advanced_search_header col-sm-12">
+                    <h2 class="main-product-block">{{input.get('q')}}</h2>
+                    {{helper.form.dropdown('sorting', sorting, input.get('sorting'), 'class="advanced-search-sorting"')}}
+                </div>
+
+                <div class="search-result col-sm-12">
+                    {% for item in products %}     
+                        <div class="col-sm-4">
+                            <div class=" commerce-block-home">
+                                <a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}" class="commerce-product-block"> <img src="{{helper.uri.cdn('commerce', product_model.getProductPrimaryImage(item.commerce_product_id))}}" alt=""></a>
+                                <div class="commerce-product-content">
+                                    <h3><a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}">{{item.name}}</a></h3>
+                                    <span class="commerce-product-details"> {{item.description}}</span>
+                                    <span class="commerce-product-price"><span class="commerce-product-before-sale">{{item.price}}</span>{{ product_model.discount (item.price, item.discount) }}</span>
+                                    {% if item.discount %}<span class="commerce-product-sale-price">-{{item.discount}}%</span>{% endif %}
+                                </div>
+                            </div> 
+                        </div>
+                    {% endfor %}
+                </div>
+                {{pagination}}
+            </div>
+        </div>
+    </section>
+</form>
+
+<script src="{{ constant('STYLE_JS') }}/jquery.hideseek.min.js"></script>
+
+<script>
+    $('#search-nodata').hideseek({
+        nodata: 'No results found'
+    });
+    $('#search-brand').hideseek({
+        nodata: 'No results found'
+    });
+    $('.category').change(function () {
+        $('#search_form').submit();
+    });
+
+    $('.brand').change(function () {
+        $('#search_form').submit();
+    });
+
+    $('.advanced-search-sorting').change(function () {
+        $('#search_form').submit();
+    });
+</script>

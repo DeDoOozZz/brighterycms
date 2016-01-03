@@ -1,0 +1,137 @@
+
+
+
+<div class="row">
+    {% for item in items %}
+
+    <div class="col-md-6">
+
+        <!-- Bordered + shadow panel -->
+        <div class="panel panel-default panel-border panel-shadow">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ item.title }}</h3>
+
+                <div class="panel-options">
+                    
+                    <!--- EDIT ----->
+
+                    <a href="{{ helper.uri.url('management/pm_departments/manage', item.pm_department_id )}}" ><i class="fa-edit"></i></a>
+
+                    <!--- MINIMIZE ----->
+                    <a href="#" data-toggle="panel">
+                        <span class="collapse-icon">–</span>
+                        <span class="expand-icon">+</span>
+                    </a>
+                       <!--- DELETE ----->
+                    <a href="" class="delete_msg" data-toggle="modal" data-url_id="{{ helper.uri.url('management/pm_departments/delete', item.pm_department_id )}}" data-target="#delete1">×</a>
+
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <p>{{ item.description }}</p>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+
+
+</div>
+
+
+
+
+{#<div class="modal fade" id="edit1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="edit1">{{ lang.edit_dep }}</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" class="form-horizontal" id="edit_department">
+
+                    <div class="form-group">
+                        <label for="title" class="col-sm-3 control-label">{{ lang.title }}</label>
+
+                        <div class="col-sm-9">
+                            <input id ="title" type="text"  cols="5" value ="{{ item.title }}" class="form-control" name="title" autocomplete="on">
+                        </div>
+
+                    </div>
+                    <div class="form-group-separator"></div>
+
+
+                    <div class="form-group">
+
+                        <label for="desc" class="col-sm-3 control-label">{{ lang.desc }}</label>
+
+                        <div class="col-sm-9">
+                            <textarea  cols="5" id="desc" class="form-control" name="name">{{ item.description }}</textarea>
+                        </div>
+                    </div>
+                    <input type="hidden" id="edit_id">
+                    <div class="form-group-separator"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+
+                            <a id="submit_id" class="btn btn-info " href="">{{lang.submit}}</a>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>#}
+<div class="modal fade" id="delete1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{lang.system_msg}}</h4>
+            </div>
+            <div class="modal-body">
+                <a>{{lang.delete_item}}</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">{{ lang.no }}</button>
+                <a id="delete_id" class="btn btn-danger" href="url">{{lang.delete}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).on("click", ".delete_msg", function () {
+        var full_url = $(this).data('url_id');
+        $("#delete_id").attr('href', full_url);
+    });
+    
+    $(document).on("click{#", ".edit", function () {
+        var dep_id = $(this).data('dep_id');
+        var desc = $(this).data('desc');
+        var title = $(this).data('title');
+
+        $("#edit_id").val(dep_id);
+        $("#title").val( title);
+        $("#desc").val(desc); //textarea
+        var full_url = $(this).data('url_id');
+        $("#submit_id").attr('href', full_url);
+    });
+    $('#edit_department').submit(function(){
+        $.post('{{ helper.uri.url('management/pm_departments/manage' )}}'
+        + $("#edit_id").val(), $(this).serialize(), function(response){
+
+        });
+
+        return false; //3shan my3mlsh request bel submit
+    });
+    data-dep_id="{{ item.department_id }}" data-title="{{ item.title }}" data-desc="{{ item.description }}" data-target="#edit1"
+#}
+
+</script>

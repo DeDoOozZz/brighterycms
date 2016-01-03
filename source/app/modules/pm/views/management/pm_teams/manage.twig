@@ -1,0 +1,156 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.teams }}</h3>
+
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,true,'role="form" class="form-horizontal"  method ="post"') }}
+        {{ error }}
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="field-1">{{ lang.title }}</label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" for="field-1" id="name"  name="title"
+                                      value="{{ helper.form.value('title', item.title) }}">
+                </div>
+            </div>
+
+            <div class="form-group-separator"></div>
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="field-5">{{ lang.desc }}</label>
+
+                <div class="col-sm-10">
+                    <textarea class="form-control" cols="5" id="field-5" name="description"  >{{ helper.form
+                             .value('description', item.description) }}</textarea>
+                </div>
+            </div>
+
+            <div class="form-group-separator"></div>
+
+            <div class="form-group">
+
+                <div id="mem-row">
+
+                  <div class="pull-right">
+                         <button class="btn btn-success" id="add-members">{{ lang.add }}</button>
+                  </div>
+                  <div class="row">
+                        <div class="col-sm-5 margin-10">{{ lang.members }}</div>
+                       <div class="col-sm-5 margin-10" style="padding-left: 66px;">{{ lang.role }}</div>
+                  </div>
+                  <div class="row" id="add-row">
+                    <div class="col-sm-5">
+
+                        {{ helper.form.dropdown('add_user_id[]', user, helper.form.value('add_user_id[]', team_users),
+                          'class="form-control select2" ') }}
+                    </div>
+                    <div class="col-sm-5">
+
+                        {{ helper.form.dropdown('add_pm_role_id[]', roles, helper.form.value('add_pm_role_id[]', team_users),
+                         'class="form-control select2" ') }}
+                     </div>
+                    <div class="col-sm-2">
+                          <button class="btn btn-white" data-toggle="remove">
+                              <i class="fa-trash"></i>
+                          </button>
+
+                      </div>
+
+                  </div>
+
+                </div>
+
+             </div>
+
+            <div class="form-group-separator"></div>
+
+            <div class="form-group">
+                 <label class="col-sm-2 control-label">{{ lang.leader }}</label>
+
+                <div class="col-sm-10">
+               {{helper.form.dropdown('pm_team_leader_id', user, helper.form.value('pm_team_leader_id',item.pm_team_leader_id),
+               'class="form-control select2 "')  }}
+            </div>
+            </div>
+
+            <div class="form-group-separator"></div>
+
+
+            <div class="form-group">
+                <input type="submit" id="submit" class="btn btn-info btn-single pull-right" value ="{{ lang.submit }}">
+            </div>
+
+
+
+        </form>
+
+        {{ helper.form.close() }}
+    </div>
+</div>
+	
+
+
+<script src="{{ constant('STYLE_JS') }}/select2/select2.min.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($)
+    {
+        $("#s2example-1").select2({
+            placeholder: 'Select Members...',
+            allowClear: true
+        }).on('select2-open', function ()
+        {
+            // Adding Custom Scrollbar
+            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+        });
+    });
+
+
+
+    $(function () {
+// Check box
+        $(function () {
+            $('#type').change(function () {
+                if ($('#type').is(':checked')) {
+                    $('#mem-row').show();
+                } else {
+                    $('#mem-row').hide();
+                }
+            });
+        });
+    });
+
+
+    $(function () {
+// view dropdown rows
+        $('#add-members').click(function () {
+            $('#add-row').append(
+                    '<div class="col-sm-5">' +
+                    '{{ helper.form.dropdown('add_user_id[]', user, helper.form.value('add_user_id[]'),
+                      'class="form-control select2" ') }}' +
+                    '</div>' +
+                    '<div class="col-sm-5">' +
+                    '{{ helper.form.dropdown('add_pm_role_id[]', roles, helper.form.value('add_pm_role[]_id'),
+                    'class="form-control select2" ') }}' +
+                    '</div>' +
+                    '<div class="col-sm-2">' +
+                    '<button class="btn btn-white">' +
+                    '<i class="fa-trash"></i>' +
+                    '</button>' +
+                    '</div>'
+            );
+            return false;
+        });
+
+    });
+
+//    $(function () {
+//        $('#submit').click(function () {
+//            $.ajax({url: "<?=base_url('management/pm_teams/manage')?>", success: function(result){
+//                $("#div1").html(result);
+//            }});
+//        })});
+</script>
+

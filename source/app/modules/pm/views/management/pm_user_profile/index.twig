@@ -1,0 +1,196 @@
+
+
+<section class="profile-env" style="float: none;">
+
+    <div class="row">
+
+        <div class="col-sm-3">
+
+            <!-- User Info Sidebar -->
+            <div class="user-info-sidebar">
+
+                <a href="#" class="user-img">
+                    <img src="{{ helper.uri.cdn() }}users/{{ item.image }}" alt="user-img"
+                         class="img-cirlce img-responsive img-thumbnail"/>
+                </a>
+
+                <a href="#" class="user-name">
+                    {{ item.fullname }}
+                    <span class="user-status is-online" style="float: none;"></span>
+                </a>
+
+                    <span class="user-title">
+                            Deverloper at <strong>Brightery</strong>
+                    </span>
+
+                <hr/>
+
+                <ul class="list-unstyled user-info-list">
+                    <li>
+                        <i class="fa-home"></i>
+                        {{ lang.usergroup }}: {{ item.usergroup }}
+                    </li>
+
+                </ul>
+
+                <hr/>
+
+                <ul class="list-unstyled user-friends-count">
+                    <li>
+                        <span>{{ issue_count.issues }}</span>
+                        {{ lang.issues }}
+                    </li>
+                    <li>
+                        <span>{{ project_count.projects }}</span>
+                        {{ lang.projects }}
+                    </li>
+
+                </ul>
+
+                <a href="{{ helper.uri.url('management/users/manage', item.user_id) }} ">
+                     <button type="button" class="btn btn-success btn-block text-left">
+                    {{ lang.edit_profile }}
+                    <i class="fa-edit pull-right"></i>
+                </button>
+                </a>
+
+
+            </div>
+
+        </div>
+
+        <div class="col-sm-9">
+
+            <div class="sorted ui-sortable">
+
+                <div class="panel panel-color panel-success" style="position: relative;">
+
+                    <!-- panel head -->
+                    <div class="panel-heading ui-sortable-handle">
+                        <div class="panel-title">{{ lang.teams }}</div>
+
+                    </div>
+
+                    <!-- panel body -->
+                    <div class="panel-body">
+                        <table class="table table-bordered table-striped" id="datatable">
+                            <thead>
+                            <tr>
+                                <th>{{ lang.team_title }}</th>
+                                <th>{{ lang.role }}</th>
+                            </tr>
+                            </thead>
+                            {% for team in teams %}
+                                <tbody class="middle-align">
+
+                                <tr>
+                                    <td>{{ team.team }}</td>
+                                    <td>{{ team.role }}</td>
+                                </tr>
+                                </tbody>
+                            {% endfor %}
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="sorted ui-sortable">
+
+                <div class="panel panel-color panel-purple" style="position: relative;">
+
+                    <!-- panel head -->
+                    <div class="panel-heading ui-sortable-handle">
+                        <div class="panel-title">{{ lang.assigned }}</div>
+
+                    </div>
+
+                    <!-- panel body -->
+                    <div class="panel-body">
+                        <table class="table table-bordered table-striped" id="datatable">
+                            <thead>
+                            <tr>
+                                <th>{{ lang.issue_title }}</th>
+                                <th> {{ lang.assigned_date }}</th>
+                                <th>{{ lang.priority }}</th>
+                                <th> {{ lang.issue_status }}</th>
+                            </tr>
+                            </thead>
+                            {% for ass in assign %}
+                                <tbody class="middle-align">
+
+                                <tr>
+                                    <th>
+                                        <a href="{{ helper.uri.url('management/pm_issue_details/index', ass.pm_issue_id) }} ">
+                                            <span> {{ ass.issue_title }}</span>
+                                        </a>
+                                    </th>
+                                    <th>{{ ass.assigned_date }}</th>
+                                    <th style="color:{{ ass.p_color }}">{{ ass.priority }}</th>
+                                    <th style="color:{{ ass.s_color }}">{{ ass.statues }}</th>
+                                </tr>
+
+                                </tbody>
+                            {% endfor %}
+                        </table>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="sorted ui-sortable">
+
+                <div class="panel panel-color panel-danger" style="position: relative;">
+
+                    <!-- panel head -->
+                    <div class="panel-heading ui-sortable-handle">
+                        <div class="panel-title">{{ lang.actions }}</div>
+
+                    </div>
+
+                    <!-- panel body -->
+                    <div class="panel-body">
+
+                        <table class="table table-bordered table-striped" id="datatable">
+                            <thead>
+                            <tr>
+                                <th>{{ lang.issue_title }}</th>
+                                <th>{{ lang.actions }}</th>
+                                <th>{{ lang.date }}</th>
+                                <th>{{ lang.reason }}</th>
+                            </tr>
+                            </thead>
+                            {% for action in actions %}
+                                <tbody class="middle-align">
+                                <tr>
+                                    <th>
+                                        <a href="{{ helper.uri.url('management/pm_issue_details/index', action.pm_issue_id) }} ">
+                                            <span>{{ action.issue_title }}</span>
+                                        </a>
+                                    </th>
+                                    {% if action.actions == 'Infraction' %}
+                                        <th style="color:red;">{{ action.actions }}</th>
+                                    {% endif %}
+                                    {% if action.actions == 'Reputation' %}
+                                        <th style="color:blue;">{{ action.actions }}</th>
+                                    {% endif %}
+                                    <th>{{ action.time }}</th>
+                                    <th>{{ action.reson }}</th>
+                                </tr>
+                                </tbody>
+                            {% endfor %}
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

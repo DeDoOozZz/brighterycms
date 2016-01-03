@@ -1,0 +1,92 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.role }}</h3>
+
+        <div class="panel-options">
+            <a href="{{ helper.uri.url('management/pm_roles/manage') }}" class="btn btn-secondary" style="color: #FFF;">
+                {{ lang.add }}
+            </a>
+        </div>
+    </div>
+    <div class="panel-body">
+
+        <table class="table table-bordered table-striped" id="datatable">
+            <thead>
+            <tr>
+                <th>{{ lang.title }}</th>
+                <th>{{ lang.operations }}</th>
+            </tr>
+            </thead>
+            <tbody class="middle-align">
+
+            {% for item in items %}
+                <tr class="delete-row_{{ item.pm_role_id }}">
+                    <td>{{ item.title }}</td>
+                    <td>
+                        <a class="btn btn-info btn-sm"
+                           href="{{ helper.uri.url('management/pm_roles/manage', item.pm_role_id ) }}">{{ lang.edit }}</a>
+                        <a href="#" class="btn btn-secondary btn-sm delete_msg" data-id="{{ item.pm_role_id }}"
+                           data-url_id="{{ helper.uri.url('management/pm_roles/delete', item.pm_role_id ) }}"
+                           data-toggle="modal" data-target="#deleteMsg" style="color:#fff;">{{ lang.delete }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+ {{pagination}}
+    </div>
+</div>
+<div class="modal fade" id="deleteMsg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{ lang.system_msg }}</h4>
+            </div>
+            <div class="modal-body">
+                <a>{{ lang.delete_item }}</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">{{ lang.no }}</button>
+                <a id="delete_id" class="btn btn-danger delete " data-id="{{ item.pm_role_id }}" href="url">{{ lang.delete }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $("#datatable").dataTable();
+    });
+
+
+        $('.delete').click(function () {
+            var button = $(this);
+            $.get($(this).attr('href'), function (data) {
+                $('.delete-row_' + button.data('id')).remove();
+            });
+            return false;
+        });
+
+        $('#delete_id').click(function () {
+            return false
+        });
+        $('.delete_msg').click(function () {
+
+            var full_url = $(this).data('id');
+            $("#delete_id").attr('data-id', full_url);
+//            $('#deleteMsg').modal('hide') ;
+//            $('.modal-dialog').click(function() {
+//                var qqq = $(this).closest('.modal');
+//                $(qqq).modal('hide');
+//            });
+
+        });
+
+//        $('#deleteMsg').click(function () {
+//            $(this).hide();
+//            $('.modal-dialog').hide();
+//        });
+
+    });
+</script>

@@ -1,0 +1,148 @@
+<!-- projects-page section 
+                     ================================================== -->
+<section class="commerce-single-product">
+    <div class="container">
+        <div class="row commerce-single-product-block">
+            <div class="col-sm-4">
+                <div class="commerce-product-main-image">
+                    <img class=" zoom" src="{{helper.uri.cdn('commerce', product_model.getProductPrimaryImage(item.commerce_product_id))}}" data-zoom-image="{{helper.uri.cdn('commerce', product_model.getProductPrimaryImage(item.commerce_product_id))}}" alt="">
+                </div>
+                <div class="commerce-related-product-imgs row">
+                    {% for img in imgs %}
+                        <a href="#" class="col-sm-2" data-zoom-image="{{helper.uri.cdn('commerce', img.product_image)}}" data-image="{{helper.uri.cdn('commerce', img.product_image)}}"><img src="{{helper.uri.cdn('commerce', img.product_image)}}" ></a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h2 class="commerce-single-pro-title">{{item.name}}</h2>
+                {#                <span class="commerce-pro-puplisher">by: <a href="#">Muhammad Elsaieed</a></span>#}
+                <span class="commerce-pro-cat">More: <a href="{{ helper.uri.url('commerce_category/index', item.commerce_category_id ) }}">{{item.title}}</a></span>
+                <span class="product_brand">
+                   <img src="{{helper.uri.cdn('commerce', item.brand_iamge)}}" alt=""> 
+                </span>
+                {# <div class="commerce-pro-review">
+                     <ul>
+                         <li><i class="fa fa-star"></i></li>
+                         <li><i class="fa fa-star"></i></li>
+                         <li><i class="fa fa-star"></i></li>
+                         <li><i class="fa fa-star"></i></li>
+                         <li><i class="fa fa-star"></i></li>
+                     </ul>
+                 </div>#}
+                <div class="commerce-product-fetrues">
+                    {#<select>#}
+                    {#<option>color</option>#}
+                    {#</select>#}
+                    <span class="commerce-product-price"><span class="commerce-product-before-sale">${{item.price}}</span>${{ product.discount (item.price, item.discount) }}</span>
+                    <a href="javascript:cart.add({{ item.commerce_product_id }});" class="commerce-add-tocart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                    <a href="javascript:wishlist.add({{ item.commerce_product_id }});" class="commerce-add-wishlist"><i class="fa fa-heart"></i> Add to Wishlist</a>
+                    {% if item.description %}
+                        <div class="commerce-key-fetrues">
+                            <h3>Key features</h3>
+                            {#<ul>#}
+                            {#<li>- <span>attribute</span> : <span>value</span> </li>#}
+                            {{item.description}}
+                            {#</ul>#}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-sm-4 related-pro-block">
+                <h3>Some Related Products</h3>
+
+                {% for item in related_products %}
+                    <div class="commerce-pro-related row">
+                        <div class="commerce-related-pro-img col-sm-4">
+                            <a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}" class="commerce-product-block" style="height:auto;"> <img src="{{helper.uri.cdn('commerce', product_model.getProductPrimaryImage(item.commerce_product_id))}}" alt=""></a>
+
+                        </div>
+                        <div class="commerce-pro-related-details col-sm-8">
+                            <a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}" class="related-pro-title">{{item.name}}</a>
+                            <span class="commerce-pro-cat">More: <a href="{{ helper.uri.url('commerce_category/index', item.commerce_category_id ) }}">{{item.title}}</a></span>
+                            <span class="commerce-product-price">${{ product.discount (item.price, item.discount) }} <span class="commerce-product-before-sale">${{item.price}}</span>  </span>
+                        </div>
+                    </div>
+                {% endfor %}                    
+            </div>
+        </div>
+    </div>
+</section>  
+<section class="commerce-pro-documentation">
+    <div class="container">
+        <h3>Product Documentation</h3>
+        <div class="tabs">
+            <ul class="tab-links">
+                <li class="active"><a href="#tab1"><i class="fa fa-bookmark"></i> Specification</a></li>
+                <li><a href="#tab2"><i class="fa fa-book"></i> Document</a></li>
+                    {#                <li><a href="#tab3"><i class="fa fa-line-chart"></i> review</a></li>#}
+            </ul>
+
+            <div class="tab-content">
+                <div id="tab1" class="tab active">
+                    <p>{{item.description}}</p>
+                </div>
+
+                <div id="tab2" class="tab">
+                    <p>{{item.category_desc}}</p>
+                </div>
+
+                {#  <div id="tab3" class="tab">
+                      <p>Tab #3 content goes here!</p>
+                      <p>Donec pulvinar neque sed semper lacinia. Curabitur lacinia ullamcorper nibh; quis imperdiet velit eleifend ac. Donec blandit mauris eget aliquet lacinia! Donec pulvinar massa interdum ri.</p>
+                  </div>#}               
+            </div>
+        </div>
+        <script>
+            jQuery(document).ready(function () {
+                jQuery('.tabs .tab-links a').on('click', function (e) {
+                    var currentAttrValue = jQuery(this).attr('href');
+
+                    // Show/Hide Tabs
+                    jQuery('.tabs ' + currentAttrValue).slideDown(400).siblings().slideUp(400);
+
+                    // Change/remove current tab to active
+                    jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+
+                    e.preventDefault();
+                });
+            });
+        </script>
+    </div>
+</section>
+
+<section class="projects-page-section">
+    <div class="container">
+        <h2 class="main-product-block">{{main_cat.title}}</h2>
+        <ul class="filter commerce-filter filter_{{main_cat.title}}" style="text-align:right; margin-bottom: 0;">
+            <li><a href="#" data-filter="">{{lang.all}}</a></li>
+                {% for sub_cat in category_model.getSubCategories(main_cat.commerce_category_id) %}     
+                <li><a href="#" data-filter=".cat_{{ sub_cat.commerce_category_id }}">{{sub_cat.title}}</a></li>  
+                {% endfor %}
+        </ul>
+
+        <div class="commerce-categories-home jcarousel" style="margin-top: 20px;">
+            <ul class="iso-call">
+                {% for sub_cat in category_model.getSubCategories(main_cat.commerce_category_id) %}  
+                    {% for item in product_model.getCategoryProducts(sub_cat.commerce_category_id) %}     
+                        <li class="cat_{{ sub_cat.commerce_category_id }}">
+                            <div class=" commerce-block-home">
+                                <a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}" class="commerce-product-block"> <img src="{{helper.uri.cdn('commerce', product_model.getProductPrimaryImage(item.commerce_product_id))}}" alt=""></a>
+                                <div class="commerce-product-content">
+                                    <h3><a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}">{{item.name}}</a></h3>
+                                    <span class="commerce-product-details"> {{item.description}}</span>
+                                    <span class="commerce-product-price"><span class="commerce-product-before-sale">{{item.price}}</span>{{ product.discount (item.price, item.discount) }}</span>
+                                    {% if item.discount %}<span class="commerce-product-sale-price">-{{item.discount}}%</span>{% endif %}
+                                </div>
+                            </div> 
+                        </li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+            <a href="#" class="jcarousel-control-prev"><i class="fa fa-chevron-left"></i></a>
+            <a href="#" class="jcarousel-control-next"><i class="fa fa-chevron-right"></i></a>
+        </div>
+    </div>
+</section>  
+<script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.imagesloaded.min.js"></script>
+<script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.isotope.min.js"></script>
+<script type="text/javascript" src="{{ constant("STYLE_JS") }}/retina-1.1.0.min.js"></script>

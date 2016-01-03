@@ -1,0 +1,599 @@
+<div class="col-sm-10 float_responsive">
+    <div class="featured-jobs float_responsive">
+        <h2 class="inside-title"><i class="fa fa-tag"></i> وظائف  مميزة</h2> 
+        <div class="sub-job-list">
+            {%for job in spotlighted %}
+                <div class="job-block">
+                    <span class="col-sm-1 job-type-block float_responsive">
+                        <span class="job-type" style="background-color: {{job.color}}" > {{job.type}}</span>
+                    </span>
+                    <span class="col-sm-6 float_responsive" style="padding-left: 0;">
+                        <a href="{{ helper.uri.url('classfied_job/index', job.classfied_job_id ) }}" class="job-title-home">
+                            {{job.title | truncate(85) }}
+                        </a>
+                    </span>
+                    <div class="col-sm-5 float_responsive for-responsive-details">
+                        <span class="hide col-sm-2 job-location">
+                            {% if job.country_image %}
+                                <img src="{{helper.uri.cdn('classfied', job.country_image)}}">
+                                <span class="job-location-name">للعمل في    {{job.country_name}}</span>
+                            {% endif %}
+                        </span>
+                        <span class="hide col-sm-1 company_posted">
+                            <i class="fa fa-user"></i>
+                            <span class="copmany_posted_name">{{job.company}}</span> 
+                        </span>
+                        <span class="hide col-sm-2 job-present">
+                            <span class="count-number">{{job.appicants}}</span>
+                            <span class="presenter-count"> المتقدمين</span>
+                        </span>
+                        <span class="hide col-sm-2 job-presenter-location">
+                            {% if job.location_image %}
+                                <img src="{{helper.uri.cdn('classfied', job.location_image)}}">
+                                <span class="presenter-location">متقدمين من  {{job.location_name}}</span>
+                            {% endif %}
+                        </span>
+                        <span class="hide col-sm-4 job-created"><i class="fa fa-history"></i> {{ job.created_on }}</span>
+                        <span class="col-sm-1 show-details" data-toggle="modal" data-target="#myModal_{{job.classfied_job_id}}"><i class="fa fa-eye"></i></span>
+                    </div>
+                </div>
+                <div class="modal fade login-box" id="myModal_{{job.classfied_job_id}}" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel" aria-hidden="true" style="color:#333; margin: 0; padding: 0;">
+
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel"> {{ lang.quick_details }} </h4>
+                            </div>
+                            <div class="modal-body">
+                                {% if job.company %}
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="company">{{ lang.company }}</label>
+                                        <div class="col-sm-9">
+                                            {{job.company}}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if job.type %}
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="classfied_type_id">{{ lang.classfied_type_id }}</label>
+                                        <div class="col-sm-9">
+                                            {{ job.type }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                
+                                {% if job.title %}
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="title">{{ lang.title }}</label>
+                                        <div class="col-sm-9">
+                                            {{job.title}}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if job.description %}
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="description">{{ lang.description }}</label>
+                                        <div class="col-sm-9">
+                                            {{job.description}}  
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if job.location_name %}
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="candidate_location">{{ lang.candidate_location}}</label>
+                                        <div class="col-sm-9">
+                                            {{job.location_name}}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+    <div class="featured-jobs float_responsive">
+        <h2 class="inside-title"> آخر طلبات الوظائف</h2> 
+        <div class="sub-job-list">
+            {%for job in latest_added %}
+                <div class="job-block">
+                    <span class="col-sm-1 job-type-block float_responsive">
+                        <span class="job-type" style="background-color: {{job.color}}" > {{job.type}}</span>
+                    </span>
+                    <span class="col-sm-6 float_responsive" style="padding-left: 0;">
+                        <a href="{{ helper.uri.url('classfied_job/index', job.classfied_job_id ) }}" target="_blank" class="job-title-home">
+                            {{job.title | truncate(60) }}
+
+                        </a>
+                    </span>
+                    <div class="col-sm-5 float_responsive for-responsive-details">
+                        <span class="col-sm-2 job-location">
+                            {% if job.country_image %}
+                                <img src="{{helper.uri.cdn('classfied', job.country_image)}}">
+                                <span class="job-location-name">للعمل في    {{job.country_name}}</span>
+                            {% endif %}
+                        </span>
+                        <span class="col-sm-1 company_posted">
+                            <i class="fa fa-user"></i>
+                            <span class="copmany_posted_name">{{job.company}}</span>
+                        </span>
+                        <span class="col-sm-2 job-present">
+                            <span class="count-number">{{job.appicants}}</span>
+                            <span class="presenter-count"> المتقدمين</span>
+                        </span>
+                        <span class="col-sm-2 job-presenter-location">
+                            {% if job.location_image %}
+                                <img src="{{helper.uri.cdn('classfied', job.location_image)}}">
+                                <span class="presenter-location">متقدمين من  {{job.location_name}}</span>
+                            {% endif %}
+                        </span>
+                        <span class="col-sm-4 job-created"><i class="fa fa-history"></i> {{ job.created_on }}</span>
+                        <span class="col-sm-1 show-details" data-toggle="modal" data-target="#myModal_{{job.classfied_job_id}}"><i class="fa fa-eye"></i></span>
+                    </div>
+                </div>
+                <div class="modal fade login-box" id="myModal_{{job.classfied_job_id}}" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel" aria-hidden="true" style="color:#333; margin: 0; padding: 0;">
+
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel"> {{ lang.quick_details }} </h4>
+                            </div>
+                            <div class="modal-body">
+                                {% if job.company %}
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="company">{{ lang.company }}</label>
+                                        <div class="col-sm-9">
+                                            {{job.company}}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if job.type %}
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="classfied_type_id">{{ lang.classfied_type_id }}</label>
+                                        <div class="col-sm-9">
+                                            {{ job.type }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {#
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="classfied_city_id">{{ lang.classfied_city_id }}</label>
+                                <div class="col-sm-9">
+                                    <input type="hidden" name="classfied_city_id" value="{{ input.post('classfied_city_id') }}" />
+                                    {{ job.city }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="classfied_area_id">{{ lang.classfied_area_id }}</label>
+                                <div class="col-sm-9">
+                                    <input type="hidden" name="classfied_area_id" value="{{ input.post('classfied_area_id') }}" />
+                                    {{ job.area }}
+                                </div>
+                            </div>#}
+                                {% if job.title %}
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="title">{{ lang.title }}</label>
+                                        <div class="col-sm-9">
+                                            {{job.title}}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if job.description %}
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="description">{{ lang.description }}</label>
+                                        <div class="col-sm-9">
+                                            {{job.description}}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if job.location_name %}
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="candidate_location">{{ lang.candidate_location}}</label>
+                                        <div class="col-sm-9">
+                                            {{job.location_name}}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {# <div class="form-group">
+                                     <label class="col-sm-3 control-label" for="salary">{{ lang.salary}}</label>
+                                     <div class="col-sm-9">
+                                         {{lang.from}}: {{job.salary_from}} --
+                                         {{lang.to}}: {{job.salary_to}} --
+                                         {{lang.classfied_currency_id}}: {{job.currency}}
+                                     </div>
+                                 </div>
+                                 #}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {#<div class="job-block">#}
+                {#<span class="col-sm-1 job-type-block float_responsive">#}
+                {#<span class="job-type" style="background-color: {{job.color}}" > {{job.type}}</span>#}
+                {#</span>#}
+                {#<span class="col-sm-6 float_responsive" style="padding-left: 0;white-space: nowrap;#}
+                {#width: 12em;#}
+                {#overflow: hidden;#}
+                {#text-overflow: ellipsis;">#}
+                {#<a href="{{ helper.uri.url('classfied_job/index', job.classfied_job_id ) }}" class="job-title-home">#}
+                {#{{job.title | truncate(60) }}#}
+                {#</a>#}
+                {#</span>#}
+                {#<div class="col-sm-5 float_responsive for-responsive-details">#}
+                {#<span class="hide col-sm-2 job-location">#}
+                {#{% if job.country_image %}#}
+                {#<img src="{{helper.uri.cdn('classfied', job.country_image)}}">#}
+                {#<span class="job-location-name">للعمل في    {{job.country_name}}</span>#}
+                {#{% endif %}#}
+                {#</span>#}
+                {#<span class="hide col-sm-1 company_posted">#}
+                {#<i class="fa fa-user"></i>#}
+                {#<span class="copmany_posted_name">{{job.company}}</span>#}
+                {#</span>#}
+                {#<span class="hide col-sm-2 job-present">#}
+                {#<span class="count-number">{{job.appicants}}</span>#}
+                {#<span class="presenter-count"> المتقدمين</span>#}
+                {#</span>#}
+                {#<span class="hide col-sm-2 job-presenter-location">#}
+                {#{% if job.location_image %}#}
+                {#<img src="{{helper.uri.cdn('classfied', job.location_image)}}">#}
+                {#<span class="presenter-location">متقدمين من  {{job.location_name}}</span>#}
+                {#{% endif %}#}
+                {#</span>#}
+                {#<span class="hide col-sm-4 job-created"><i class="fa fa-history"></i> {{ job.created_on }}</span>#}
+                {#<span class="col-sm-1 show-details" data-toggle="modal" data-target="#myModal_{{job.classfied_job_id}}"><i class="fa fa-eye"></i></span>#}
+                {#</div>#}
+                {#</div>#}
+                {#<div class="modal fade login-box" id="myModal_{{job.classfied_job_id}}" tabindex="-1" role="dialog"#}
+                {#aria-labelledby="myModalLabel" aria-hidden="true" style="color:#333; margin: 0; padding: 0;">#}
+
+                {#<div class="modal-dialog">#}
+                {#<div class="modal-content">#}
+                {#<div class="modal-header">#}
+                {#<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span#}
+                {#aria-hidden="true">&times;</span></button>#}
+                {#<h4 class="modal-title" id="myModalLabel"> {{ lang.quick_details }} </h4>#}
+                {#</div>#}
+                {#<div class="modal-body">#}
+                {#{% if job.company %}#}
+                {#<div class="form-group">#}
+                {#<label class="col-sm-3 control-label" for="company">{{ lang.company }}</label>#}
+                {#<div class="col-sm-9">#}
+                {#{{job.company}}#}
+                {#</div>#}
+                {#</div>#}
+                {#{% endif %}#}
+
+                {#{% if job.type %}#}
+                {#<div class="form-group">#}
+                {#<label class="col-sm-3 control-label" for="classfied_type_id">{{ lang.classfied_type_id }}</label>#}
+                {#<div class="col-sm-9">#}
+                {#{{ job.type }}#}
+                {#</div>#}
+                {#</div>#}
+                {#{% endif %}#}
+                {#&#123;&#35;#}
+                {#<div class="form-group">#}
+                {#<label class="col-sm-3 control-label" for="classfied_city_id">{{ lang.classfied_city_id }}</label>#}
+                {#<div class="col-sm-9">#}
+                {#<input type="hidden" name="classfied_city_id" value="{{ input.post('classfied_city_id') }}" />#}
+                {#{{ job.city }}#}
+                {#</div>#}
+                {#</div>#}
+                {#<div class="form-group">#}
+                {#<label class="col-sm-3 control-label" for="classfied_area_id">{{ lang.classfied_area_id }}</label>#}
+                {#<div class="col-sm-9">#}
+                {#<input type="hidden" name="classfied_area_id" value="{{ input.post('classfied_area_id') }}" />#}
+                {#{{ job.area }}#}
+                {#</div>#}
+                {#</div>&#35;&#125;#}
+                {#{% if job.title %}#}
+                {#<div class="form-group">#}
+                {#<label class="col-sm-3 control-label" for="title">{{ lang.title }}</label>#}
+                {#<div class="col-sm-9">#}
+                {#{{job.title}}#}
+                {#</div>#}
+                {#</div>#}
+                {#{% endif %}#}
+
+                {#{% if job.description %}#}
+                {#<div class="form-group">#}
+                {#<label class="col-sm-3 control-label" for="description">{{ lang.description }}</label>#}
+                {#<div class="col-sm-9">#}
+                {#{{job.description}}#}
+                {#</div>#}
+                {#</div>#}
+                {#{% endif %}#}
+
+                {#{% if job.location_name %}#}
+                {#<div class="form-group">#}
+                {#<label class="col-sm-3 control-label" for="candidate_location">{{ lang.candidate_location}}</label>#}
+                {#<div class="col-sm-9">#}
+                {#{{job.location_name}}#}
+                {#</div>#}
+                {#</div>#}
+                {#{% endif %}#}
+
+                {#&#123;&#35; <div class="form-group">#}
+                {#<label class="col-sm-3 control-label" for="salary">{{ lang.salary}}</label>#}
+                {#<div class="col-sm-9">#}
+                {#{{lang.from}}: {{job.salary_from}} --#}
+                {#{{lang.to}}: {{job.salary_to}} --#}
+                {#{{lang.classfied_currency_id}}: {{job.currency}}#}
+                {#</div>#}
+                {#</div>#}
+                {#&#35;&#125;#}
+                {#</div>#}
+
+                {#</div>#}
+                {#</div>#}
+                {#</div>#}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="featured-jobs float_responsive">
+        <h2 class="inside-title"> اكثر طلبات قدمت</h2> 
+        <div class="sub-job-list">
+            {%for job in most_applied %}
+                <div class="job-block">
+                    <span class="col-sm-1 job-type-block float_responsive">
+                        <span class="job-type" style="background-color: {{job.color}}" > {{job.type}}</span>
+                    </span>
+                    <span class="col-sm-6 float_responsive" style="padding-left: 0;">
+                        <a href="{{ helper.uri.url('classfied_job/index', job.classfied_job_id ) }}" target="_blank" class="job-title-home">
+                            {{job.title | truncate(60) }}
+
+                        </a>
+                    </span>
+                    <div class="col-sm-5 float_responsive for-responsive-details">
+                        <span class="col-sm-2 job-location">
+                            {% if job.country_image %}
+                                <img src="{{helper.uri.cdn('classfied', job.country_image)}}">
+                                <span class="job-location-name">للعمل في    {{job.country_name}}</span>
+                            {% endif %}
+                        </span>
+                        <span class="col-sm-1 company_posted">
+                            <i class="fa fa-user"></i>
+                            <span class="copmany_posted_name">{{job.company}}</span>
+                        </span>
+                        <span class="col-sm-2 job-present">
+                            <span class="count-number">{{job.appicants}}</span>
+                            <span class="presenter-count"> المتقدمين</span>
+                        </span>
+                        <span class="col-sm-2 job-presenter-location">
+                            {% if job.location_image %}
+                                <img src="{{helper.uri.cdn('classfied', job.location_image)}}">
+                                <span class="presenter-location">متقدمين من  {{job.location_name}}</span>
+                            {% endif %}
+                        </span>
+                        <span class="col-sm-4 job-created"><i class="fa fa-history"></i> {{ job.created_on }}</span>
+                        <span class="col-sm-1 show-details" data-toggle="modal" data-target="#myModal_{{job.classfied_job_id}}"><i class="fa fa-eye"></i></span>
+                    </div>
+                </div>
+                <div class="modal fade login-box" id="myModal_{{job.classfied_job_id}}" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel" aria-hidden="true" style="color:#333; margin: 0; padding: 0;">
+
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel"> {{ lang.quick_details }} </h4>
+                            </div>
+                            <div class="modal-body">
+                                {% if job.company %}
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="company">{{ lang.company }}</label>
+                                        <div class="col-sm-9">
+                                            {{job.company}}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if job.type %}
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="classfied_type_id">{{ lang.classfied_type_id }}</label>
+                                        <div class="col-sm-9">
+                                            {{ job.type }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {#
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="classfied_city_id">{{ lang.classfied_city_id }}</label>
+                                <div class="col-sm-9">
+                                    <input type="hidden" name="classfied_city_id" value="{{ input.post('classfied_city_id') }}" />
+                                    {{ job.city }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="classfied_area_id">{{ lang.classfied_area_id }}</label>
+                                <div class="col-sm-9">
+                                    <input type="hidden" name="classfied_area_id" value="{{ input.post('classfied_area_id') }}" />
+                                    {{ job.area }}
+                                </div>
+                            </div>#}
+                                {% if job.title %}
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="title">{{ lang.title }}</label>
+                                        <div class="col-sm-9">
+                                            {{job.title}}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if job.description %}
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="description">{{ lang.description }}</label>
+                                        <div class="col-sm-9">
+                                            {{job.description}}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if job.location_name %}
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="candidate_location">{{ lang.candidate_location}}</label>
+                                        <div class="col-sm-9">
+                                            {{job.location_name}}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {# <div class="form-group">
+                                     <label class="col-sm-3 control-label" for="salary">{{ lang.salary}}</label>
+                                     <div class="col-sm-9">
+                                         {{lang.from}}: {{job.salary_from}} --
+                                         {{lang.to}}: {{job.salary_to}} --
+                                         {{lang.classfied_currency_id}}: {{job.currency}}
+                                     </div>
+                                 </div>
+                                 #}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {#<div class="job-block">#}
+                {#<span class="col-sm-1 job-type-block float_responsive">#}
+                {#<span class="job-type" style="background-color: {{job.color}}" > {{job.type}}</span>#}
+                {#</span>#}
+                {#<span class="col-sm-6 float_responsive" style="padding-left: 0;white-space: nowrap;#}
+                {#width: 12em;#}
+                {#overflow: hidden;#}
+                {#text-overflow: ellipsis;">#}
+                {#<a href="{{ helper.uri.url('classfied_job/index', job.classfied_job_id ) }}" class="job-title-home">#}
+                {#{{job.title | truncate(60) }}#}
+                {#</a>#}
+                {#</span>#}
+                {#<div class="col-sm-5 float_responsive for-responsive-details">#}
+                {#<span class="hide col-sm-2 job-location">#}
+                {#{% if job.country_image %}#}
+                {#<img src="{{helper.uri.cdn('classfied', job.country_image)}}">#}
+                {#<span class="job-location-name">للعمل في    {{job.country_name}}</span>#}
+                {#{% endif %}#}
+                {#</span>#}
+                {#<span class="hide col-sm-1 company_posted">#}
+                {#<i class="fa fa-user"></i>#}
+                {#<span class="copmany_posted_name">{{job.company}}</span>#}
+                {#</span>#}
+                {#<span class="hide col-sm-2 job-present">#}
+                {#<span class="count-number">{{job.appicants}}</span>#}
+                {#<span class="presenter-count"> المتقدمين</span>#}
+                {#</span>#}
+                {#<span class="hide col-sm-2 job-presenter-location">#}
+                {#{% if job.location_image %}#}
+                {#<img src="{{helper.uri.cdn('classfied', job.location_image)}}">#}
+                {#<span class="presenter-location">متقدمين من  {{job.location_name}}</span>#}
+                {#{% endif %}#}
+                {#</span>#}
+                {#<span class="hide col-sm-4 job-created"><i class="fa fa-history"></i> {{ job.created_on }}</span>#}
+                {#<span class="col-sm-1 show-details" data-toggle="modal" data-target="#myModal_{{job.classfied_job_id}}"><i class="fa fa-eye"></i></span>#}
+                {#</div>#}
+                {#</div>#}
+                {#<div class="modal fade login-box" id="myModal_{{job.classfied_job_id}}" tabindex="-1" role="dialog"#}
+                {#aria-labelledby="myModalLabel" aria-hidden="true" style="color:#333; margin: 0; padding: 0;">#}
+
+                {#<div class="modal-dialog">#}
+                {#<div class="modal-content">#}
+                {#<div class="modal-header">#}
+                {#<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span#}
+                {#aria-hidden="true">&times;</span></button>#}
+                {#<h4 class="modal-title" id="myModalLabel"> {{ lang.quick_details }} </h4>#}
+                {#</div>#}
+                {#<div class="modal-body">#}
+                {#{% if job.company %}#}
+                {#<div class="form-group">#}
+                {#<label class="col-sm-3 control-label" for="company">{{ lang.company }}</label>#}
+                {#<div class="col-sm-9">#}
+                {#{{job.company}}#}
+                {#</div>#}
+                {#</div>#}
+                {#{% endif %}#}
+
+                {#{% if job.type %}#}
+                {#<div class="form-group">#}
+                {#<label class="col-sm-3 control-label" for="classfied_type_id">{{ lang.classfied_type_id }}</label>#}
+                {#<div class="col-sm-9">#}
+                {#{{ job.type }}#}
+                {#</div>#}
+                {#</div>#}
+                {#{% endif %}#}
+                {#&#123;&#35;#}
+                {#<div class="form-group">#}
+                {#<label class="col-sm-3 control-label" for="classfied_city_id">{{ lang.classfied_city_id }}</label>#}
+                {#<div class="col-sm-9">#}
+                {#<input type="hidden" name="classfied_city_id" value="{{ input.post('classfied_city_id') }}" />#}
+                {#{{ job.city }}#}
+                {#</div>#}
+                {#</div>#}
+                {#<div class="form-group">#}
+                {#<label class="col-sm-3 control-label" for="classfied_area_id">{{ lang.classfied_area_id }}</label>#}
+                {#<div class="col-sm-9">#}
+                {#<input type="hidden" name="classfied_area_id" value="{{ input.post('classfied_area_id') }}" />#}
+                {#{{ job.area }}#}
+                {#</div>#}
+                {#</div>&#35;&#125;#}
+                {#{% if job.title %}#}
+                {#<div class="form-group">#}
+                {#<label class="col-sm-3 control-label" for="title">{{ lang.title }}</label>#}
+                {#<div class="col-sm-9">#}
+                {#{{job.title}}#}
+                {#</div>#}
+                {#</div>#}
+                {#{% endif %}#}
+
+                {#{% if job.description %}#}
+                {#<div class="form-group">#}
+                {#<label class="col-sm-3 control-label" for="description">{{ lang.description }}</label>#}
+                {#<div class="col-sm-9">#}
+                {#{{job.description}}#}
+                {#</div>#}
+                {#</div>#}
+                {#{% endif %}#}
+
+                {#{% if job.location_name %}#}
+                {#<div class="form-group">#}
+                {#<label class="col-sm-3 control-label" for="candidate_location">{{ lang.candidate_location}}</label>#}
+                {#<div class="col-sm-9">#}
+                {#{{job.location_name}}#}
+                {#</div>#}
+                {#</div>#}
+                {#{% endif %}#}
+
+                {#&#123;&#35; <div class="form-group">#}
+                {#<label class="col-sm-3 control-label" for="salary">{{ lang.salary}}</label>#}
+                {#<div class="col-sm-9">#}
+                {#{{lang.from}}: {{job.salary_from}} --#}
+                {#{{lang.to}}: {{job.salary_to}} --#}
+                {#{{lang.classfied_currency_id}}: {{job.currency}}#}
+                {#</div>#}
+                {#</div>#}
+                {#&#35;&#125;#}
+                {#</div>#}
+
+                {#</div>#}
+                {#</div>#}
+                {#</div>#}
+            {% endfor %}
+        </div>
+    </div>
+</div>

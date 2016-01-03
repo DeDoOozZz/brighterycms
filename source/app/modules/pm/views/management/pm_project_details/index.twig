@@ -1,0 +1,134 @@
+<div class="page-title">
+
+    <div class="title-env">
+        <h1 class="title">{{ item.title }}</h1>
+
+    </div>
+
+</div>
+
+<section class="profile-env" style="float: none;">
+
+    <div class="row">
+
+        <div class="col-sm-3">
+
+
+        <div class="user-info-sidebar">
+
+
+            <a href="#" class="user-name">
+                {{item.title}} Details
+
+            </a>
+
+            <hr />
+
+            <ul class="list-unstyled user-info-list">
+                <li>
+                    <i class="fa-home"></i>
+                    Deadline:{{ item.deadline }}
+                </li>
+                <li>
+                    <i class="fa-briefcase"></i>
+                    Supervisor:<a href="#">{{item.supervisor}} </a>
+                </li>
+                <li>
+                    <i class="fa-graduation-cap"></i>
+                    Price:
+                </li>
+                <li>
+                    <i class="fa-graduation-cap"></i>
+                    Client:
+                </li>
+            </ul>	
+
+            <hr />
+
+        </div>
+
+    </div>
+
+        <div class="col-sm-9">
+
+            <!--Description -->
+        <div class="panel panel-color  panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ lang.description }}</h3>
+
+
+            </div>
+
+            <div class="panel-body">
+
+                <p> {{ item.about }}</p>
+
+            </div>
+        </div>
+
+            <!--Teams -->
+        <div class="panel panel-color panel-purple" style="position: relative;">
+
+            <!-- panel head -->
+            <div class="panel-heading ui-sortable-handle">
+                <div class="panel-title">{{ lang.teams }}Teams of Project</div>
+
+            </div>
+
+            <!-- panel body -->
+            <div class="panel-body">
+                <div class="panel panel-default">
+
+            {% for teams in member_results %}
+
+                <div class="panel-heading" style="background-color: white; color: black;">{{teams.team}}</div>
+                {% for name in teams.member %}
+                    <div class="panel-body">
+
+
+                        <div class="well">
+
+                                   {{name.fullname}} : {{name.title}}
+
+                        </div>
+
+
+                    </div>
+                      {%endfor%}        
+                {%endfor%}
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="sorted ui-sortable">
+
+            <div class="panel panel-color panel-danger" style="position: relative;">
+
+                <!-- panel head -->
+                <div class="panel-heading ui-sortable-handle">
+                    <div class="panel-title">Issues</div>
+
+                </div>
+
+                <!-- panel body -->
+                <div class="panel-body">
+                    {%for issue in issues%}
+                        <div class="well">
+                            <a href="{{ helper.uri.url('management/pm_issue_details/index', issue.pm_issue_id) }}">{{issue.title}}</a>
+
+                        </div>
+                    {%endfor%}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+
+</section>
+

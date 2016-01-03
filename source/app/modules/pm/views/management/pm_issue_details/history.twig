@@ -1,0 +1,93 @@
+<!---- History Modal -->
+
+<div class="modal-content">
+
+    <div class="modal-header">
+        <h4 class="modal-title">
+           <span><strong>{{ issue.title }}</strong></span> {{ lang.history }}
+        </h4>
+    </div>
+
+
+    <div class="modal-body">
+
+        <div class="sorted ui-sortable">
+
+            <div class="panel panel-color panel-purple" style="position: relative;">
+
+
+                <!-- panel body -->
+                <div class="panel-body">
+                    <table class="table table-bordered table-striped" id="datatable">
+                        <thead>
+                        <tr>
+                            <th> {{ lang.actions }}</th>
+                            <th>{{ lang.from_user }}  </th>
+                            <th>{{ lang.to_user }}</th>
+                            <th>{{ lang.date }}</th>
+                        </tr>
+                        </thead>
+                        {% for item in items %}
+                            <tbody class="middle-align">
+
+                            <tr>
+                                {% if item.actions == 'assign'  %}
+                                <th>
+                                    <span style="color:#003bb3" >
+                                         {{ item.actions }}
+                                    </span>
+                                </th>
+                                {% endif %}
+                                {% if item.actions == 'forward'  %}
+                                <th>
+                                    <span style="color:orangered" >
+                                         {{ item.actions }}
+                                    </span>
+                                </th>
+                                {% endif %}
+                                {% if item.actions == 'start'  %}
+                                <th>
+                                    <span style="color:yellowgreen" >
+                                         {{ item.actions }}
+                                    </span>
+                                </th>
+                                {% endif %}
+                                {% if item.actions == 'done'  %}
+
+                                <th>
+                                   <span style="color:purple" >
+                                         {{ item.actions }}
+                                    </span>
+                                </th>
+                                {% endif %}
+                                {% if item.actions == 'pause'  %}
+
+                                <th>
+                                    <span style="color:hotpink" >
+                                         {{ item.actions }}
+                                    </span>
+                                </th>
+                                {% endif %}
+                                <th>{{ item.from_user }}</th>
+                                <th>{{ item.to_user }}</th>
+                                <th>{{ item.datetime }}</th>
+                            </tr>
+
+                            </tbody>
+                        {% endfor %}
+                    </table>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">close{{ lang.close }}</button>
+    </div>
+</div>

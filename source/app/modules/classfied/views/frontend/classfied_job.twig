@@ -1,0 +1,207 @@
+<div class="col-sm-10">
+    <div class="preview-post-job">
+        <h3>الشركة المعلنة</h3>
+
+        <div class="company-details-job">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="company">{{ lang.company }}</label>
+
+                <div class="col-sm-10">
+                    {% if item.url %}
+                        <a href="{{ item.url }}">{{ item.company }}</a>
+                    {% else %}
+                        {{ item.company }}
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+        {% if item.type %}
+            <div class="form-group form-group-bootom-border">
+                <label class="col-sm-2 control-label" for="classfied_type_id">{{ lang.classfied_type_id }}</label>
+
+                <div class="col-sm-10">
+                    {{ item.type }}
+                </div>
+            </div>
+        {% endif %}
+        {% if item.category %}
+            <div class="form-group form-group-bootom-border">
+                <label class="col-sm-2 control-label"
+                       for="classfied_category_id">{{ lang.classfied_category_id }}</label>
+
+                <div class="col-sm-10">
+                    {{ item.category }}
+                </div>
+            </div>
+        {% endif %}
+        {% if item.country %}
+            <div class="form-group form-group-bootom-border">
+                <label class="col-sm-2 control-label" for="classfied_country_id">{{ lang.classfied_country_id }}</label>
+
+                <div class="col-sm-10">
+                    <input type="hidden" name="classfied_country_id" value="{{ input.post('classfied_country_id') }}"/>
+                    {{ item.country }}
+                </div>
+            </div>
+        {% endif %}
+        {% if item.city %}
+            <div class="form-group form-group-bootom-border">
+                <label class="col-sm-2 control-label" for="classfied_city_id">{{ lang.classfied_city_id }}</label>
+
+                <div class="col-sm-10">
+                    <input type="hidden" name="classfied_city_id" value="{{ input.post('classfied_city_id') }}"/>
+                    {{ item.city }}
+                </div>
+            </div>
+        {% endif %}
+        {% if item.area %}
+            <div class="form-group form-group-bootom-border">
+                <label class="col-sm-2 control-label" for="classfied_area_id">{{ lang.classfied_area_id }}</label>
+
+                <div class="col-sm-10">
+                    <input type="hidden" name="classfied_area_id" value="{{ input.post('classfied_area_id') }}"/>
+                    {{ item.area }}
+                </div>
+            </div>
+        {% endif %}
+        {% if item.title %}
+            <div class="form-group form-group-bootom-border">
+                <label class="col-sm-2 control-label" for="title">{{ lang.title }}</label>
+
+                <div class="col-sm-10">
+                    {{ item.title }}
+                </div>
+            </div>
+        {% endif %}
+        {% if item.description %}
+            <div class="form-group form-group-bootom-border">
+                <label class="col-sm-2 control-label" for="description">{{ lang.description }}</label>
+
+                <div class="col-sm-10">
+                    {{ item.description }}
+                </div>
+            </div>
+        {% endif %}
+        {% if item.location %}
+            <div class="form-group form-group-bootom-border">
+                <label class="col-sm-2 control-label" for="candidate_location">{{ lang.candidate_location }}</label>
+
+                <div class="col-sm-10">
+                    {{ item.location }}
+                </div>
+            </div>
+        {% endif %}
+        {% if item.salary_from %}
+            <div class="form-group form-group-bootom-border">
+                <label class="col-sm-2 control-label" for="salary">{{ lang.salary }}</label>
+
+                <div class="col-sm-10">
+                    {{ lang.from }}: {{ item.salary_from }} --
+                    {{ lang.to }}: {{ item.salary_to }} --
+                    {{ lang.classfied_currency_id }}: {{ item.currency }}
+                </div>
+            </div>
+        {% endif %}
+        {% if item.experience %}
+            <div class="form-group form-group-bootom-border">
+                <label class="col-sm-2 control-label"
+                       for="classfied_experience_id">{{ lang.classfied_experience_id }}</label>
+
+                <div class="col-sm-10">
+                    {{ item.experience }}
+                </div>
+            </div>
+        {% endif %}
+        {% if item.phone_num %}
+            <div class="form-group form-group-bootom-border">
+                <label class="col-sm-2 control-label" for="phone_num">{{ lang.phone_num }}</label>
+
+                <div class="col-sm-10">
+                    <div style="padding: 10px;
+                         background-color: #1883C8;
+                         color: #fff;
+                         display: inline-block;
+                         border-radius: 5px;" onclick="this.innerHTML = '{{ item.phone_num }}'">اظهار الرقم</div>
+
+                </div>
+            </div>
+        {% endif %}
+
+        {% if item.poster_email %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label"> </label>
+
+                <div class="col-sm-10">
+                    <span class="applay-job" style="padding: 10px;
+                          background-color: #f49616;
+                          color: #fff;
+                          border-radius: 5px;"><i class="fa fa-black-tie"></i> تقدم للوظيفة</span>
+                </div>
+            </div>
+        {% endif %}
+
+
+
+        {{ helper.form.open(null,false,true,'role="form" class="comment-form"') }}
+        {{ error }}
+        <div class="for-applay-job">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{ lang.name }}</label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="company" placeholder="{{ lang.company }}" name="company"
+                           value="{{ helper.form.value('company') }}">
+                </div>
+            </div>
+
+            <div class="form-group ">
+                <label class="col-sm-2 control-label">{{ lang.email }}</label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="company" placeholder="{{ lang.email }}" name="company"
+                           value="{{ helper.form.value('company') }}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{ lang.cv }}</label>
+
+                <div class="col-sm-10">
+                    <input type="file" class="form-control" id="company" placeholder="{{ lang.upload_cv }}">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">كود التأكيد</label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="anti_spam" placeholder="{{ anti_spam }}" name="company"
+                           value="{{ helper.form.value('anti_spam') }}">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+
+                <div class="col-sm-10">
+                    <button type="submit" class="btn classfied-submit" style="float: right;">{{ lang.send }}</button>
+                </div>
+            </div>
+        </div>
+        {{ helper.form.close() }}
+
+
+    </div>
+    <div class="addthis_native_toolbox"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".applay-job").click(function () {
+            $(".for-applay-job").toggle();
+        });
+    });
+</script>

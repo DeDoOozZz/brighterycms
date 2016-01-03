@@ -1,0 +1,59 @@
+<ul class="chat-conversations list-unstyled">
+    {% if  count_other_conversations  %}
+    <li class="browse-more">
+        <a href="#" class="chat-user">
+            <i class="linecons-comment"></i>
+            <span>{{ count_other_conversations }}</span>
+        </a>
+
+        <ul class="other-conversations-list">
+            {% for oconversation in other_conversations %}
+            <li>
+                <a href="javascript:chat.draw({{ oconversation.user_id }});">
+                    {{ oconversation.fullname }}
+                    <span>&times;</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endif %}
+
+    {% for conversation in conversations %}
+    <li class="conversation_window_{{ conversation.chat_conversation_id }}">
+        <a href="#" class="chat-user" onclick="chat.toggleChatWindow(jQuery(this).parent());">
+            <span class="user-status is-online {#is-idle is-busy#}"></span>
+            {{ conversation.fullname }}
+        </a>
+        {% if conversation.new_messages %}
+        <span class="badge badge-purple">{{ conversation.new_messages }}</span>
+        {% endif %}
+
+        <div class="conversation-window">
+            <a href="#" class="chat-user" onclick="chat.toggleChatWindow(jQuery(this).parent().parent());">
+                <span class="close" onclick="chat.closeChatWindow({{ conversation.user_id }})">&times;</span>
+
+                <span class="user-status is-online"></span>
+                {{ conversation.fullname }}
+            </a>
+
+            <ul class="conversation-messages ps-scrollbar ps-scroll-down">
+
+            </ul>
+
+            <form method="post" class="chat-form" onsubmit="return chat.formHandler({{ conversation.chat_conversation_id }})">
+                <input type="text" class="form-control" placeholder="Enter your message..."/>
+            </form>
+        </div>
+    </li>
+        <script>chat.sync_messages({{ conversation.chat_conversation_id }});</script>
+    {% endfor %}
+
+
+</ul>
+
+<a href="#" class="mobile-chat-toggle" onclick="$('.footer-sticked-chat').toggleClass('mobile-is-visible')">
+    <i class="linecons-comment"></i>
+    <span class="num">{{ all_conversations }}</span>
+    {#<span class="badge badge-purple">4</span>#}
+</a>

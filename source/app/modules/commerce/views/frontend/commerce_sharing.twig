@@ -1,0 +1,43 @@
+<section class="sharing-page">
+    <div class="container">
+        <div class="sharing-header">
+            <h1>Sharing</h1>
+            <a href="{{ helper.uri.url('commerce_manage_sharing') }}"><i class="fa fa-share"></i> share with Neighbors</a>
+        </div>
+        <div class="commerce-sharing-blocks-page ">
+            {% for item in items %} 
+                <div class=" commerce-block-sharing-home col-sm-4 card">
+                    <div class="sub-commerce-block-sharing-home front">
+                        <div class="sharing-block-imgs col-sm-6">
+                            <a href="#" class="sharing-from-img"> <img src="{{helper.uri.cdn()}}commerce/{{item.from_image}}" ></a>
+                            <span>by <span>{{item.fullname}}</span></span>
+                        </div>
+                        <div class="commerce-product-content col-sm-6">
+                            <h3><a href="">{{item.from_title}}</a></h3>
+                            <span class="sharing-location"><i class="fa fa-map-marker"></i> {{item.location}}</span>
+                            <p>{{item.from_description}}</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-commerce-block-sharing-home back">
+                        <div class="sharing-block-imgs">
+                            <h3><a href="">{{item.to_title}}</a></h3>
+
+                            <p>
+                                {{item.to_description}}
+                            </p>
+                        </div>
+                    </div>
+                </div> 
+            {% endfor %}
+
+        </div>
+    </div>
+</section> 
+<script type="text/javascript">
+    $(function () {
+        $(".card").flip({
+            trigger: "hover"
+        });
+    });
+</script>

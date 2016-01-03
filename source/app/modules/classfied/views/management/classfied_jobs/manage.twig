@@ -1,0 +1,163 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.jobs }}</h3>
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,true,'role="form" class="form-horizontal"') }}
+        {{ error }} 
+        <div style="background-color: #f5f5f5; padding: 10px; margin-bottom: 15px;">
+            <h3 style="color:#333; font-size: 16px;">{{lang.company}}</h3>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="company">{{ lang.company }}</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="company" placeholder="{{ lang.company}}" name="company"
+                           value="{{ helper.form.value('company', item.company) }}">
+                </div>
+            </div>
+            <div class="form-group-separator"></div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="url">{{ lang.url }}</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="url" placeholder="{{ lang.url}}" name="url"
+                           value="{{ helper.form.value('url', item.url) }}">
+                </div>
+            </div>
+            <div class="form-group-separator"></div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="poster_email">{{ lang.poster_email}}</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="poster_email" placeholder="{{ lang.poster_email}}" name="poster_email"
+                           value="{{ helper.form.value('poster_email', item.poster_email) }}">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="classfied_category_id">{{ lang.classfied_category_id }}</label>
+            <div class="col-sm-10">
+                {{ helper.form.dropdown('classfied_category_id', categories, helper.form.value('classfied_category_id',item.classfied_category_id), 'class="form-control select2" ') }}
+
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="classfied_type_id">{{ lang.classfied_type_id }}</label>
+            <div class="col-sm-10">
+                {{ helper.form.dropdown('classfied_type_id', types, helper.form.value('classfied_type_id',item.classfied_type_id), 'class="form-control select2" ') }}
+
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="title">{{ lang.title }}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="title" placeholder="{{ lang.title }}" name="title"
+                       value="{{ helper.form.value('title', item.title) }}">
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="description">{{ lang.description }}</label>
+            <div class="col-sm-10">
+                <textarea type="text" class="form-control ckeditor" rows="10" id="description" placeholder="{{ lang.description}}" name="description" >{{ helper.form.value('description', item.description) }}</textarea>
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="candidate_location">{{ lang.candidate_location}}</label>
+            <div class="col-sm-10">
+                {{ helper.form.dropdown('candidate_location', countries, helper.form.value('classfied_country_id',item.classfied_country_id), 'class="form-control select2" ') }}
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="classfied_country_id">{{ lang.workplace}} {{ lang.classfied_country_id }}</label>
+            <div class="col-sm-3">
+                {{ helper.form.dropdown('classfied_country_id', countries, helper.form.value('classfied_country_id',item.classfied_city_id), 'class="form-control select2 selected_country" onchange="country_changes(this.value)"') }}
+            </div>
+             <div class="col-sm-3">
+                {{ helper.form.dropdown('classfied_city_id', cities, helper.form.value('classfied_city_id',item.classfied_city_id), 'class="form-control  selected_city" onchange="city_changes(this.value)"') }}
+            </div>
+            <div class="col-sm-4">
+                {{ helper.form.dropdown('classfied_area_id', areas, helper.form.value('classfied_area_id',item.classfied_area_id), 'class="form-control  selected_area" ') }}
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="salary">{{ lang.salary}}</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="salary_from" placeholder="{{ lang.salary_from}}" name="salary_from"
+                       value="{{ helper.form.value('salary_from', item.salary_from) }}">
+            </div>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="salary_to" placeholder="{{ lang.salary_to}}" name="salary_to"
+                       value="{{ helper.form.value('salary_to', item.salary_to) }}">
+            </div>
+            <div class="col-sm-2">
+                {{ helper.form.dropdown('classfied_currency_id', currenies, helper.form.value('classfied_currency_id', item.classfied_currency_id), 'class="form-control"') }}
+
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="phone_num">{{ lang.phone_num}}</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="phone_num" placeholder="{{ lang.phone_num}}" name="phone_num"
+                       value="{{ helper.form.value('phone_num', item.phone_num) }}">
+            </div>
+            <div class="col-sm-2">
+                <input type="checkbox" name="is_hidden" value="1" {{ helper.form.checked('is_hidden', '1') }}> {{lang.is_hidden}} 
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="classfied_experience_id">{{ lang.classfied_experience_id}}</label>
+            <div class="col-sm-10">
+                {{ helper.form.dropdown('classfied_experience_id', experiences, helper.form.value('classfied_experience_id', item.classfied_experience_id), 'class="form-control"') }}
+
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-10">
+                <a href="{{ helper.uri.url('management/classfied_jobs/index') }}" class="btn btn-danger cancel-button">{{lang.cancel}}</a>
+                <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+            </div>
+        </div>
+        {{ helper.form.close() }}
+
+    </div>
+</div>
+
+<script src="{{ constant("STYLE_JS") }}/ckeditor/ckeditor.js"></script>
+<script src="{{ constant("STYLE_JS") }}/ckeditor/adapters/jquery.js"></script>
+<script>
+
+    function country_changes(id) {
+        $.post('{{ helper.uri.url('management/classfied_jobs/get_cities') }}/' + id, {city_id: '{{input.post('city_id')}}'}, function (response) {
+            $('.selected_city').html(response);
+            city_changes($('.selected_city').val());
+        });
+       
+    }
+
+    function city_changes(id) {
+        $.post('{{ helper.uri.url('management/classfied_jobs/get_areas') }}/' + id, {area_id: '{{input.post('area_id')}}'}, function (response) {
+            $('.selected_area').html(response);
+        });
+    }
+</script>

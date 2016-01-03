@@ -1,0 +1,432 @@
+<!Doctype html>
+<html lang="en" class="no-js">
+    <head>
+        <title>{{ config.get('title') }}</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="keywords" value="{{ config.get('keywords') }}" />
+        <meta name="description" value="{{ config.get('description') }}" />
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/bootstrap.min.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/jquery.bxslider.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/font-awesome.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/animate.css" media="screen">
+        <!-- REVOLUTION BANNER CSS SETTINGS -->
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/settings.css" media="screen"/>
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/style.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/newstyle.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/commerce_style.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/jcarousel.responsive.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/commerce_slider.css" media="screen">
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.migrate.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.bxslider.min.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.imagesloaded.min.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.isotope.min.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/retina-1.1.0.min.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/plugins-scroll.js"></script>
+        <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.themepunch.tools.min.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.themepunch.revolution.min.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/script.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.jcarousel.min.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jcarousel.responsive.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.elevatezoom.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.nivo.slider.pack.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.flip.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script type="text/javascript">
+        var brightery_style_images = "{{ constant('STYLE_IMAGES') }}";
+        var site_url = "{{ helper.uri.url() }}";
+
+        $(window).load(function () {
+            $('#slider').nivoSlider();
+        });
+        loading = {
+            start: function () {
+                $('#loading').show();
+            },
+            stop: function () {
+                $('#loading').hide();
+            }
+        };
+        var cart = {
+            add: function ($product_id, callback) {
+                loading.start();
+                $.getJSON(site_url + 'commerce_cart/add/' + $product_id, function (data) {
+                    loading.stop();
+                    $('.commerce-cart-number-home').html(data.total);
+                    if (typeof callback === "function") {
+                        callback($product_id);
+                    }
+                });
+            }
+        };
+        var wishlist = {
+            add: function ($product_id, callback) {
+                loading.start();
+                $.getJSON(site_url + 'commerce_wishlist/add/' + $product_id, function (data) {
+                    loading.stop();
+                    //                    $('.commerce-cart-number-home').html(data.total);
+                    if (typeof callback === "function") {
+                        callback($product_id);
+                    }
+                });
+            }
+        };
+        </script>
+    </head>
+    <body>
+
+        <!-- Container -->
+        <div id="container">
+            <!-- Header
+                ================================================== -->
+            <header class="clearfix">
+                <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{{ helper.uri.url('commerce_home' ) }}"><img
+                                src="{{ constant("STYLE_IMAGES") }}/logo.png" alt=""></a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <span class="commerce-home-categories">All Categories <i class="fa fa-caret-down"></i></span>
+
+                    <div class="commerce-main-category-menu">
+                        <div class="sub-commerce-main-category-menu">
+                            <ul>
+                                {% for category in _data.categories %}
+                                    <li class="commerce-drop">
+                                        <a class="active" href="#">{{ category.main.title }}
+                                            <i class="fa fa-chevron-right"></i>
+                                        </a>
+
+                                        <ul class="commerce-dropdown"
+                                            {% if category.main.image %}
+                                                style="background-image: url({{ helper.uri.cdn('commerce', category.main.image) }}); background-position: right;   background-repeat: no-repeat;background-size: contain;"
+                                            {% endif %}>
+                                            {% for sub_category in category.sub %}
+                                                <li>
+                                                    <a href="{{ helper.uri.url('commerce_category/index', sub_category.commerce_category_id ) }}">{{ sub_category.title }}</a>
+                                                </li>
+                                            {% endfor %}
+                                            {#                                        <img src="{{ helper.uri.cdn('commerce', category.main.image)}}">#}
+                                        </ul>
+
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <form class="commerce-home-search" action="{{ helper.uri.url('commerce_search') }}">
+                            <select name="category_id[]">
+                                <option value="">All Categories</option>
+                                {% for category in _data.categories %}
+                                    <option value="{{ category.main.commerce_category_id }}">{{ category.main.title }}</option>
+                                    {#{% for sub_category in category.sub %}#}
+                                    {#<option value="{{ sub_category.commerce_category_id }}">#}
+                                    {#-- {{ sub_category.title }}</option>#}
+                                    {#{% endfor %}#}
+                                {% endfor %}
+                            </select>
+                            <input type="text" name="q" value="{{ input.get('q') }}">
+                            <span class="commerce-submit-search">
+                                <input type="submit">
+                                <img src="{{ constant("STYLE_IMAGES") }}/search.png"
+                                     onclick="$('.commerce-home-search').submit()"/>
+                            </span>
+                        </form>
+                    </div>
+                    <div class=" commerce-header-menu">
+
+                        <div class="commerce-cart-icon-home">
+                            <!--<i class="fa fa-shopping-cart"></i>-->
+                            <a href="{{ helper.uri.url('commerce_cart' ) }}"><img
+                                    src="{{ constant("STYLE_IMAGES") }}/cart_.png"></a>
+                            <span class="commerce-cart-number-home">{{ _data.cart.getItemsCount() }}</span>
+                        </div>
+                        <div class="commerce-wishlist-icon-home">
+                            <a href="{{ helper.uri.url('commerce_wishlist' ) }}"><img
+                                    src="{{ constant("STYLE_IMAGES") }}/wishlist.png"></a>
+                        </div>
+                        <div class="commerce-account-icon-home">
+                            {% if input.cookie('fullname') %}
+                                <p class="logout-user">
+                                    <span class="user-header-home"> <span class="header-user_image"><img
+                                                src="{{ helper.uri.cdn('users', input.cookie('image')) }}"></span><a
+                                            href="#">{{ input.cookie('fullname') }}</a> <i
+                                            class="fa fa-angle-down"></i></span>
+                                    <span class="logout-home"><a
+                                            href="{{ helper.uri.url('users/logout') }}">{{ lang.logout }}</a> <i
+                                            class="fa fa-sign-out"></i> </span>
+                                </p>
+                            {% else %}
+                                <p class="login-user">
+                                    <span class="login-home" data-toggle="modal" data-target="#myModal"
+                                          style="color:#fff;"> <i
+                                            class="fa fa-sign-in commerce-user-home"></i> {{ lang.login }} </span>
+                                    <span class="login-home"> <i class="fa fa-user commerce-user-home"></i> <a
+                                            href="{{ helper.uri.url('users/register') }}"
+                                            style="color:#fff; text-decoration: none;">{{ lang.register }}</a></span>
+                                </p>
+                            {% endif %}
+                        </div>
+
+                        <div class="modal fade login-box" id="myModal" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel" aria-hidden="true" style="color:#333; margin: 0; padding: 0;">
+
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user"></i> {{ lang.login }}
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="login-errors" style="display: none"></div>
+
+                                        <form role="form" class="form-horizontal reservation-login" id="login">
+                                            <div class="form-group">
+                                                <label for="field-5" class="col-sm-2 control-label">{{ lang.email }}</label>
+
+                                                <div class="col-sm-10">
+                                                    <input type="text" placeholder="{{ lang.email }}" class="form-control"
+                                                           name="username">
+                                                </div>
+                                            </div>
+                                            <div class="form-group-separator"></div>
+
+                                            <div class="form-group">
+                                                <label for="field-5" class="col-sm-2 control-label">{{ lang.password }}</label>
+
+                                                <div class="col-sm-10">
+                                                    <input type="password" placeholder="{{ lang.password }}"
+                                                           class="form-control" name="password">
+                                                </div>
+                                            </div>
+                                            <div class="form-group-separator"></div>
+
+
+                                            <div class="form-group">
+                                                <label for="field-5" class="col-sm-2 control-label"></label>
+
+                                                <div class="col-sm-10">
+                                                    <label class="remember-me" style="font-size: 12px;"><input type="checkbox">
+                                                        Remember me</label>
+                                                    <a href="#" class="forget-password" style="font-size:12px;">Forget
+                                                        Password?</a><br>
+                                                    <a href="{{ helper.uri.url('users/register') }}"
+                                                       class="register-new-patient register"
+                                                       style="float:right; margin-left: 10px;">{{ lang.register }}</a>
+
+                                                    <input type="submit" class="submit reservation-login-submit"
+                                                           value="{{ lang.login }}" style="float:right;">
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="commerce-account-icon-home logout" style="display: block;">
+
+
+                            <!--<span class="logout-home"><a href="#">Logout</a> <i class="fa fa-sign-out"></i> </span>-->
+                            <div class="commerce-user-menu">
+                                <ul>
+                                    <li><a href="{{ helper.uri.url('commerce_dashboard' ) }}">Account Setting</a></li>
+                                    <li><a href="{{ helper.uri.url('commerce_orders/my_orders' ) }}">My Orders</a></li>
+                                    <li><a href="{{ helper.uri.url('users/logout') }}" class="active"><i
+                                                class="fa fa-sign-out"></i> {{ lang.logout }}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        {#<div class=" commerce-header-info">
+                            <span class="commerce-show-lang"><img src="{{ constant("STYLE_IMAGES")}}/flag.png"/> Arabic</span>
+                            <div class="commerce-header-language">
+                                <ul>
+                                    <li><img src="{{ constant("STYLE_IMAGES")}}/en.png"> English</li>
+                                    <li><img src="{{ constant("STYLE_IMAGES")}}/en.png"> English</li>
+                                    <li><img src="{{ constant("STYLE_IMAGES")}}/en.png"> English</li>
+                                </ul>
+                            </div>
+                        </div>#}
+                    </div>
+                </nav>
+            </header>
+            <!-- End Header -->
+            {layout}
+        </div>
+        <!-- footer
+                ================================================== -->
+        <footer>
+            <div class="commerce-up-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="commerce-footer-widget">
+                                <h2>My Account</h2>
+                                <ul class="commerce-tag-list">
+                                    <li><a href="{{ helper.uri.url('commerce_dashboard' ) }}">Account Setting</a></li>
+                                    <li><a href="{{ helper.uri.url('commerce_orders/my_orders' ) }}">My orders</a></li>
+                                    <li><a href="{{ helper.uri.url('commerce_wishlist' ) }}">My Wishlist</a></li>
+                                    <li><a href="{{ helper.uri.url('commerce_cart' ) }}">My Cart</a></li>
+                                    <li><a href="{{ helper.uri.url('users/logout') }}" class="active"><i
+                                                class="fa fa-sign-out"></i> {{ lang.logout }}</a></li>
+                                </ul>
+                                {# <h2>Selling on Brightery</h2>
+                                 <ul class="commerce-tag-list">
+                                     <li><a href="#">Selling Fees</a></li>
+                                     <li><a href="#">Sell on Brightery</a></li>
+                                     <li><a href="#">How it work</a></li>
+                                 </ul>#}
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="commerce-footer-widget">
+                                <h2>About Us</h2>
+                                <ul class="commerce-tag-list">
+                                    <li><a href="http://www.brightery.com/">Brightery</a></li>
+                                    <li><a href="{{ helper.uri.url('commerce_home' ) }}">Brightery E-commerce</a></li>
+                                    <li><a href="{{ helper.uri.url('commerce_how_working' ) }}">How it work</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="commerce-footer-widget">
+                                <h2>Customer Services</h2>
+                                <ul class="flickr">
+                                    <li><a href="{{ helper.uri.url('users/register') }}">Join US</a></li>
+                                    <li><a href="{{ helper.uri.url('contactus') }}">Help</a></li>
+                                    <li><a href="{{ helper.uri.url('faqs') }}">FAQ</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="commerce-footer-widget info-widget">
+                                <h2>Info</h2>
+
+                                <p class="first-par">You can contact or visit us during working time.</p>
+
+                                <p><span>Tel: </span> 1234 - 5678 - 9012</p>
+
+                                <p><span>Email: </span> support@brightery.com</p>
+
+                                <p><span>Working Hours: </span> 8:00 a.m - 17:00 a.m</p>
+
+                                <h2>Follow Us</h2>
+                                <ul class="social-icons">
+                                    <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a class="rss" href="#"><i class="fa fa-rss"></i></a></li>
+                                    <li><a class="google" href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a class="pinterest" href="#"><i class="fa fa-pinterest"></i></a></li>
+                                </ul>
+
+                                <h2>Payment Method</h2>
+                                <ul class="payment-method">
+                                    <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="copyright">
+                &copy; Copyright {{ "now"|date('Y') }}, All rights reserved.
+            </p>
+        </footer>
+        <!-- End footer -->
+
+        <!-- End Container -->
+
+        <!-- Revolution slider -->
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".commerce-home-categories").click(function () {
+                    $(".commerce-main-category-menu").toggle();
+                });
+                $(".commerce-drop").click(function () {
+                    $(".commerce-dropdown").not($(this).find(".commerce-dropdown")).hide();
+                    $(this).find(".commerce-dropdown").show();
+                    $(".commerce-main-category-menu").css('width', '800px');
+                    $(".sub-commerce-main-category-menu > ul").css('border-right', '1px solid #dedede');
+                });
+
+                $(".user-header-home").click(function () {
+                    $(".commerce-user-menu").toggle();
+                });
+
+                $(".commerce-show-lang").click(function () {
+                    $(".commerce-header-language").toggle();
+                });
+
+                $(".commerce-menu-icon-home a").click(function () {
+                    $(".commerce-menu-icon-home-menu").toggle();
+                });
+
+                $(".zoom").elevateZoom({zoomType: "lens", lensShape: "round", lensSize: 200});
+                $(".commerce-related-product-imgs a").click(function () {
+                    $(".zoom").attr('src', $(this).attr('data-image'));
+                    $(".zoom").attr('data-zoom-image', $(this).attr('data-zoom-image'));
+
+                    var ez = $('.zoom').data('elevateZoom');
+                    ez.swaptheimage($(this).attr('data-image'), $(this).attr('data-zoom-image'));
+                });
+
+                // LOGIN FORM
+                $('#login').submit(function () {
+                    loading.start();
+                    $.post(site_url + 'users/login/true', $(this).serialize(), function (data) {
+                        $('.login-errors').hide();
+                        res = $.parseJSON(data);
+                        if (res.accessGranted) {
+                            window.location = window.location;
+                        }
+                        else {
+                            $('.login-errors').html(res.errors);
+                            $('.login-errors').show();
+                        }
+                        loading.stop();
+                    });
+                    return false;
+                });
+                $('#login .register').click(function () {
+
+                    return false;
+                });
+                $(".commerce-home-search input").autocomplete({
+                    source: site_url + "commerce_search/autocomeplete",
+                    minLength: 1,
+                });
+            });
+        </script>
+        <style>.ui-autocomplete { position: absolute; cursor: default;z-index:2000 !important;}  </style>
+        <div id="loading">
+            <img src="{{ constant("STYLE_IMAGES") }}/loading.gif">
+        </div>
+    </body>
+</html>

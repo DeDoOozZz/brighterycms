@@ -1,0 +1,89 @@
+
+<div class="modal-content ">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span spanaria-hidden="true">&times;</span></button>
+        <h4 class="modal-title " id="myModalLabel">Schedule Exception</h4>
+    </div>
+    <div class="modal-body" id="new">
+            {{ helper.form.open(null,false,true,'role="form" class="form-horizontal" id="schedule_exceptions"') }}
+            {{ error }}
+                <div class="row">
+                    <div class="col-sm-11"></div>
+                    <button class="btn btn-secondary col-sm-1"  onclick="return add_new_exception();">Add</button>
+                </div>
+        {#{% for item in exp_schedule %}#}
+                <div class="main-manage-schedule-exception ">
+                    <div class="row manage-schedule-exception exception-{{ item.clinic_schedule_exception_id }}" >
+                        <div class="col-sm-4 schedule-input-calender">
+                            <div class="input-group">
+                                <input type="text" name="exc_date" class="form-control datepicker" value="{{ item.date }}"  data-format="D, dd MM yyyy">
+
+                                <div class="input-group-addon">
+                                    <a href="#"><i class="linecons-calendar"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="col-sm-4" style="padding:0;">
+                                From:
+                            </div>
+                            <div class="col-sm-8" style="padding:0;">
+                                <div class="input-group input-group-minimal">
+                                    <input type="text" name ="exc_from" class="form-control timepicker" id="time" placeholder="{{ lang.time }}" name="time" value="{{ item.from_time }}" data-template="dropdown" data-show-seconds="false" data-default-time="11:25 AM" data-show-meridian="true" >
+                                    <div class="input-group-addon">
+                                        <i class="linecons-clock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="col-sm-4" style="padding:0;">
+                                To:
+                            </div>
+                            <div class="col-sm-8" style="padding:0;">
+                                <div class="input-group input-group-minimal">
+                                    <input type="text" name="exc_to" class="form-control timepicker" id="time" placeholder="{{ lang.time }}" name="time" value="{{ item.to_time }}" data-template="dropdown" data-show-seconds="false" data-default-time="11:25 AM" data-show-meridian="true" >
+                                    <div class="input-group-addon">
+                                        <i class="linecons-clock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2" style="width:auto;">
+                            <a class="delete" href="{{ helper.uri.url('management/clinic_doctors/delete', item.clinic_schedule_exception_id) }}">
+                                <button type="button" class="close" data-dismiss="row" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        {#{% endfor %}#}
+
+                <div class=" row modal-footer">
+                <button type="submit" id="submit_id" class="btn btn-secondary">Submit</button>
+                <button type="button"   class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        {{ helper.form.close() }}
+
+    </div>
+</div>
+
+<script src="{{ constant('STYLE_JS') }}/timepicker/bootstrap-timepicker.min.js"></script>
+<script src="{{ constant('STYLE_JS') }}/datepicker/bootstrap-datepicker.js"></script>
+
+<script type="text/javascript">
+
+    $('#schedule_exceptions').click(function() {
+        $.post(site_url + '/management/clinic_doctors/schedule_exceptions/{{ item.clinic_doctor_id }}', $('#submit_id').serialize(), function (response) {
+            response = $.parseJSON(response);
+        });
+    });
+
+    $('.delete').click(function () {
+        var button = $(this);
+        $.get($(this).attr('href'), function (data) {
+            button.parent().parent().remove();
+        });
+        return false;
+    });
+
+</script>

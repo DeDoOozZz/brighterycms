@@ -1,0 +1,81 @@
+<div class="modal_errors"></div>
+{{ helper.form.open(null,false,false,'role="form" class="form-horizontal" id="manage_patient_xrays" ') }}
+<div class="form-group">
+    <label class="col-sm-3 control-label">{{lang.title}}</label>
+    <div class="col-sm-9">
+        <input type="text" class="form-control" id="title" placeholder="{{ lang.title }}" name="title"
+               value="{{ helper.form.value('title', xray.title) }}">
+    </div>
+</div>
+<div class="patient-group-separator"></div>
+
+<div class="form-group">
+    <label class="col-sm-3 control-label">{{lang.image}}</label>
+
+    <div class="col-sm-9">
+        <input type="file" class="form-control" id="image" placeholder="{{ lang.image }}" name="image"
+               value="{{ helper.form.value('image', xray.image) }}">
+    </div>
+</div>
+<div class="patient-group-separator"></div>
+
+<div class="form-group">
+    <label class="col-sm-3 control-label">{{lang.description}}</label>
+
+    <div class="col-sm-9">
+        <textarea class="form-control" id="description" placeholder="{{ lang.description }}" name="description">{{ helper.form.value('description', xray.description) }}</textarea>
+    </div>
+</div>
+
+
+<div class="patient-group-separator"></div>
+<div class="form-group">
+    <label class="col-sm-2 control-label"></label>
+
+    <div class="col-sm-10">
+        <a onclick="$('#myModal2').modal('hide')" class="btn btn-danger cancel-button">{{ lang.cancel }}</a>
+        <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+    </div>
+</div>
+      
+{{ helper.form.close()}}
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+
+        $("#manage_patient_xrays").submit(function () {
+            $.post('{{ helper.uri.url('management/clinic_xray_negative/manage')}}/{{ op }}/{{ id }}', $(this).serialize(), function (res) {
+                obj = jQuery.parseJSON(res);
+                if (obj.sucess == 0) {
+                    $('.modal_errors').html(obj.errors);
+                } else {
+                    $('#myModal2').modal('hide');
+                    if ('{{ op }}' == 'add'){
+                        $('.data_xrays tbody').append('<tr class="xray_'+ obj.id +'">'
+                                + '<td>'+ obj.title +'</td>'
+                                + '<td>'+ obj.description +'</td>'
+                                + '<td>'
+                                + '<a href="#" class="btn btn-secondary btn-sm show-xrays" href="#" data-toggle="modal" data-target="#myModal2" rel="edit" data-id="' + obj.id + '">{{lang.edit}}</a>'
+                                + '<a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_xray_negative/delete') }}/'+ obj.id +'">{{ lang.delete }}</a>'
+                                + '</td></tr>');
+                    }
+                    else
+                    {
+                        $('.data_xrays tbody tr.xray_' + obj.id).html('<td>'+ obj.title +'</td>'
+                                + '<td>'+ obj.description +'</td>'
+                                + '<td>'
+                                + '<a href="#" class="btn btn-secondary btn-sm show-xrays" href="#" data-toggle="modal" data-target="#myModal2" rel="edit" data-id="' + obj.id + '">{{lang.edit}}</a>'
+                                + '<a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_xray_negative/delete') }}/'+ obj.id +'">{{ lang.delete }}</a>'
+                                + '</td>');
+                        
+                    }
+                }
+
+            });
+            return false;
+
+        });
+        
+    });
+</script>
+

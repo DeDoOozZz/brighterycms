@@ -1,0 +1,171 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.licenses }}</h3>
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,true,'role="form" id="licenses" class="form-horizontal"') }}
+
+        <div class="error" ></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="license_code">{{ lang.license_code}}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control validate[required]" id="url" placeholder="{{ lang.license_code }}" name="license_code"  value="{{ helper.form.value('license_code', item.license_code) }}"> 
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="domain">{{ lang.Domin }}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control validate[required]" id="url" placeholder="{{ lang.Domin }}" name="domain" value="{{ helper.form.value('domain', item.domain) }}"> 
+            </div>
+        </div>
+
+        <div class="form-group-separator"></div> 
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="brightery_product_id">{{ lang.User }}</label>
+            <div class="col-sm-10">
+                {{ helper.form.dropdown('user_id', user, helper.form.value('user_id', item.user_id), 'class="form-control " ') }}
+            </div>
+        </div>
+        <div class="form-group-separator"></div> 
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="brightery_product_id">{{ lang.product_title }}</label>
+            <div class="col-sm-10">
+                {{ helper.form.dropdown('brightery_product_id', product, helper.form.value('brightery_product_id', item.brightery_product_id), 'class="form-control "   id="select" ') }}
+            </div>
+        </div>
+
+
+        <div class="form-group-separator"></div> 
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="brightery_product_id">{{ lang.Available}}</label>  
+            <div class="col-sm-10">
+                {{ helper.form.dropdown('payment_type', product_name, helper.form.value('payment_type', item.brightery_product_id) ,'class="form-control " id="buy_type" ') }}
+
+            </div>                   
+        </div>
+        <div style="display:none" id="show_subscription">
+            <div class="form-group-separator"></div> 
+            <div class="form-group" >
+                <label class="col-sm-2 control-label" for="brightery_product_id">{{ lang.Available_subscription}}</label>  
+                <div class="col-sm-10">
+                    {{ helper.form.dropdown('subscription_status', product_na, helper.form.value('subscription_status', item.brightery_product_id) ,'class="form-control " id="subscription_status" ') }}
+
+                </div>                   
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-10">
+
+
+
+                <button type="submit" id="submit1" class="btn btn-secondary">{{ lang.submit }}</button>
+
+
+            </div>
+        </div>
+
+        {{ helper.form.close() }}
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    valid = false;
+
+
+    if (valid == true)
+    {
+        return true;
+    }
+    $('#licenses').submit(function ()
+    {
+
+
+
+        $.post('{{ helper.uri.url('management/brightery_licenses/manage/?api=1') }}', $(this).serialize(), function (res)
+        {
+
+            if (res.error == null)
+            {
+                valid = true;
+                $(this).submit();
+
+
+            }
+            else
+            {
+                for (var k in res.error) {
+
+
+                    $('.error').append(res.error[k] + '<br>');
+                }
+            }
+        });
+
+        if (valid == false)
+            return false;
+
+
+
+    });
+
+
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+
+        $('#select').change(function () {
+            var id = $('#select option:selected').val();
+
+            if (id != '') {
+                $.post('{{ helper.uri.url('management/brightery_licenses/select') }}', {id: id}, function (res)
+                {
+
+                    $('#buy_type').html(res);
+
+                });
+            }
+        });
+
+
+        $('#buy_type').change(function () {
+
+
+            var type_id = $('#buy_type option:selected').val();
+            var type = $('#buy_type option:selected').text();
+            if (type == 'Subscription')
+            {
+                $.post('{{helper.uri.url('management/brightery_licenses/select') }}', {type_id: type_id}, function (res)
+
+                {
+
+
+                    $('#show_subscription').show();
+                    $('#subscription_status').html(res);
+
+                });
+            }
+
+
+        });
+
+
+
+
+    });
+
+
+
+
+
+</script>

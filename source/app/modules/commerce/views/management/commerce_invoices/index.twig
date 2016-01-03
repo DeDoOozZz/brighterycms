@@ -1,0 +1,51 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.commerce_invoices }}</h3>
+    </div>
+    <div class="panel-body">
+
+        <table class="table table-bordered table-striped" id="datatable">
+            <thead>
+                <tr>
+                    <th>{{ lang.commerce_invoice_id }}</th>
+                    <th>{{ lang.commerce_order_id }}</th>
+                    <th>{{ lang.total }}</th>
+                    <th>{{ lang.user_id }}</th>
+                    <th>{{ lang.status }}</th>
+                    <th>{{ lang.created }}</th>
+                </tr>
+            </thead>
+            <tbody class="middle-align">
+
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.commerce_invoice_id }}</td>
+                        <td>{{ item.commerce_order_id }}</td>
+                        <td>{{ item.total }}</td>
+                        <td>{{ item.fullname }}</td>
+                        <td>{{ item.status }}</td>
+                        <td>{{ item.created }}</td>   
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {{ pagination }}
+    </div>
+</div>
+<div class="modal fade" id="deleteMsg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{lang.system_msg}}</h4>
+            </div>
+            <div class="modal-body">
+                <a>{{lang.delete_item}}</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">{{ lang.no }}</button>
+                <a id="delete_id" class="btn btn-danger" href="url">{{lang.delete}}</a>
+            </div>
+        </div>
+    </div>
+</div>

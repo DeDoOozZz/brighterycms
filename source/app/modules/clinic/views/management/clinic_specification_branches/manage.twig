@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+   <div class="panel-heading">
+       <h3 class="panel-title">{{ lang.clinic_specification_branches }}</h3>
+   </div>
+   <div class="panel-body">
+       {{ helper.form.open(null,false,true,'role="form" id="clinic_specification_branches" class="form-horizontal"') }}
+           {{ error }}<div class="form-group">
+               <label class="col-sm-2 control-label" for="clinic_specification_id">{{ lang.clinic_specification_id }}</label>
+               <div class="col-sm-10">
+           <input type="text" class="form-control validate[required]" id="clinic_specification_id" placeholder="{{ lang.clinic_specification_id }}" name="clinic_specification_id" value="{{ helper.form.value('clinic_specification_id', item.clinic_specification_id) }}"> 
+</div>
+           </div>
+            <div class="form-group-separator"></div><div class="form-group">
+               <label class="col-sm-2 control-label" for="clinic_branch_id">{{ lang.clinic_branch_id }}</label>
+               <div class="col-sm-10">
+           <input type="text" class="form-control validate[required]" id="clinic_branch_id" placeholder="{{ lang.clinic_branch_id }}" name="clinic_branch_id" value="{{ helper.form.value('clinic_branch_id', item.clinic_branch_id) }}"> 
+</div>
+           </div>
+            <div class="form-group-separator"></div> <div class="form-group">
+               <label class="col-sm-2 control-label"></label>
+
+               <div class="col-sm-10">
+                       <button type="submit" class="btn btn-secondary">{{ lang.submit }}</button>
+               </div>
+           </div>
+        {{ helper.form.close() }}
+
+    </div>
+</div>

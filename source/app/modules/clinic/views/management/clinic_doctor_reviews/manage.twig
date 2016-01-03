@@ -1,0 +1,58 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.clinic_doctor_reviews }}</h3>
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,true,'role="form" id="clinic_doctor_reviews" class="form-horizontal"') }}
+        {{ error }}
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="review">{{ lang.review }}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control validate[required]" id="review" placeholder="{{ lang.review }}" name="review" value="{{ helper.form.value('review', item.review) }}"> 
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="clinic_patient_id">{{ lang.clinic_patient_id }}</label>
+            <div class="col-sm-10">
+                {{ helper.form.dropdown('clinic_patient_id', patient, helper.form.value('clinic_patient_id', item.clinic_patient_id), 'class="form-control select" ') }} 
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="clinic_doctor_id">{{ lang.clinic_doctor_id }}</label>
+            <div class="col-sm-10">
+               {{ helper.form.dropdown('clinic_doctor_id', doctor, helper.form.value('clinic_doctor_id', item.clinic_doctor_id), 'class="form-control select" ') }}
+            </div>
+        </div>
+        <div class="form-group-separator"></div> 
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-10">
+                 <a href="{{ helper.uri.url('management/clinic_doctor_reviews/index') }}" class="btn btn-danger cancel-button">{{lang.cancel}}</a>
+                <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+            </div>
+        </div>
+        {{ helper.form.close() }}
+
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function ($)
+    {
+        $(".select").select2({
+            placeholder: '{{lang.select_specifications}} ',
+            allowClear: true
+        }).on('select2-open', function ()
+        {
+            // Adding Custom Scrollbar
+            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+        });
+
+    });
+
+</script>

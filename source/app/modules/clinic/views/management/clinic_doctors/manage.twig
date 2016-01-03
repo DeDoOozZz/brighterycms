@@ -1,0 +1,148 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.clinic_doctors }}</h3>
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,true,'role="form" class="form-horizontal"') }}
+        {{ error }}
+
+        {% if user_id == false %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="name">{{ lang.search_user }}</label>
+
+                <div class="col-sm-5 ">
+                    <select class="form-control criteria" onchange="search();" name="criteria">
+                        <option value="fullname">{{ lang.fullname }}</option>
+                        <option value="email">{{ lang.email }}</option>
+                        <option value="phone">{{ lang.phone }}</option>
+                    </select>
+                </div>
+                <div class="col-sm-5 search_input">
+                    <input type="hidden" name="user_id" id="user" value="{{ helper.form.value('user_id', item.user_id) }}">
+                    {{ helper.form.dropdown('fullname', user_fullname, helper.form.value('fullname', item.user_id), 'class="form-control select2" id="fullname"') }}
+                    {{ helper.form.dropdown('email', user_email, helper.form.value('email', item.user_id), 'class="form-control select2" id="email"') }}
+                    {{ helper.form.dropdown('phone', user_phone, helper.form.value('phone', item.user_id), 'class="form-control select2" id="phone"') }}
+                </div>
+
+            </div>
+        {% else %}
+            <input type="hidden" name="user_id" value="{{ user_id }}" />
+            <script>
+                $(document).ready(function(){
+                    loadUserInfo({{ user_id }});
+                });
+            </script>
+        {% endif %}
+        <table class="table table-bordered table-striped user-doctor-details">
+            <thead>
+                <tr>
+                    <th>{{ lang.field }}</th>
+                    <th>{{ lang.details }}</th>
+
+                </tr>
+            </thead>
+            <tbody class="middle-align">
+                <tr>
+                    <td>{{ lang.fullname }}</td>
+                    <td class="user-info-fullname"></td>
+                </tr>
+                <tr>
+                    <td>{{ lang.email }}</td>
+                    <td class="user-info-email"></td>
+                </tr>
+                <tr>
+                    <td>{{ lang.phone }}</td>
+                    <td class="user-info-phone"></td>
+                </tr>
+                <tr>
+                    <td>{{ lang.gender }}</td>
+                    <td class="user-info-gender"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="clinic_specification_id">{{ lang.specification }}</label>
+
+            <div class="col-sm-10">
+                {{ helper.form.dropdown('clinic_specification_id', specification, helper.form.value('clinic_specification_id', item.clinic_specification_id), 'class="form-control select" ') }}
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="name">{{ lang.description }}</label>
+
+            <div class="col-sm-10">
+                <textarea class="form-control" id="description" placeholder="{{ lang.description }}"
+                          name="description">{{ helper.form.value('description', item.description) }}</textarea>
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="name">{{ lang.period_average }}</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="period_average" placeholder="{{ lang.period_average }}"
+                       name="period_average" value="{{ helper.form.value('period_average', item.period_average) }}">
+            </div>
+        </div>
+
+
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-10">
+                <a href="{{ helper.uri.url('management/clinic_doctors/index') }}" class="btn btn-danger cancel-button">{{lang.cancel}}</a>
+                <button type="submit" class="btn btn-secondary" style="float: right;">{{ lang.submit }}</button>
+            </div>
+        </div>
+        {{ helper.form.close() }}
+
+    </div>
+</div>
+
+<script>
+    jQuery(document).ready(function ($) {
+        search();
+        $(".criteria").change(function () {
+            search();
+        });
+
+        $('.search_input select').change(function () {
+            loadUserInfo($(this).val());
+        });
+    });
+    function loadUserInfo(user_id) {
+        $('.user-doctor-details').hide();
+        loading.start();
+        $.getJSON('{{ helper.uri.url('management/clinic_doctors/get_user_information/') }}' + user_id, function (data) {
+            $('.user-info-fullname').html(data.user.fullname);
+            $('.user-info-email').html(data.user.email);
+            $('.user-info-phone').html(data.user.phone);
+            $('.user-info-gender').html(data.user.gender);
+            $('#user').val(data.user.user_id);
+            loading.stop();
+            $('.user-doctor-details').show();
+        });
+    }
+    function search() {
+        $('.search_input select').each(function () {
+            $(this).select2("container").hide();
+        });
+        $('.search_input #' + $('.criteria').val()).select2("container").show();
+    }
+
+
+</script>
+<style>
+    .user-doctor-details {
+        display: none;
+    }
+
+</style>
+

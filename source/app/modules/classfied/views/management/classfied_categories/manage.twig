@@ -1,0 +1,82 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.classfied_category }}</h3>
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,true,'role="form" class="form-horizontal"') }}
+        {{ error }} 
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="name">{{ lang.name }}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" placeholder="{{ lang.name }}" name="name"
+                       value="{{ helper.form.value('name', item.name) }}">
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="var_name">{{ lang.var_name }}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="var_name" placeholder="{{ lang.var_name }}" name="var_name"
+                       value="{{ helper.form.value('var_name', item.var_name) }}">
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        
+         <div class="form-group">
+            <label class="col-sm-2 control-label" for="title">{{ lang.title }}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="title" placeholder="{{ lang.title }}" name="title"
+                       value="{{ helper.form.value('title', item.title) }}">
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        
+         <div class="form-group">
+            <label class="col-sm-2 control-label" for="description">{{ lang.description }}</label>
+            <div class="col-sm-10">
+                <textarea type="text" class="form-control" id="description" placeholder="{{ lang.description}}" name="description" >{{ helper.form.value('description', item.description) }}</textarea>
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        
+         <div class="form-group">
+            <label class="col-sm-2 control-label" for="keywords">{{ lang.keywords }}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="keywords" placeholder="{{ lang.keywords }}" name="keywords"
+                       value="{{ helper.form.value('keywords', item.keywords) }}">
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        
+       <div class="form-group">
+            <label class="col-sm-2 control-label" for="category_order">{{ lang.category_order }}</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="category_order" placeholder="{{ lang.category_order }}" name="category_order"
+                       value="{{ helper.form.value('category_order', item.category_order) }}">
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="icon">{{ lang.icon }}</label>
+            <div class="col-sm-10">
+                <input type="file" class="form-control" id="icon" placeholder="{{lang.icon}}" name="icon" >
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-10">
+                <a href="{{ helper.uri.url('management/classfied_categories/index') }}" class="btn btn-danger cancel-button">{{lang.cancel}}</a>
+                <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+            </div>
+        </div>
+        {{ helper.form.close() }}
+
+    </div>
+</div>

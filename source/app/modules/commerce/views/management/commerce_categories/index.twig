@@ -1,0 +1,91 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.commerce_categories }}</h3>
+
+        <div class="panel-options">
+            <a href="{{ helper.uri.url('management/commerce_categories/manage') }}" class="btn btn-secondary"
+               style="color: #FFF;">
+                {{ lang.add }}
+            </a>
+        </div>
+    </div>
+    <div class="panel-body">
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>{{ lang.title }}</th>
+                <th>{{ lang.seo }}</th>
+                <th>{{ lang.operations }}</th>
+            </tr>
+            </thead>
+            <tbody class="middle-align">
+            {% for item in items %}
+                <tr>
+                    <td class="cat_contoller" style="cursor:pointer;">
+                        <span data-id="{{ item.commerce_category_id }}">
+                             <i class="fa fa-plus-square"></i>
+                        </span> {{ item.title }}
+                    </td>
+                    <td>{{ item.seo }}</td>
+                    <td>
+                        <a class="btn btn-info btn-sm"
+                           href="{{ helper.uri.url('management/commerce_categories/manage', item.commerce_category_id ) }}">{{ lang.edit }}</a>
+                        <a href="#" class="btn btn-danger btn-sm delete_msg"
+                           data-url_id="{{ helper.uri.url('management/commerce_categories/delete', item.commerce_category_id  ) }}"
+                           data-toggle="modal" data-target="#deleteMsg" style="color:#fff;">{{ lang.delete }}</a>
+                    </td>
+                </tr>
+                {% for sub_item in category_model.getSubCategories(item.commerce_category_id) %}
+                    <tr style="display: none; background: #f5f5f5" class="sub_{{ item.commerce_category_id }}">
+                        <td> <i class="fa fa-minus"></i> {{ sub_item.title }}</td>
+                        <td>{{ sub_item.seo }}</td>
+                        <td>
+                            <a class="btn btn-info btn-sm"
+                               href="{{ helper.uri.url('management/commerce_categories/manage', sub_item.commerce_category_id ) }}">{{ lang.edit }}</a>
+                            <a href="#" class="btn btn-danger btn-sm delete_msg"
+                               data-url_id="{{ helper.uri.url('management/commerce_categories/delete', sub_item.commerce_category_id  ) }}"
+                               data-toggle="modal" data-target="#deleteMsg" style="color:#fff;">{{ lang.delete }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+        {{ pagination }}
+    </div>
+</div>
+<div class="modal fade" id="deleteMsg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{ lang.system_msg }}</h4>
+            </div>
+            <div class="modal-body">
+                <a>{{ lang.delete_item }}</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">{{ lang.no }}</button>
+                <a id="delete_id" class="btn btn-danger" href="url">{{ lang.delete }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.cat_contoller').click(function () {
+        span = $(this).find('span');
+        if (span.html() == '<i class="fa fa-plus-square"></i>')
+        {
+            span.html('<i class="fa fa-minus-square"></i>');
+            $('.sub_' + span.data('id')).slideDown();
+        }
+        else
+        {
+            span.html('<i class="fa fa-plus-square"></i>');
+            $('.sub_' + span.data('id')).hide();
+        }
+    });
+</script>

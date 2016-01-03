@@ -1,0 +1,78 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.clinic_schedules }}</h3>
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,true,'role="form" class="form-horizontal"') }}
+        {{ error }}
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="clinic_doctor_id">{{ lang.doctor}}</label>
+            <div class="col-sm-10">
+               {{ helper.form.dropdown('clinic_doctor_id', doctor, helper.form.value('clinic_doctor_id', item.clinic_doctor_id), 'class="form-control " id="s2example-1" ') }} 
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="day">{{ lang.day }}</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    {{ helper.form.dropdown('day', menu, helper.form.value('day', item.day), 'class="form-control"') }} 
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="from_time">{{ lang.from_time }}</label>
+            <div class="col-sm-10">
+                <div class="input-group input-group-minimal">
+                    <input type="text" class="form-control timepicker" id="from_time" placeholder="{{ lang.from_time }}" name="from_time" value="{{ helper.form.value('from_time', item.from_time) }}" data-template="dropdown" data-show-seconds="true" data-default-time="11:25 AM" data-show-meridian="true" data-minute-step="5" data-second-step="5" > 
+                    <div class="input-group-addon">
+                        <i class="linecons-clock"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="to_time">{{ lang.to_time }}</label>
+            <div class="col-sm-10">
+                <div class="input-group input-group-minimal">
+                    <input type="text" class="form-control timepicker" id="to_time" placeholder="{{ lang.to_time }}" name="to_time" value="{{ helper.form.value('to_time', item.to_time) }}" data-template="dropdown" data-show-seconds="true" data-default-time="11:25 AM" data-show-meridian="true" data-minute-step="5" data-second-step="5" > 
+                    <div class="input-group-addon">
+                        <i class="linecons-clock"></i>
+                    </div>
+                </div>   
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="period_average">{{ lang.period_average }}</label>
+            <div class="col-sm-10">
+                <div class="input-group input-group-minimal">
+                    <input type="number" class="form-control" id="period_average" placeholder="{{ lang.period_average_per_miniute }}" name="period_average" value="{{ helper.form.value('period_average', item.period_average) }}" > 
+                    <div class="input-group-addon">
+                        <i class="linecons-clock"></i>
+                    </div>
+                </div>   
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-secondary">{{ lang.submit }}</button>
+                <a href="{{ helper.uri.url('management/clinic_schedules/index') }}" class="btn btn-danger">{{lang.cancel}}</a>
+            </div>
+        </div>
+        {{ helper.form.close() }}
+
+    </div>
+</div>

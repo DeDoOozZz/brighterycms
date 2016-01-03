@@ -1,0 +1,151 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.clinic_reservations }}</h3>
+
+        <div class="panel-options">
+            <a href="{{ helper.uri.url('management/clinic_reservations/manage') }}" class="btn btn-secondary"
+               style="color: #FFF;">
+                {{ lang.add }}
+            </a>
+        </div>
+    </div>
+    <br>
+
+    <div id="search_form">
+
+        <form role="form" class="form-horizontal" method="get">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="specification_search">{{ lang.date }}</label>
+
+                <div class="col-sm-10">
+                    <input type="text" name="date" value="{{ input.get.date }}" class="form-control selector"
+                           placeholder="{{ lang.date }}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="specification_search">{{ lang.clinic_patient_id }}</label>
+
+                <div class="col-sm-10">
+                    {{ helper.form.dropdown('user_id',patient, helper.form.value('user_id'), 'class="form-control " id="s2example-1" ') }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label " for="specification_search">{{ lang.status }}</label>
+
+                <div class="col-sm-10">
+                    {{ helper.form.dropdown('status',status, helper.form.value('status'), 'class="form-control"') }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="specification_search">{{ lang.doctor }}</label>
+
+                <div class="col-sm-10">
+                    {{ helper.form.dropdown('doctor_id',doctor, helper.form.value('doctor_id'), 'class="form-control doctor_id" id="s2example-1" ') }}
+                </div>
+            </div>
+
+            <div class="form-group reservation_type_id_div">
+                <label class="col-sm-2 control-label " for="specification_search">{{ lang.reservation_type }}</label>
+
+                <div class="col-sm-10">
+                    {{ helper.form.dropdown('clinic_doctor_reservation_type_id',null, helper.form.value('clinic_doctor_reservation_type_id'), 'class="form-control reservation_type_id" id="s2example-1" ') }}
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-secondary btnn-for-search" style="float: right;">{{ lang.search }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="panel-body">
+
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>{{ lang.clinic_patient_id }}</th>
+                <th>{{ lang.date }}</th>
+                <th>{{ lang.time }}</th>
+                <th>{{ lang.operations }}</th>
+            </tr>
+            </thead>
+            <tbody class="middle-align">
+
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.fullname }}</td>
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.time }}</td>
+                    <td>
+                        <a class="btn btn-info btn-sm"
+                           href="{{ helper.uri.url('management/clinic_reservations/manage', item.clinic_reservation_id ) }}">{{ lang.edit }}</a>
+                        <a href="#" class="btn btn-danger btn-sm delete_msg"
+                           data-url_id="{{ helper.uri.url('management/clinic_reservations/delete', item.clinic_reservation_id ) }}"
+                           data-toggle="modal" data-target="#deleteMsg" style="color:#fff;">{{ lang.delete }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {{ pagination }}
+
+    </div>
+</div>
+<div class="modal fade" id="deleteMsg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{ lang.system_msg }}</h4>
+            </div>
+            <div class="modal-body">
+                <a>{{ lang.delete_item }}</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">{{ lang.no }}</button>
+                <a id="delete_id" class="btn btn-danger" href="url">{{ lang.delete }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="{{ constant('STYLE_CSS') }}/datatables/dataTables.bootstrap.css">
+<script src="{{ constant('STYLE_JS') }}/datatables/js/jquery.dataTables.min.js"></script>
+<script src="{{ constant('STYLE_JS') }}/datatables/dataTables.bootstrap.js"></script>
+<script src="{{ constant('STYLE_JS') }}/datatables/yadcf/jquery.dataTables.yadcf.js"></script>
+<script src="{{ constant('STYLE_JS') }}/datatables/tabletools/dataTables.tableTools.min.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $("#datatable").dataTable();
+        $('.selector').datepicker();
+        $('.reservation_type_id_div').hide();
+
+        $('.doctor_id').change(function () {
+            var e = $('.doctor_id option:selected').text();
+            var val = $('.doctor_id option:selected').val();
+            if (e == 'Select ...') {
+                $('.reservation_type_id_div').hide();
+            }
+            else {
+                loading.start();
+                $.post('{{helper.uri.url('management/clinic_reservations/get_doctor') }}', {id: val}, function (res) {
+
+                    $('.reservation_type_id_div').show();
+                    $('.reservation_type_id').html(res);
+                    loading.stop();
+                });
+            }
+        });
+    });
+</script>

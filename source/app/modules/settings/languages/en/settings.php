@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'general_settings' => "General Settings",
+    'title' => "Title",
+    'description' => "Description",
+    'keywords' => "Keywords",
+    'paging_limit' => "Paging Limit",
+    'webmaster_email' => "Webmaster Email",
+    'timezone' => "Timezone",
+    'management_style' => "Management Style",
+    'frontend_style' => "Frontend Style",
+    'frontend_layout' => "Frontend Layout",
+    'management_layout' => "Management Layout",
+    'alexa_verification' => "Alexa Verification Code",
+    'bing_verification' => "Bing Verification Code",
+    'yandex_verification' => "Yandex Verification Code",
+    'google_verification' => "Google Verification Code",
+    'fb_app_id' => "Facebook Application ID",
+    'site_status' => "Site Status",
+    'on' => "ON",
+    'off' => "OFF",
+    'closing_message' => "Closing Message",
+    'styles' => "Styles",
+    'seo' => "SEO",
+];

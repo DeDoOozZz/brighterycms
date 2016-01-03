@@ -1,0 +1,63 @@
+
+<!-- cart-page section 
+            ================================================== -->
+<section class="cart-section-page">
+    <div class="container">
+        <div class="cart-products col-sm-8">
+            <h1>Shopping Wishlist</h1>
+            <div class="cart-table-header row">
+                <div class="col-sm-10">
+                    <span>products</span>
+                </div>
+                <div class="col-sm-2">
+                    <span>Price</span>
+                </div>
+            </div>
+            {% for item in items %} 
+                <div class="cart-table-body row">
+                    <div class="col-sm-2">
+                        <a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}" class="cart-pro-image">
+                            <img src="{{helper.uri.cdn('commerce', product_model.getProductPrimaryImage(item.commerce_product_id))}}">
+                        </a>
+                    </div>
+                    <div class="col-sm-8">
+                        <a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}" class="commerce-single-pro-title">{{item.name}}</a>
+                        {#                    <span class="commerce-pro-puplisher">by: <a href="#">Muhammad Elsaieed</a></span>#}
+                        <span class="commerce-pro-cat">More: <a href="#">Category name</a></span>
+                        <span class="cart-product-option">
+                            <a href="{{ helper.uri.url('commerce_wishlist/remove', item.commerce_wishlist_id ) }}" class=""><i class="fa fa-trash-o"></i> Remove</a>
+
+                            <a href="{{ helper.uri.url('commerce_wishlist/to_cart', item.commerce_wishlist_id ) }}" class=""><i class="fa fa-heart"></i> to Cart</a>
+                        </span>
+                    </div>
+
+                    <div class="col-sm-2 cart-product-price">
+                        <span>{{ item.price }} $</span>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <a  href="{{ helper.uri.url('commerce_cart' ) }}" class="continue-shopping">Back to my Cart</a>
+
+        </div>
+        <div class="col-sm-4 related-pro-block">
+            <h3>Some Related Products</h3>
+
+            {% for item in related_products %}
+                <div class="commerce-pro-related row">
+                    <div class="commerce-related-pro-img col-sm-4">
+                        <a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}" class="commerce-product-block" style="height:auto;"> <img src="{{helper.uri.cdn('commerce', product_model.getProductPrimaryImage(item.commerce_product_id))}}" alt=""></a>
+
+                    </div>
+                    <div class="commerce-pro-related-details col-sm-8">
+                        <a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}" class="related-pro-title">{{item.name}}</a>
+                        <span class="commerce-pro-cat">More: <a href="{{ helper.uri.url('commerce_category/index', item.commerce_category_id ) }}">{{item.title}}</a></span>
+                        <span class="commerce-product-price">${{ product.discount (item.price, item.discount) }} <span class="commerce-product-before-sale">${{item.price}}</span>  </span>
+                    </div>
+                </div>
+            {% endfor %}         
+        </div>
+    </div>
+</section>
+
+<!-- End cart-page section -->

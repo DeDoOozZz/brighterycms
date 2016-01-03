@@ -1,0 +1,27 @@
+
+{%for user in users %}
+
+    <a href="javascript:chat.draw({{user.user_id}});">
+        <img src="{{ helper.uri.cdn('users', user.image) }}" class="chat-image"> {{user.fullname}}
+        
+        <span class="user-status  {{ user.status }}"></span>
+        <span class="chat-last-seen">{{user.last_seen}}</span>
+    </a>
+
+{% endfor %}
+<style>
+    .chat-image{
+        width: 25px;
+        margin-right: 10px;
+    } 
+    .user-status{
+        float: right;
+        margin-top: 10px;
+    } 
+    .chat-last-seen{
+        float: right;
+         margin-top: 5px;
+         margin-right: 3px
+
+    }
+</style>

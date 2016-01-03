@@ -1,0 +1,455 @@
+<script type="text/javascript">
+// Sample Javascript code for this page
+    jQuery(document).ready(function ($)
+    {
+        // Sample Select all images
+        $("#select-all").on('change', function (ev)
+        {
+            var is_checked = $(this).is(':checked');
+
+            $(".album-image input[type='checkbox']").prop('checked', is_checked).trigger('change');
+        });
+
+        // Edit Modal
+        $('.gallery-env a[data-action="edit"]').on('click', function (ev)
+        {
+            ev.preventDefault();
+            $("#gallery-image-modal").modal('show');
+        });
+
+        // Delete Modal
+        $('.gallery-env a[data-action="trash"]').on('click', function (ev)
+        {
+            ev.preventDefault();
+            $("#gallery-image-delete-modal").modal('show');
+        });
+
+
+        // Sortable
+        $('.gallery-env a[data-action="sort"]').on('click', function (ev)
+        {
+            ev.preventDefault();
+
+            var is_sortable = $(".album-images").sortable('instance');
+
+            if (!is_sortable)
+            {
+                $(".gallery-env .album-images").sortable({
+                    items: '> div',
+                    containment: 'parent'
+                });
+
+                $(".album-sorting-info").stop().slideDown(300);
+            }
+            else
+            {
+                $(".album-images").sortable('destroy');
+                $(".album-sorting-info").stop().slideUp(300);
+            }
+        });
+    });
+</script>
+<div class="page-error-search">
+    <form class="form-half" method="get" action="" enctype="application/x-www-form-urlencoded">
+        <input type="text" class="form-control" placeholder="Search..." />
+
+        <button type="submit" class="btn-unstyled">
+            <i class="linecons-search"></i>
+        </button>
+    </form>
+</div>
+<br><br>
+<section class="gallery-env">
+
+    <div class="row">
+        
+    {#   Start Module Content   #}
+        <div class="col-sm-9 gallery-right">
+
+        {# Start Module Header #}
+            <div class="album-header">
+                <h2>Modules</h2>
+
+                <ul class="album-options list-unstyled list-inline">
+                    <li>
+                        <a href="#">
+                            <i class="fa-trophy"></i>
+                            Top
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa-briefcase"></i>
+                            New
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class=" fa-money"></i>
+                            Paid
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa-gittip"></i>
+                            Free
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        {# End Module Header #}
+        
+        {#   Strat Module Body     #}
+
+            <div class="album-images row">
+
+                <div class="col-md-12">
+                    <div class="album-header">
+                        <a href="#" class="thumb" data-action="edit">
+                            <img src="{{ constant("STYLE_IMAGES") }}/marwa.jpg" class="img-responsive" />
+                        </a>
+
+                        <div class="name">
+                            <span>Module Name</span>
+
+                            <span class="store_block_option">
+                                <i class="fa-gittip"></i>
+                                Free
+                            </span>
+                        </div>
+                        
+                    {#    Start  Module Operations     #}
+                       <div class="module_oprations">
+                            <button class="btn btn-red btn-icon btn-icon-standalone col-sm-6  unistall_operations">
+                                <i class="fa-trash"></i>
+                                <span>Unistall</span>
+                            </button>
+
+                            <button class="btn btn-orange btn-icon btn-icon-standalone col-sm-6  update_operations">
+                                <i class="fa-cloud-upload"></i>
+                                <span>Update</span>
+                            </button>
+                        </div>
+                        
+                       <div class="module_oprations">
+                                <button class="btn btn-secondary btn-icon btn-icon-standalone col-sm-12 ">
+                                    <i class="fa-cloud-download"></i>
+                                    <span>Install</span>
+                                 </button>
+                        </div>
+                    {#     End  Module Operations         #} 
+                    
+                    
+                    {#     Start Module Description       #}
+                        <div class="module_description">
+                            <p>ay klam fel7madaaaa ay klam fel7madaaaa ay klam fel7madaaaa ay klam fel7madaaaa ay klam fel7madaaaa ay klam fel7madaaaa</p>
+                        </div>
+                    {#       End Module Description       #}
+                    
+                    
+                    {#       Start Module Pics            #}
+                        <div class="album-images row module_imgs">
+                            <!-- Module Block Pic-->
+                            <div class="col-md-3 col-sm-4 col-xs-6">
+                                <div class="album-image">
+                                    <a href="#" class="thumb" data-action="edit">
+                                        <img src="{{ constant("STYLE_IMAGES") }}/marwa.jpg" class="img-responsive" />
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Module Block Pic-->
+                            <div class="col-md-3 col-sm-4 col-xs-6">
+                                <div class="album-image">
+                                    <a href="#" class="thumb" data-action="edit">
+                                        <img src="{{ constant("STYLE_IMAGES") }}/marwa.jpg" class="img-responsive" />
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Module Block Pic-->
+                            <div class="col-md-3 col-sm-4 col-xs-6">
+                                <div class="album-image">
+                                    <a href="#" class="thumb" data-action="edit">
+                                        <img src="{{ constant("STYLE_IMAGES") }}/marwa.jpg" class="img-responsive" />
+                                    </a>
+                                </div>
+                            </div>
+                           <!-- Module Block Pic-->
+                            <div class="col-md-3 col-sm-4 col-xs-6">
+                                <div class="album-image">
+                                    <a href="#" class="thumb" data-action="edit">
+                                        <img src="{{ constant("STYLE_IMAGES") }}/marwa.jpg" class="img-responsive" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {#    End Module Pics                 #}
+                    </div>
+                </div>  
+                    
+                    
+            {#   Start adding review  #}
+                <div class="panel-options-review">
+                     <span class="name add_review" data-toggle="modal" data-target="#myModal7">
+                        <i class="choosen_review">&#9733;</i>
+                        <i class="choosen_review">&#9733;</i>
+                        <i class="choosen_review">&#9733;</i>
+                        <i class="notchoosen_review">&#9734;</i>
+                        <i class="notchoosen_review">&#9734;</i>
+                    </span>
+                </div> 
+                <div class="modal fade" id="myModal7" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Add Your Review</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form role="form" class="form-horizontal">
+                                    <div class="form-group">
+
+                                       <div class="col-sm-12 add_review">
+                                            <span>
+                                                <i class="notchoosen_review">&#9734;</i>
+                                                <i class="notchoosen_review">&#9734;</i>
+                                                <i class="notchoosen_review">&#9734;</i>
+                                                <i class="notchoosen_review">&#9734;</i>
+                                                <i class="notchoosen_review">&#9734;</i>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group-separator"></div>
+
+                                    <div class="form-group">
+                                        <label for="field-5" class="col-sm-2 control-label">Title</label>
+                                         <div class="col-sm-10">
+                                              <input type="text" class="form-control" id="field-1" placeholder="Title">
+                                         </div>
+                                    </div>
+
+                                    <div class="form-group-separator"></div>
+
+                                    <div class="form-group">
+                                        <label for="field-5" class="col-sm-2 control-label">description</label>
+                                        <div class="col-sm-10">
+                                            <textarea id="field-5" cols="5" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group-separator"></div>
+
+                                    <div class="form-group">
+                                        <label for="field-5" class="col-sm-2 control-label"></label>
+                                        <div class="col-sm-10">
+                                            <input type="submit" class="btn btn-secondary " value="save">
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>    
+            {#    end adding review    #}
+            
+            {#    Start All Review     #}
+                <div class="profile-env">
+                    {# section1 #}
+                    <section class="user-timeline-stories">
+
+                        <!-- Timeline Story Type: Status -->
+                        <article class="timeline-story">
+
+                            <i class="fa-paper-plane-empty block-icon"></i>
+
+                            <!-- User info -->
+                            <header>
+
+                                <a href="#" class="user-img">
+                                    <img src="{{ constant("STYLE_IMAGES") }}/user-4.png" alt="user-img" class="img-responsive img-circle" />
+                                </a>
+
+                                <div class="user-details">
+                                    <a href="#">Art Ramadani</a> posted a status <a href="#">update</a>.
+                                    <time>12 hours ago</time>
+                                    <span class="name">
+                                        <i class="choosen_review">&#9733;</i>
+                                        <i class="choosen_review">&#9733;</i>
+                                        <i class="choosen_review">&#9733;</i>
+                                        <i class="notchoosen_review">&#9734;</i>
+                                        <i class="notchoosen_review">&#9734;</i>
+                                    </span>
+                                </div>
+
+                            </header>
+
+                            <div class="story-content">
+                                <!-- Story Content Wrapped inside Paragraph -->
+                                <p>Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial two promise. Greatly who affixed suppose but enquire compact prepare all put. Added forth chief trees but rooms think may.</p>        
+                            </div>
+
+                        </article>
+
+                    </section>
+
+                    {# section2 #}
+                    <section class="user-timeline-stories">
+
+                        <!-- Timeline Story Type: Status -->
+                        <article class="timeline-story">
+
+                            <i class="fa-paper-plane-empty block-icon"></i>
+
+                            <!-- User info -->
+                            <header>
+
+                                <a href="#" class="user-img">
+                                    <img src="{{ constant("STYLE_IMAGES") }}/user-4.png" alt="user-img" class="img-responsive img-circle" />
+                                </a>
+
+                                <div class="user-details">
+                                    <a href="#">Art Ramadani</a> posted a status <a href="#">update</a>.
+                                    <time>12 hours ago</time>
+                                    <span class="name">
+                                        <i class="choosen_review">&#9733;</i>
+                                        <i class="choosen_review">&#9733;</i>
+                                        <i class="choosen_review">&#9733;</i>
+                                        <i class="notchoosen_review">&#9734;</i>
+                                        <i class="notchoosen_review">&#9734;</i>
+                                    </span>
+                                </div>
+
+                            </header>
+
+                            <div class="story-content">
+                                <!-- Story Content Wrapped inside Paragraph -->
+                                <p>Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial two promise. Greatly who affixed suppose but enquire compact prepare all put. Added forth chief trees but rooms think may.</p>        
+                            </div>
+
+                        </article>
+
+                    </section>
+
+                    {# section3 #}
+                    <section class="user-timeline-stories">
+
+                        <!-- Timeline Story Type: Status -->
+                        <article class="timeline-story">
+
+                            <i class="fa-paper-plane-empty block-icon"></i>
+
+                            <!-- User info -->
+                            <header>
+
+                                <a href="#" class="user-img">
+                                    <img src="{{ constant("STYLE_IMAGES") }}/user-4.png" alt="user-img" class="img-responsive img-circle" />
+                                </a>
+
+                                <div class="user-details">
+                                    <a href="#">Art Ramadani</a> posted a status <a href="#">update</a>.
+                                    <time>12 hours ago</time>
+                                    <span class="name">
+                                       <i class="choosen_review">&#9733;</i>
+                                        <i class="choosen_review">&#9733;</i>
+                                        <i class="choosen_review">&#9733;</i>
+                                        <i class="notchoosen_review">&#9734;</i>
+                                        <i class="notchoosen_review">&#9734;</i>
+                                    </span>
+                                </div>
+
+                            </header>
+
+                            <div class="story-content">
+                                <!-- Story Content Wrapped inside Paragraph -->
+                                <p>Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial two promise. Greatly who affixed suppose but enquire compact prepare all put. Added forth chief trees but rooms think may.</p>        
+                            </div>
+
+                        </article>
+
+                    </section>
+
+                    {#  load mor reviews  #}
+                    <button class="btn btn-white btn-block load_more">
+                        <i class="fa-bars"></i>
+                        Load More Images
+                    </button>
+                </div>
+            {#    End All Review     #}
+            </div>
+        {#   End Module Body   #}
+        </div>
+    {#   End Module Content   #}    
+
+    {# Start Module Sidebar #}
+        <div class="col-sm-3 gallery-left">
+
+            <div class="gallery-sidebar">
+
+                <ul class="sidebar_store_list">
+                    <li>
+                        <a href="#" class="balance_store">
+                            <i class="fa-money"></i>
+                            <span>Balance</span>
+                            <span class="badge badge-white badge-money">3000$</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="wishlist_store">
+                            <i class="fa-heart"></i>
+                            <span>Wishlist</span> 
+                            <span class="badge badge-white bage_wishlist">4</span> 
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="list-unstyled">
+                    <li class="active">
+                        <a href="#">
+                            <i class="fa-stethoscope"></i>
+                            <span>Medical</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa-folder-o"></i>
+                            <span>Category2</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa-folder-o"></i>
+                            <span>Category3</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    {# End Module Sidebar #}
+    </div>
+
+</section>
+<div class="modal fade" id="gallery-image-delete-modal" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm Image Deletion</h4>
+            </div>
+
+            <div class="modal-body">
+
+                Do you really want to delete this image?
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

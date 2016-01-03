@@ -1,0 +1,7 @@
+<?php
+
+return [
+    'category' => "???????",
+    'name' => "?????",
+    'catergory_attributes' => "Catergory Attributes",
+];

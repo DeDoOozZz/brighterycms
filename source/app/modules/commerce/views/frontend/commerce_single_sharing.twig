@@ -1,0 +1,40 @@
+<!-- projects-page section 
+                     ================================================== -->
+<section class="commerce-single-product">
+    <div class="container">
+        <div class="col-sm-6">
+            <div class="col-sm-4">
+                <div class="commerce-sharing-image">
+                    <img src='{{ constant("STYLE_IMAGES")}}/small/2.png' data-zoom-image="{{ constant("STYLE_IMAGES")}}/large/2.png"/>
+                </div>                   
+            </div>
+            <div class="col-sm-8">
+                <h2 class="commerce-single-pro-title">{{item.from_title}}</h2>
+                <span class="commerce-pro-puplisher">by: <a href="#">{{item.fullname}}</a></span>
+                    <div class="commerce-key-fetrues">
+                        <h3>Key fetrues</h3>
+                        <ul>
+                           {{item.from_description}}
+                        </ul>
+                    </div>               
+            </div>          
+        </div>
+                        
+        <div class="col-sm-6">
+            <div class="col-sm-4">
+                <div class="commerce-sharing-image">
+                    <img src='{{ constant("STYLE_IMAGES")}}/small/2.png' data-zoom-image="{{ constant("STYLE_IMAGES")}}/large/2.png"/>
+                </div>                   
+            </div>
+            <div class="col-sm-8">
+                <h2 class="commerce-single-pro-title">{{item.from_title}}</h2>
+                    <div class="commerce-key-fetrues">
+                        <h3>Key fetrues</h3>
+                        <ul>
+                           {{item.from_description}}
+                        </ul>
+                    </div>               
+            </div>          
+        </div>
+    </div>
+</section>  

@@ -1,0 +1,73 @@
+<!-- registration section
+    ================================================== -->
+<section class="services-page-section" style="margin-top: 70px;">
+    <div class="container">
+        {{ helper.form.open(null,false,true,'role="form" class="comment-form"') }}
+        {{error}}
+        <div class="row">
+            <div class="col-md-4">
+                <h2 class="registration-title">What you want to share?</h2>
+            </div>
+            <div class="col-md-4">
+                <h2 class="registration-title">What you are looking for?</h2>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <label>{{lang.from_title}}</label>
+                <input name="from_title" id="from_title" type="text" placeholder="{{lang.from_title}}" value="{{ helper.form.value('from_title') }}">
+            </div>
+            <div class="col-md-4">
+                <label>{{lang.to_title}}</label>
+                <input name="to_title" id="to_title" type="text" placeholder="{{lang.to_title}}" value="{{ helper.form.value('to_title') }}">
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>{{lang.from_description}}</label>
+                <textarea name="from_description" id="from_description" type="text" placeholder="{{lang.from_description}}">{{ helper.form.value('from_description') }}</textarea>
+            </div>
+            <div class="col-md-4">
+                <label>{{lang.to_description}}</label>
+                <textarea name="to_description" id="to_description" type="text" placeholder="{{lang.to_description}}">{{ helper.form.value('to_description') }}</textarea>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <label>{{lang.from_image}}</label>
+                <input name="from_image" id="from_image" type="file" placeholder="{{lang.from_image}}" value="{{ helper.form.value('from_image') }}">
+            </div>
+            <div class="col-md-4">
+                <label>{{lang.to_image}}</label>
+                <input name="to_image" id="to_image" type="file" placeholder="{{lang.to_image}}" value="{{ helper.form.value('to_image') }}">
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <label>{{lang.location}}</label>
+                <input name="location" id="location" type="text" placeholder="{{lang.location}}" value="{{ helper.form.value('location') }}">
+            </div>
+            <div class="col-md-4">
+                <label class="col-md-12"> {{lang.space}} </label><br>
+                <input type="submit" id="" value="{{lang.submit}}">
+            </div>
+        </div>
+        {{ helper.form.close() }}
+    </div>
+</section>
+
+<style>
+    input#submit_contact {
+        width: 100%;
+        line-height: 30px;
+        margin-top: 4px;
+    }
+</style>

@@ -1,0 +1,67 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.clinic_schedules }}</h3>
+
+        <div class="panel-options">
+            <a href="{{ helper.uri.url('management/clinic_schedules/manage') }}" class="btn btn-secondary" style="color: #FFF;">
+                {{ lang.add }}
+            </a>
+        </div>
+    </div>
+    <div class="panel-body">
+
+        <table class="table table-bordered table-striped" id="datatable">
+            <thead>
+                <tr>
+                    <th>{{ lang.doctor }}</th>
+                    <th>{{ lang.day }}</th>
+                    <th>{{ lang.from_time }}</th>
+                    <th>{{ lang.to_time }}</th>
+                    <th>{{ lang.operations }}</th>
+                </tr>
+            </thead>
+            <tbody class="middle-align">
+
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.fullname }}</td>
+                        <td>{{ item.day }}</td>
+                        <td>{{ item.from_time }}</td>
+                        <td>{{ item.to_time }}</td>
+                        <td>
+                            <a class="btn btn-info btn-sm" href="{{ helper.uri.url('management/clinic_schedules/manage', item.clinic_schedule_id ) }}">{{ lang.edit }}</a>
+                            <a href="#" class="btn btn-secondary btn-sm delete_msg" data-url_id="{{helper.uri.url('management/clinic_schedules/delete', item.clinic_schedule_id  )}}" data-toggle="modal" data-target="#deleteMsg" style="color:#fff;">{{lang.delete}}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<div class="modal fade" id="deleteMsg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{lang.system_msg}}</h4>
+            </div>
+            <div class="modal-body">
+                <a>{{lang.delete_item}}</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">{{ lang.no }}</button>
+                <a id="delete_id" class="btn btn-danger" href="url">{{lang.delete}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="{{ constant('STYLE_CSS') }}/datatables/dataTables.bootstrap.css">
+<script src="{{ constant('STYLE_JS') }}/datatables/js/jquery.dataTables.min.js"></script>
+<script src="{{ constant('STYLE_JS') }}/datatables/dataTables.bootstrap.js"></script>
+<script src="{{ constant('STYLE_JS') }}/datatables/yadcf/jquery.dataTables.yadcf.js"></script>
+<script src="{{ constant('STYLE_JS') }}/datatables/tabletools/dataTables.tableTools.min.js"></script><script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $("#datatable").dataTable();
+    });
+</script>

@@ -1,0 +1,181 @@
+<div class="col-sm-10">
+    <div class="preview-post-job">
+        {{ helper.form.open(null,false,true,'role="form" class="comment-form"') }}
+        <input type="hidden" name="confirm" value="1">
+        {{ error }}
+        {% if input.post('company') %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="company">{{ lang.company }}</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="company" value="{{ input.post('company') }}">
+                    {{ input.post('company') }}    
+                </div>
+            </div>
+        {% endif %}
+
+        {% if input.post('url') %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="url">{{ lang.url }}</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="url" value="{{ input.post('url') }}">
+                    {{ input.post('url') }}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if input.post('poster_email') %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="poster_email">{{ lang.poster_email}}</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="poster_email" value="{{ input.post('poster_email') }}">
+                    {{ input.post('poster_email') }}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if input.post('classfied_type_id') %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="classfied_type_id">{{ lang.classfied_type_id }}</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="classfied_type_id" value="{{ input.post('classfied_type_id') }}" />
+                    {{ types }}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if input.post('classfied_category_id') %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="classfied_category_id">{{ lang.classfied_category_id }}</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="classfied_category_id" value="{{ input.post('classfied_category_id') }}" />
+                    {{ categories }}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if input.post('classfied_country_id') %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="classfied_country_id">{{ lang.classfied_country_id }}</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="classfied_country_id" value="{{ input.post('classfied_country_id') }}" />
+                    {{ countries }}        
+                </div>
+            </div>
+        {% endif %}
+
+        {% if input.post('classfied_city_id') %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="classfied_city_id">{{ lang.classfied_city_id }}</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="classfied_city_id" value="{{ input.post('classfied_city_id') }}" />
+                    {{ cities }}        
+                </div>
+            </div>
+        {% endif %}
+
+        {% if input.post('classfied_area_id') %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="classfied_area_id">{{ lang.classfied_area_id }}</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="classfied_area_id" value="{{ input.post('classfied_area_id') }}" />
+                    {{ areas }}        
+                </div>
+            </div>
+        {% endif %}
+
+        {% if input.post('title') %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="title">{{ lang.title }}</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="title" value="{{ input.post('title') }}">
+                    {{ input.post('title') }}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if input.post('description') %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="description">{{ lang.description }}</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="description" value="{{ input.post('description') }}">
+                    {{ input.post('description') }}    
+                </div>
+            </div>
+        {% endif %}
+
+        {% if input.post('candidate_location') %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="candidate_location">{{ lang.candidate_location}}</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="candidate_location" value="{{ input.post('classfied_country_id') }}">
+                    {{classfied_country_id}}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if input.post('salary_from') %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="salary">{{ lang.salary}}</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="salary_from" value="{{ input.post('salary_from') }}">
+                    {{ input.post('salary_from') }}
+                    <input type="hidden" name="salary_to" value="{{ input.post('salary_to') }}">
+                    {{ input.post('salary_to') }}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if input.post('classfied_currency_id') %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="currency">{{ lang.currency}}</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="classfied_currency_id" value="{{ input.post('classfied_currency_id') }}" />
+                    {{ currencies }}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if input.post('phone_num') %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="phone_num">{{ lang.phone_num}}</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="phone_num" value="{{ input.post('phone_num') }}">
+                    {{ input.post('phone_num') }}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if input.post('classfied_experience_id') %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="classfied_experience_id">{{ lang.classfied_experience_id}}</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="classfied_experience_id" value="{{ input.post('classfied_experience_id') }}" />
+                    {{ experiences }}
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"> </label>
+            <div class="col-sm-10">
+                <a href="#" class="applay-job"><i class="fa fa-black-tie"></i> تقدم للوظيفة</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-10">
+                <button type="submit" class="btn classfied-submit" style="float: right;">{{lang.confirm}}</button>
+                <button type="button" onclick="window.history.back()" class="btn classfied-submit return" style="float: right;"><i class="fa fa-reply-all"></i> {{lang.return}}</button>
+            </div>
+        </div>
+        {{ helper.form.close() }}
+    </div>
+</div>
+<style>
+    .classfied-submit.return {
+        margin-right: 10px;
+        color: #fff;
+        background-color: silver;
+    }
+</style>

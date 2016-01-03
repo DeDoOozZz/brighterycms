@@ -1,0 +1,299 @@
+ul, ol {
+    padding-left: 0;
+}
+li.error_message {
+    list-style: none;
+    line-height: 30px;
+    background-color: #cc3f44;
+    color: #fff;
+    padding: 0 10px;
+    font-size: 14px;
+    margin-bottom: 3px;
+    border-radius: 5px;
+    padding: 0 10px;
+}
+li.error_message .fa-times-circle {
+    font-family: 'Montserrat', sans-serif;
+    font-size:13px;
+}
+li.error_message .fa-times-circle:before {
+    margin-right: 5px;
+    font-family: fontawesome;
+}
+.faqs-answered {
+    color: silver;
+    font-weight: normal;
+    font-size: 11px;
+    margin: 10px 15px;
+    display: block;
+}
+.single-faq {
+    margin-bottom: 20px;
+}
+.single-faq h2 {
+    text-transform: none !important;
+}
+.toshow_faq{
+    cursor: pointer;  
+}
+p.show_faq {
+    display: none;
+}
+.navbar-brand {
+    width: 200px;
+}
+.navbar-brand>img {
+    width: 100%;
+}
+span.add-another-option-address,
+span.add-another-option-phone {
+    margin: 30px 0;
+    display: block;
+    cursor: pointer;
+}
+span.add-another-option-address:hover,
+span.add-another-option-phone:hover{
+    color:#ffab00;
+}
+.show-another-option,
+.show-another-option-address{
+    display: none;
+}
+#contact-form input[type="file"],
+#contact-form input[type="password"],
+#contact-form input[type="email"]
+{
+    width: 100%;
+    padding: 10px 20px;
+    border: 1px solid #dedede;
+    margin-bottom: 20px;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    color: #666666;
+    font-size: 13px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff !important;
+}
+#contact-form input[type="password"]:focus,
+#contact-form input[type="file"]:focus,
+#contact-form input[type="email"]:focus{
+    border: 1px solid #ffba00;
+}
+#contact-form label{
+    display: block;
+    color:#666;
+    font-family: 'Montserrat', sans-serif;
+}
+input[type="radio"] {
+    margin-bottom: 20px;
+}
+.registration-title {
+    color: #222222;
+    font-size: 17px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    margin: 0 0 15px;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+input.datepicker-registration{
+    position:relative;
+}
+.calendar-registration {
+    position: absolute;
+    top: 25px;
+    right: 15px;
+    background-color: #dedede;
+    line-height: 40px;
+    width: 30px;
+    text-align: center;
+    color:#666;
+}
+
+//   start login home   //
+
+.top-line p span i {
+    font-size: 16px;
+}
+i.fa.fa-sort-asc.drop-login {
+    font-size: 12px;
+    position: absolute;
+    left: 87px;
+    top: 3px;
+    color:#fff;
+}
+
+.login-home{
+    cursor: pointer;
+}
+select.form-control {
+    border: 1px solid #dedede;
+    box-shadow: none;
+    border-radius: 0;
+    color: #666;
+}
+form .form-group-separator {
+    height: 1px;
+    background: #eee;
+    margin-bottom: 15px;
+}
+
+input.form-control {
+    border: 1px solid #dedede;
+    border-radius: 0;
+    box-shadow: none;
+}
+a.register-new-patient {
+    line-height: 37px;
+    color: #fff;
+    background-color: #8dc63f;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    width: 100px;
+}
+
+input.submit.reservation-login-submit {
+    width: 100px;
+}
+label.remember-me {
+    color: #999 !important;
+    font-weight: normal;
+    margin-bottom: 20px;
+    font-size: 14px;
+
+}
+a.forget-password {
+    float: right;
+    color: #999;
+    text-decoration: underline;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+a.forget-password:hover{
+    color: #ffab00;
+
+}
+
+.form-group input:focus{
+    border: 1px solid #ffba00;
+    box-shadow: 0;
+}
+input.form-control {
+    border-radius: 0;
+    box-shadow: none  !important;
+    font-size: 12px;
+    font-weight: normal;
+}
+.login-box,
+.login-box label,
+.login-box h4{
+    color:#666;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: normal;
+}
+.header-user_image{
+    width:30px;
+    height:30px;
+    display:inline-block;
+    overflow: hidden;
+}
+.header-user_image img {
+    width: 100%;
+    border-radius: 50%;
+    height:100%;
+}
+p.logout-user {
+    padding-left: 40px;
+    position: relative;
+    margin-bottom: 0;
+}
+span.header-user_image {
+    position: absolute;
+    left: 0;
+    top: -5px;
+}
+.logout-user a{
+    color:#fff;
+    text-decoration: none;
+}
+section.main-section-page {
+    margin-top: 165px;
+    margin-bottom: 20px;
+}
+.reseravtion-search-title {
+    padding-left: 15px;
+}
+.reservation-search-form select{
+    height: 39px;
+    outline: 0;
+    box-shadow: none;
+}
+.main-block input[type="text"]:focus{
+    border: 1px solid #fab000;
+}
+.reservation-search-form select:focus{
+    outline: 0;
+    box-shadow: none;
+    border:1px solid #fab000;
+}
+.doctors-results {
+    margin-top: 25px;
+}
+.doctors-blocks {
+    background-color: #f5f5f5;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    float: left;
+    width: 100%;
+    margin-left: 0;
+}
+.doctor-image  img{
+    width: 100%;
+}
+.doctor-details h2 {
+    margin-top: 0;
+    font-size: 18px;
+    /*font-weight: bold;*/
+    color:#333;
+}
+.reservation-details-title {
+    font-weight: bold;
+    font-size: 12px;
+    color:#333;
+}
+span.reservation-details-content {
+    font-size: 12px;
+    color:#333;
+}
+.view-doctor-schedule {
+    line-height: 30px;
+    background-color: #fab000;
+    color: #fff;
+    display: block;
+    width: 150px;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 13px;
+}
+.view-doctor-schedule:hover{
+    text-decoration: none;
+    color: #fff;
+}
+.reservation-details {
+    margin-bottom: 5px;
+}
+.reservation-header h2{
+    font-size: 18px;
+}
+.about-section{
+    margin-top: 100px;
+}
+.menu-links li{
+    list-style: none;
+}
+.menu-links li a{
+    color:#fff;
+}
+//  end login home   //

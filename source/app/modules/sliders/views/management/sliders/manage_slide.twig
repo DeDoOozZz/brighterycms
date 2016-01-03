@@ -1,0 +1,105 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.slide }}</h3>
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,true,'role="form" id="slider" class="form-horizontal"') }}
+        {{ error }}
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="title">{{lang.title}}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="fullname" placeholder="{{lang.title}}" name="title"
+                       value="{{ helper.form.value('title', item.title) }}">
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="image">{{ lang.image }}</label>
+            <div class="col-sm-10">
+                <input type="file" class="form-control" id="image" placeholder="{{lang.image}}" name="image">
+            </div>
+        </div>
+
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="caption">{{ lang.caption }}</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="password" placeholder="{{ lang.caption }}" name="caption"
+                       value="{{ helper.form.value('caption', item.caption) }}">
+            </div>
+        </div>
+
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="url">{{lang.url}}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="url" placeholder="{{lang.url}}" name="url"
+                       value="{{ helper.form.value('url', item.url) }}">
+            </div>
+        </div>
+
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="from_date">{{lang.from_date}}</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <input type="text" class="form-control datetimepicker1" id="from_date" placeholder="{{lang.from_date}}" name="from_date"
+                           value="{{helper.form.value('from_date', item.from_date)}} " data-format="yyyy-mm-dd">
+                    <div class="input-group-addon">
+                        <a href="#"><i class="linecons-calendar"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="to_date">{{lang.to_date}}</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <input type="text" class="form-control datetimepicker1" id="to_date" placeholder="{{lang.to_date}}" name="to_date"
+                           value="{{ helper.form.value('to_date', item.to_date) }} " data-format="yyyy-mm-dd">
+                    <div class="input-group-addon">
+                        <a href="#"><i class="linecons-calendar"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="sort">{{lang.sort}}</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="sort" placeholder="{{lang.sort}}" name="sort"
+                       value="{{ helper.form.value('sort', item.sort) }}">
+            </div>
+        </div>
+
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-10">
+                <a href="{{ helper.uri.url('management/sliders/index') }}" class="btn btn-danger cancel-button">{{lang.cancel}}</a>
+                <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+            </div>
+        </div>
+        {{ helper.form.close() }}
+
+    </div>
+</div>
+<link rel="stylesheet" type="text/css" href="{{ constant('STYLE_JS') }}/jquery.datetimepicker.css" />
+<script src="{{ constant('STYLE_JS') }}/jquery.datetimepicker.full.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.datetimepicker1').datetimepicker();
+    });
+</script>

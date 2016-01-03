@@ -1,0 +1,499 @@
+
+
+<section class="profile-env" style="float: none;">
+
+    <div class="row">
+
+        <!-----ISSUE DETAILS SIDEBAR ---->
+        <div class="col-sm-3">
+
+
+            <div class="user-info-sidebar">
+
+                <ul class="list-unstyled user-info-list">
+                    <h2>{{ lang.details }}</h2>
+                    <li>
+                        <i class="fa-flag"></i>
+                        <strong>{{ lang.type }} </strong> {{ item.issue_type }}
+                    </li>
+                    <li>
+                        <i class="fa fa-certificate"></i>
+                        <strong>{{ lang.priority }} </strong>
+                        <span style="color:{{ item.priority }}">{{ item.priority_title }}</span>
+
+                    </li>
+                    <li>
+                        <i class="fa-male"></i>
+                        <strong>{{ lang.reviewer }} </strong> {{ item.reviewer }}
+
+                    </li>
+                    <li>
+                        <i class="fa fa-suitcase"></i>
+                        <strong>{{ lang.project }} </strong> {{ item.project }}
+
+                    </li>
+                    <li>
+                        <i class="fa-history"></i>
+                        <strong>{{ lang.deadline }} </strong> {{ item.deadline }}
+
+                    </li>
+                    <li>
+                        <i class="fa-history"></i>
+                        <strong>{{ lang.estimated }} </strong> {{ item.estimated_time }}
+
+                    </li>
+                </ul>
+
+                <hr/>
+
+
+                <!-- Issue Activities -->
+
+                <ul class="list-unstyled user-info-list">
+
+                    <h4>{{ lang.issue_activities }}</h4>
+
+                    <div class="vertical-top">
+                        {% if item.activities == start %}
+                        <a href=""
+                           class="btn btn-icon btn-white actions" data-toggle="tooltip" name="start" data-placement="top"
+                           title="Start" data-original-title="Start Issue " onclick="play()" data-actions="start" id ="play">
+                            <i class="fa-play" id="iplay"></i>
+                        </a>
+
+                        {#<input type="number" id="timer">#}
+
+                        {% endif %}
+
+
+                        {% if item.activities == pause %}
+                        <a href="" class="btn btn-icon btn-white actions" name="pause" data-toggle="tooltip" data-placement="top"
+                           title="Pause" data-original-title="Pause Issue" onclick ="pause()" data-actions="pause" id="pause">
+                            <i class="fa-pause" id="ipause"></i>
+                        </a>
+                        {% endif %}
+
+                        {% if item.activities == done %}
+                        <a href="" class="btn btn-icon btn-white actions" name ="done" data-toggle="tooltip" data-placement="top"
+                           title="Done" data-original-title="Done Issue" data-actions="done" id="done">
+                            <i class="fa fa-check-square-o" id="idone"></i>
+                        </a>
+                        {% endif %}
+
+                        {{ total }}
+                    </div>
+                </ul>
+
+                <div class="clock" style="margin:2em;"></div>
+                <div class="message"></div>
+
+                <script type="text/javascript">
+                    var clock;
+
+                    $(document).ready(function() {
+
+                        clock = $('.clock').FlipClock({
+                            clockFace: 'HourlyCounter'
+                        });
+                    });
+                </script>
+
+
+                <hr/>
+
+
+
+                <!--HISTORY -->
+
+                <a href="#" class=" text-left  history" data-toggle="modal" data-target="#myModal2" style="">
+                    <button class="btn btn-blue btn-block text-left">
+                        <i class="fa-history  pull-right"></i>
+                        <span>{{ lang.history }}</span>
+                    </button>
+                </a>
+
+                <a href="{{ helper.uri.url('management/pm_issues/manage', item.pm_issue_id) }}"  style="background-color:{{ item.priority }}; ">
+                     <button class="btn btn-blue btn-block text-left">
+                        <i class="fa-pencil  pull-right"></i>
+                        <span>{{ lang.edit_issue }}</span>
+                     </button>
+                </a>
+
+                <hr/>
+
+                <div class="panel panel-color">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" style="color:black;float: left;">{{ lang.assigned_to }}</h3>
+                    </div>
+
+                    <div class="panel-body">
+                        <table class="table table-condensed">
+                            <thead>
+                            <tr>
+                                <th>{{ lang.name }}</th>
+                                <th>{{ lang.date }}</th>
+                            </tr>
+                            </thead>
+
+                            <tbody class="middle-align">
+                            {% for item in assigned %}
+                            <tr>
+                                <td><a href="#" class="operation" data-toggle="modal" data-target="#operations" data-id="{{ item.to_user_id }}">{{ item.to_user }}</a></td>
+                                <td>{{ item.datetime }}</td>
+
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <div class="col-sm-9">
+
+            <!----- DESCRIPTION ---->
+
+             <div class="panel panel-color panel-gray">
+                <div class="panel-heading" style="background-color:{{ item.priority }}; ">
+                    <h3 class="panel-title" style="color:white;float: left;">{{ item.title }}</h3>
+                </div>
+
+                <div class="panel-body">
+                    {{ item.description }}
+
+                </div>
+            </div>
+
+            <!-- <blockquote class="blockquote blockquote-info" style ="border-color:{{ item.priority }};">
+                <p>
+                    <strong style="color:{{ item.priority }};">{{ item.title }}</strong>
+                </p>
+                <p>
+                    <small>{{ item.description }} </small>
+                </p>
+            </blockquote> -->
+
+            <!----- ATTACHMENTS ---->
+
+             <div class="panel panel-color">
+                <div class="panel-heading" style="">
+                    <h3 class="panel-title" style="color:black;float: left;">{{ lang.attachments }}</h3>
+                </div>
+
+                <div class="panel-body">
+                <table class="table table-bordered table-striped" id="">
+                <thead>
+                <tr>
+
+                    <th>{{ lang.file_name }}</th>
+                    <th>{{ lang.download }}</th>
+                </tr>
+                </thead>
+
+                <tbody class="middle-align">
+
+                {% for attach in attach %}
+
+                    <tr class="delete-row_{{ attach.pm_attachment_id }}">
+                        <td>{{ attach.file_name }}</td>
+                        <td>
+                            <a href="{{ helper.uri.cdn('/pm/',attach.file_name ) }}" class="btn btn-icon btn-blue"
+                               style="background-color:{{ item.priority }}; ">
+                                <i class="fa fa-download"></i>
+                            </a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+                </div>
+            </div>
+
+                 <!------ THE COMMENT ---->
+
+            <div>
+                <form method="post" action="" class="profile-post-form" id="formcomment">
+                    <textarea class="form-control input-unstyled input-lg autogrow comment_area" placeholder="What's on your mind?" name="comment"></textarea>
+                    <i class="el-edit block-icon"></i>
+
+                    <ul class="list-unstyled list-inline form-action-buttons">
+                        <li>
+                            <button type="button" class="btn btn-unstyled comment_attach_file">
+                                <i class="el-attach"></i>
+                            </button>
+                        </li>
+                    </ul>
+                    <input type="file" name="file" style="display: none" class="comment_attach_file_input"/>
+                    <span class="comment_attach_file_name"></span>
+                    <button type="submit" class="btn btn-single btn-xs btn-success post-story-button">Post</button>
+                </form>
+
+
+                <section class="user-timeline-stories" style="width:100%;">
+                    {% for comment in comments %}
+                    <!-- THE COMMENT STORY -->
+                    <article class="timeline-story" style="width:100%;">
+
+                        <i class="fa-paper-plane-empty block-icon"></i>
+
+
+                        <header>
+
+                            <a href="#" class="user-img">
+                                <img src="{{ helper.uri.cdn('users', input.cookie('image')) }}" alt="user-img" class="img-responsive img-circle">
+                            </a>
+
+                            <div class="user-details">
+                                <a href="#">{{ comment.username }}</a> posted a comment <a href="#">update</a>.
+                                <time>{{ comment.time }}</time>
+                            </div>
+
+                        </header>
+
+                        <div class="story-content parent_comment">
+
+                            <p>{{ comment.comment }}</p>
+
+
+                            <div class="story-options-links">
+                                <a href="#">
+                                    <i class="linecons-comment"></i>
+                                    Replies
+                                    <span>(5)</span>
+                                </a>
+                            </div>
+                    <!---Replies---->
+
+                            <!-- REPLIES -->
+                            <ul class="list-unstyled story-comments">
+                                {% for reply in comment_model.replies(comment.pm_comment_id) %}
+                                <li class="replies_append delete_comment">
+
+                                    <div class="story-comment" id="">
+                                        <a href="#" class="comment-user-img">
+                                            <img src="{{ helper.uri.cdn('users', input.cookie('image')) }}" alt="user-img" class="img-circle img-responsive">
+                                        </a>
+
+                                        <div class="story-comment-content">
+                                            <a href="#" class="story-comment-user-name">
+                                                {{ reply.username }}
+                                                <time>{{ reply.time }}</time>
+                                            </a>
+
+                                            <p>{{ reply.comment }}</p>
+                                            <span style ="float:right;"><a onclick="$(this).delete_comment({{ item.pm_comment_id }});return false;" class="left effect shadow delete-button" href="#">
+                                                    <i class="fa fa-close" style="color:#DDDDDD;"></i>
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </li>
+                                {% endfor %}
+                            </ul>
+
+
+                            <form method="post" action="" class="story-comment-form" id="formreply">
+                                <input type="hidden" name="parent" value="{{ comment.pm_comment_id }}">
+                                <textarea class="form-control input-unstyled autogrow replies_com" placeholder="Reply..." name="comment" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 58px;"></textarea>
+                            </form>
+                        </div>
+
+                    </article>
+            {% endfor %}
+                </section>
+
+
+
+            </div>
+
+                 <!-- End Comment-->
+        </div>
+
+    </div>
+
+</section>
+
+<!--- History Modal -->
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-dialog">
+        </div>
+    </div>
+</div>
+
+<!-- Operations Modal -->
+
+<div class="modal fade" id="operations" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-dialog">
+        </div>
+    </div>
+</div>
+
+
+<link rel="stylesheet" href="{{ constant('STYLE_CSS') }}/fonts/elusive/css/elusive.css">
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $('#formcomment').submit(function(){
+        $.post(site_url + '/management/pm_issue_details/addcomments/{{ item.pm_issue_id }}', $(this).serialize(), function(response){
+            response = $.parseJSON(response);
+            $('.comment_attach_file_name').html('');
+            $('.comment_area').val('');
+            $('.user-timeline-stories').append('<article class="timeline-story"  style="width:100%;>' +
+                    '<i class="fa-paper-plane-empty block-icon"></i>' +
+                    '<header>' +
+                    '<a href="#" class="user-img">' +
+                    '<img src="{{ helper.uri.cdn('users', input.cookie('image')) }}" alt="user-img" class="img-responsive img-circle">' +
+                    '</a>' +
+                    '<div class="user-details">' +
+                    '<a href="#">' + response.item.username + '</a>'+
+                    '<time>' + response.item.time + '</time>' +
+                    '</div>' +
+                    '</header>' +
+                    '<div class="story-content parent_comment">' +
+                    '<p>' + response.item.comment + '</p>' +
+                    '<form method="post" action="" class="story-comment-form" id="formreply">' +
+                    '<textarea class="form-control input-unstyled autogrow" placeholder="Reply..." name="comment" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 58px;"></textarea>' +
+                    '</form>' +
+                    '</div>' +
+                    '</article>');
+        });
+
+        return false;
+    });
+
+
+    $('.comment_attach_file').click(function(){
+        $('.comment_attach_file_input').click();
+    });
+    $('.comment_attach_file_input').change(function(){
+        $('.comment_attach_file_name').html($(this).val());
+    });
+
+});
+
+$(document).ready(function(){
+    $('#formreply').keypress(function (e) {
+        if (e.which == 13) {
+            $.post(site_url + '/management/pm_issue_details/addcomments/{{ item.pm_issue_id }}', $(this).serialize(), function(res) {
+                res = $.parseJSON(res);
+                $('.replies_com').val('');
+                $('.replies_append').append('<li class="replies_append">' +
+                        '<div class="story-comment" id="">' +
+                        '<a href="#" class="comment-user-img">' +
+                        '<img src="{{ helper.uri.cdn('users', input.cookie('image')) }}" alt="user-img" class="img-circle img-responsive">'+
+                        '</a>' +
+                        '<div class="story-comment-content">' +
+                        '<a href="#" class="story-comment-user-name">' + res.reply.username +
+                        '<time>' + res.reply.time +'</time>' +
+                        '</a>' +
+                        '<p>' + res.reply.comment + '</p>' +
+                        {#<!--'<span style ="float:right;"><a onclick="$(this).delete_comment('{{ item.om_comment_id }}');return false;" class="left effect shadow delete_comment" href="#">' +-->#}
+                        '<i class="fa fa-close" style="color:#DDDDDD;"></i>' +
+                        '</a>' +
+                        '</span>' +
+                        '</div>' +
+                        '</div>' +
+                        '</li>' );
+
+            });
+        }
+    });
+});
+
+{#jQuery.fn.delete_comment = function (id) {#}
+    {#var that = $(this);#}
+    {#callBack: $('#delete-button').keypress(function (e) {#}
+                {#$.post(site_url + '/management/pm_issue_details/delete/{{ item.pm_comment_id }}', {#}
+                    {#remove: id#}
+                {#}, function (data) {#}
+                    {#if (data.status == 'done') {#}
+                        {#that.parents('.replies_append').remove();#}
+                    {#}#}
+                {#}, 'json');#}
+            {#});#}
+
+{#}#}
+
+
+$('.history').click(function () {
+
+    $.get('{{ helper.uri.url('management/pm_issue_details/history/',item.pm_issue_id ) }}' + $(this).attr('rel'), function (data) {
+
+             $('.modal-dialog').html(data);
+    });
+
+});
+
+$('.operation').click(function () {
+
+    $.get('{{ helper.uri.url('management/pm_issue_details/operations/',item.pm_issue_id ) }}/' + $(this).data('id'), function (data) {
+
+        $('.modal-dialog').html(data);
+    });
+
+});
+
+
+
+// Issue Activities
+    $('.actions').click(function (){
+        $.post(site_url + '/management/pm_issue_details/activities/{{ item.pm_issue_id }}',
+                {actions: $(this).data('actions')}, function(response){
+                    response = $.parseJSON(response);
+
+
+        });
+        return false;
+    });
+
+//$(document).ready(function(){
+//    $("#play").click(function(){
+//        $('#iplay').toggleClass(".fa-pause")
+//
+//    });
+//
+//});
+//    (function(){
+//        var i = 0;
+//        function stop(){
+//            clearTimeout(i);
+//        }
+//
+//        function start(){
+//            i = setTimeout( timed, 1000 );
+//        }
+//
+//        function timed(){
+//            document.getElementById("timer").value++;
+//            start();
+//        }
+//
+//        window.pause = stop;
+//        window.play = start;
+//    })()
+
+
+
+</script>
+
+<link rel="stylesheet" href="{{ constant('STYLE_JS') }}/flipclock.css">
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script src="{{ constant('STYLE_JS') }}/flipclock.js"></script>

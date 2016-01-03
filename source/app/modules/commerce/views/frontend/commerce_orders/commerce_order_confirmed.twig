@@ -1,0 +1,28 @@
+<section class="order_confirmed-page">
+    <div class="container">
+        <div class="confirmed-order">
+            <span>
+                <img src="{{ constant("STYLE_IMAGES") }}/order.png">
+                Thank you, Your Order is Confirmed check your 
+                <a href="{{ helper.uri.url('commerce_orders/my_orders' ) }}">Order List</a>
+            </span>
+        </div>
+    </div>
+</section>
+
+<style>
+    .order_confirmed-page{
+        margin-top: 100px;
+    }
+    .confirmed-order{
+        padding: 80px 0;
+        text-align: center;
+    }
+    .confirmed-order span{
+        color: #333;
+        font-weight: bold;
+    }
+    .confirmed-order img{
+        width:20px;
+    }
+</style>

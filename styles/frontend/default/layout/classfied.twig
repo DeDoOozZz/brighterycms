@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ config.get('title') }}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" value="{{ config.get('keywords') }}" />
+        <meta name="description" value="{{ config.get('description') }}" />
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" type='text/css'>
+
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/bootstrap.min.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/font-awesome.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/style.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/classfied_style.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/responsive.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/classfied_responsive.css" media="screen">
+
+        <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.min.js"></script>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+        <!-- For Home SEARCH  -->
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/bootstrap.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script>
+            $(function () {
+                var availableTags = [
+                    "مصمم شبكات",
+                    "مبرمج"
+                ];
+                $("#tags").autocomplete({
+                    source: availableTags
+                });
+            });
+        </script>
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5644e017f592986d" async="async"></script>
+    </head>
+    <body>
+        <div id="container">
+            <!-- Header
+                ================================================== -->
+            <header class="clearfix">
+                <div class="container">
+                    <nav class="navbar navbar-default">
+                        <div class="top-line-header">
+                            <div class="header-container">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <a class="navbar-brand" href="{{ helper.uri.url('classfied_home' ) }}"><img src="{{ constant("STYLE_IMAGES") }}/classfied_logo.png" alt=""></a>
+                                    </div>	
+
+                                    <div class="col-sm-5" style="float: left;">
+                                        <div class="ui-widget">
+                                            <form action="{{ helper.uri.url('classfied_search') }}">
+                                            <i class="fa fa-search icon-search-home"></i>
+                                            <input id="tags" name="q">
+                                            <input type="submit" style="display: none" />
+                                            </form>
+                                        </div>
+                                        <span class="search-hint">مثال: مدينه: القاهره - او وظيفة: مصمم شبكات</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+            <div class="responsive_header">
+                <div class="res-logo">
+                    <a href="{{ helper.uri.url('classfied_home' ) }}"><img src="{{ constant("STYLE_IMAGES") }}/classfied_logo.png" alt=""></a>
+                </div>	
+                <div class="res-menu-button">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <div class="res-dropdown-menu">
+                    <ul>
+                        {% for category in _data.categories %}
+                            <li class="col-sm-2"><a href="{{ helper.uri.url('classfied_category/index', category.classfied_category_id ) }}"><img src="{{ helper.uri.cdn('classfied', category.icon) }}"> {{category.name}} ({{category.total_vacancies}})</a>  </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <!-- End Header -->
+            <div class="main-page-home">
+
+                <div class="home-search">
+                    <div class="container">
+                        <div class="col-sm-5 float_responsive">
+                            <ul class="nav">
+                                <li><a href="{{ helper.uri.url('page/tips' ) }}">نصائح الزوار</a></li>
+                                <li><a href="{{ helper.uri.url('page/about')}}">عن وظائف</a></li>
+                                <li><a href="{{ helper.uri.url('contactus' ) }}">للإتصال بنا</a></li>
+                                <li><a href="{{ helper.uri.url('faqs')}}">اسئلة متكررة</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-7 float_responsive-link">
+                            <a href="{{ helper.uri.url('classfied_post_job' ) }}" class="post-job-link"> <i class="fa fa-bullhorn"></i> اعلن عن وظيفتك مجاناً </a>
+                            <a href="{{ helper.uri.url('classfied_post_job' ) }}" class="post-job-link-responsive"> <i class="fa fa-bullhorn"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="all-job-categories">
+                    <div class="container">
+                        <ul class="col-sm-12">
+                            {% for category in _data.categories %}
+                                <li class="col-sm-2"><a href="{{ helper.uri.url('classfied_category/index', category.classfied_category_id ) }}"><img src="{{ helper.uri.cdn('classfied', category.icon) }}"> {{category.name}}  ({{category.total_vacancies}})</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="list-jobs">
+                    <div class="container">
+                        <div class="google-announcement">
+
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <!-- wza2ef -->
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-client="ca-pub-2178725799240442"
+                                 data-ad-slot="4745084170"
+                                 data-ad-format="auto"></ins>
+                            <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+                        {layout}
+                        <div class="col-sm-2 main-annnouncement-blocks">
+                            <div class="row announce_block">
+                                <div class="all-job-categories">
+                                    <ul>
+                                        {% for country in _data.countries %}
+                                            <li>{{country.name}}<span> ({{country.total_vacancies}})</span></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row announce_block">
+                                <a class="announce-image" href="#"><img src="images/1.jpg"></a>
+                                <a class="announce-title" href="#">وظائف في مجال النفطو الغاز</a>
+                                <p>مطلوبع وجه السرعه وظائف في مجال كذا . ارجو تسجيل السيرة الذاتية على</p>
+                            </div>
+                            <div class="row announce_block">
+                                <a class="announce-image" href="#"><img src="images/1.jpg"></a>
+                                <a class="announce-title" href="#">وظائف في مجال النفطو الغاز</a>
+                                <p>مطلوبع وجه السرعه وظائف في مجال كذا . ارجو تسجيل السيرة الذاتية على</p>
+                            </div>
+                            <div class="row announce_block">
+                                <a class="announce-image" href="#"><img src="images/1.jpg"></a>
+                                <a class="announce-title" href="#">وظائف في مجال النفطو الغاز</a>
+                                <p>مطلوبع وجه السرعه وظائف في مجال كذا . ارجو تسجيل السيرة الذاتية على</p>
+                            </div>
+                            <div class="row announce_block">
+                                <a class="announce-image" href="#"><img src="images/1.jpg"></a>
+                                <a class="announce-title" href="#">وظائف في مجال النفطو الغاز</a>
+                                <p>مطلوبع وجه السرعه وظائف في مجال كذا . ارجو تسجيل السيرة الذاتية على</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- FOOTER
+        ================================================== -->
+        <footer>
+            <div class="container">
+                <div class="col-sm-3">
+                    <h4>الاتصال بنا</h4>
+                    <span class="footer-contactus"><i class="fa fa-map-marker"></i> 13 كلام كلام كلام كلام كلام </span>
+                    <span class="footer-contactus"><i class="fa fa-phone-square"></i> (+20)115898574 </span>
+                    <ul class="social-links">
+                        <li><a href="#" class="fb-link"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#" class="tw-link"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#" class="google-link"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#" class="ln-link"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <h4>استخدم</h4>
+                    <ul class="footer-public-links">
+                        <li><a href="{{ helper.uri.url('classfied_post_job' ) }}">أعلن عن وظيفتك مجاناً</a></li>
+                        <li><a href="#">وظائف على موقعك</a></li>
+                        <li><a href="#">خلاصة الوظائف RSS</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <h4>إبحث عن المزيد</h4>
+                    <ul class="footer-public-links">
+                        <li><a href="{{ helper.uri.url('page/about')}}">عن موقع وظائف</a></li>
+                        <li><a href="{{ helper.uri.url('contactus')}}">للإتصال بنا</a></li>
+                        <li><a href="{{ helper.uri.url('faqs')}}">أسئلة متكررة</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-3">
+                    <h4>متنوعات</h4>
+                    <ul class="footer-public-links">
+                        <li><a href="#">شركات و مؤسسات</a></li>
+                        <li><a href="#">شاهد كافة الدول</a></li>
+                        <li><a href="#">خارطة الموقع</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <p class="copyrights">
+                &copy; الحقوق محفوظ  <a href="http://www.wza2ef.com/">WZA2EF.COM</a>.
+            </p>
+        </footer>
+        <!-- End FOOTER -->
+        <script>
+            $(document).ready(function () {
+
+                $(".res-menu-button").click(function () {
+                    $(".res-dropdown-menu").toggle();
+                });
+                $(".res-has-sub").click(function () {
+                    $(".res-sub-menu").toggle();
+                });
+                $(".has-sub-category").click(function () {
+                    $(this).find(".dropdown-submenu").toggle();
+                });
+                $(".has_sub_submenu").hover(function () {
+                    $(".sub_submenu").show();
+                });
+
+
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,206 @@
+{# Page search #}
+<div class="page-error-search">
+    <form class="form-half" method="get" action="" enctype="application/x-www-form-urlencoded">
+            <input type="text" class="form-control" placeholder="Search..." />
+
+            <button type="submit" class="btn-unstyled">
+                    <i class="linecons-search"></i>
+            </button>
+    </form>
+</div>
+<br><br>
+<section class="gallery-env">
+
+    <div class="row">
+
+    {#   Start Module Content   #}
+        <div class="col-sm-9 gallery-right">
+
+        {# Start Module Header #}
+            <div class="album-header">
+                <h2>Modules</h2>
+
+                <ul class="album-options list-unstyled list-inline">
+                    <li>
+                        <a href="#">
+                            <i class="fa-trophy"></i>
+                            Top
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa-briefcase"></i>
+                            New
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class=" fa-money"></i>
+                            Paid
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa-gittip"></i>
+                            Free
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        {# End Module Header #}
+
+
+        {#   Strat Module Body     #}
+            <div class="album-images row">
+
+                <!-- Module Block -->
+                <div class="col-md-3 col-sm-4 col-xs-6">
+                    <div class="album-image">
+                        <a href="{{ helper.uri.url('management/modules_store/single_module') }}" class="thumb" data-action="edit">
+                            <img src="{{ constant("STYLE_IMAGES") }}/marwa.jpg" class="img-responsive" />
+                        </a>
+
+                        <a href="{{ helper.uri.url('management/modules_store/single_module') }}" class="name">
+                            <span>Module Name</span>
+                        </a>
+                        <span class="name">
+                            <i class="choosen_review">&#9733;</i>
+                            <i class="choosen_review">&#9733;</i>
+                            <i class="choosen_review">&#9733;</i>
+                            <i class="notchoosen_review">&#9734;</i>
+                            <i class="notchoosen_review">&#9734;</i>
+                        </span>
+                        
+                         <span class="store_block_option">
+                            <i class="fa-gittip"></i>
+                            Free
+                        </span>
+                    </div>
+                </div>
+                        
+                <!-- Module Block -->
+                <div class="col-md-3 col-sm-4 col-xs-6">
+                    <div class="album-image inistalled">
+                        <a href="#" class="thumb" data-action="edit">
+                            <img src="{{ constant("STYLE_IMAGES") }}/marwa.jpg" class="img-responsive" />
+                        </a>
+
+                        <a href="#" class="name">
+                            <span>Module Name</span>
+                        </a>
+                        
+                        <span class="name">
+                            <i class="choosen_review">&#9733;</i>
+                            <i class="choosen_review">&#9733;</i>
+                            <i class="choosen_review">&#9733;</i>
+                            <i class="notchoosen_review">&#9734;</i>
+                            <i class="notchoosen_review">&#9734;</i>
+                        </span>
+                        
+                        <span class="store_block_option">
+                            <i class="fa-check-square"></i>
+                            Installed
+                        </span>
+                    </div>
+                </div>
+                <!-- Module Block -->
+                <div class="col-md-3 col-sm-4 col-xs-6">
+                    <div class="album-image">
+                        <a href="#" class="thumb" data-action="edit">
+                            <img src="{{ constant("STYLE_IMAGES") }}/marwa.jpg" class="img-responsive" />
+                        </a>
+
+                        <a href="#" class="name">
+                            <span>Module Name</span>  
+                        </a>
+                        <span class="name">
+                            <i class="choosen_review">&#9733;</i>
+                            <i class="choosen_review">&#9733;</i>
+                            <i class="choosen_review">&#9733;</i>
+                            <i class="notchoosen_review">&#9734;</i>
+                            <i class="notchoosen_review">&#9734;</i>
+                        </span>
+                        
+                        <span class="store_block_option">
+                            <i class="fa-money"></i>
+                            2000$
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+            {#  load mor reviews  #}
+            <button class="btn btn-white btn-block load_more">
+                <i class="fa-bars"></i>
+                Load More Images
+            </button>
+    {# Enfd Module Body   #}
+        </div>
+    
+
+        <!-- Modules Sidebar -->
+        <div class="col-sm-3 gallery-left">
+
+            <div class="gallery-sidebar">
+                
+                <ul class="sidebar_store_list">
+                    <li>
+                       <a href="#" class="balance_store">
+                            <i class="fa-money"></i>
+                            <span>Balance</span>
+                            <span class="badge badge-white badge-money">3000$</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="wishlist_store">
+                            <i class="fa-heart"></i>
+                            <span>Wishlist</span> 
+                            <span class="badge badge-white bage_wishlist">4</span> 
+                        </a>
+                    </li>
+                </ul>
+              
+                <ul class="list-unstyled">
+                    <li class="active">
+                        <a href="#">
+                            <i class="fa-stethoscope"></i>
+                            <span>Medical</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa-folder-o"></i>
+                            <span>Category2</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa-folder-o"></i>
+                            <span>Category3</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{#<script src="{{ constant('STYLE_JS') }}/bootstrap.min.js"></script>
+<script src="{{ constant('STYLE_JS') }}/TweenMax.min.js"></script>
+<script src="{{ constant('STYLE_JS') }}/resizeable.js"></script>
+<script src="{{ constant('STYLE_JS') }}/joinable.js"></script>
+<script src="{{ constant('STYLE_JS') }}/xenon-api.js"></script>
+<script src="{{ constant('STYLE_JS') }}/xenon-toggles.js"></script>
+
+
+<!-- Imported scripts on this page -->
+<script src="{{ constant('STYLE_JS') }}/jquery-ui/jquery-ui.min.js"></script>
+
+
+<!-- JavaScripts initializations and stuff -->
+<script src="{{ constant('STYLE_JS') }}/xenon-custom.js"></script>#}

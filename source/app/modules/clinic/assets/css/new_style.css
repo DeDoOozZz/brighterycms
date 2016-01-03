@@ -1,0 +1,387 @@
+body {
+    margin: 0;
+    color:#555;
+    background-color: #fff;
+}
+span{
+    color:#888;
+}
+ul{
+    padding: 0;
+    margin: 0;
+}
+li{
+    list-style: none;
+}
+header {
+    float: left;
+    width: 100%;
+}
+.sub-header{
+    padding: 10px 20px;
+}
+.welcome-screen-logo{
+    height: 30px;
+}
+.welcome-screen-logo img{
+    height:100%;
+}
+.reservation-calender {
+    border: 3px solid #333;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+.for-calender-right, .for-calender-left{
+    position: absolute;
+    top: -10px;
+    height: 20px;
+}
+.for-calender-right{
+    right: 5px; 
+}
+.for-calender-left{
+    left: 5px;
+}
+.reservation-calender span{
+    display: block;
+}
+.calender-month{
+    background-color: #3ca832;
+    color:#fff;
+    padding: 5px;
+    text-align: center;
+    font-size: 16px;
+}
+.calender-day {
+    text-align: center;
+    color: #333 !important;
+    font-size: 20px;
+    padding: 0 5px;
+}
+.calender-year {
+    color: #333 !important;
+    padding: 5px 10px;
+    padding-top: 0;
+}
+.container {
+    float: left;
+    width: 100%;
+}
+.sub-container{
+    margin: 20px;
+}
+.reservation-note {
+    margin: 20px 0;
+    background-color: #C00A26;
+    color: #FFF;
+    border-radius: 10px;
+    padding-bottom: 10px;
+}
+.reservation-note h2 {
+    background-color: #FFF;
+    color: #353534;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    border-radius: 0px 0px 10px 10px;
+    padding: 5px 0;
+    font-size: 20px;
+}
+.reservation-note-content {
+    margin: 10px 15px;
+}
+.reservation-note-content span{
+    color: #fff;
+}
+.guide-note {
+    margin: 15px 0px;
+    border-radius: 10px;
+    padding-bottom: 10px;
+    background-color: #2597d8;
+}
+.gide-note h2 {
+    color: #555;
+    font-size: 20px;
+}
+.gide-note-content {
+    margin: 10px;
+}
+.gide-note-content .gide{
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    border: 2px solid #fff;
+    margin-right: 5px;
+}
+.gide-note-content span{
+    color:#fff;
+}
+.attend{
+    background-color:#5ca323;
+}
+.entered{
+    background-color:#ffab00;
+}
+.late{
+    background-color:#e74c3c;
+}
+
+.patient_list {
+    float: left;
+    width: 64%;
+    margin-right: 5%
+}
+.right-side {
+    width: 29%;
+    float: left;
+}
+.late-patients {
+    background-color: #F2F2F2;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    padding-top:10px;
+}
+.late-patients h2 {
+    text-align: center;
+    color: #353534;
+    position: relative;
+    width: 300px;
+    margin: auto;
+    font-size: 20px;
+    padding: 15px 0px;
+}
+.late-patients h2 img {
+    position: absolute;
+    left: 0px;
+    width: 30px;
+    top: 7px;
+}
+.late-patients > ul {
+    width: 80%;
+    margin: 10px auto;
+}
+.late-patients > ul > li {
+    position: relative;
+    margin-bottom: 20px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 10px;
+}
+.late-patients .patient-icon-span.late {
+    width: 40px;
+    height: 40px;
+    top: -5px;
+}
+.entered{
+    background-color: #ffab00 !important;
+    color:#fff !important;
+}
+.late{
+    background-color: #e74c3c !important;
+    color: #fff !important; 
+}
+.patient_list_title {
+    color: #555;
+    text-align: center;
+    font-size: 20px;
+    width: 40%;
+    margin: auto;
+    background-color: #F2F2F2;
+    padding: 20px 0px 0px;
+    border-radius: 10px 10px 0px 0px;
+    height: 33px;
+}
+.main-late-patient .patient_list_title{
+    width: 60%;
+}
+.patient_list_title span {
+    background-color: #FFF;
+    padding: 6px 25px;
+    border-radius: 10px;
+    color: #353534;
+}
+.all_patient_list {
+    background-color: #F2F2F2;
+    border-radius: 10px;
+    padding: 10px;
+}
+.patient_list_header, .list-patient {
+    width: 70%;
+    margin: auto;
+}
+.patient_list_header {
+    margin: 10px auto 20px auto;
+}
+
+.patient_list_header li, .list-patient li{
+    text-align: center;
+    position: relative;
+    border-radius: 20px;
+    background-color: #353534;
+    border: 3px solid #fff;
+    line-height: 30px;
+    color:#fff;
+    margin-bottom: 15px;
+}
+.list-patient li{
+
+}
+.late-patient{
+    background-color: #c00a26 !important;
+}
+.attend-patient{
+    background-color: #f39200 !important;
+}
+.entered-patient{
+    background-color: #57a432 !important;
+}
+.patients-will-attend li{
+    background-color: #fff !important;
+}
+.patient_list_header li > span {
+    position: absolute;
+    z-index: 99;
+    top: -8px;
+    left: -11px;
+    color: #FFF;
+    background-color: #353534;
+    border: 3px solid #FFF;
+    border-radius: 100%;
+    width: 45px;
+    height: 45px;
+}
+.patient_list_header li > span > span {
+    padding: 5px 11px;
+    display: block;
+    color: #FFF;
+    text-align: center;
+}
+.patient-list-icon {
+    position: absolute;
+    left: -4px;
+    top: -18px;
+}
+.patient-number {
+    position: absolute;
+    color: #FFF;
+    left: -4px;
+    z-index: 999;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+}
+.patient-in-list {
+    position: absolute;
+    right: -2px;
+    top: -4px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #353534;
+    border-radius: 100%;
+    background-image: url(../images/icons-01.png);
+    background-size: 100% 100%;
+}
+.entered-patient .patient-list-icon {
+    top: -7px;
+}
+.attend-patient .patient-list-icon {
+    top: -10px;
+    left: -9px;
+}
+.patient-icon-span {
+    background-color: #353534;
+    width: 47px;
+    height: 47px;
+    border-radius: 100%;
+    position: absolute;
+    left: -3px;
+    top: -6px;
+}
+.patient-icon-span span {
+    color: #FFF;
+    display: block;
+    text-align: center;
+    width: 100%;
+    top: 6px;
+    position: absolute;
+}
+.patient-icon-span.late{
+    background-color: #C00A26 !important;
+}
+
+/* MUHAMMAD'S CODE */
+.patient-icon {
+    background-color: #353534;
+    width: 47px;
+    height: 47px;
+    border-radius: 100%;
+    position: absolute;
+    left: -3px;
+    top: -6px;
+}
+.patient-icon span{
+    color: #FFF;
+    display: block;
+    text-align: center;
+    width: 100%;
+    top: 6px;
+    position: absolute;
+}
+/** LATE **/
+.patients-will-attend .late{
+    background-color: #c00a26 !important;
+}
+.late .patient-icon {
+    background: transparent url("../images/icons2.png") repeat scroll 0% 0%;
+    width: 38px;
+    position: absolute;
+    top: -13px;
+    border-radius: 0px;
+    left: -2px;
+    height: 47px;
+}
+.late .patient-icon span {
+    top: 12px;
+    left: 1px;
+    color:#c00a26 !important;
+}
+/* ATTEND */
+.patients-will-attend .attend{
+    background-color: #57a432 !important;
+}
+.attend .patient-icon {
+    width: 45px;
+    top: -8px;
+    background: transparent url("../images/icons3.png") repeat scroll 0% 0%;
+    border-radius: 0px;
+}
+/** WAIT **/
+.patients-will-attend .wait{
+    background-color: #f39200 !important;
+}
+.wait .patient-icon {
+    background: transparent url("../images/icons4.png") repeat scroll 0% 0%;
+    width: 45px;
+    height: 46px;
+    position: absolute;
+    top: -7px;
+    left: -7px;
+    border-radius: 0px;
+}
+.wait .patient-icon span{
+    top: 10px;
+}
+/** NORMAL **/
+.patients-will-attend .normal{
+    background-color: #353534 !important;
+}
+.normal .patient-icon {
+    width: 42px;
+    top: -7px;
+    background: #333;
+    border-radius: 0px;
+    border-radius: 100%;
+    border-right: 4px solid #fff;
+    height: 42px;
+}

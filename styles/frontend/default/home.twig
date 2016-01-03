@@ -1,0 +1,229 @@
+<!-- home-section 
+        ================================================== -->
+<section id="home-section" class="slider1">
+
+    <!--
+    #################################
+            - THEMEPUNCH BANNER -
+    #################################
+    -->
+    <div class="tp-banner-container">
+        <div class="tp-banner" >
+            <ul><!-- SLIDE  -->
+                {% for item in slides %}  
+                    <li data-transition="fade" data-slotamount="7" data-masterspeed="500" data-saveperformance="on"  data-title="Intro Slide">
+                        <!-- MAIN IMAGE -->
+                        <img src="{{ constant("STYLE_IMAGES") }}/upload/slide/1.jpg"  alt="slidebg1" data-lazyload="{{ constant("STYLE_IMAGES") }}/upload/slide/1.jpg" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+                        <!-- LAYERS -->
+
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption finewide_medium_white lfl tp-resizeme rs-parallaxlevel-0"
+                             data-x="0"
+                             data-y="280" 
+                             data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                             data-speed="500"
+                             data-start="1200"
+                             data-easing="Power3.easeInOut"
+                             data-splitin="none"
+                             data-splitout="none"
+                             data-elementdelay="0.1"
+                             data-endelementdelay="0.1"
+                             style="z-index: 8; max-width: auto; max-height: auto; white-space: nowrap;  right: 104.5px; "><br><span>{{item.title}}</span> <br>
+                        </div>
+
+                        <!-- LAYER NR. 2 -->
+                        <div class="tp-caption small_text customin tp-resizeme rs-parallaxlevel-0"
+                             data-x="0"
+                             data-y="400" 
+                             data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                             data-speed="500"
+                             data-start="1800"
+                             data-easing="Power3.easeInOut"
+                             data-splitin="none"
+                             data-splitout="none"
+                             data-elementdelay="0.05"
+                             data-endelementdelay="0.1"
+                             style="z-index: 7; max-width: auto; max-height: auto; white-space: nowrap; right: 104.5px;">{{item.caprion}}
+                        </div>
+
+                        <!-- LAYER NR. 3 -->
+                        <div class="tp-caption lfl tp-resizeme rs-parallaxlevel-0"
+                             data-x="0"
+                             data-y="510" 
+                             data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                             data-speed="500"
+                             data-start="2400"
+                             data-easing="Power3.easeInOut"
+                             data-splitin="none"
+                             data-splitout="none"
+                             data-elementdelay="0.1"
+                             data-endelementdelay="0.1"
+                             data-linktoslide="next"
+                             style="z-index: 10; max-width: auto; max-height: auto; white-space: nowrap; right: 104.5px;"><a href="#" class='trans-btn'>{{lang.link}}</a>
+                        </div>
+
+                        <!-- LAYER NR. 4 -->
+                        <div class="tp-caption lfr tp-resizeme rs-parallaxlevel-0"
+                             data-x="200"
+                             data-y="510" 
+                             data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                             data-speed="500"
+                             data-start="2500"
+                             data-easing="Power3.easeInOut"
+                             data-splitin="none"
+                             data-splitout="none"
+                             data-elementdelay="0.1"
+                             data-endelementdelay="0.1"
+                             data-linktoslide="next"
+                             style="z-index: 11; max-width: auto; max-height: auto; white-space: nowrap; right: 304.5px;"><a href='#' class='trans-btn2'>{{lang.link}}</a>
+                        </div>
+                    </li> 
+                {% endfor %}
+            </ul>
+            <div class="tp-bannertimer"></div>
+        </div>
+    </div>
+</section>
+<!-- End home section -->
+
+<!-- banner-section 
+        ================================================== -->
+<section class="banner-section">
+    <div class="container">
+        <h2>All You Need for building Creative &amp; Professional<a href="projects.html" class="button-one">click here</a></h2>
+    </div>
+</section>
+<!-- End banner section -->
+
+<!-- news-section 
+        ================================================== -->
+<section class="news-section">
+    <div class="container">
+        <div class="news-title">
+            <h2>{{lang.our_latest_news}}</h2>
+        </div>
+        <div class="news-box">
+            <div class="row">
+                {% for post in post %} 
+                    <div class="col-md-3 col-sm-6">
+                        <div class="news-post"> 
+                            <img src="{{helper.uri.cdn('blog', post.image )}}" alt="">
+                            <h2><a href="{{ helper.uri.url('blog/post', post.seo) }}">{{post.title}}</a></h2>
+                            <span>{{ post.created|date("d F Y")}}</span></br>
+                            {{post.short_content}}</br>
+                            <a href="{{ helper.uri.url('blog/post', post.seo) }}">Continue Reading...</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- End news section -->
+<!-- testimonial-section 
+        ================================================== -->
+<section class="testimonial-section">
+    <div class="container">
+        <div class="title-section">
+            <h1>{{lang.clients}} <span>{{lang.testimonials}}</span></h1>
+        </div>
+
+        <div class="testimonial-box">
+            <ul class="bxslider">
+                {% for testimonial in testimonial %} 
+                    <li>
+                        <h2>{{testimonial.client_name}}</h2>
+                        <span>{{testimonial.client_position}}</span> </br>
+                        <p>{{testimonial.message}}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- End testimonial section -->
+
+<!-- clients-section 
+        ================================================== -->
+<section class="clients-section">
+    <div class="container">
+        <div class="clients-title">
+            <h2>{{lang.clients}} {{lang.our_parents}}</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <ul class="client-list">
+                    {% for client in client %} 
+                        <li>
+                            <a href="#"><img src="{{ constant("CDN") }}/clients/{{client.image}}" alt=""></a>
+                                {{client.name}}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <blockquote>
+                    <p>There are some of <span>our partners</span> and <span>customers</span>, who are very satisfied with our work. <br>Do you want to be <span>next one</span> ?</p>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End clients section -->
+<script type="text/javascript">
+
+    jQuery(document).ready(function () {
+
+        jQuery('.tp-banner').show().revolution(
+                {
+                    dottedOverlay: "none",
+                    delay: 10000,
+                    startwidth: 1140,
+                    startheight: 700,
+                    hideThumbs: 200,
+                    thumbWidth: 100,
+                    thumbHeight: 50,
+                    thumbAmount: 5,
+                    navigationType: "bullet",
+                    navigationArrows: "none",
+                    touchenabled: "on",
+                    onHoverStop: "off",
+                    swipe_velocity: 0.7,
+                    swipe_min_touches: 1,
+                    swipe_max_touches: 1,
+                    drag_block_vertical: false,
+                    parallax: "mouse",
+                    parallaxBgFreeze: "on",
+                    parallaxLevels: [7, 4, 3, 2, 5, 4, 3, 2, 1, 0],
+                    keyboardNavigation: "off",
+                    navigationHAlign: "center",
+                    navigationVAlign: "bottom",
+                    navigationHOffset: 0,
+                    navigationVOffset: 40,
+                    shadow: 0,
+                    spinner: "spinner4",
+                    stopLoop: "off",
+                    stopAfterLoops: -1,
+                    stopAtSlide: -1,
+                    shuffle: "off",
+                    autoHeight: "off",
+    forceFullWidth: "off",
+                    hideThumbsOnMobile: "off",
+                    hideNavDelayOnMobile: 1500,
+                    hideBulletsOnMobile: "off",
+                    hideArrowsOnMobile: "off",
+                    hideThumbsUnderResolution: 0,
+                    hideSliderAtLimit: 0,
+                    hideCaptionAtLimit: 0,
+                    hideAllCaptionAtLilmit: 0,
+                    startWithSlide: 0,
+                    fullScreenOffsetContainer: ".header"
+                });
+
+    });	//ready
+
+</script>

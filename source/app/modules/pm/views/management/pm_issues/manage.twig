@@ -1,0 +1,364 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ lang.add_new_issue }}</h3>
+            </div>
+            <div class="panel-body">
+                {{ helper.form.open(null,false,true,'role="form" class="form-horizontal" id="fileupload"') }}
+                {{ error }}
+
+                <!---------- PROJECT ------------>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ lang.select_project }}</label>
+
+                    <div class="col-sm-10">
+                        {{ helper.form.dropdown('pm_project_id', pm_projects, helper.form.value('pm_project_id', item.pm_project_id), 'class="form-control select2"') }}
+                    </div>
+                </div>
+
+                <div class="form-group-separator"></div>
+
+                <!---------- ISSUE TYPE ------------>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="field-5">{{ lang.issue_type }}</label>
+
+                    <div class="col-sm-10">
+                        <div>
+                            {{ helper.form.dropdown('pm_issue_type_id', types, helper.form.value('pm_issue_type_id', item.pm_issue_type_id), 'class="form-control select2"') }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group-separator"></div>
+
+                <!---------- Summary ------------>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="title">{{ lang.issue_title }}</label>
+
+                    <div class="col-sm-10">
+                        <input name="title" type="text" class="form-control validate[required]" id="title"
+                               placeholder="{{ lang.title }}" name="title"
+                               value="{{ helper.form.value('title', item.title) }}">
+                    </div>
+                </div>
+
+                <div class="form-group-separator"></div>
+
+                <!---------- PRIORITIES ------------>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ lang.select_priority }}</label>
+
+                    <div class="col-sm-10">
+                        {{ helper.form.dropdown('pm_priority_id', priority, helper.form.value('pm_priority_id', item.pm_priority_id), 'class="form-control select2"') }}
+                    </div>
+                </div>
+
+                <div class="form-group-separator"></div>
+
+                <!---------- Description ------------>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="description">{{ lang.about_issue }}</label>
+
+                    <div class="col-sm-10">
+                        <textarea name="description" class="form-control" id="description"
+                                  placeholder="{{ lang.about_issue }}">{{ helper.form.value('description', item.description) }}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group-separator"></div>
+
+                <!---------- ATTACHMENTS ------------>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="field-4">{{ lang.attachments }}</label>
+
+                    <div class="col-sm-10">
+
+                        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+                        <div class="row fileupload-buttonbar">
+                            <div class="col-lg-9">
+                                <!-- The fileinput-button span is used to style the file input field as button -->
+                <span class="btn btn-success fileinput-button">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>{{ lang.add_files }}</span>
+                    <input type="file" name="files[]" multiple>
+                </span>
+                                <button type="submit" class="btn btn-primary start">
+                                    <i class="glyphicon glyphicon-upload"></i>
+                                    <span>{{ lang.start_upload }}</span>
+                                </button>
+                                <button type="reset" class="btn btn-warning cancel">
+                                    <i class="glyphicon glyphicon-ban-circle"></i>
+                                    <span>{{ lang.cancel_upload }}</span>
+                                </button>
+                                <button type="button" class="btn btn-danger delete">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                    <span>{{ lang.delete }}</span>
+                                </button>
+                                <input type="checkbox" class="toggle">
+                                <!-- The global file processing state -->
+                                <span class="fileupload-process"></span>
+                            </div>
+                            <!-- The global progress state -->
+                            <div class="col-lg-5 fileupload-progress fade">
+                                <!-- The global progress bar -->
+                                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0"
+                                     aria-valuemax="100">
+                                    <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                                </div>
+                                <!-- The extended global progress state -->
+                                <div class="progress-extended">&nbsp;</div>
+                            </div>
+                        </div>
+
+                        <!-- The table listing the files available for upload/download -->
+                        <table role="presentation" class="table table-striped">
+                            <tbody class="files"></tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group-separator"></div>
+
+                <!---------- REVIEWER ------------>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ lang.reviewer }}</label>
+
+                    <div class="col-sm-10">
+                        {{ helper.form.dropdown('pm_reviewer_id', users, helper.form.value('pm_reviewer_id', item.pm_reviewer_id),
+                        'class="form-control select2" ') }}</div>
+                </div>
+
+                <div class="form-group-separator"></div>
+
+                {% if not item.pm_issue_id %}
+                <!---------- Assign To user .. ------------>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ lang.assign }}</label>
+
+                    <div class="col-sm-10">
+                        {{ helper.form.dropdown('to_user_id', users, helper.form.value('to_user_id', assign.assign_to),
+                        'class="form-control select2" ') }}</div>
+                </div>
+
+                <div class="form-group-separator"></div>
+                {% endif %}
+                <!---------- ESTIMATED TIME ------------>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ lang.estimated_time }}</label>
+
+                    <div class="col-sm-10">
+                        <div class="input-group input-group-minimal">
+                            <input type="text" class="form-control timepicker  validate[required]" id="estimated_time"
+                                   data-template="dropdown" data-show-seconds="true" data-minute-step="5"
+                                   data-second-step="5" name="estimated_time"
+                                   value="{{ helper.form.value('estimated_time', item.estimated_time) }}">
+
+                            <div class="input-group-addon">
+                                <a href="#"><i class="linecons-clock"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group-separator"></div>
+
+                <!---------- DEADLINE ------------>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ lang.deadline }}</label>
+
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <input type="text"
+                                   class="form-control datepicker {% if item.pm_issue_id !='' %} validate[required] {% endif %}"
+                                   id="deadline" placeholder="{{ lang.deadline }}" name="deadline"
+                                   value="{{ helper.form.value('deadline', item.deadline) }}">
+
+                            <div class="input-group-addon">
+                                <a href="#"><i class="linecons-calendar"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group-separator"></div>
+
+                <!---------- SUBMIT ------------>
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-secondary">{{ lang.submit }}</button>
+                </div>
+                {{ helper.form.close() }}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="{{ constant('STYLE_JS') }}/select2/select2.min.js"></script>
+<script type="text/javascript">
+
+    $('.datepicker').datepicker({
+        format: 'yyyy/mm/dd',
+        startDate: '-3d'
+    })
+    jQuery(document).ready(function ($) {
+        $("#s2example-1").select2({
+            placeholder: 'Select The Reviewer...',
+            allowClear: true
+        }).on('select2-open', function () {
+            // Adding Custom Scrollbar
+            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+        });
+
+    });
+</script>
+
+
+<!-- The blueimp Gallery widget -->
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
+{% verbatim %}
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td>
+            <span class="preview"></span>
+        </td>
+        <td>
+            <p class="name">{%=file.name%}</p>
+            <strong class="error text-danger"></strong>
+        </td>
+        <td>
+            <p class="size">Processing...</p>
+            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+        </td>
+        <td>
+            {% if (!i && !o.options.autoUpload) { %}
+                <button class="btn btn-primary start" disabled>
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Start</span>
+                </button>
+            {% } %}
+            {% if (!i) { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        <td>
+            <span class="preview">
+                {% if (file.thumbnailUrl) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                    <input type="hidden" name="uploaded_files[]" value="{%=file.name%}" />
+                {% } %}
+            </span>
+        </td>
+        <td>
+            <p class="name">
+                {% if (file.url) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                {% } else { %}
+                    <span>{%=file.name%}</span>
+                {% } %}
+            </p>
+            {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+            {% } %}
+        </td>
+        <td>
+            <span class="size">{%=o.formatFileSize(file.size)%}</span>
+        </td>
+        <td>
+            {% if (file.deleteUrl) { %}
+                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Delete</span>
+                </button>
+                <input type="checkbox" name="delete" value="1" class="toggle">
+            {% } else { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>
+
+{% endverbatim %}
+
+<style>
+    .template-download .preview img {
+        width: 200px;
+    }
+</style>
+
+<link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+<link rel="stylesheet" href="{{ constant('STYLE_CSS') }}/file_upload/css/jquery.fileupload.css">
+<link rel="stylesheet" href="{{ constant('STYLE_CSS') }}/file_upload/css/jquery.fileupload-ui.css">
+<!-- CSS adjustments for browsers with JavaScript disabled -->
+<noscript>
+    <link rel="stylesheet" href="{{ constant('STYLE_CSS') }}/file_upload/css/jquery.fileupload-noscript.css">
+</noscript>
+<noscript>
+    <link rel="stylesheet" href="{{ constant('STYLE_CSS') }}/file_upload/css/jquery.fileupload-ui-noscript.css">
+</noscript>
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<script src="{{ constant('STYLE_JS') }}/file_upload/js/vendor/jquery.ui.widget.js"></script>
+<!-- The Templates plugin is included to render the upload/download listings -->
+<script src="//blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+<script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="{{ constant('STYLE_JS') }}/file_upload/js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="{{ constant('STYLE_JS') }}/file_upload/js/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="{{ constant('STYLE_JS') }}/file_upload/js/jquery.fileupload-process.js"></script>
+<!-- The File Upload image preview & resize plugin -->
+<script src="{{ constant('STYLE_JS') }}/file_upload/js/jquery.fileupload-image.js"></script>
+<!-- The File Upload audio preview plugin -->
+<script src="{{ constant('STYLE_JS') }}/file_upload/js/jquery.fileupload-audio.js"></script>
+<!-- The File Upload video preview plugin -->
+<script src="{{ constant('STYLE_JS') }}/file_upload/js/jquery.fileupload-video.js"></script>
+<!-- The File Upload validation plugin -->
+<script src="{{ constant('STYLE_JS') }}/file_upload/js/jquery.fileupload-validate.js"></script>
+<!-- The File Upload user interface plugin -->
+<script src="{{ constant('STYLE_JS') }}/file_upload/js/jquery.fileupload-ui.js"></script>
+<!-- The main application script -->
+<script>
+    $('#fileupload').fileupload({
+        // Uncomment the following to send cross-domain cookies:
+        //xhrFields: {withCredentials: true},
+        url: '{{ helper.uri.url('management/pm_issues/manage_files/', item.pm_issue_id) }}'
+    });
+</script>
+<script src="{{ constant('STYLE_JS') }}/file_upload/js/main.js"></script>
+<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
+<!--[if (gte IE 8)&(lt IE 10)]>
+<script src="{{ constant('STYLE_JS') }}/file_upload/js/cors/jquery.xdr-transport.js"></script>
+<![endif]-->
+

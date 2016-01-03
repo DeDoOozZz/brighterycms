@@ -1,0 +1,265 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.branch }}</h3>
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,true,'role="form" class="form-horizontal"') }}
+        {{ error }} 
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="clinic_branch">{{ lang.name }}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="clinic_branch" placeholder="{{ lang.name }}" name="clinic_branch"
+                       value="{{ helper.form.value('clinic_branch', item.clinic_branch) }}">
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="phone">{{ lang.phone }}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="clinic_branch" placeholder="{{ lang.phone }}" name="phone"
+                       value="{{ helper.form.value('phone', item.phone) }}">
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="address">{{ lang.address }}</label>
+            <div class="col-sm-10">
+                <textarea type="text" class="form-control" id="address" placeholder="{{ lang.address}}" name="address">{{ helper.form.value('address', item.address) }}</textarea>
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="description">{{ lang.description }}</label>
+            <div class="col-sm-10">
+                <textarea type="text" class="form-control" id="description" placeholder="{{ lang.description}}" name="description" >{{ helper.form.value('description', item.description) }}</textarea>
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="map">{{ lang.location }}</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="latitude" placeholder="{{ lang.latitude}}" name="latitude"
+                       value="{{ helper.form.value('latitude', item.latitude) }}">
+            </div>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="longitude" placeholder="{{ lang.longitude}}" name="longitude"
+                       value="{{ helper.form.value('longitude', item.longitude) }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="map"></label>
+            <div class="col-sm-10 ">
+                <div class="gmap full-page-google-map">
+                    <div id="map-1"></div>
+                </div>
+                <div class="map-toolbar">
+                    <div class="row">
+                        <div class="col-sm-4">
+
+                            {#<form role="form" method="post" id="address-search">#}
+                            <div class="input-group input-group-minimal">
+                                <span class="input-group-addon">
+                                    <i class="fa-map-marker"></i>
+                                </span>
+                                <input type="text" class="form-control location_search" placeholder="Enter address">
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-white map-search">{{ lang.search }}</button>
+                                </span>
+                            </div>
+                            {#                            </form>#}
+
+                        </div>
+                        <div class="col-sm-8 text-right">
+
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-white" id="map-unzoom">-</button>
+                                <button type="button" class="btn btn-white" id="map-resetzoom">Reset</button>
+                                <button type="button" class="btn btn-white" id="map-zoom">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-10">
+                <a href="{{ helper.uri.url('management/clinic_branches/index') }}" class="btn btn-danger cancel-button">{{lang.cancel}}</a>
+                <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+            </div>
+        </div>
+        {{ helper.form.close() }}
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($)
+    {
+
+        var map;
+        var geocoder = new google.maps.Geocoder();
+
+        var markers = [];
+        var iterator = 0;
+
+        var berlin = new google.maps.LatLng(52.520816, 13.410186);
+//                stockholm = new google.maps.LatLng(59.32522, 18.07002);
+//
+//        var neighborhoods = [
+//            new google.maps.LatLng(52.511467, 13.447179),
+//            new google.maps.LatLng(52.549061, 13.422975),
+//            new google.maps.LatLng(52.497622, 13.396110),
+//            new google.maps.LatLng(52.517683, 13.394393),
+//            new google.maps.LatLng(52.530843, 13.382721),
+//            new google.maps.LatLng(52.514549, 13.350105),
+//            new google.maps.LatLng(52.534394, 13.340492),
+//        ];
+
+        function initialize()
+        {
+            var mapOptions = {
+                zoom: 12,
+                center: berlin
+            };
+
+            // Calculate Height
+            var el = document.getElementById('map-1'),
+                    doc_height =
+                    $(document).height() - 10 -
+                    $(".main-content > .user-info-navbar").outerHeight() -
+                    $(".main-content > .page-title").outerHeight() -
+                    $(".google-map-env .map-toolbar").outerHeight();
+
+            // Adjust map height to fit the document contianer
+            el.style.height = doc_height + 'px';
+
+            map = new google.maps.Map(el, mapOptions);
+
+//            for (var i = 0; i < neighborhoods.length; i++)
+//            {
+//                setTimeout(function () {
+//                    addMarker();
+//                }, i * 200 + 200);
+//            }
+
+            // Stockholm Marker
+            var marker = new google.maps.Marker({
+                map: map,
+                position: berlin,
+                draggable: true
+            });
+            google.maps.event.addListener(marker, 'drag', function (event) {
+                document.getElementById("latitude").value = event.latLng.lat();
+                document.getElementById("longitude").value = event.latLng.lng();
+            });
+
+        }
+
+//        function addMarker()
+//        {
+//            markers.push(new google.maps.Marker({
+//                position: neighborhoods[iterator],
+//                map: map,
+//                draggable: true,
+//                animation: google.maps.Animation.DROP
+//            }));
+//
+//            iterator++;
+//        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+        // Toolbar
+        $("#go-sthlm").on('click', function (ev)
+        {
+            ev.preventDefault();
+
+            map.panTo(stockholm);
+        });
+
+        $("#go-bln").on('click', function (ev)
+        {
+            ev.preventDefault();
+
+            map.panTo(berlin);
+        });
+
+        $("#map-unzoom").on('click', function (ev)
+        {
+            ev.preventDefault();
+
+            map.setZoom(map.getZoom() - 1);
+        });
+
+        $("#map-resetzoom").on('click', function (ev)
+        {
+            ev.preventDefault();
+
+            map.setZoom(12);
+        });
+
+        $("#map-zoom").on('click', function (ev)
+        {
+            ev.preventDefault();
+
+            map.setZoom(map.getZoom() + 1);
+        });
+
+        $(".map-search").on('click', function (ev)
+        {
+            ev.preventDefault();
+
+            var $inp = $('.location_search'),
+                address = $inp.val().trim();
+
+            $inp.prev().find('i').addClass('fa-spinner fa-spin');
+
+            if (address.length != 0)
+            {
+                geocoder.geocode({'address': address}, function (results, status)
+                {
+                    $inp.prev().find('i').removeClass('fa-spinner fa-spin');
+
+                    if (status == google.maps.GeocoderStatus.OK)
+                    {
+                        map.setCenter(results[0].geometry.location);
+
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location,
+                            draggable: true
+                        });
+
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                });
+            }
+        });
+
+        $('#latitude, #longitude').on('change', function() {
+            map.panTo(new google.maps.LatLng($('#latitude').val(), $('#longitude').val()));
+        });
+
+
+
+    });
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<style>
+    .gmap.full-page-google-map {
+        margin-bottom: 20px;
+    }
+    #map-1{
+        height: 350px !important;
+    }
+</style>

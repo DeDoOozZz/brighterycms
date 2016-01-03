@@ -1,0 +1,54 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.default_issue_status }}</h3>
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,false,'role="form" id="setting" class="form-horizontal"') }}
+        {{ error }}
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ lang.creation_status }}</label>
+
+            <div class="col-sm-10">
+                {{ helper.form.dropdown('creation_status', status, helper.form.value('creation_status', status.Pm_issue_statues_id), 'class="form-control select2"') }}
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ lang.start_status }}</label>
+
+            <div class="col-sm-10">
+                {{ helper.form.dropdown('start_status', status, helper.form.value('start_status', status.Pm_issue_statues_id), 'class="form-control select2"') }}
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ lang.pause_status }}</label>
+
+            <div class="col-sm-10">
+                {{ helper.form.dropdown('pause_status', status, helper.form.value('pause_status', status.Pm_issue_statues_id), 'class="form-control select2"') }}
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ lang.done_status }}</label>
+
+            <div class="col-sm-10">
+                {{ helper.form.dropdown('done_status', status, helper.form.value('done_status', status.Pm_issue_statues_id), 'class="form-control select2"') }}
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-10">
+                <a href="{{ helper.uri.url('management/settings/index') }}"
+                   class="btn btn-danger cancel-button">{{ lang.cancel }}</a>
+                <button type="submit" class="btn btn-secondary" style="float: right;">{{ lang.submit }}</button>
+            </div>
+        </div>
+
+
+    </div>
+
+        {{ helper.form.close() }}
+</div>

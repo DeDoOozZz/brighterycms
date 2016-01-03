@@ -1,0 +1,159 @@
+body {
+    margin: 0;
+    color:#555;
+}
+span{
+    color:#888;
+}
+header {
+    float: left;
+    width: 100%;
+}
+.header-container {
+    background-color: #eee;
+    float: left;
+    width: 100%;
+}
+.reservation_head {
+    padding: 10px 20px;
+}
+.reservation-calender {
+    position: relative;
+    float: left;
+    width: 200px;
+}
+.calender-time {
+    color: #555;
+    float: right;
+    position: relative;
+    font-size:15px;
+}
+span.calender-day {
+    position: absolute;
+    top: 0px;
+    left: 35px;
+}
+.calender-time-content span {
+    color: #e74c3c;
+    font-size: 14px;
+}
+.calender-time img{
+    position: absolute;
+}
+.calender-time img {
+    position: absolute;
+    left: -35px;
+    top: -3px;
+}
+.container {
+    float: left;
+    width: 100%;
+}
+.sub-container{
+    margin: 20px;
+}
+.reservation-note {
+    position: relative;
+    margin-bottom: 20px;
+}
+.reservation-note img{
+    position: absolute;
+    left:0;
+}
+.guide-note h2 {
+    color: #e74c3c;
+    font-weight: normal;
+    font-size: 22px;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+.reservation-note-content {
+    padding-left: 40px;
+    margin-bottom: 10px;
+}
+.guide-note {
+    border: 1px solid #f5f5f5;
+    padding: 10px;
+    margin: 15px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #dedede;
+}
+.gide-note h2 {
+    color: #555;
+    font-size: 20px;
+}
+.gide-note-content {
+    margin-bottom: 10px;
+}
+.patient_list {
+    float: left;
+    width: 64%;
+    margin-right: 5%
+}
+.late_patients {
+    width: 29%;
+    float: left;
+}
+table{
+    width:100%;
+    border-color: #eee;
+    border-spacing: 0;
+}
+th.min-col {
+    width: 100px;
+}
+
+th, td {
+    line-height: 35px;
+    text-align: center;
+    border:1px solid #eee;
+}
+
+td.patient-name {
+    background-color: #5ca323;
+    border-radius: 10px;
+    color:#fff;
+}
+.entered{
+    background-color: #ffab00 !important;
+    color:#fff !important;
+}
+.late{
+    background-color: #e74c3c !important;
+    color: #fff !important; 
+}
+.late_patient_title,
+.patient_list_title{
+    color:#555;
+    text-align: center;
+    font-size: 20px;
+}
+.patient-entered-now{
+    background-color: #5ca323 !important;
+    color:#fff;
+    border-radius: 10px;
+}
+span.gide{
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    margin-right: 10px;
+}
+.attend{
+    background-color:#5ca323;
+}
+.entered{
+    background-color:#ffab00;
+}
+.late{
+    background-color:#e74c3c;
+}
+footer{
+    background-color:#eee;
+    float: left;
+    text-align: center;
+    width:100%;
+    line-height:35px;
+    color:#555;
+    font-size: 20px;
+}

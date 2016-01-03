@@ -1,0 +1,108 @@
+<div class="slider-wrapper theme-default">
+    <div id="slider" class="nivoSlider">
+        <a href="#"> <img src="{{ constant("STYLE_CSS") }}/slider/1.jpg"/></a>
+        <a href="#"> <img src="{{ constant("STYLE_CSS") }}/slider/2.jpg"/></a>
+    </div>
+</div>
+
+<!-- projects-page section -->
+<section class="projects-page-section commerce-caterories-blocks">
+    <div class="container">
+        <ul class="filter commerce-filter" style="text-align:left; margin-bottom: 0;">
+            <li><i class="fa fa-star commerce-category-icon"></i> <a href="#" data-fcommerceilter="*">Offers</a></li>
+        </ul>
+        <div class="commerce-categories-home commerce-offer-home jcarousel">
+            <ul>
+                {% for item in offers %}
+                    <li>
+                        <div class="commerce-block-home commerce-offer-blocks">
+                            <a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}"><img src="{{helper.uri.cdn()}}commerce/{{item.offer_image}}" alt=""></a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            <a href="#" class="jcarousel-control-prev"><i class="fa fa-chevron-left"></i></a>
+            <a href="#" class="jcarousel-control-next"><i class="fa fa-chevron-right"></i></a>
+        </div>
+    </div>
+</section>
+
+<section class="projects-page-section commerce-caterories-blocks">
+    <div class="container">
+        <ul class="filter commerce-filter" style="text-align:left; margin-bottom: 0;">
+            <li><i class="fa fa-bookmark commerce-category-icon"></i> <a href="#" data-fcommerceilter="*">Recent Added</a></li>
+        </ul>
+        <div class="commerce-categories-home jcarousel" style="margin-top: 20px;">
+            <ul>
+                {% for item in recent_products %}
+                    <li class="cat_{{ sub_cat.commerce_category_id }}">
+                        <div class=" commerce-block-home">
+                            <a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}" class="commerce-product-block">
+                                <img src="{{helper.uri.cdn('commerce', product_model.getProductPrimaryImage(item.commerce_product_id) )}}"></a>
+                            <div class="commerce-product-content">
+                                <h3><a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}">{{item.name}}</a>{#<img src="{{ constant("STYLE_IMAGES")}}/add-cart.png" alt="">#}</h3>
+                                <span class="commerce-product-details"> {{item.description}}</span>
+                                <span class="commerce-product-price"><span class="commerce-product-before-sale">{{item.price}}</span>{{ product_model.discount (item.price, item.discount) }}</span>
+                                <span class="commerce-product-sale-price">-{{item.discount}}%</span>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <a href="#" class="jcarousel-control-next" ><i class="fa fa-chevron-right"></i></a>
+
+            <a href="#" class="jcarousel-control-prev" ><i class="fa fa-chevron-left"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- End projects-page section-->
+
+{% for main_cat in categories %}
+    <section class="projects-page-section commerce-caterories-blocks">
+        <div class="container">
+            <h2 class="main-product-block">{{main_cat.title}}</h2>
+            <ul class="filter commerce-filter filter_{{main_cat.title}}" style="text-align:right; margin-bottom: 0;">
+                <li><a href="#" data-filter="">{{lang.all}}</a></li>
+                {% for sub_cat in category_model.getSubCategories(main_cat.commerce_category_id) %}
+                    <li><a href="#" data-filter=".cat_{{ sub_cat.commerce_category_id }}">{{sub_cat.title}}</a></li>
+                {% endfor %}
+            </ul>
+
+            <div class="commerce-categories-home jcarousel " style="margin-top: 20px;">
+                <ul class="iso-call">
+                    {% for sub_cat in category_model.getSubCategories(main_cat.commerce_category_id) %}
+                        {% for item in product_model.getCategoryProducts(sub_cat.commerce_category_id) %}
+                            <li class="cat_{{ sub_cat.commerce_category_id }}">
+                                <div class=" commerce-block-home">
+                                    <a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}" class="commerce-product-block"> <img src="{{helper.uri.cdn('commerce', product_model.getProductPrimaryImage(item.commerce_product_id))}}" alt=""></a>
+                                    <div class="commerce-product-content">
+                                        <h3><a href="{{ helper.uri.url('commerce_product/index', item.commerce_product_id ) }}">{{item.name}}</a>{#<img class="add-to-cart" src="{{ constant("STYLE_IMAGES")}}/add-cart.png" alt="">#}</h3>
+                                        <span class="commerce-product-details"> {{item.description}}</span>
+                                        <span class="commerce-product-price"><span class="commerce-product-before-sale">{{item.price}}</span>{{ product_model.discount (item.price, item.discount) }}</span>
+                                        <span class="commerce-product-sale-price">-{{item.discount}}%</span>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+                <a href="#" class="jcarousel-control-next" ><i class="fa fa-chevron-right"></i></a>
+
+                <a href="#" class="jcarousel-control-prev" ><i class="fa fa-chevron-left"></i></a>
+            </div>
+        </div>
+    </section>
+{% endfor %}
+<!-- End projects-page section -->
+
+<script>
+    $('.add-to-cart').click(function () {
+        var prod = $(this);
+        cart.add($(this).data('id'), function () {
+            prod.attr('src', '{{ constant("STYLE_IMAGES")}}/remove-cart.png');
+        });
+
+    });
+</script>

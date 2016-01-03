@@ -1,0 +1,47 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.settings }}</h3>
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,false,'role="form" id="setting" class="form-horizontal"') }}
+        {{ error }}
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Doctor Usergroup</label>
+
+            <div class="col-sm-10">
+                <select class="form-control" name="doctor_usergroup_id">
+                    <option selected="selected">{{item.doctor_usergroup_id}}</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Patient Usergroup</label>
+
+            <div class="col-sm-10">
+                <select class="form-control" name="patient_usergroup_id">
+                    <option>{{item.patient_usergroup_id}}</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-10">
+                <a href="{{ helper.uri.url('management/clinic_settings/index') }}" class="btn btn-danger cancel-button">{{lang.cancel}}</a>
+                <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+                
+            </div>
+        </div>
+           
+        {{ helper.form.close() }}
+
+    </div>
+</div>

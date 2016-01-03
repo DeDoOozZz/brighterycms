@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en" class="no-js">
+    <head>
+        <title>{{ config.get('title') }}</title>
+
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="keywords" value="{{ config.get('keywords') }}" />
+        <meta name="description" value="{{ config.get('description') }}" />
+        <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/bootstrap.min.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/jquery.bxslider.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/font-awesome.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/animate.css" media="screen">
+        <!-- REVOLUTION BANNER CSS SETTINGS -->
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/settings.css" media="screen"/>
+        <link rel="stylesheet" type="text/css" href="{{ constant("STYLE_CSS") }}/style.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="{{ constant('STYLE_CSS') }}/newstyle.css" media="screen">
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.migrate.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.bxslider.min.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.imagesloaded.min.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.isotope.min.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/retina-1.1.0.min.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/plugins-scroll.js"></script>
+        <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.themepunch.tools.min.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/jquery.themepunch.revolution.min.js"></script>
+        <script type="text/javascript" src="{{ constant("STYLE_JS") }}/script.js"></script>
+        <link rel="stylesheet" href="{{ constant("STYLE_JS") }}/select2/select2.css">
+        <link rel="stylesheet" href="{{ constant("STYLE_JS") }}/select2/select2-bootstrap.css">
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+        <script type="text/javascript">
+            var brightery_style_images = "{{ constant('STYLE_IMAGES') }}";
+            var site_url = "{{ helper.uri.url() }}";
+            loading = {
+                start: function () {
+                    $('#loading').show();
+                },
+                stop: function () {
+                    $('#loading').hide();
+                }
+            };
+
+        </script>
+    </head>
+    <body>
+
+        <!-- Container -->
+        <div id="container">
+            <!-- Header
+                ================================================== -->
+            <header class="clearfix">
+                <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                    <div class="top-line">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {% if input.cookie('fullname') %}
+                                        <p class="logout-user">
+                                            <span class="user-header-home"> <span class="header-user_image"><img src="{{ helper.uri.cdn('users', input.cookie('image')) }}"></span><a href="#">{{ input.cookie('fullname') }}</a></span>
+                                            <span class="logout-home"><a href="{{ helper.uri.url('users/logout') }}">{{ lang.logout }}</a> <i class="fa fa-sign-out"></i> </span>
+                                        </p>
+                                    {% else %}
+                                        <p class="login-user">
+                                            <span class="login-home" data-toggle="modal" data-target="#myModal"><i class="fa fa-sign-in"></i> {{ lang.login }} </span>
+                                            <span class="login-home"><i class="fa fa-user"></i><a href="{{ helper.uri.url('users/register') }}" style="color:#fff; text-decoration: none;">{{ lang.register }}</a></span>
+                                        </p>
+                                    {% endif %}
+
+                                    <div class="modal fade login-box" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user"></i>{{lang.login}}</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="login-errors" style="display: none"></div>
+
+                                                    <form role="form" class="form-horizontal reservation-login" id="login">
+                                                        <div class="form-group">
+                                                            <label for="field-5" class="col-sm-3 control-label">{{lang.email}}</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" placeholder="{{lang.email}}" class="form-control" name="username">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group-separator"></div>
+
+                                                        <div class="form-group">
+                                                            <label for="field-5" class="col-sm-3 control-label">{{lang.password}}</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="password" placeholder="{{lang.password}}" class="form-control" name="password">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group-separator"></div>
+
+
+                                                        <div class="form-group">
+                                                            <label for="field-5" class="col-sm-3 control-label"></label>
+                                                            <div class="col-sm-9">
+                                                                <label class="remember-me"><input type="checkbox"> Remember me</label>
+                                                                <a href="#" class="forget-password">Forget Password ?</a><br>
+                                                                <input type="submit" class="submit reservation-login-submit" value="{{lang.login}}" >
+                                                                <a href="{{ helper.uri.url('users/register') }}" class="register-new-patient">{{lang.register}}</a>
+                                                            </div>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="social-icons">
+                                        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a class="rss" href="#"><i class="fa fa-rss"></i></a></li>
+                                        <li><a class="google" href="#"><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                                        <li><a class="pinterest" href="#"><i class="fa fa-pinterest"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="{{ helper.uri.url() }}"><img src="{{ constant("STYLE_IMAGES")}}/logo.png" alt=""></a>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="drop"><a class="active" href="{{ helper.uri.url('home') }}">Home</a> </li>
+                                <li class="drop"><a href="{{ helper.uri.url('portfolio/index')}}">Portfolio</a></li>
+                                <li><a href="{{ helper.uri.url('pages/index/about')}}">About</a></li>
+                                <li class="drop"><a href="{{ helper.uri.url('blog/index') }}">Blog</a></li>
+{#                                <li><a href="{{ helper.uri.url('resumes') }}">Resumes</a></li>#}
+                                <li><a href="{{ helper.uri.url('contactus') }}">Contact</a></li>
+                                <li><a href="{{ helper.uri.url('clinic_reservations') }}">Reservation</a></li>
+                                <li><a href="{{ helper.uri.url('faqs') }}">FAQS</a></li>
+                                <li class="search drop"><a href="#" class="open-search"><i class="fa fa-search"></i></a>
+                                    <form class="form-search">
+                                        <input type="search" placeholder="Search:"/>
+                                        <button type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collapse -->
+                    </div>
+                    <!-- /.container -->
+                </nav>
+            </header>
+            <!-- End Header -->
+
+            {layout}
+
+            <!-- footer
+                ================================================== -->
+            <footer>
+                <div class="up-footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="footer-widget">
+                                    <h2>About Us</h2>
+
+                                   
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="footer-widget">
+                                    <h2>Tags</h2>
+                                    <ul class="menu-links">
+                                        <li><a class="active" href="{{ helper.uri.url('home') }}">Home</a></li>
+                                        <li><a href="{{ helper.uri.url('portfolio/index')}}">Portfolio</a></li>
+                                        <li><a href="{{ helper.uri.url('pages/index/about')}}">About</a></li>
+                                        <li><a href="{{ helper.uri.url('blog/index') }}">Blog</a></li>
+{#                                        <li><a href="{{ helper.uri.url('resumes') }}">Resumes</a></li>#}
+                                        <li><a href="{{ helper.uri.url('contactus') }}">Contact</a></li>
+                                        <li><a href="{{ helper.uri.url('clinic_reservations') }}">Reservation</a></li>
+                                        <li><a href="{{ helper.uri.url('faqs') }}">FAQS</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="footer-widget">
+                                    <h2>Flickr widget</h2>
+                                    <ul class="flickr">
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="footer-widget info-widget">
+                                    <h2>Info</h2>
+
+                                    <p class="first-par">You can contact or visit us during working time.</p>
+
+                                    <p><span>Tel: </span> 1234 - 5678 - 9012</p>
+
+                                    <p><span>Email: </span> support@brightery.com</p>
+
+                                    <p><span>Working Hours: </span> 8:00 a.m - 17:00 a.m</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="copyright">
+                    &copy; Copyright {{ "now"|date('Y') }}, All rights reserved.
+                </p>
+            </footer>
+            <!-- End footer -->
+
+        </div>
+        <!-- End Container -->
+
+        <!-- Revolution slider -->
+        <script type="text/javascript">
+
+            jQuery(document).ready(function () {
+                // LOGIN FORM
+                $('#login').submit(function () {
+                    loading.start();
+                    $.post(site_url + 'users/login/true', $(this).serialize(), function (data) {
+                        $('.login-errors').hide();
+                        res = $.parseJSON(data);
+                        if (res.accessGranted) {
+                            window.location = window.location;
+                        }
+                        else
+                        {
+                            $('.login-errors').html(res.errors);
+                            $('.login-errors').show();
+                        }
+                        loading.stop();
+                    });
+                    return false;
+                });
+                $('#login .register').click(function () {
+
+                    return false;
+                });
+
+                        });	//ready
+
+        </script>
+    </body>
+</html>

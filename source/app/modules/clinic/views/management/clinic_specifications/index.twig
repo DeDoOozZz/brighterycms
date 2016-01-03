@@ -1,0 +1,70 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.specifications}}</h3>
+
+        <div class="panel-options">
+            <a href="{{ helper.uri.url('management/clinic_specifications/manage') }}" class="btn btn-secondary" style="color: #FFF;">
+                {{ lang.add }}
+            </a>
+        </div>
+    </div>
+    <br>
+    <div id="search_form">
+        <form role="form" class="form-horizontal" method="get">
+            <div class="form-group">
+                <div class="col-sm-7"></div>
+                <div class="col-sm-5" style="position: relative;">
+                    <input type="text" name="specification_search" value="{{ input.get.specification_search }}"
+                           class="form-control" placeholder="{{ lang.search_by_specification }}">
+                    <button type="submit" class="btn btn-secondary btn-for-search" style="right:15px; top:0; position: absolute;"><i class="linecons-search"></i></button>
+                </div>
+            </div>      
+        </form>
+    </div>
+    <div class="panel-body">
+
+        <table class="table table-bordered table-striped" >
+            <thead>
+                <tr>
+                    <td>{{lang.specification}}</td>
+                    <td class="no-sorting">{{lang.operations}}</td>
+                </tr>
+            </thead>
+            <tbody class="middle-align">
+                {% for item in items %}
+                    <tr>
+                        <td>{{item.specification}}</td>
+                        <td>
+                            <a class="btn btn-info btn-sm" href="{{ helper.uri.url('management/clinic_specifications/manage', item.clinic_specification_id) }}">{{lang.edit}}</a>
+                            <a href="#" class="btn btn-danger btn-sm delete_msg" data-url_id="{{helper.uri.url('management/clinic_specifications/delete',item.clinic_specification_id)}}" data-toggle="modal" data-target="#deleteMsg" style="color:#fff;">{{lang.delete}}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {{pagination}}
+
+    </div>
+</div>
+<div class="modal fade" id="deleteMsg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{lang.system_msg}}</h4>
+            </div>
+            <div class="modal-body">
+                <a>{{lang.delete_item}}</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">{{ lang.no }}</button>
+                <a id="delete_id" class="btn btn-danger" href="url">{{lang.delete}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="{{ constant('STYLE_CSS') }}/datatables/dataTables.bootstrap.css">
+<script src="{{ constant('STYLE_JS') }}/datatables/js/jquery.dataTables.min.js"></script>
+<script src="{{ constant('STYLE_JS') }}/datatables/dataTables.bootstrap.js"></script>
+<script src="{{ constant('STYLE_JS') }}/datatables/yadcf/jquery.dataTables.yadcf.js"></script>
+<script src="{{ constant('STYLE_JS') }}/datatables/tabletools/dataTables.tableTools.min.js"></script>

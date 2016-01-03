@@ -1,0 +1,104 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.commerce_orders }}</h3>
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,true,'role="form" class="form-horizontal"') }}
+        {{ error }}
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="parent">{{ lang.commerce_order_id }}</label>
+
+            <div class="col-sm-4">
+                {{ helper.form.input('text', 'commerce_order_id', helper.form.value('commerce_order_id'), 'class="form-control" ') }}
+            </div>
+
+            <label class="col-sm-2 control-label" for="parent">{{ lang.user_id }}</label>
+
+            <div class="col-sm-4">
+                {{ helper.form.dropdown('user_id', users, helper.form.value('user_id'), 'class="form-control select2" ') }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="parent">{{ lang.from_date }}</label>
+
+            <div class="col-sm-4">
+                {{ helper.form.input('text', 'from_date', helper.form.value('from_date'), 'class="form-control datepicker" ') }}
+            </div>
+
+            <label class="col-sm-2 control-label" for="parent">{{ lang.to_date }}</label>
+
+            <div class="col-sm-4">
+                {{ helper.form.input('text', 'to_date', helper.form.value('to_date'), 'class="form-control datepicker" ') }}
+            </div>
+        </div>
+
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-secondary" style="float: right;">{{ lang.search }}</button>
+            </div>
+        </div>
+
+        <div class="form-group-separator"></div>
+
+        <div style="clear: both"></div>
+
+        {{ helper.form.close() }}
+    </div>
+
+    <div class="panel-body">
+        <table class="table table-bordered table-striped" id="datatable">
+            <thead>
+            <tr>
+                <th>{{ lang.commerce_order_id }}</th>
+                <th>{{ lang.user_id }}</th>
+                <th>{{ lang.total }}</th>
+                <th class="no-sorting">{{ lang.operations }}</th>
+            </tr>
+            </thead>
+            <tbody class="middle-align">
+
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.commerce_order_id }}</td>
+                    <td>{{ item.fullname }}</td>
+                    <td>{{ item.total }}</td>
+                    <td>
+                        <a class="btn btn-info btn-sm"
+                           href="{{ helper.uri.url('management/commerce_orders/view', item.commerce_order_id ) }}">{{ lang.view }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<div class="modal fade" id="view" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{ lang.system_msg }}</h4>
+            </div>
+            <div class="modal-body">
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">{{ lang.close }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.datepicker').datepicker({format: 'yyyy-mm-dd'});
+
+    });
+</script>

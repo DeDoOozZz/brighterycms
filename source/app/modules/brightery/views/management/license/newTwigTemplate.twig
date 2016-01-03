@@ -1,0 +1,20 @@
+<html>
+<head>
+    <script type="text/javascript">
+$(function() {
+    $('#text1').hide(); 
+    $('#type').change(function(){
+        if($('#type').is(':checked')) {
+            $('#text1').show(); 
+        } else {
+            $('#text1').hide(); 
+        } 
+    });
+});
+</script>
+</head>
+<body>
+    <input type="checkbox" id="type"/>
+    <input type="text" id="text1" style="display: none"/>
+</body>
+</html>

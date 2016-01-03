@@ -1,0 +1,45 @@
+<div class="col-sm-10">
+    <!-- map
+    ================================================== -->
+    <div id="map"></div>
+    <!-- map -->
+
+    <!-- contact section
+        ================================================== -->
+    <section class="contact-section">
+            <div class="col-md-4">
+                <div class="contact-info">
+                    <h2>{{lang.contact_info}}</h2>
+                    <p>You can contact or visit us in our office from Monday to Friday from 8:00 - 17:00</p>
+                    <ul class="information-list">
+                        <li><i class="fa fa-map-marker"></i><span>907 N Randolph street, Arlington County, Virginia, United States</span></li>
+                        <li><i class="fa fa-phone"></i><span>+1 703-697-1776</span><span>+1 605-315-8544</span></li>
+                        <li><i class="fa fa-envelope-o"></i><a href="#">nunforest@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                {{ helper.form.open(null,false,false,'role="form" class="comment-form"') }}
+                <h2>{{lang.send_message}}</h2>
+                {{ error }}
+                <div class="row">
+                    <div class="col-md-6">
+                        <input name="name" id="name" type="text" placeholder="{{lang.name}}" value="{{ helper.form.value('name') }}">
+                    </div>
+                    <div class="col-md-6">
+                        <input name="email" id="email" type="text" placeholder="{{lang.email}}" value="{{ helper.form.value('email') }}">
+                    </div>
+                </div>
+                <textarea name="message" id="comment" placeholder="{{lang.message}}"></textarea>
+                <input type="submit" value="{{lang.send_message}}">
+                <div id="msg" class="message"></div>
+                {{ helper.form.close() }}
+            </div>
+    </section>
+    <!-- End contact section -->
+</div>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+<script type="text/javascript" src="{{ constant('STYLE_JS') }}/gmap3.min.js"></script>
+<script type="text/javascript" src="{{ constant('STYLE_JS') }}/script.js"></script>

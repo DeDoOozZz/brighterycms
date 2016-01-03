@@ -1,0 +1,347 @@
+<style>
+    table{
+        width:100%;
+    }
+    thead {
+        border-bottom: 1px solid #dedede;
+    }
+    th.fc-header {
+        width: 12.5%;
+        color: #555;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 40px;
+        text-align: center;
+    }
+    tr {
+        line-height: 50px;
+        text-align: center;
+        border-bottom: 1px solid #dedede;
+    }
+    .fc-record {
+        border-left:  1px solid #dedede;
+    }
+    .last-record{
+        border-right: 1px solid #dedede;
+    }
+    .reserved {
+        background-color: #f5f5f5;
+        color:silver !important;
+    }
+    .vacation{
+        background-color: #f5f5f5;
+    }
+    span.reservation-day {
+        color: #888;
+        font-size: 12px;
+    }
+    .times{
+        color:#555;
+    }
+    td.fc-record {
+        color: #666;
+        font-size: 14px;
+    }
+    .reservation-header h2 {
+        float: left;
+        color: #666;
+        font-weight: normal;
+        font-size: 18px;
+    }
+    .reservation-header .form-group {
+        float: right;
+    }
+    .date-and-time {
+        display: inline;
+    }
+    .date-and-time {
+        display: inline;
+    }
+    input#datepicker {
+        border: 1px solid #dedede;
+        line-height: 36px;
+        width: 200px;
+        margin-right: -5px;
+        padding-left: 5px;
+    }
+    .calendar-date {
+        background-color: #dedede;
+        line-height: 40px;
+        width: 30px;
+        text-align: center;
+        color:#666;
+    }
+    .control-label {
+        color: #999;
+        font-size: 14px;
+        font-weight: normal;
+    }
+    input.submit {
+        background-color: #ffab00;
+        border: none;
+        color: #fff;
+        line-height: 30px;
+        width: 100px;
+    }
+    .available{
+        cursor: pointer;
+    }
+    select.form-control {
+        border: 1px solid #dedede;
+        box-shadow: none;
+        border-radius: 0;
+        color: #666;
+    }
+    form .form-group-separator {
+        height: 1px;
+        background: #eee;
+        margin-bottom: 15px;
+    }
+    h2.sub-title-reservation {
+        font-size: 18px;
+        color: #777;
+        margin-top: 0;
+        margin-left: 10px;
+    }
+    input.form-control {
+        border: 1px solid #dedede;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    a.register-new-patient {
+        line-height: 32px;
+        color: #fff;
+        background-color: #8dc63f;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        float: left;
+        margin-left: 20px;
+        font-size: 12px;
+    }
+    label.remember-me {
+        color: #999;
+        font-weight: normal;
+    }
+    a.forget-password {
+        float: right;
+        color: #999;
+        text-decoration: underline;
+    }
+    a.forget-password:hover{
+        color: #ffab00;
+    }
+</style>
+<!-- End page-banner section -->
+{#{%set i = 1 %}#}
+<section class="services-page-section" style="padding-top: 165px !important;">
+    <div class="container">
+        <div class="row calender-reservation">
+            <div class="reservation-header">
+                <h2><i class="fa fa-calendar"></i> Dr.esraa</h2>
+                <form>
+                    <div class="form-group">
+                        <label class=" control-label">Select day</label>
+                        <div class="date-and-time">
+                            <input type="text" id="datepicker" >
+                            <i class="fa fa-calendar calendar-date "></i>
+                        </div>
+                    </div>
+                    <script>
+                        $(function () {
+                            $("#datepicker").datepicker();
+                        });
+                    </script>
+                </form>
+            </div>
+
+            {#{{date}}#}
+            <table>
+                <thead>
+                <th class="fc-header">Times</th>
+                {#{% for item in dates %}#}
+                    <th class="fc-header">day <br><span class="reservation-day">date</span><br>
+                        {#{% for i in item_schedule %}#}
+                            {#{% if i.day == item.day %}#}
+                                <span class="reservation-day">time</span>
+                            {#{% endif %}#}
+                        {#{%endfor%}#}
+                    </th>
+                {#{%endfor%}#}
+                </thead>
+                <tbody>
+                {#{% for final in finals %}#}
+                    <tr>
+                        <td class="fc-record times">final time{{final.time}}</td>
+                        {#{% for itt in final.schedule|cast_to_array %}#}
+                            {#{% if  not itt.clinic_schedule_id %}#}
+                                <td class="fc-record vacation last-record"></td>
+                            {#{%elseif itt.status == 'reserved' %}#}
+                                <td class="fc-record reserved"><i class="fa fa-lock"></i>Reserved</td>
+                            {#{%elseif itt.status == 'except' %}#}
+                                <td class="fc-record vacation last-record"></td>
+                            {#{%elseif itt.to_time < final.time %}#}
+                                <td class="fc-record vacation last-record"></td>
+                            {#{%elseif itt.from_time > final.time %}#}
+                                <td class="fc-record vacation last-record"></td>
+                            {#{%elseif itt.from_time <= final.time and final.time <= itt.to_time %}#}
+                                <td class="fc-record available" id="id_{{i}}" data-id="id_{{i}}" data-toggle="modal" data-date="{{itt.date}}" data-clinic_schedule_id="{{itt.clinic_schedule_id}}" data-time="{{final.time}}" data-target="#myModal2"><i class="fa fa-unlock"></i> Available</td>
+                                {#{%set i = i + 1%}#}
+                            {#{%endif%}#}
+                        {#{%endfor%}#}
+                    </tr>
+                {#{% endfor %}#}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Reservation</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id='login_form' class="form-horizontal">
+                    <h2 class="sub-title-reservation">Login</h2>
+                    <div class="form-group">
+                        <label for="field-5" class="col-sm-3 control-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="text" placeholder="Email" name="E_MAIL" id="E_MAIL" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+
+                    <div class="form-group">
+                        <label for="field-5" class="col-sm-3 control-label">Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" name='password' placeholder="Password" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+
+
+                    <div class="form-group">
+                        <label for="field-5" class="col-sm-3 control-label"></label>
+                        <div class="col-sm-9">
+                            <label class="remember-me"><input type="checkbox"> Remember me</label>
+                            <a href="#" class="forget-password">Forget Password ?</a><br>
+                            <div class="form-group-separator"></div>
+                            <input type="submit" class="submit" id="login" name="login" value="Login" style="float:left;">
+                            <a href="#" class="register-new-patient">Registration</a>
+                        </div>
+                    </div>
+
+                </form>
+                <form role="form"  id='Reserve' class="form-horizontal">
+                    {#<div class="form-group">
+                        <div class="col-sm-9">
+                            <input type="hidden" value name="date" id="date" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <input type="hidden" value name="time" id="time" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <input type="hidden" value name="clinic_schedule_id" id="clinic_schedule_id" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <input type="hidden" value name="id" id="id" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <input type="hidden" value name="email" id="email" class="form-control">
+                        </div>
+                    </div>
+#}
+                    <div class="form-group">
+                        <label for="field-5" class="col-sm-3 control-label">Reservation</label>
+                        <div id="reserved" class="form-horizontal col-sm-9"{#{%if user == null%} hidden {%endif%}#} style="color:#666;">
+                            {#{%for item in type%}#}
+                                <input type="radio" name="clinic_doctor_reservation_type_id" value="{{item.clinic_doctor_reservation_type_id}}name">title {{item.title}}<br>
+                            {#{%endfor%}#}
+                        </div>
+                    </div>
+                    <div class="form-group-separator"></div>
+
+
+                    <div class="form-group">
+                        <label for="field-5" class="col-sm-3 control-label"></label>
+                        <div class="col-sm-9">
+                            <input type="submit" class="submit" value="Reserve">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+{#<script>#}
+    {#$(document).ready(function () {#}
+        {#$('#login_form').submit(function () {#}
+            {#var email = $("#E_MAIL").val();#}
+            {#$("#email").attr('value', email);#}
+            {#// process the form#}
+            {#$.post("{{helper.uri.url('clinic_reservations/check')}}", $(this).serialize(), function (status) {#}
+                {#if (!status.connected == 1) {#}
+                    {#$('#login_form').remove();#}
+                    {#$('#Reserve').show();#}
+                {#}#}
+            {#});#}
+            {#return false;#}
+        {#});#}
+        {#$('#Reserve').submit(function () {#}
+            {#var id = '"#' + $('#id').val() + '"';#}
+            {#&#123;&#35;            alert(id);&#35;&#125;#}
+            {#$.post("{{helper.uri.url('clinic_reservations/save')}}", $(this).serialize(), function (status) {#}
+                {#if (!status.connected == 1) {#}
+                    {#$('#myModal').hide();#}
+                    {#$(id).removeClass('availabe');#}
+                    {#$(id).addClass('reserved');#}
+                {#}#}
+            {#});#}
+            {#return false;#}
+        {#});#}
+        {#$(document).on("click", ".available", function () {#}
+            {#var date = $(this).data('date');#}
+            {#var time = $(this).data('time');#}
+            {#var id = $(this).data('id');#}
+            {#var clinic_schedule_id = $(this).data('clinic_schedule_id');#}
+            {#$("#date").attr('value', date);#}
+            {#$("#id").attr('value', id);#}
+            {#$("#time").attr('value', time);#}
+            {#$("#clinic_schedule_id").attr('value', clinic_schedule_id);#}
+        {#});#}
+        {#$('#datepicker').change(function () {#}
+            {#var date = $('#datepicker').val();#}
+            {#&#123;&#35;            alert(date);&#35;&#125;#}
+            {#$.ajax({#}
+                {#type: 'POST', // define the type of HTTP verb we want to use (POST for our form)#}
+                {#url: '{{helper.uri.url('clinic_reservations/get_date/' + date + '')}}', // the url where we want to POST#}
+                {#data: $(this).serialize(), // our data object#}
+                {#//dataType: 'json', // what type of data do we expect back from the server#}
+                {#encode: true#}
+            {#})#}
+                    {#.done(function (data) {#}
+                        {#if (data)#}
+                        {#{#}
+                        {#}#}
+                    {#});#}
+            {#event.preventDefault();#}
+            {#return false;#}
+        {#});#}
+    {#});#}
+{#</script>#}

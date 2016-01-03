@@ -1,0 +1,183 @@
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.modules }}</h3>
+    </div>
+
+    <div class="panel-body">
+
+        <table class="table table-bordered table-striped" >
+            <thead>
+                <tr>
+                    <th>{{ lang.name }}</th>
+                    <th>{{ lang.enabel }}</th>
+                    <th>{{ lang.status }}</th>
+                    <th>{{ lang.setting }}</th> 
+                </tr>
+            </thead>
+
+            <tbody class="middle-align">
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>
+                            <select class="form-control" style="width:100%;">
+                                <option>Enable</option>
+                                <option>Disable</option>
+                            </select>
+                        </td>
+                        <td>
+                            {{item.status}}
+                            <i class="fa-times-circle" style="color:#bb0000; font-size: 16px;"></i>
+                            <i class="fa-check-square" style="color:#5ca323; font-size: 16px;"></i>
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary btn-icon btn-icon-standalone"  data-toggle="modal" data-target="#myModal" style="width:100%;">
+                                <i class="fa-cogs"></i>
+                                <span>Change Settings</span>
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+
+        </table>
+        {{pagination}}
+        {#     each Module setting       #}
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Module Setting</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form" class="form-horizontal">
+
+                            <div class="form-group">
+                                <label for="field-5" class="col-sm-2 control-label">Title</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="field-1" placeholder="Title">
+                                </div>
+                            </div>
+
+                            <div class="form-group-separator"></div>
+
+                            <div class="form-group">
+                                <label for="field-5" class="col-sm-2 control-label"></label>
+                                <div class="col-sm-10">
+                                    <input type="submit" class="btn btn-secondary " value="save">
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <br>
+        {#   --------------------------- Next table for install modules -------------------------------   #}
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ lang.install_new_module }}</h3>
+        </div>
+
+        <script type="text/javascript">
+            jQuery(document).ready(function ($)
+            {
+                var i = 1,
+                        $example_dropzone_filetable = $("#example-dropzone-filetable"),
+                        example_dropzone = $("#advancedDropzone").dropzone({
+                    url: 'data/upload-file.php',
+                    // Events
+                    addedfile: function (file)
+                    {
+                        if (i == 1)
+                        {
+                            $example_dropzone_filetable.find('tbody').html('');
+                        }
+
+                        var size = parseInt(file.size / 1024, 10);
+                        size = size < 1024 ? (size + " KB") : (parseInt(size / 1024, 10) + " MB");
+
+                        var $entry = $('<tr>\
+                                    <td class="text-center">' + (i++) + '</td>\
+                                    <td>' + file.name + '</td>\
+                                    <td><div class="progress progress-striped"><div class="progress-bar progress-bar-warning"></div></div></td>\
+                                    <td>' + size + '</td>\
+                                    <td>Uploading...</td>\
+                            </tr>');
+
+                        $example_dropzone_filetable.find('tbody').append($entry);
+                        file.fileEntryTd = $entry;
+                        file.progressBar = $entry.find('.progress-bar');
+                    },
+                    uploadprogress: function (file, progress, bytesSent)
+                    {
+                        file.progressBar.width(progress + '%');
+                    },
+                    success: function (file)
+                    {
+                        file.fileEntryTd.find('td:last').html('<span class="text-success">Uploaded</span>');
+                        file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-success');
+                    },
+                    error: function (file)
+                    {
+                        file.fileEntryTd.find('td:last').html('<span class="text-danger">Failed</span>');
+                        file.progressBar.removeClass('progress-bar-warning').addClass('progress-bar-red');
+                    }
+                });
+
+                $("#advancedDropzone").css({
+                    minHeight: 200
+                });
+
+            });
+        </script>
+        <br />
+
+        {#<div class="row">
+            <div class="col-sm-3 text-center">
+                <div id="advancedDropzone" class="droppable-area">
+                    Drop Files Here
+                </div>
+            </div>
+            <div class="col-sm-9">
+                {{ helper.form.open(null,false,false,'role="form" class="form-horizontal"') }}
+                <table class="table table-bordered table-striped" id="example-dropzone-filetable">
+                    <thead>
+                        <tr>
+                            <th width="1%" class="text-center">#</th>
+                            <th width="50%">Name</th>
+                            <th width="20%">Upload Progress</th>
+                            <th>Size</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="5">Files list will appear here</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-secondary">{{ lang.install }}</button>
+                {{ helper.form.close() }}
+            </div>
+        </div>#}
+    </div>
+</div>
+
+<link rel="stylesheet" href="{{ constant('STYLE_CSS') }}/datatables/dataTables.bootstrap.css">
+<script src="{{ constant('STYLE_JS') }}/datatables/js/jquery.dataTables.min.js"></script>
+<script src="{{ constant('STYLE_JS') }}/datatables/dataTables.bootstrap.js"></script>
+<script src="{{ constant('STYLE_JS') }}/datatables/yadcf/jquery.dataTables.yadcf.js"></script>
+<script src="{{ constant('STYLE_JS') }}/datatables/tabletools/dataTables.tableTools.min.js"></script>
+<script src="{{ constant('STYLE_JS') }}/dropzone/dropzone.min.js"></script>
+<script src="{{ constant('STYLE_JS') }}/xenon-custom.js"></script>
+<link rel="stylesheet" href="{{ constant('STYLE_JS') }}/dropzone/css/dropzone.css">
+<script type="text/javascript">
+            jQuery(document).ready(function ($) {
+                $("#datatable").dataTable();
+            });
+</script>

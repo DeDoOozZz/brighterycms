@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Brightery Framework</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    </head>
+
+    <body role="document">
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Brightery</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">{{ lang.home }}</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="container theme-showcase" role="main">
+
+            <!-- Main jumbotron for a primary marketing message or call to action -->
+            <div class="jumbotron">
+                <h1>{{ lang.registration_form }}</h1>
+            </div>
+            {{ helper.form.open() }}
+            {{ error }}
+            <div class="form-group">
+                <label for="name">{{ lang.name }}:</label>
+                <input type="name" class="form-control" id="name" name="name" placeholder="Muhammad El-Saeed" value="{{ post.name }}">
+            </div>
+            <div class="form-group">
+                <label for="phone">{{ lang.phone }}:</label>
+                <input type="phone" class="form-control" id="phone" name="phone" placeholder="+20 1000 100 1000" value="{{ post.phone }}">
+            </div>
+            <div class="form-group">
+                <label for="email">{{ lang.email }}:</label>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon" id="sizing-addon3">@</span>
+                    <input type="email" class="form-control" placeholder="mail@mail.com" name="email" aria-describedby="sizing-addon3" value="{{ post.email }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">{{ lang.password }}:</label>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon" id="sizing-addon3">#</span>
+                    <input type="password" class="form-control" name="password" aria-describedby="sizing-addon3">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="dropdown">{{ lang.password }}:</label>
+                <div class="input-group input-group-sm">
+                    {{ helper.form.dropdown('ddd', menu, helper.form.value('ddd', get.m)) }}
+                </div>
+            </div>
+
+            <div>
+                <input type="submit" value="{{ lang.submit }}" class="btn" />
+            </div>
+            {{ helper.form.close() }}
+        </div>
+    </body>
+</html>
+
+

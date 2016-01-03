@@ -1,0 +1,44 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.clinic_doctor_reservation_types }}</h3>
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,true,'role="form" id="clinic_doctor_reservation_types" class="form-horizontal"') }}
+        {{ error }}
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="title">{{ lang.title }}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="title" placeholder="{{ lang.title }}" name="title" value="{{ helper.form.value('title', item.title) }}"> 
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="price">{{ lang.price }}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="price" placeholder="{{ lang.price }}" name="price" value="{{ helper.form.value('price', item.price) }}"> 
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="clinic_doctor_id">{{ lang.clinic_doctor_id}}</label>
+            <div class="col-sm-10">
+               {{ helper.form.dropdown('clinic_doctor_id', doctor, helper.form.value('clinic_doctor_id', item.clinic_doctor_id), 'class="form-control " id="s2example-1" ') }}
+            </div>
+        </div>
+        <div class="form-group-separator"></div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-10">
+                <a href="{{ helper.uri.url('management/clinic_doctor_reservation_types/index') }}" class="btn btn-danger cancel-button">{{lang.cancel}}</a>
+                <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+            </div>
+        </div>
+        {{ helper.form.close() }}
+
+    </div>
+</div>
+

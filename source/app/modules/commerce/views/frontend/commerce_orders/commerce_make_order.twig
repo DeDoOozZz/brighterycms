@@ -1,0 +1,79 @@
+
+<!-- shopping-page section 
+            ================================================== -->
+<section class="cart-section-page">
+    <div class="container">
+        <div class="col-sm-8">
+            <div class="cart-payment-method">
+                {{ helper.form.open(null,false,true,'role="form" class="form-horizontal" id="pay"') }}
+                {{ error }}
+                <div class="Billing-info">
+                    <h4>Billing Information</h4>
+                    <div class="billing-block row">
+                        <span class="billing-block-title col-sm-3">Name: </span>
+                        <span class="col-sm-9">{{user.fullname}}</span>
+                    </div>
+                    <div class="billing-block row">
+                        <span class="billing-block-title col-sm-3">Email: </span>
+                        <span class="col-sm-9">{{user.email}}</span>
+                    </div>
+                    <div class="billing-block row">
+                        <span class="billing-block-title col-sm-3">Billing Address: </span> 
+                        <span class="col-sm-9">           
+                            {{ helper.form.dropdown('billing_address', addresses, helper.form.value('billing_address'), 'class="form-control s2example-1" ') }}
+                        </span>
+                    </div>
+                    <div class="billing-block row">
+                        <span class="billing-block-title col-sm-3">Shipping Address: </span> 
+                        <span class="col-sm-9">
+                            {{ helper.form.dropdown('shipping_address', addresses, helper.form.value('shipping_address'), 'class="form-control s2example-1" ') }}
+                        </span>
+                    </div>
+                </div>
+                <div class="Billing-info">
+                    <h4>Payment Method</h4>
+                        <div class="billing-block">
+                            {{ helper.form.dropdown('commerce_payment_method_id', payment, helper.form.value('payment_method')) }}
+                            {#<input type="radio" name="payment_method" class="show-method-1"> <span>{{item.name}} </span>#}
+                            {#                            <select>
+                                                            <option>any option</option>
+                                                        </select>#}
+                        </div>
+                    <a href="javascript:$('#pay').submit();" class="continue-shopping">Confirm Order</a>
+                </div>
+                {{ helper.form.close() }}
+            </div>
+
+        </div>
+        <div class="col-sm-4 cart-conclusion-price yourcart-conclusion" >
+            <h3>Order Summary</h3>
+            <div class="sub-conclusion-price">
+                <div>
+                    <span class="cart-conclusion-price-title">Sub Total Price</span>
+                    <span class="cart-price">${{cart.total()}}</span>
+                </div>
+                <div>
+                    <span class="cart-conclusion-price-title">+Shipping</span>
+                    <span class="cart-price">0.00</span>
+                </div>
+                <div class="cart-total-price">
+                    <span class="cart-conclusion-price-title">Total Price</span>
+                    <span class="cart-price">${{cart.total()}}</span>
+                </div>
+                {#<div class="sub-conclusion-price cart-coupon">#}
+                    {#<h3><input type="checkbox"> Do you have a discount code?</h3>#}
+                    {#<form class="discount-code-form">#}
+                        {#<input type="text" placeholder="Enter Coupon Code">#}
+                        {#<input type="submit" value="Use">#}
+                    {#</form>#}
+                {#</div>#}
+                <a href="javascript:$('#pay').submit();" class="to-checkout">Confirm Order</a>
+            </div>
+
+
+
+        </div>
+    </div>
+</section>
+
+<!-- End shopping-page section -->

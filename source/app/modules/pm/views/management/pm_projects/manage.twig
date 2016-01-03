@@ -1,0 +1,153 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.add_project }}</h3>
+
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,true,'role="form" class="form-horizontal"  method ="post"') }}
+        {{ error }}
+
+        <!------ Title------>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="field-1"> {{ lang.title }}</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="field-1" name="title" value="{{ helper.form.value('title', item.title) }}">
+            </div>
+        </div>
+
+        <div class="form-group-separator"></div>
+
+        <!------ Description ------>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="field-5"> {{ lang.about }}</label>
+
+            <div class="col-sm-10">
+                <textarea class="form-control" cols="5" id="field-5" name="about"  >{{ helper.form.value('about', item.about) }}</textarea>
+            </div>
+        </div>
+
+        <div class="form-group-separator"></div>
+
+        <!------ TAGS ------>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="tagsinput-2">{{ lang.tags }}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="tagsinput-2" value="{{ helper.form.value('tags', item.tags) }}" name="tags" />
+            </div>
+        </div>
+
+
+        <div class="form-group-separator"></div>
+
+        <!------ Team ------>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ lang.team_work }}</label>
+            <div class="col-sm-10">
+                {{  helper.form.dropdown('pm_teams[]', team, helper.form.value('pm_teams[]',team_project),
+                'class="form-control tags" multiple="multiple"')  }}
+            </div>
+        </div>
+
+        <div class="form-group-separator"></div>
+
+        <!------ Supervisor ------>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{lang.supervisor}}</label>
+            <div class="col-sm-10">
+                {{helper.form.dropdown('pm_supervisor_id', user, helper.form.value('pm_supervisor_id',item.pm_supervisor_id),
+                'class="form-control select2"')  }}
+            </div>
+        </div>
+
+        <div class="form-group-separator"></div>
+
+        <!------ Deadline ------>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{lang.deadline}}</label>
+
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <input type="text" class="form-control datepicker" id="deadline"  data-date-format="yyy/mm/dd"  placeholder="{{lang.deadline}}" name="deadline" value="{{ helper.form.value('deadline', item.deadline) }}">
+                    <div class="input-group-addon">
+                        <a href="#"><i class="linecons-calendar"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group-separator"></div>
+
+
+        <div class="form-group">
+
+            <input type="submit" class="btn btn-info btn-single pull-right" value ="{{ lang.submit }}">
+
+            {{ helper.form.close() }}
+        </div>
+
+        </form>
+
+    </div>
+</div>
+
+
+<script src="{{ constant("STYLE_JS") }}/tagsinput/bootstrap-tagsinput.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+
+    $('.datepicker').datepicker({
+        format: 'yyyy/mm/dd',
+        startDate: '-3d'
+    })
+
+    jQuery(document).ready(function ($){
+
+        $("#s2example-1").select2({
+            placeholder: 'Select The Supervisor...',
+            allowClear: true
+        }).on('select2-open', function ()
+        {
+            // Adding Custom Scrollbar
+            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+        });
+    });
+
+
+
+    jQuery(document).ready(function($){
+
+        var i = -1,
+                colors = ['primary', 'secondary', 'red', 'blue', 'warning', 'success', 'purple'];
+
+        colors = shuffleArray(colors);
+
+        $("#tagsinput-2").tagsinput({
+            tagClass: function()
+            {
+                i++;
+                return "label label-" + colors[i%colors.length];
+            }
+        });
+    });
+
+    // Just for demo purpose
+    function shuffleArray(array){
+
+        for (var i = array.length - 1; i > 0; i--)
+        {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+        return array;
+    }
+
+</script>
+
+
+

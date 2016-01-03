@@ -1,0 +1,66 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{lang.issues}}</h3>
+
+        <div class="panel-options">
+            <a href="{{ helper.uri.url('management/pm_issues/manage') }}" class="btn btn-secondary" style="color: #FFF;">
+                {{lang.add}}
+            </a>
+        </div>
+    </div>
+    <div class="panel-body">
+
+        <table class="table table-bordered table-striped" id="">
+            <thead>
+                <tr>
+                    <th>{{lang.title}}</th>
+                    <th>{{lang.project}}</th>
+                    <th>{{lang.priority}}</th>
+                    <th>{{lang.deadline}}</th>
+                    <th>{{lang.opertaions}}</th>
+                </tr>
+            </thead>
+            <tbody class="middle-align">
+                {% for item in items %}
+                    <tr>
+                        <td>
+                            <a href="{{ helper.uri.url('management/pm_issue_details/index', item.pm_issue_id) }} ">
+                               <span style="color:{{ item.color }};">{{ item.title }}</span>
+                            </a>
+                        </td>
+                        <td>{{item.pm_project_id}}</td>
+                        <td><input type="color" value="{%for p in priorities%}{%if item.pm_priority_id == p.pm_priority_id %}{{p.color}}{%endif%}{%endfor%}" disabled></td>
+                        <td>{{item.deadline}}</td>
+                        <td>
+                            <a class="btn btn-info btn-sm" href="{{ helper.uri.url('management/pm_issues/manage', item.pm_issue_id ) }}">{{lang.edit}}</a>
+                            <a href="#" class="btn btn-secondary btn-sm delete_msg" data-url_id="{{ helper.uri.url('management/pm_issues/delete', item.pm_issue_id ) }}" data-toggle="modal" data-target="#deleteMsg" style="color:#fff;">{{lang.delete}}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {{ pagination }}
+    </div>
+</div>
+<div class="modal fade" id="deleteMsg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{lang.system_msg}}</h4>
+            </div>
+            <div class="modal-body">
+                <a>{{lang.delete_item}}</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">{{ lang.no }}</button>
+                <a id="delete_id" class="btn btn-danger" href="url">{{lang.delete}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+{#<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $("#datatable").dataTable();
+    });
+</script>#}
