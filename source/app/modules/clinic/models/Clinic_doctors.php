@@ -26,7 +26,7 @@ class Clinic_doctors extends \Model {
         return [
             'all' => [
                 'clinic_specification_id' => ['required'],
-                'user_id' => ['required', 'numeric'],
+//                'user_id' => ['required', 'numeric'],
                 'description'=>['required'],
                 'period_average'=>['required','numeric']
 

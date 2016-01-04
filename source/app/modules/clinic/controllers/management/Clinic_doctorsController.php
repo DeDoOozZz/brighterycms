@@ -67,13 +67,19 @@ class Clinic_doctorsController extends Brightery_Controller
         $users_fullname = Form_helper::queryToDropdown('users', 'user_id', 'fullname');
         $users_phone = Form_helper::queryToDropdown('user_phones', 'user_id', 'phone');
         $users_email = Form_helper::queryToDropdown('users', 'user_id', 'email');
-
+        
         if ($id)
             $model->clinic_doctor_id = $id;
 
+        echo $this->input->post($this->input->post('criteria')) ;
+        
         if ($_POST)
-            $model->attributes = array_merge($model->attributes, $this->input->post());
-
+        {
+            $model->attributes['user_id'] = $this->input->get('user_id')/*$this->input->post($this->input->post('criteria'))*/;
+            $model->attributes['clinic_specification_id'] = $this->input->post('clinic_specification_id');
+            $model->attributes['description'] = $this->input->post('description');
+            $model->attributes['period_average'] = $this->input->post('period_average');
+        }
         if ($model->save()) {
             Uri_helper::redirect("management/clinic_doctors");
         } else {

@@ -3,17 +3,17 @@
 <div class="form-group">
     <label class="col-sm-2 control-label">{{lang.disease}}</label>
 
-  <div class="col-sm-10">
-    {{ helper.form.dropdown('clinic_disease_template_id', disease, helper.form.value('clinic_disease_template_id',disease.clinic_disease_template_id), 'class="form-control " id="s2example-1" ') }}
-  </div>
+    <div class="col-sm-10">
+        {{ helper.form.dropdown('clinic_disease_template_id', disease, helper.form.value('clinic_disease_template_id',disease.clinic_disease_template_id), 'class="form-control " id="s2example-1" ') }}
+    </div>
 </div>
-  
+
 <div class="form-group">
     <label class="col-sm-2 control-label">{{lang.note}}</label>
 
-  <div class="col-sm-10">
-      <textarea class="form-control" id="note" placeholder="{{ lang.note }}" name="note">{{ helper.form.value('note', disease.note) }}</textarea>
-  </div>
+    <div class="col-sm-10">
+        <textarea class="form-control" id="note" placeholder="{{ lang.note }}" name="note">{{ helper.form.value('note', disease.note) }}</textarea>
+    </div>
 </div>
 <div class="patient-group-separator"></div>
 
@@ -27,49 +27,50 @@
 {{ helper.form.close()}}
 <script src="{{ constant('STYLE_JS') }}/select2/select2.min.js"></script>
 <script type="text/javascript">
-        jQuery(document).ready(function ($)
-        {
-            $("#s2example-1").select2({
-                placeholder: 'Select Disease...',
-                allowClear: true
-            }).on('select2-open', function ()
+            jQuery(document).ready(function ($)
             {
-                // Adding Custom Scrollbar
-                $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                $("#s2example-1").select2({
+                    placeholder: 'Select Disease...',
+                    allowClear: true
+                }).on('select2-open', function ()
+                {
+                    // Adding Custom Scrollbar
+                    $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                });
+
+                $("#manage_patient_disese").submit(function () {
+                    $.post('{{ helper.uri.url('management/clinic_patient_diseases/manage')}}/{{ op }}/{{ id }}', $(this).serialize(), function (res) {
+                        obj = jQuery.parseJSON(res);
+                        if (obj.sucess == 0) {
+                            $('.modal_errors').html(obj.errors);
+                        } else {
+                            $('#myModal').modal('hide');
+                            if ('{{ op }}' == 'add') {
+                                $('.data_diseases tbody').append('<tr class="disease_' + obj.id + '">'
+                                        + '<td>' + obj.title + '</td>'
+                                        + '<td>' + obj.note + '</td>'
+                                        + '<td>'
+                                        + '<a href="javascript:patient.diseases("edit",' + obj.id + ');" class="btn btn-secondary btn-sm show-diseases" href="#" data-toggle="modal" data-target="#myModal" rel="edit" data-id="' + obj.id + '">{{lang.edit}}</a>'
+                                        + '<a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patient_diseases/delete') }}/' + obj.id + '">{{ lang.delete }}</a>'
+                                        + '</td></tr>');
+                            }
+                            else
+                            {
+                                $('.data_diseases tbody tr.disease_' + obj.id).html(
+                                        +'<td>' + obj.title + '</td>'
+                                        + '<td>' + obj.title + '</td>'
+                                        + '<td>' + obj.note + '</td>'
+                                        + '<td>'
+                                        + '<a href="javascript:patient.diseases("edit",' + obj.id + ');" class="btn btn-secondary btn-sm show-diseases" href="#" data-toggle="modal" data-target="#myModal" rel="edit" data-id="' + obj.id + '">{{lang.edit}}</a>'
+                                        + '<a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patient_diseases/delete') }}/' + obj.id + '">{{ lang.delete }}</a>'
+                                        + '</td>');
+
+                            }
+                        }
+
+                    });
+                    return false;
+
+                });
             });
-
-            $("#manage_patient_disese").submit(function () {
-            $.post('{{ helper.uri.url('management/clinic_patient_diseases/manage')}}/{{ op }}/{{ id }}', $(this).serialize(), function (res) {
-                obj = jQuery.parseJSON(res);
-                if (obj.sucess == 0) {
-                    $('.modal_errors').html(obj.errors);
-                } else {
-                    $('#myModal').modal('hide');
-                    if ('{{ op }}' == 'add'){
-                        $('.data_diseases tbody').append('<tr class="disease_'+ obj.id +'">'
-                                + '<td>'+ obj.title +'</td>'
-                                + '<td>'+ obj.note +'</td>'
-                                + '<td>'
-                                + '<a href="javascript:patient.diseases("edit",' + obj.id +');" class="btn btn-secondary btn-sm show-diseases" href="#" data-toggle="modal" data-target="#myModal" rel="edit" data-id="' + obj.id + '">{{lang.edit}}</a>'
-                                + '<a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patient_diseases/delete') }}/'+ obj.id +'">{{ lang.delete }}</a>'
-                                + '</td></tr>');
-                    }
-                    else
-                    {
-                        $('.data_diseases tbody tr.disease_' + obj.id).html(
-                                + '<td>'+ obj.title +'</td>'
-                                + '<td>'+ obj.note +'</td>'
-                                + '<td>'
-                                + '<a href="javascript:patient.diseases("edit",' + obj.id +');" class="btn btn-secondary btn-sm show-diseases" href="#" data-toggle="modal" data-target="#myModal" rel="edit" data-id="' + obj.id + '">{{lang.edit}}</a>'
-                                + '<a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patient_diseases/delete') }}/'+ obj.id +'">{{ lang.delete }}</a>'
-                                + '</td>');
-                        
-                    }
-                }
-
-            });
-            return false;
-
-        });
-    });
 </script>

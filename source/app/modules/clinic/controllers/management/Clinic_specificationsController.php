@@ -67,7 +67,7 @@ class Clinic_specificationsController extends Brightery_Controller
             }
             Uri_helper::redirect("management/clinic_specifications");
         }
-
+        
         return $this->render('clinic_specifications/manage', [
             'item' => $id ? $model->get() : null,
             'branches' => $branches->get(),

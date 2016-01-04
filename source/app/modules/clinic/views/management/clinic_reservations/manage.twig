@@ -1,3 +1,4 @@
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">{{ lang.clinic_reservations }}</h3>
@@ -8,7 +9,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="clinic_schedule_id">{{ lang.doctor }}</label>
             <div class="col-sm-10">
-                {{ helper.form.dropdown('clinic_schedule_id', schedule, helper.form.value('clinic_schedule_id', item.clinic_schedule_id), 'class="form-control select" ') }} 
+                {{ helper.form.dropdown('clinic_schedule_id', doctors, helper.form.value('user_id', item.fullname), 'class="form-control select" ') }} 
             </div>
         </div>
         <div class="form-group-separator"></div>
@@ -41,42 +42,42 @@
                 <div class="col-sm-10">
                     <div class="col-sm-3" data-toggle="modal" data-target="#myModal">
                         <div class="time-block">
-                              <i class="fa fa-unlock"></i> 8:15
+                            <i class="fa fa-unlock"></i> 8:15
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="time-block not-available">
-                              <i class="fa fa-unlock"></i> 8:15
+                            <i class="fa fa-unlock"></i> 8:15
                         </div>
                     </div>
                     <div class="col-sm-3" data-toggle="modal" data-target="#myModal">
                         <div class="time-block">
-                              <i class="fa fa-unlock"></i> 8:15
+                            <i class="fa fa-unlock"></i> 8:15
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="time-block not-available">
-                              <i class="fa fa-unlock"></i> 8:15
+                            <i class="fa fa-unlock"></i> 8:15
                         </div>
                     </div>
                     <div class="col-sm-3" data-toggle="modal" data-target="#myModal">
                         <div class="time-block">
-                              <i class="fa fa-unlock"></i> 8:15
+                            <i class="fa fa-unlock"></i> 8:15
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="time-block not-available">
-                              <i class="fa fa-unlock"></i> 8:15
+                            <i class="fa fa-unlock"></i> 8:15
                         </div>
                     </div>
                     <div class="col-sm-3" data-toggle="modal" data-target="#myModal">
                         <div class="time-block">
-                              <i class="fa fa-unlock"></i> 8:15
+                            <i class="fa fa-unlock"></i> 8:15
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="time-block not-available">
-                              <i class="fa fa-unlock"></i> 8:15
+                            <i class="fa fa-unlock"></i> 8:15
                         </div>
                     </div>
                 </div>
@@ -102,7 +103,7 @@
     <div class="modal-dialog">
         <div class="modal-content ">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><spanaria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title " id="myModalLabel">{{lang.reservation_details}}</h4>
             </div>
             <div class="modal-body">
@@ -124,6 +125,10 @@
                     <label class="col-sm-2 control-label"></label>
                     <div class="col-sm-10">
                         <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+                        {#                        <button type="button" class="btn btn-warning" style="float: right;" value="" >Add New User</button>#}
+                        <a href="{{ helper.uri.url('management/users/manage') }}" class="btn btn-warning" style="color: #FFF;">
+                            Add New User
+                        </a>
                     </div>
                 </div>
             </div>
@@ -133,22 +138,22 @@
 <script src="{{ constant('STYLE_JS') }}/select2/select2.min.js"></script>
 <script src="{{ constant('STYLE_JS') }}/timepicker/bootstrap-timepicker.min.js"></script>
 <script type="text/javascript">
-                            jQuery(document).ready(function ($)
-                            {
-                                $(".select").select2({
-                                    placeholder: '{{lang.select_specifications}} ',
-                                    allowClear: true
-                                }).on('select2-open', function ()
-                                {
-                                    // Adding Custom Scrollbar
-                                    $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                                });
+    jQuery(document).ready(function ($)
+    {
+        $(".select").select2({
+            placeholder: '{{lang.select_specifications}} ',
+            allowClear: true
+        }).on('select2-open', function ()
+        {
+            // Adding Custom Scrollbar
+            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+        });
 
-                                $(".search-time").click(function () {
-                                    $(".search-result").show();
-                                });
+        $(".search-time").click(function () {
+            $(".search-result").show();
+        });
 
-                            });
+    });
 
 </script>
 <style>
@@ -169,7 +174,7 @@
         float: left;
         width: 100%;
     }
-     .reservation-schedule-details .form-group {
+    .reservation-schedule-details .form-group {
         margin-bottom: 15px;
         float: left;
         width: 100%;
@@ -187,5 +192,5 @@
         color:silver;
         background-color: #f1f1f1;
     }
-    
+
 </style>

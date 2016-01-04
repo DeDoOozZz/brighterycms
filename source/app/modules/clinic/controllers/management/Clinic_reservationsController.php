@@ -28,19 +28,25 @@ class Clinic_reservationsController extends Brightery_Controller
         $model = new \modules\clinic\models\Clinic_reservations();
         $patient = Form_helper::queryToDropdown('users', 'clinic_patient_id', 'fullname', null, 'join clinic_patients on clinic_patients.user_id=users.user_id');
         $status = ['attend' => $this->Language->phrase('attend'), 'late' => $this->Language->phrase('late'), 'entered' => $this->Language->phrase('entered'), 'canceled' => $this->Language->phrase('canceled')];
-        $doctor = Form_helper::queryToDropdown('users', 'clinic_doctor_id', 'fullname', null, 'join clinic_doctors on clinic_doctors.user_id=users.user_id');
-        $model->_select = 'clinic_reservations.*,`clinic_doctor_reservation_types`.`title`,`clinic_schedules`.`clinic_schedule_id`, `users`.`fullname`';
-        $model->_joins = [
-            'clinic_schedules' => ['`clinic_schedules`.`clinic_schedule_id`=`clinic_reservations`.`clinic_schedule_id`', 'INNER'],
-            'users' => ['`users`.`user_id`=`clinic_reservations`.`user_id`', 'INNER'],
-            'clinic_doctor_reservation_types' => ['`clinic_doctor_reservation_types`.`clinic_doctor_reservation_type_id`=`clinic_reservations`.`clinic_doctor_reservation_type_id`', 'INNER'],
-        ];
+        $doctor = Form_helper::queryToDropdown('users', 'clinic_doctor_id', 'fullname', null, 'join clinic_doctors on clinic_doctors    .user_id = users.user_id');
+//        $model->_select = 'clinic_reservations.*,`clinic_doctor_reservation_types`.`title`,`clinic_schedules`.`clinic_schedule_id`, `users`.`fullname`';
+//        $model->_joins = [
+//            'clinic_schedules' => ['`clinic_schedules`.`clinic_schedule_id`=`clinic_reservations`.`clinic_schedule_id`', 'INNER'],
+//            'users' => ['`users`.`user_id`=`clinic_reservations`.`user_id`', 'INNER'],
+//            'clinic_doctor_reservation_types' => ['`clinic_doctor_reservation_types`.`clinic_doctor_reservation_type_id`=`clinic_reservations`.`clinic_doctor_reservation_type_id`', 'INNER'],
+//        ];
+        $model->_select = "clinic_reservations.* , `users`.`fullname` ";
+        
+        $model->_joins = [ 'users' => ["`users`.`user_id` = `clinic_reservations`.`user_id`"],
+            ];
+        
+//        $type->_select = Form_helper::queryToDropdown('clinic_doctor_reservation_types', 'clinic_doctor_reservation_type_id', 'title', null, 'join clinic_doctors on clinic_patients.user_id=users.user_id');
         $this->load->library('pagination');
         $model->_limit = $this->config->get('limit');
         $model->_offset = $offset;
         $config = [
             'url' => Uri_helper::url('management/clinic_reservations/index'),
-            'total' => $model->get(true),
+//            'total' => $model->get(true),
             'limit' => $model->_limit,
             'offset' => $model->_offset
         ];
@@ -62,6 +68,7 @@ class Clinic_reservationsController extends Brightery_Controller
         $model = new \modules\clinic\models\Clinic_reservations();
         $model->language_id = $this->language->getDefaultLanguage();
 
+        $doctor = Form_helper::queryToDropdown('users', 'clinic_doctor_id', 'fullname', null, 'join clinic_doctors on clinic_doctors.user_id = users.user_id');
         $model->attributes = $this->Input->input['post'];
         $clinic_reservation_status = ['confirmed' => $this->Language->phrase('confirmed'),
             'canceled' => $this->Language->phrase('canceled'),
@@ -85,7 +92,8 @@ class Clinic_reservationsController extends Brightery_Controller
             'patient' => $patients,
             'schedule' => $schedules,
             'reservation_type' => $reservation_type,
-            'clinic_reservation_status' => $clinic_reservation_status
+            'clinic_reservation_status' => $clinic_reservation_status,
+            'doctors' => $doctor
         ]);
     }
 
