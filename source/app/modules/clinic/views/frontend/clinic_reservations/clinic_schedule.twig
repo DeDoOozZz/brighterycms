@@ -158,25 +158,39 @@
             {{date}}
             <table>
                 <thead>
-                    <th class="fc-header">Times</th>
+                <th class="fc-header">Times</th>
                     {% for item in dates %}
                     <th class="fc-header">{{item.day}} <br><span class="reservation-day">{{item.date}}</span><br>
-                    {% for i in item_schedule %}
-                        {% if i.day == item.day %}
-                            <span class="reservation-day">{{i.from_time}} - {{i.to_time}}</span>
-                        {% endif %}
-                    {%endfor%}
+                        {% for i in item_schedule %}
+                            {% if i.day == item.day %}
+                                <span class="reservation-day">{{i.from_time}} - {{i.to_time}}</span>
+                            {% endif %}
+                        {%endfor%}
                     </th>
-                    {%endfor%}
+                {%endfor%}
                 </thead>
                 <tbody>
                     {% for final in finals %}
                         <tr>
                             <td class="fc-record times">{{final.time}}</td>
                             {% for itt in final.schedule|cast_to_array %}
-                                {% if  not itt.clinic_schedule_id %}
+                                {#                                {% if not itt.from_time %}
+                                                                    <td class="fc-record vacation last-record"></td>
+                                                                {%elseif itt.status == 'reserved' and itt.time == final.time %}
+                                                                    <td class="fc-record reserved"><i class="fa fa-lock"></i>Reserved</td>
+                                                                {%elseif itt.status == 'except' %}
+                                                                    <td class="fc-record vacation last-record"></td>
+                                                                {%elseif itt.to_time < final.time %}
+                                                                    <td class="fc-record vacation last-record"></td>
+                                                                {%elseif itt.from_time > final.time %}
+                                                                    <td class="fc-record vacation last-record"></td>
+                                                                {%elseif itt.from_time <= final.time and final.time <= itt.to_time %}
+                                                                    <td class="fc-record available" id="id_{{i}}" data-id="id_{{i}}" data-toggle="modal" data-date="{{itt.date}}" data-time="{{final.time}}" data-target='#myModal2'><i class="fa fa-unlock"></i> Available</td>
+                                                                    {%set i = i + 1%}
+                                                                {%endif%}#}
+                                {% if not itt.from_time %}
                                     <td class="fc-record vacation last-record"></td>
-                                {%elseif itt.status == 'reserved' %}
+                                {%elseif itt.status == 'reserved' and itt.time == final.time %}
                                     <td class="fc-record reserved"><i class="fa fa-lock"></i>Reserved</td>
                                 {%elseif itt.status == 'except' %}
                                     <td class="fc-record vacation last-record"></td>
@@ -185,7 +199,7 @@
                                 {%elseif itt.from_time > final.time %}
                                     <td class="fc-record vacation last-record"></td>
                                 {%elseif itt.from_time <= final.time and final.time <= itt.to_time %}
-                                    <td class="fc-record available" id="id_{{i}}" data-id="id_{{i}}" data-toggle="modal" data-date="{{itt.date}}" data-clinic_schedule_id="{{itt.clinic_schedule_id}}" data-time="{{final.time}}" data-target="#myModal2"><i class="fa fa-unlock"></i> Available</td>
+                                    <td class="fc-record available" id="id_{{i}}" data-id="id_{{i}}" data-toggle="modal" data-date="{{itt.date}}" data-time="{{final.time}}" data-target='#myModal2'><i class="fa fa-unlock"></i> Available</td>
                                     {%set i = i + 1%}
                                 {%endif%}
                             {%endfor%}
@@ -204,7 +218,7 @@
                 <h4 class="modal-title" id="myModalLabel">Reservation</h4>
             </div>
             <div class="modal-body">
-                <form role="form" id='login_form' class="form-horizontal" {%if user != null%}hidden{%endif%}>
+                <form role="form" id='login_form' class="form-horizontal" {%if user == null%}hidden{%endif%}>
                     <h2 class="sub-title-reservation">Login</h2>
                     <div class="form-group">
                         <label for="field-5" class="col-sm-3 control-label">Email</label>
@@ -236,7 +250,7 @@
 
                 </form>
 
-                <form role="form"  id='Reserve' class="form-horizontal"  {%if user == null%}hidden{%endif%}>   
+                <form role="form"  id='Reserve' class="form-horizontal"  {%if user != null%}hidden{%endif%}>   
                     <div class="form-group"  style="display: none;">
                         <div class="col-sm-9">
                             <input type="hidden" value name="date" id="date" class="form-control ">
@@ -249,7 +263,7 @@
                     </div>
                     <div class="form-group"  style="display: none;">
                         <div class="col-sm-9">
-                            <input type="hidden" value name="clinic_schedule_id" id="clinic_schedule_id" class="form-control">
+                            <input type="hidden" value {#name="clinic_schedule_id"#} {#id="clinic_schedule_id"#} class="form-control">
                         </div>
                     </div>
                     <div class="form-group"  style="display: none;">
@@ -259,7 +273,7 @@
                     </div>
                     <div class="form-group"  style="display: none;">
                         <div class="col-sm-9">
-                            <input type="hidden" value name="email" id="email" class="form-control">
+                            <input type="text" value name="email" id="email" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
@@ -305,13 +319,14 @@
                             });
                             $('#Reserve').submit(function () {
                                 var id = '"#' + $('#id').val() + '"';
-                                alert(id);
+    {#                                alert(id);#}
     {#            alert(id);#}
                 $.post("{{helper.uri.url('clinic_reservations/save')}}", $(this).serialize(), function (status) {
-                    if (!status.connected == 1) {
+                    if (status.connected == 1) {
                         $('#myModal').hide();
                         $(id).removeClass('availabe');
                         $(id).addClass('reserved');
+                        alert('hskag');
                     }
                 });
                 return false;
@@ -320,11 +335,11 @@
                 var date = $(this).data('date');
                 var time = $(this).data('time');
                 var id = $(this).data('id');
-                var clinic_schedule_id = $(this).data('clinic_schedule_id');
+    {#                var clinic_schedule_id = $(this).data('clinic_schedule_id');#}
                 $("#date").attr('value', date);
                 $("#id").attr('value', id);
                 $("#time").attr('value', time);
-                $("#clinic_schedule_id").attr('value', clinic_schedule_id);
+    {#                $("#clinic_schedule_id").attr('value', clinic_schedule_id);#}
             });
             $('#datepicker').change(function () {
                 var date = $('#datepicker').val();

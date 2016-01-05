@@ -110,7 +110,7 @@ class Clinic_reservationController extends Brightery_Controller {
 
         /////////////////////////////Clinic Schedules///////////////////////////
         $model_schedule = new \modules\clinic\models\Clinic_schedules();
-        $model_schedule->_select = 'clinic_schedule_id ,clinic_doctor_id, day , from_time , to_time ';
+        $model_schedule->_select = 'clinic_doctor_id, day , from_time , to_time ';
         $model_schedule->clinic_doctor_id = $doctor_id;
         $time = $model_schedule->get();
         $from = $time[0]->from_time;
@@ -127,11 +127,12 @@ class Clinic_reservationController extends Brightery_Controller {
          ;
         $result = $model_schedule->get();
         $time = $model_schedule->get_time($from, $to, $period, $doctor_id);
-        $exceptions = $model_schedule->exceptions($doctor_id);
         $date_new = $model_schedule->get_newDate();
         $reserved = $model_schedule->get_schedule($date_new, $time, $doctor_id);
+        $exceptions = $model_schedule->exceptions($doctor_id);
         $model_schedule->pre($reserved, $result, $date_new);
         $final = $model_schedule->Final_Array($reserved, $exceptions);
+//        print_r($final);
         $userInfo = $this->permissions->checkUserCredentials();
         return $this->render('clinic_reservations/clinic_schedule', [
                     'dates' => $date_new,
@@ -229,16 +230,16 @@ class Clinic_reservationController extends Brightery_Controller {
      */
 
     public function saveAction() {
-        $email = $this->input->post('email');
-        $date = $this->input->post('date');
-        $time = $this->input->post('time');
-        $clinic_schedule_id = $this->input->post('clinic_schedule_id');
+        echo $email = $this->input->post('email');
+        echo $date = $this->input->post('date');
+        echo $time = $this->input->post('time');
+//        $clinic_schedule_id = $this->input->post('clinic_schedule_id');
         $clinic_doctor_reservation_type_id = $this->input->post('clinic_doctor_reservation_type_id');
         print_r($_POST);
         $model = new \modules\users\models\Users();
         $model->_select = "user_id";
         $model->email = $email;
-        if ($model->get()) {
+        if (!$model->get()) {
             $user = $model->get();
             echo $user_id = $user[0]->user_id;
             $model_res = new \modules\clinic\models\Clinic_reservations(FALSE);
@@ -246,7 +247,7 @@ class Clinic_reservationController extends Brightery_Controller {
             $model_res->time = $time;
             $model_res->date = $date;
             $model_res->user_id = $user_id;
-            $model_res->clinic_schedule_id = $clinic_schedule_id;
+//            $model_res->clinic_schedule_id = $clinic_schedule_id;
             $model_res->clinic_doctor_reservation_type_id = $clinic_doctor_reservation_type_id;
             $model_res->clinic_reservation_status = 'pending';
             $model_res->status = '';
