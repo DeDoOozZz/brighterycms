@@ -14,15 +14,13 @@ defined('ROOT') OR exit('No direct script access allowed');
  * @link http://store.brightery.com/module/general/clinic
  * @controller Clinic_reservations
  * */
-class Clinic_reservationsController extends Brightery_Controller
-{
+class Clinic_reservationsController extends Brightery_Controller {
 
     protected $interface = 'management';
     protected $layout = 'default';
     protected $auth = true;
 
-    public function indexAction($offset = 0)
-    {
+    public function indexAction($offset = 0) {
         $this->permission('index');
         $this->language->load("clinic_reservations");
         $model = new \modules\clinic\models\Clinic_reservations();
@@ -36,10 +34,10 @@ class Clinic_reservationsController extends Brightery_Controller
 //            'clinic_doctor_reservation_types' => ['`clinic_doctor_reservation_types`.`clinic_doctor_reservation_type_id`=`clinic_reservations`.`clinic_doctor_reservation_type_id`', 'INNER'],
 //        ];
         $model->_select = "clinic_reservations.* , `users`.`fullname` ";
-        
+
         $model->_joins = [ 'users' => ["`users`.`user_id` = `clinic_reservations`.`user_id`"],
-            ];
-        
+        ];
+
 //        $type->_select = Form_helper::queryToDropdown('clinic_doctor_reservation_types', 'clinic_doctor_reservation_type_id', 'title', null, 'join clinic_doctors on clinic_patients.user_id=users.user_id');
         $this->load->library('pagination');
         $model->_limit = $this->config->get('limit');
@@ -52,16 +50,15 @@ class Clinic_reservationsController extends Brightery_Controller
         ];
 
         return $this->render('clinic_reservations/index', [
-            'items' => $model->get(),
-            'patient' => $patient,
-            'doctor' => $doctor,
-            'status' => $status,
-            'pagination' => $this->Pagination->generate($config)
+                    'items' => $model->get(),
+                    'patient' => $patient,
+                    'doctor' => $doctor,
+                    'status' => $status,
+                    'pagination' => $this->Pagination->generate($config)
         ]);
     }
 
-    public function manageAction($id = false)
-    {
+    public function manageAction($id = false) {
         $this->permission('manage');
 
         $this->language->load("clinic_reservations");
@@ -86,19 +83,21 @@ class Clinic_reservationsController extends Brightery_Controller
         if ($model->save()) {
             Uri_helper::redirect("management/clinic_reservations");
         }
-
+$final = null;
+if($_POST)
+    $final= $this->getSearch();
         return $this->render('clinic_reservations/manage', [
-            'item' => $id ? $model->get() : null,
-            'patient' => $patients,
-            'schedule' => $schedules,
-            'reservation_type' => $reservation_type,
-            'clinic_reservation_status' => $clinic_reservation_status,
-            'doctors' => $doctor
+        'item' => $id ? $model->get() : null,
+        'patient' => $patients,
+        'schedule' => $schedules,
+        'reservation_type' => $reservation_type,
+        'clinic_reservation_status' => $clinic_reservation_status,
+        'doctors' => $doctor,
+//        'final' => $final
         ]);
     }
 
-    public function deleteAction($id = false)
-    {
+    public function deleteAction($id = false) {
         $this->permission('delete');
 
         if (!$id) {
@@ -110,8 +109,38 @@ class Clinic_reservationsController extends Brightery_Controller
             Uri_helper::redirect("management/clinic_reservations");
     }
 
-    public function get_doctorAction()
-    {
+    public function getSearchAction() {
+//        echo "hdjlsahd";
+//        print_r($_POST);
+        $this->layout = 'ajax';
+        $doctor_id = $this->input->post('clinic_dcotor_id');
+        $date = $this->input->post('date');
+        $model_period = new \modules\clinic\models\Clinic_doctors();
+        $model_period->_select = 'period_average ';
+        $model_period->clinic_doctor_id = $doctor_id;
+        $period_time = $model_period->get();
+        $average_time = $period_time->period_average;
+//        print _r($period);
+//        echo $doctor_id ;
+        /////////////////////get day////////////////////////////////////////
+        $timestamp = strtotime($date);
+        $day = date("l", $timestamp);
+        $model_date = new \modules\clinic\models\Clinic_schedules();
+        $model_date->_select = 'from_time , to_time ';
+        $model_date->clinic_doctor_id = $doctor_id;
+        $model_date->day = $day;
+        $period = $model_date->get();
+        $from = $period[0]->from_time;
+        $to = $period[0]->to_time;
+
+        $time = $model_date->get_time($from, $to, $average_time, $doctor_id);
+        $final = $model_date->get_searchResult($date, $time, $doctor_id);
+//        print_r($final);
+//        exit();
+        return json_encode(['result' => $final]);
+    }
+
+    public function get_doctorAction() {
         $id = $this->input->post('id');
         $data = $this->Database->query("select clinic_doctor_reservation_type_id,title from clinic_doctor_reservation_types where clinic_doctor_id=$id")->result();
         if (!$data) {

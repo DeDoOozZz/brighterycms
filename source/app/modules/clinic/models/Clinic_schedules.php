@@ -97,6 +97,7 @@ class Clinic_schedules extends \Model {
                 break;
             $x = 0;
         }
+
         return $time;
     }
 
@@ -129,21 +130,15 @@ class Clinic_schedules extends \Model {
 
         /////////////////////////////Clinic Schedules///////////////////////////
         $model_schedule = new Clinic_schedules();
-//        $model_schedule->_select = 'clinic_schedule_id, day , from_time , to_time ';
         $model_schedule->_select = 'day , from_time , to_time ';
         $model_schedule->clinic_doctor_id = $doctor_id;
         $res = $model_schedule->get();
-//        $res = Clinic_schedules::resultchange();
-//        print_r($res);
-//        exit();
         foreach ($date as $key => $value) {
             $day = $date[$key]->day;
             $d = $date[$key]->date;
-            $id = $date[$key]->clinic_schedule_id;
             foreach ($i as $k => $v) {
                 $i[$k]->schedule->$day->date = $d;
                 $i[$k]->schedule->$day->day = $day;
-//                $i[$k]->schedule->$day->clinic_schedule_id = $id;
                 $i[$k]->schedule->$day->status = '';
                 $i[$k]->schedule->$day->from_time = '';
                 $i[$k]->schedule->$day->to_time = '';
@@ -154,12 +149,8 @@ class Clinic_schedules extends \Model {
                 }
             }
         }
-//        print_r($res);
-//        exit();
         $count = 0;
         foreach ($res as $keyy => $value) {
-
-//            $clinic_schedule_id = $res[$keyy]->clinic_schedule_id;
             /////////////////////////////Clinic Reservations///////////////////////////
             $model_reservations = new Clinic_reservations();
             $model_reservations->_select = 'clinic_reservation_id, user_id , date , time ';
@@ -168,36 +159,14 @@ class Clinic_schedules extends \Model {
             $dates = $model_reservations->get();
 
             foreach ($dates as $key => $value) {
-                print_r($dates);
-//                exit();
                 foreach ($date_new as $keyy => $valuee) {
-//                    print_r($date_new);
-//                    exit();
-//                    exit();
-//                    $i[$time]->schedule->clinic_schedule_id = $schedule_id;
                     if ($date_new[$keyy]->date == $dates[$key]->date) {
-//                        echo $date_new[$keyy]->date;
-//                        echo "==";
-//                        echo $dates[$key]->date; 
-//                        $schedule_id = $dates[$key]->clinic_schedule_id;
                         $time = $dates[$key]->time;
                         $date = $dates[$key]->date;
                         $user_id = $dates[$key]->user_id;
-
-//                        $string = "2010-11-24";
-//                        exit();
                         /////////////////////get day////////////////////////////////////////
                         $timestamp = strtotime($date);
                         $day = date("l", $timestamp);
-//                        $day_id = new Clinic_schedules();
-//                        $day_id->select = 'day';
-////                        $day_id->clinic_schedule_id = $dates[$key]->clinic_schedule_id;
-//                        $day_id->clinic_doctor_id = $dates[$key]->clinic_doctor_id;
-//                        $res_day = $day_id->get();
-//                        print_r($res_day);
-//                        exit();
-//                        echo $day = $res_day[$count++]->day;
-//                        exit();
                         //////////////////////get full name from users//////////////////////
                         $user = new \modules\users\models\Users();
                         $user->_select = 'fullname';
@@ -207,54 +176,28 @@ class Clinic_schedules extends \Model {
                         $fullname = $res_name->fullname;
 
                         //////////////////insert in array///////////////////////////////////
-//                        print_r($i[$time]->schedule->{$day}->status );
-//                        exit();
                         if (isset($i[$time]->schedule->{$day})) {
                             $test = $i[$time]->schedule->{$day};
-//                        print_r($test);
-
                             $test->time = $time;
                             $test->day = $day;
                             $test->date = $date;
                             $test->fullname = $fullname;
                             $test->status = 'reserved';
                         }
-//                        print_r($i);
-//                        exit();
-//                        $i[$time]->schedule->{$day}->time = $time;
-//                        $i[$time]->schedule->{$day}->day = $day;
-//                        $i[$time]->schedule->{$day}->date = $date;
-//                        $i[$time]->schedule->{$day}->fullname = $fullname;
-//                        $i[$time]->schedule->{$day}->status = 'reserved';
                     }
                 }
             }
         }
-//        exit();
-//        print_r($i);
-//        exit();
         Clinic_schedules::$result_final = $res;
         return $i;
     }
 
     function exceptions($doctor_id) {
-        /////////////////////////////Clinic Schedules///////////////////////////
-//        $model_schedule = new Clinic_schedules();
-//        $model_schedule->_select = 'day , from_time , to_time ';
-////        $model_schedule->_select = 'clinic_schedule_id, day , from_time , to_time ';
-//        $model_schedule->clinic_doctor_id = $doctor_id;
-//        $res = $model_schedule->get();
-//        print_r($res);
-//        exit();
-//        var_dump(Clinic_schedules::$res) ;
-//        Clinic_schedules::$result_final ;
         $res = Clinic_schedules::$result_final;
         foreach ($res as $key => $value) {
             $exceptions = new exceptions();
             $exception = new Clinic_schedule_exceptions();
-//            $exception->_select = 'clinic_schedule_id, date, from_time, to_time';
             $exception->_select = 'date, from_time, to_time';
-//            $exception->clinic_schedule_id = $res[$key]->clinic_schedule_id;
             $exception->clinic_doctor_id = $doctor_id;
             $res_exceptions = $exception->get();
             $date = $res_exceptions[$key]->date;
@@ -264,7 +207,6 @@ class Clinic_schedules extends \Model {
             /////////////////////get day////////////////////////////////////////
             $day_id = new Clinic_schedules();
             $day_id->_select = 'day';
-//            $day_id->clinic_schedule_id = $res[$key]->clinic_schedule_id;
             $res_day = $day_id->get();
 
             $day = $res_day[$key]->day;
@@ -289,7 +231,6 @@ class Clinic_schedules extends \Model {
         foreach ($result as $key => $value) {
             foreach ($date as $k => $v) {
                 if ($result[$key]->day == $date[$k]->day) {
-//                    $date[$k]->clinic_schedule_id = $result[$key]->clinic_schedule_id;
                     break;
                 }
             }
@@ -298,11 +239,9 @@ class Clinic_schedules extends \Model {
         foreach ($date as $key => $value) {
             $day = $date[$key]->day;
             $d = $date[$key]->date;
-//            $id = $date[$key]->clinic_schedule_id;
             foreach ($reserved as $k => $v) {
                 $reserved[$k]->schedule->$day->date = $d;
                 $reserved[$k]->schedule->$day->day = $day;
-//                $reserved[$k]->schedule->$day->clinic_schedule_id = $id;
                 $reserved[$k]->schedule->$day->status;
             }
         }
@@ -341,6 +280,75 @@ class Clinic_schedules extends \Model {
                     $reserved[$key]->schedule->$date[$i]->status = 'except';
         }
         return $reserved;
+    }
+
+    public function get_searchResult($date, $time, $doctor_id) {
+        $i = 0;
+        $x = 0;
+//        $final_result = [];
+        foreach ($time as $key) {
+            $model_rev = new \modules\clinic\models\Clinic_reservations();
+            $model_rev->_select = 'user_id , date , time';
+            $model_rev->time = $key;
+            $model_rev->date = $date;
+            $model_rev->clinic_doctor_id = $doctor_id;
+            $model_rev->clinic_reservation_status = "confirmed";
+            $result_f = $model_rev->get();
+            $user_id = $result_f[0]->user_id;
+            $time_r = $result_f[0]->time;
+            $date_r = $result_f[0]->date;
+            if ($model_rev->get()) {
+//                echo $time->$key->user_id = $user_id;
+                $result[$i]->user_id = $user_id;
+                $result[$i]->date = $date_r;
+                $result[$i]->time = $time_r;
+                $i++;
+            }
+        }
+
+        $model_ex = new \modules\clinic\models\Clinic_schedule_exceptions();
+        $model_ex->select = '';
+        $model_ex->clinic_doctor_id = $doctor_id;
+        $model_ex->date = $date;
+        $exception = $model_ex->get();
+
+        $times = [];
+        foreach ($time as $value) {
+            $times[$value] = '';
+        }
+        foreach ($exception as $key => $v) {
+            $ffff = strtotime("1970-01-01 $v->from_time UTC");
+            $tttt = strtotime("1970-01-01 $v->to_time UTC");
+            foreach ($times as $k => $value) {
+                $exxxx = strtotime("1970-01-01 $k UTC");
+                if ($exxxx == $ffff) {
+                    $times[$k]->status = 'except';
+                } elseif ($exxxx == $tttt) {
+                    $times[$k]->status = 'except';
+                } elseif ($exxxx > $ffff && $exxxx < $tttt) {
+                    $times[$k]->status = 'except';
+                }
+            }
+        }
+        
+        $model_re = new \modules\clinic\models\Clinic_reservations();
+        $model_re->select = '';
+        $model_re->clinic_doctor_id = $doctor_id;
+        $model_re->date = $date;
+        $reservation = $model_re->get();
+//        print_r($reservation);
+//        exit();
+        foreach ($reservation as $key => $v) {
+            $ffff = strtotime("1970-01-01 $v->time UTC");
+//            $tttt = strtotime("1970-01-01 $v->to_time UTC");
+            foreach ($times as $k => $value) {
+                $exxxx = strtotime("1970-01-01 $k UTC");
+                if ($exxxx == $ffff) {
+                    $times[$k]->status = 'reserved';
+                }
+            }
+        }
+        return $times ;
     }
 
 }

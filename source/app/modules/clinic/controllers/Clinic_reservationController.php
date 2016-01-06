@@ -145,7 +145,7 @@ class Clinic_reservationController extends Brightery_Controller {
                     'type' => $type_result,
         ]);
     }
-
+    
     /* public function indexAction() {
       $this->language->load("clinic_reservations");
       $searchkey = $this->input->get('searchkey');
@@ -239,7 +239,7 @@ class Clinic_reservationController extends Brightery_Controller {
         $model = new \modules\users\models\Users();
         $model->_select = "user_id";
         $model->email = $email;
-        if (!$model->get()) {
+        if ($model->get()) {
             $user = $model->get();
             echo $user_id = $user[0]->user_id;
             $model_res = new \modules\clinic\models\Clinic_reservations(FALSE);
@@ -251,6 +251,8 @@ class Clinic_reservationController extends Brightery_Controller {
             $model_res->clinic_doctor_reservation_type_id = $clinic_doctor_reservation_type_id;
             $model_res->clinic_reservation_status = 'pending';
             $model_res->status = '';
+//            print_r($model_res);
+//            exit();
             if ($model_res->save())
                 return true;
             else

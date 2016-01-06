@@ -1,83 +1,27 @@
-
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">{{ lang.clinic_reservations }}</h3>
     </div>
     <div class="panel-body">
-        {{ helper.form.open(null,false,true,'role="form" class="form-horizontal"') }}
+        {#{{ helper.form.open(null,false,true,'role="form" class="form-horizontal"') }}#}
         {{ error }}
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="clinic_schedule_id">{{ lang.doctor }}</label>
-            <div class="col-sm-10">
-                {{ helper.form.dropdown('clinic_schedule_id', doctors, helper.form.value('user_id', item.fullname), 'class="form-control select" ') }} 
-            </div>
-        </div>
-        <div class="form-group-separator"></div>
-
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="date">{{ lang.date }}</label>
-            <div class="col-sm-10">
-                <div class="input-group">
-                    <input type="text" class="form-control datepicker" id="date" placeholder="{{ lang.date }}" name="date" value="{{ helper.form.value('date', item.date) }}" data-format="yyyy-mm-dd"> 
-                    <div class="input-group-addon">
-                        <i class="linecons-calendar"></i>
-                    </div>
+        <form id="search_form" name="search_form" mehtod="POST">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="clinic_schedule_id">{{ lang.doctor }}</label>
+                <div class="col-sm-10">
+                    {{ helper.form.dropdown('clinic_dcotor_id', doctors, helper.form.value('user_id', item.fullname), 'class="form-control select" name="user_id" id="user_id" ') }} 
                 </div>
             </div>
-        </div>
-        <div class="form-group-separator"></div> 
+            <div class="form-group-separator"></div>
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label"></label>
-
-            <div class="col-sm-10">
-                <button type="button" class="btn btn-secondary search-time" style="float: right;">{{lang.search}}</button>
-            </div>
-        </div>
-        <div class="search-result">
 
             <div class="form-group">
-                <label class="col-sm-2 control-label" for="time">{{ lang.time }}</label>
+                <label class="col-sm-2 control-label" for="date">{{ lang.date }}</label>
                 <div class="col-sm-10">
-                    <div class="col-sm-3" data-toggle="modal" data-target="#myModal">
-                        <div class="time-block">
-                            <i class="fa fa-unlock"></i> 8:15
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="time-block not-available">
-                            <i class="fa fa-unlock"></i> 8:15
-                        </div>
-                    </div>
-                    <div class="col-sm-3" data-toggle="modal" data-target="#myModal">
-                        <div class="time-block">
-                            <i class="fa fa-unlock"></i> 8:15
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="time-block not-available">
-                            <i class="fa fa-unlock"></i> 8:15
-                        </div>
-                    </div>
-                    <div class="col-sm-3" data-toggle="modal" data-target="#myModal">
-                        <div class="time-block">
-                            <i class="fa fa-unlock"></i> 8:15
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="time-block not-available">
-                            <i class="fa fa-unlock"></i> 8:15
-                        </div>
-                    </div>
-                    <div class="col-sm-3" data-toggle="modal" data-target="#myModal">
-                        <div class="time-block">
-                            <i class="fa fa-unlock"></i> 8:15
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="time-block not-available">
-                            <i class="fa fa-unlock"></i> 8:15
+                    <div class="input-group">
+                        <input id="date" name="date" type="text" class="form-control datepicker" id="date" placeholder="{{ lang.date }}" name="date" value="{{ helper.form.value('date', item.date) }}" data-format="yyyy-mm-dd"> 
+                        <div class="input-group-addon">
+                            <i class="linecons-calendar"></i>
                         </div>
                     </div>
                 </div>
@@ -88,14 +32,53 @@
                 <label class="col-sm-2 control-label"></label>
 
                 <div class="col-sm-10">
-                    <a href="{{ helper.uri.url('management/clinic_reservations/index') }}" class="btn btn-danger cancel-button">{{lang.cancel}}</a>
-                    <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+                    <input type="submit" id="search" class="btn btn-secondary search-time" style="float: right;">
                 </div>
             </div>
-        </div>
+            {#        </form>#}
+            {{ helper.form.close() }}
+            <div class="search-result" id="search-result">
 
-        {{ helper.form.close() }}
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="time">{{ lang.time }}</label>
+                    <div class="col-sm-10">
+                        <div class="col-sm-3" data-toggle="modal" data-target="#myModal">
+                            {#<div class="col-sm-3">
+                                <div class="time-block not-available">
+                                    <i class="fa fa-unlock"></i> 8:15
+                                </div>
+                            </div>#}
+                            {#                        {{ debug.print_r(final) }}#}
+                            {#{%for item in final %}
+                                <div class="time-block">
+                                    
+                                    {%if item.status == 'except'%}
+                                        <i class="fa fa-lock not-available"></i> {{item}}
+                                    {% elseif item.status == 'reseved' %}
+                                        <i class="fa fa-lock not-available"></i> {{item}}
+                                    {% elseif not item.status %}
+                                        <i class="fa fa-unlock available"></i> {{item}}
+                                    {%endif%}
+                                </div>
+                            {%endfor%}#}
+                            <div class="time-block">
 
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group-separator"></div> 
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"></label>
+
+                    <div class="col-sm-10">
+                        <a href="{{ helper.uri.url('management/clinic_reservations/index') }}" class="btn btn-danger cancel-button">{{lang.cancel}}</a>
+                        <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 
@@ -125,7 +108,6 @@
                     <label class="col-sm-2 control-label"></label>
                     <div class="col-sm-10">
                         <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
-                        {#                        <button type="button" class="btn btn-warning" style="float: right;" value="" >Add New User</button>#}
                         <a href="{{ helper.uri.url('management/users/manage') }}" class="btn btn-warning" style="color: #FFF;">
                             Add New User
                         </a>
@@ -137,24 +119,46 @@
 </div>   
 <script src="{{ constant('STYLE_JS') }}/select2/select2.min.js"></script>
 <script src="{{ constant('STYLE_JS') }}/timepicker/bootstrap-timepicker.min.js"></script>
+<script src="{{ constant('STYLE_JS') }}/mustache.min.js"></script>
+{% verbatim %}
+    <script id="search_result" type="x-tmpl-mustache">
+        {{#result}}
+        if(result.status == 'except')
+        <i class="fa fa-lock not-available"></i> {{result}}
+        else if(result.status == 'reserved')
+        <i class="fa fa-lock not-available"></i> {{result}}
+        else if(!result.status)
+        <i class="fa fa-unlock available"></i> {{result}}
+        {{/result}}
+    </script>
+{% endverbatim %}
+
 <script type="text/javascript">
-    jQuery(document).ready(function ($)
-    {
-        $(".select").select2({
-            placeholder: '{{lang.select_specifications}} ',
-            allowClear: true
-        }).on('select2-open', function ()
-        {
-            // Adding Custom Scrollbar
-            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-        });
-
-        $(".search-time").click(function () {
-            $(".search-result").show();
-        });
-
-    });
-
+                                jQuery(document).ready(function ($)
+                                {
+                                    $(".select").select2({
+                                        placeholder: '{{lang.select_specifications}} ',
+                                        allowClear: true
+                                    }).on('select2-open', function ()
+                                    {
+                                        // Adding Custom Scrollbar
+                                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                    });
+                                    $('#search').click(function () {
+                                        $.post("{{helper.uri.url('management/clinic_reservations/getSearch')}}", $('#search_form').serialize(), function (status) {
+                                            $("#search-result").show();loadSearch(status);
+                                        });
+                                        return false;
+                                    });
+                                });
+</script>
+<script>
+    function loadSearch(searchResult) {
+        var searchResult = $('#search_result').html();
+        var rendered = Mustache.render(searchResult);
+        $('.time-block').html(rendered);
+    }
+    ;
 </script>
 <style>
     .search-result{
