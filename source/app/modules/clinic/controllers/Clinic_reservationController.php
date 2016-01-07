@@ -85,7 +85,7 @@ class Clinic_reservationController extends Brightery_Controller {
         $model_id->clinic_doctor_id = $id;
         $resuser_id = $model_id->get();
         $user_id = $resuser_id->user_id;
-        
+
         $model = new \modules\users\models\Users();
         $model->_select = 'user_id , fullname';
         $model->status = 'active';
@@ -100,6 +100,7 @@ class Clinic_reservationController extends Brightery_Controller {
         $res = $model_doctors->get();
         $period = $res[0]->period_average;
         $doctor_id = $res[0]->clinic_doctor_id;
+        
 
 
         ////////////////////////////doctors//////////////////////////////////
@@ -123,16 +124,18 @@ class Clinic_reservationController extends Brightery_Controller {
                 $to = $time[$key]->to_time;
             }
         }
-        
-         ;
+
+        ;
         $result = $model_schedule->get();
         $time = $model_schedule->get_time($from, $to, $period, $doctor_id);
-        $date_new = $model_schedule->get_newDate();
+        if ($this->input->get('date')) {
+            $date_new = $model_schedule->get_newDate($this->input->get('date'));
+        } else
+            $date_new = $model_schedule->get_newDate();
         $reserved = $model_schedule->get_schedule($date_new, $time, $doctor_id);
         $exceptions = $model_schedule->exceptions($doctor_id);
         $model_schedule->pre($reserved, $result, $date_new);
         $final = $model_schedule->Final_Array($reserved, $exceptions);
-//        print_r($final);
         $userInfo = $this->permissions->checkUserCredentials();
         return $this->render('clinic_reservations/clinic_schedule', [
                     'dates' => $date_new,
@@ -143,9 +146,10 @@ class Clinic_reservationController extends Brightery_Controller {
                     'reserved' => $reserved,
                     'user' => $userInfo,
                     'type' => $type_result,
+                    'doctor_id' => $doctor_id
         ]);
     }
-    
+
     /* public function indexAction() {
       $this->language->load("clinic_reservations");
       $searchkey = $this->input->get('searchkey');
@@ -215,44 +219,40 @@ class Clinic_reservationController extends Brightery_Controller {
       return $the_date;
       }
      */
-    /* public function checkAction() {
-      $email = $this->input->post('email');
-      $password = $this->input->post('password');
-      $model = new \modules\users\models\Users();
-      $model->_select = "user_id";
-      $model->email = $email;
-      $model->password = md5($password);
-      if ($model->get()) {
-      return true;
-      } else
-      return false;
-      }
-     */
+    public function checkAction() {
+        $email = $this->input->post('E_MAIL');
+        $password = $this->input->post('password');
+        $model = new \modules\users\models\Users();
+        $model->_select = "user_id";
+        $model->email = $email;
+        $model->password = md5($password);
+        if ($model->get()) {
+            return true;
+        } else
+            return false;
+    }
 
     public function saveAction() {
-        echo $email = $this->input->post('email');
-        echo $date = $this->input->post('date');
-        echo $time = $this->input->post('time');
-//        $clinic_schedule_id = $this->input->post('clinic_schedule_id');
+        $email = $this->input->post('email');
+        $date = $this->input->post('date');
+        $time = $this->input->post('time');
+        $clinic_doctor_id = $this->input->post('clinic_doctor_id');
         $clinic_doctor_reservation_type_id = $this->input->post('clinic_doctor_reservation_type_id');
-        print_r($_POST);
         $model = new \modules\users\models\Users();
         $model->_select = "user_id";
         $model->email = $email;
         if ($model->get()) {
             $user = $model->get();
-            echo $user_id = $user[0]->user_id;
+            $user_id = $user[0]->user_id;
             $model_res = new \modules\clinic\models\Clinic_reservations(FALSE);
             $model_res->created = date("Y-m-d H:i:s");
             $model_res->time = $time;
             $model_res->date = $date;
             $model_res->user_id = $user_id;
-//            $model_res->clinic_schedule_id = $clinic_schedule_id;
+            $model_res->clinic_doctor_id = $clinic_doctor_id;
             $model_res->clinic_doctor_reservation_type_id = $clinic_doctor_reservation_type_id;
             $model_res->clinic_reservation_status = 'pending';
             $model_res->status = '';
-//            print_r($model_res);
-//            exit();
             if ($model_res->save())
                 return true;
             else

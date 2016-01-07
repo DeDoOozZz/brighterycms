@@ -21,41 +21,67 @@ class Clinic_reservationsController extends Brightery_Controller {
     protected $auth = true;
 
     public function indexAction($offset = 0) {
+
         $this->permission('index');
         $this->language->load("clinic_reservations");
         $model = new \modules\clinic\models\Clinic_reservations();
-        $patient = Form_helper::queryToDropdown('users', 'clinic_patient_id', 'fullname', null, 'join clinic_patients on clinic_patients.user_id=users.user_id');
-        $status = ['attend' => $this->Language->phrase('attend'), 'late' => $this->Language->phrase('late'), 'entered' => $this->Language->phrase('entered'), 'canceled' => $this->Language->phrase('canceled')];
-        $doctor = Form_helper::queryToDropdown('users', 'clinic_doctor_id', 'fullname', null, 'join clinic_doctors on clinic_doctors    .user_id = users.user_id');
+        if ($this->input->get()) {
+            $patient = Form_helper::queryToDropdown('users', 'clinic_patient_id', 'fullname', null, 'join clinic_patients on clinic_patients.user_id=users.user_id');
+            $status = ['attend' => $this->Language->phrase('attend'), 'late' => $this->Language->phrase('late'), 'entered' => $this->Language->phrase('entered'), 'canceled' => $this->Language->phrase('canceled')];
+            $doctor = Form_helper::queryToDropdown('users', 'clinic_doctor_id', 'fullname', null, 'join clinic_doctors on clinic_doctors    .user_id = users.user_id');
+            $user_id = $this->input->get('user_id');
+            if ($this->input->get('date'))
+                $model->date = $this->input->get('date');
+            if ($this->input->get('user_id')) {
+                $model->where('`users`. `user_id`', $this->input->get('user_id'));
+            }
+            if ($this->input->get('status'))
+                $model->where('`clinic_reservations`. `status`', $this->input->get('status'));
+            if ($this->input->get('doctor_id'))
+                $model->clinic_doctor_id = $this->input->get('doctor_id');
+//            $this->load->library('pagination');
+            $model->_select = "clinic_reservations.* , `users`.`fullname`";
+            $model->_joins = [ 'users' => ["`users`.`user_id` = `clinic_reservations`.`user_id`"],
+            ];
+            return $this->render('clinic_reservations/index', [
+                        'items' => $model->get(),
+                        'patient' => $patient,
+                        'doctor' => $doctor,
+                        'status' => $status
+//                        'pagination' => $this->Pagination->generate($config)
+            ]);
+        }
+        elseif (!$this->input->get()) {
+            $patient = Form_helper::queryToDropdown('users', 'clinic_patient_id', 'fullname', null, 'join clinic_patients on clinic_patients.user_id=users.user_id');
+            $status = ['attend' => $this->Language->phrase('attend'), 'late' => $this->Language->phrase('late'), 'entered' => $this->Language->phrase('entered'), 'canceled' => $this->Language->phrase('canceled')];
+            $doctor = Form_helper::queryToDropdown('users', 'clinic_doctor_id', 'fullname', null, 'join clinic_doctors on clinic_doctors    .user_id = users.user_id');
 //        $model->_select = 'clinic_reservations.*,`clinic_doctor_reservation_types`.`title`,`clinic_schedules`.`clinic_schedule_id`, `users`.`fullname`';
 //        $model->_joins = [
 //            'clinic_schedules' => ['`clinic_schedules`.`clinic_schedule_id`=`clinic_reservations`.`clinic_schedule_id`', 'INNER'],
 //            'users' => ['`users`.`user_id`=`clinic_reservations`.`user_id`', 'INNER'],
 //            'clinic_doctor_reservation_types' => ['`clinic_doctor_reservation_types`.`clinic_doctor_reservation_type_id`=`clinic_reservations`.`clinic_doctor_reservation_type_id`', 'INNER'],
 //        ];
-        $model->_select = "clinic_reservations.* , `users`.`fullname` ";
+            $model->_select = "clinic_reservations.* , `users`.`fullname` ";
+            $model->_joins = [ 'users' => ["`users`.`user_id` = `clinic_reservations`.`user_id`"],
+            ];
 
-        $model->_joins = [ 'users' => ["`users`.`user_id` = `clinic_reservations`.`user_id`"],
-        ];
-
-//        $type->_select = Form_helper::queryToDropdown('clinic_doctor_reservation_types', 'clinic_doctor_reservation_type_id', 'title', null, 'join clinic_doctors on clinic_patients.user_id=users.user_id');
-        $this->load->library('pagination');
-        $model->_limit = $this->config->get('limit');
-        $model->_offset = $offset;
-        $config = [
-            'url' => Uri_helper::url('management/clinic_reservations/index'),
+            $this->load->library('pagination');
+            $model->_limit = $this->config->get('limit');
+            $model->_offset = $offset;
+            $config = [
+                'url' => Uri_helper::url('management/clinic_reservations/index'),
 //            'total' => $model->get(true),
-            'limit' => $model->_limit,
-            'offset' => $model->_offset
-        ];
-
-        return $this->render('clinic_reservations/index', [
-                    'items' => $model->get(),
-                    'patient' => $patient,
-                    'doctor' => $doctor,
-                    'status' => $status,
-                    'pagination' => $this->Pagination->generate($config)
-        ]);
+                'limit' => $model->_limit,
+                'offset' => $model->_offset
+            ];
+            return $this->render('clinic_reservations/index', [
+                        'items' => $model->get(),
+                        'patient' => $patient,
+                        'doctor' => $doctor,
+                        'status' => $status,
+                        'pagination' => $this->Pagination->generate($config)
+            ]);
+        }
     }
 
     public function manageAction($id = false) {
@@ -83,16 +109,16 @@ class Clinic_reservationsController extends Brightery_Controller {
         if ($model->save()) {
             Uri_helper::redirect("management/clinic_reservations");
         }
-$final = null;
-if($_POST)
-    $final= $this->getSearch();
+        $final = null;
+        if ($_POST)
+            $final = $this->getSearch();
         return $this->render('clinic_reservations/manage', [
-        'item' => $id ? $model->get() : null,
-        'patient' => $patients,
-        'schedule' => $schedules,
-        'reservation_type' => $reservation_type,
-        'clinic_reservation_status' => $clinic_reservation_status,
-        'doctors' => $doctor,
+                    'item' => $id ? $model->get() : null,
+                    'patient' => $patients,
+                    'schedule' => $schedules,
+                    'reservation_type' => $reservation_type,
+                    'clinic_reservation_status' => $clinic_reservation_status,
+                    'doctors' => $doctor,
 //        'final' => $final
         ]);
     }
@@ -110,8 +136,6 @@ if($_POST)
     }
 
     public function getSearchAction() {
-//        echo "hdjlsahd";
-//        print_r($_POST);
         $this->layout = 'ajax';
         $doctor_id = $this->input->post('clinic_dcotor_id');
         $date = $this->input->post('date');
@@ -120,8 +144,6 @@ if($_POST)
         $model_period->clinic_doctor_id = $doctor_id;
         $period_time = $model_period->get();
         $average_time = $period_time->period_average;
-//        print _r($period);
-//        echo $doctor_id ;
         /////////////////////get day////////////////////////////////////////
         $timestamp = strtotime($date);
         $day = date("l", $timestamp);
@@ -135,9 +157,7 @@ if($_POST)
 
         $time = $model_date->get_time($from, $to, $average_time, $doctor_id);
         $final = $model_date->get_searchResult($date, $time, $doctor_id);
-//        print_r($final);
-//        exit();
-        return json_encode(['result' => $final]);
+        return json_encode([$final]);
     }
 
     public function get_doctorAction() {

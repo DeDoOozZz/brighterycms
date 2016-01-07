@@ -120,7 +120,7 @@
 <script src="{{ constant('STYLE_JS') }}/select2/select2.min.js"></script>
 <script src="{{ constant('STYLE_JS') }}/timepicker/bootstrap-timepicker.min.js"></script>
 <script src="{{ constant('STYLE_JS') }}/mustache.min.js"></script>
-{% verbatim %}
+{#{% verbatim %}
     <script id="search_result" type="x-tmpl-mustache">
         {{#result}}
         if(result.status == 'except')
@@ -131,35 +131,96 @@
         <i class="fa fa-unlock available"></i> {{result}}
         {{/result}}
     </script>
-{% endverbatim %}
+{% endverbatim %}#}
 
 <script type="text/javascript">
-                                jQuery(document).ready(function ($)
-                                {
-                                    $(".select").select2({
-                                        placeholder: '{{lang.select_specifications}} ',
-                                        allowClear: true
-                                    }).on('select2-open', function ()
-                                    {
-                                        // Adding Custom Scrollbar
-                                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                                    });
-                                    $('#search').click(function () {
-                                        $.post("{{helper.uri.url('management/clinic_reservations/getSearch')}}", $('#search_form').serialize(), function (status) {
-                                            $("#search-result").show();loadSearch(status);
-                                        });
-                                        return false;
-                                    });
-                                });
+    jQuery(document).ready(function ($)
+    {
+        $('#search').click(function (e) {
+    {#e.preventDefault();
+    $.ajax({
+        type: "post",
+        url: "{{helper.uri.url('management/clinic_reservations/getSearch')}}",
+        data: $('#search_form').serialize(),
+        contentType: "application/x-www-form-urlencoded",
+        success: function (responseData) {
+            alert(responseData)
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+        $("#search-result").show();
+    })#}
+                e.preventDefault();
+                $("#search-result").show();
+                $.getJSON("{{helper.uri.url('management/clinic_reservations/getSearch')}}", function (data) {
+    {#                    alert('click');#}
+    {#                    var items = [];#}
+    {#var acc = [];
+    $.each(data, function (index, value) {
+        acc.push(index + ': ' + value);
+    });
+    alert(JSON.stringify(acc));#}
+                    var list = data;
+{#                    alert('POST = ' . list);#}
+                    for (var i = 0 ; i < list.length; i++) {
+                        var obj = data.status;
+                        alert(obj);
+    {#                                        $("<li />", {text: obj.i + ": " + obj.id}).appendTo(list);#}
+                    }
+                    ;
+    {#                                    );#}
+
+    {#$.each(data, function (key, val) {
+        alert(data);
+        items.push("<li id='" + key + "'>" + val[key] + "</li>");
+    });#}
+    {#var status = data.result[0].status;
+    var name = data.result[1].status;
+    alert(status);
+    alert(name);#}
+    {#for (var data = result.length; i--; ) {
+        var status = data[i].status;
+        alert(status);
+        // address.city
+        // address.street
+        // etc
+    }#}
+
+                    {#$("<ul/>", {
+                        "class": "my-new-list",
+                        html: acc.join("")
+                    }).appendTo(".time-block");#}
+                });
+
+            });
+
+
+            $(".select").select2({
+                placeholder: '{{lang.select_specifications}} ',
+                allowClear: true
+            }).on('select2-open', function ()
+            {
+                // Adding Custom Scrollbar
+                $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+            });
+    {#$('#search').click(function () {
+        $.post("{{helper.uri.url('management/clinic_reservations/getSearch')}}", $('#search_form').serialize(), function (status) {
+            $("#search-result").show();
+            loadSearch(status);
+        });
+        return false;
+    });#}
+        });
 </script>
-<script>
+{#<script>
     function loadSearch(searchResult) {
         var searchResult = $('#search_result').html();
         var rendered = Mustache.render(searchResult);
         $('.time-block').html(rendered);
     }
     ;
-</script>
+</script>#}
 <style>
     .search-result{
         display: none;

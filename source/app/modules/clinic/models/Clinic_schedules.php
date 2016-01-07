@@ -101,9 +101,11 @@ class Clinic_schedules extends \Model {
         return $time;
     }
 
-    function get_newDate() {
+    function get_newDate($date = NULL) {
         $date_new = [];
-        if ($this->youm)
+        if ($date)
+            $new_date = $date;
+        elseif ($this->youm)
             $new_date = $this->youm;
         else
             $new_date = date("Y-m-d");
@@ -115,6 +117,8 @@ class Clinic_schedules extends \Model {
             $date_new[$x]->date = $new_date;
             $date_new[$x]->day = date_format(date_create($new_date), 'l');
         }
+//        if ($date)
+//            exit();
         return $date_new;
     }
 
@@ -330,7 +334,7 @@ class Clinic_schedules extends \Model {
                 }
             }
         }
-        
+
         $model_re = new \modules\clinic\models\Clinic_reservations();
         $model_re->select = '';
         $model_re->clinic_doctor_id = $doctor_id;
@@ -348,7 +352,7 @@ class Clinic_schedules extends \Model {
                 }
             }
         }
-        return $times ;
+        return $times;
     }
 
 }

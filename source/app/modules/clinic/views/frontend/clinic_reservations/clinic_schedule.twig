@@ -143,13 +143,16 @@
                     <div class="form-group">
                         <label class=" control-label">Select day</label>
                         <div class="date-and-time">
-                            <input type="text" id="datepicker" >
+                            <input type="text" id="datepicker" name="date">
                             <i class="fa fa-calendar calendar-date "></i>
                         </div>
                     </div>
                     <script>
                         $(function () {
-                            $("#datepicker").datepicker();
+                            $("#datepicker").datepicker({
+                                dateFormat: "yy-mm-dd"
+                            }
+                            );
                         });
                     </script>
                 </form>
@@ -263,7 +266,7 @@
                     </div>
                     <div class="form-group"  style="display: none;">
                         <div class="col-sm-9">
-                            <input type="hidden" value {#name="clinic_schedule_id"#} {#id="clinic_schedule_id"#} class="form-control">
+                            <input type="text" value="{{doctor_id}}" name="clinic_doctor_id" id="clinic_doctor_id" class="form-control">
                         </div>
                     </div>
                     <div class="form-group"  style="display: none;">
@@ -305,12 +308,29 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
                         $(document).ready(function () {
+                            $('#datepicker').change(function () {
+                                var date = $('#datepicker').val();
+                                $.ajax({
+                                    url: "{{helper.uri.url('clinic_reservation/get_schedule')}}",
+                                    type: "get",
+                                    data: {
+                                        date: date
+                                    },
+                                    success: function () {
+    {#                        location.reload();  #}
+    {#                        alert('success');#}
+                                    },
+                                    error: function () {
+                                        alert('error');
+                                    }
+                                });
+                            });
                             $('#login_form').submit(function () {
                                 var email = $("#E_MAIL").val();
                                 $("#email").attr('value', email);
                                 // process the form
-                                $.post("{{helper.uri.url('clinic_reservations/check')}}", $(this).serialize(), function (status) {
-                                    if (!status.connected == 1) {
+                                $.post("{{helper.uri.url('clinic_reservation/check')}}", $(this).serialize(), function (status) {
+                                    if (status == 1) {
                                         $('#login_form').remove();
                                         $('#Reserve').show();
                                     }
@@ -319,14 +339,14 @@
                             });
                             $('#Reserve').submit(function () {
                                 var id = '"#' + $('#id').val() + '"';
-    {#                                alert(id);#}
-    {#            alert(id);#}
-                $.post("{{helper.uri.url('clinic_reservations/save')}}", $(this).serialize(), function (status) {
-                    if (status.connected == 1) {
-                        $('#myModal').hide();
+                $.post("{{helper.uri.url('clinic_reservation/save')}}", $(this).serialize(), function (status) {
+                    if (status == 1) {
+{#                        alert(id);#}
+                        $('#myModal2').hide();
                         $(id).removeClass('availabe');
                         $(id).addClass('reserved');
-                        alert('hskag');
+                        {#$(id).removeClass('availabe');
+                        $(id).addClass('reserved');#}
                     }
                 });
                 return false;
@@ -335,11 +355,9 @@
                 var date = $(this).data('date');
                 var time = $(this).data('time');
                 var id = $(this).data('id');
-    {#                var clinic_schedule_id = $(this).data('clinic_schedule_id');#}
                 $("#date").attr('value', date);
                 $("#id").attr('value', id);
                 $("#time").attr('value', time);
-    {#                $("#clinic_schedule_id").attr('value', clinic_schedule_id);#}
             });
             $('#datepicker').change(function () {
                 var date = $('#datepicker').val();
