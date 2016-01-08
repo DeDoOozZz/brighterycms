@@ -139,7 +139,7 @@
         <div class="row calender-reservation">
             <div class="reservation-header">
                 <h2><i class="fa fa-calendar"></i> Dr.{{items.fullname}}</h2>
-                <form>
+                <form id="date_change">
                     <div class="form-group">
                         <label class=" control-label">Select day</label>
                         <div class="date-and-time">
@@ -177,20 +177,6 @@
                         <tr>
                             <td class="fc-record times">{{final.time}}</td>
                             {% for itt in final.schedule|cast_to_array %}
-                                {#                                {% if not itt.from_time %}
-                                                                    <td class="fc-record vacation last-record"></td>
-                                                                {%elseif itt.status == 'reserved' and itt.time == final.time %}
-                                                                    <td class="fc-record reserved"><i class="fa fa-lock"></i>Reserved</td>
-                                                                {%elseif itt.status == 'except' %}
-                                                                    <td class="fc-record vacation last-record"></td>
-                                                                {%elseif itt.to_time < final.time %}
-                                                                    <td class="fc-record vacation last-record"></td>
-                                                                {%elseif itt.from_time > final.time %}
-                                                                    <td class="fc-record vacation last-record"></td>
-                                                                {%elseif itt.from_time <= final.time and final.time <= itt.to_time %}
-                                                                    <td class="fc-record available" id="id_{{i}}" data-id="id_{{i}}" data-toggle="modal" data-date="{{itt.date}}" data-time="{{final.time}}" data-target='#myModal2'><i class="fa fa-unlock"></i> Available</td>
-                                                                    {%set i = i + 1%}
-                                                                {%endif%}#}
                                 {% if not itt.from_time %}
                                     <td class="fc-record vacation last-record"></td>
                                 {%elseif itt.status == 'reserved' and itt.time == final.time %}
@@ -202,7 +188,7 @@
                                 {%elseif itt.from_time > final.time %}
                                     <td class="fc-record vacation last-record"></td>
                                 {%elseif itt.from_time <= final.time and final.time <= itt.to_time %}
-                                    <td class="fc-record available" id="id_{{i}}" data-id="id_{{i}}" data-toggle="modal" data-date="{{itt.date}}" data-time="{{final.time}}" data-target='#myModal2'><i class="fa fa-unlock"></i> Available</td>
+                                    <td class="fc-record available" id="id_{{i}}" data-id="id_{{i}}" data-toggle="modal" data-date="{{itt.date}}" data-time="{{final.time}}" data-target='#myModal2'><i id="lock_id_{{i}}" class="fa fa-unlock"></i> Available</td>
                                     {%set i = i + 1%}
                                 {%endif%}
                             {%endfor%}
@@ -276,7 +262,7 @@
                     </div>
                     <div class="form-group"  style="display: none;">
                         <div class="col-sm-9">
-                            <input type="text" value name="email" id="email" class="form-control">
+                            <input type="hidden" value name="email" id="email" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
@@ -309,73 +295,57 @@
 <script>
                         $(document).ready(function () {
                             $('#datepicker').change(function () {
-                                var date = $('#datepicker').val();
-                                $.ajax({
-                                    url: "{{helper.uri.url('clinic_reservation/get_schedule')}}",
-                                    type: "get",
-                                    data: {
-                                        date: date
-                                    },
-                                    success: function () {
-    {#                        location.reload();  #}
-    {#                        alert('success');#}
-                                    },
-                                    error: function () {
-                                        alert('error');
-                                    }
-                                });
+                                $('#date_change').submit();
                             });
-                            $('#login_form').submit(function () {
-                                var email = $("#E_MAIL").val();
-                                $("#email").attr('value', email);
-                                // process the form
-                                $.post("{{helper.uri.url('clinic_reservation/check')}}", $(this).serialize(), function (status) {
-                                    if (status == 1) {
-                                        $('#login_form').remove();
-                                        $('#Reserve').show();
-                                    }
-                                });
-                                return false;
-                            });
-                            $('#Reserve').submit(function () {
-                                var id = '"#' + $('#id').val() + '"';
-                $.post("{{helper.uri.url('clinic_reservation/save')}}", $(this).serialize(), function (status) {
-                    if (status == 1) {
-{#                        alert(id);#}
-                        $('#myModal2').hide();
-                        $(id).removeClass('availabe');
-                        $(id).addClass('reserved');
-                        {#$(id).removeClass('availabe');
-                        $(id).addClass('reserved');#}
-                    }
-                });
-                return false;
-            });
-            $(document).on("click", ".available", function () {
-                var date = $(this).data('date');
-                var time = $(this).data('time');
-                var id = $(this).data('id');
-                $("#date").attr('value', date);
-                $("#id").attr('value', id);
-                $("#time").attr('value', time);
-            });
-            $('#datepicker').change(function () {
-                var date = $('#datepicker').val();
-    {#            alert(date);#}
-                $.ajax({
-                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                    url: '{{helper.uri.url('clinic_reservations/get_date/' + date + '')}}', // the url where we want to POST
-                    data: $(this).serialize(), // our data object
-                    //dataType: 'json', // what type of data do we expect back from the server
-                    encode: true
-                })
-                        .done(function (data) {
-                            if (data)
-                            {
-                            }
                         });
-                event.preventDefault();
-                return false;
-            });
+                        $('#login_form').submit(function () {
+                            var email = $("#E_MAIL").val();
+                            $("#email").attr('value', email);
+                            // process the form
+                            $.post("{{helper.uri.url('clinic_reservation/check')}}", $(this).serialize(), function (status) {
+                                if (status == 1) {
+                                    $('#login_form').remove();
+                                    $('#Reserve').show();
+                                }
+                            });
+                            return false;
+                        });
+                        $('#Reserve').submit(function () {
+                            var id = '#' + $('#id').val();
+                            var lock_id = '#lock_' + $('#id').val();
+                            $.post("{{helper.uri.url('clinic_reservation/save')}}", $(this).serialize(), function (status) {
+                                if (status == 1) {
+                                    $('#myModal2').hide();
+                                    $(id).removeClass('availabe');
+                                    $(id).addClass('reserved');
+                                    $(lock_id).parent().html('<i class="fa fa-lock"></i>Reserved');
+                                }
+                            });
+                            return false;
+                        });
+                        $(document).on("click", ".available", function () {
+                            var date = $(this).data('date');
+                            var time = $(this).data('time');
+                            var id = $(this).data('id');
+                            $("#date").attr('value', date);
+                            $("#id").attr('value', id);
+                            $("#time").attr('value', time);
+                        });
+                      {#  $('#datepicker').change(function () {
+                            var date = $('#datepicker').val();
+            $.ajax({
+                type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                url: '{{helper.uri.url('clinic_reservations/get_date/' + date + '')}}', // the url where we want to POST
+                data: $(this).serialize(), // our data object
+                encode: true
+            })
+                    .done(function (data) {
+                        if (data)
+                        {
+                        }
+                    });
+            event.preventDefault();
+            return false;
+        });#}
         });
 </script>
