@@ -91,13 +91,16 @@ class Clinic_reservationsController extends Brightery_Controller {
         $model = new \modules\clinic\models\Clinic_reservations();
         $model->language_id = $this->language->getDefaultLanguage();
 
+        if ($this->input->post('doctor_id'))
+            $doctor_id = $this->input->post('doctor_id');
         $doctor = Form_helper::queryToDropdown('users', 'clinic_doctor_id', 'fullname', null, 'join clinic_doctors on clinic_doctors.user_id = users.user_id');
         $model->attributes = $this->Input->input['post'];
         $clinic_reservation_status = ['confirmed' => $this->Language->phrase('confirmed'),
             'canceled' => $this->Language->phrase('canceled'),
             'pending' => $this->Language->phrase('pending')];
         $schedules = Form_helper::queryToDropdown('clinic_schedules', 'clinic_schedule_id', 'clinic_schedule_id');
-        $reservation_type = Form_helper::queryToDropdown('clinic_doctor_reservation_types', 'clinic_doctor_reservation_type_id', 'title');
+        if ($doctor_id)
+            $reservation_type = Form_helper::queryToDropdown('clinic_doctor_reservation_types', 'clinic_doctor_reservation_type_id', 'title', null, 'WHERE clinic_doctor_id = "' . $doctor_id . '"');
 
         $patients = Form_helper::fullqueryToDropdown('SELECT clinic_patients.clinic_patient_id, users.fullname FROM clinic_patients  INNER JOIN users ON users.user_id = clinic_patients.user_id', 'clinic_patient_id', 'fullname');
         if ($id)
@@ -137,8 +140,8 @@ class Clinic_reservationsController extends Brightery_Controller {
 
     public function getSearchAction() {
         $this->layout = 'ajax';
-        $doctor_id = $this->input->post('clinic_dcotor_id');
-        $date = $this->input->post('date');
+        $doctor_id = $this->input->get('user_id');
+        $date = $this->input->get('date');
         $model_period = new \modules\clinic\models\Clinic_doctors();
         $model_period->_select = 'period_average ';
         $model_period->clinic_doctor_id = $doctor_id;
@@ -157,7 +160,7 @@ class Clinic_reservationsController extends Brightery_Controller {
 
         $time = $model_date->get_time($from, $to, $average_time, $doctor_id);
         $final = $model_date->get_searchResult($date, $time, $doctor_id);
-        return json_encode([$final]);
+        return json_encode([ 'result' => $final]);
     }
 
     public function get_doctorAction() {
@@ -172,6 +175,29 @@ class Clinic_reservationsController extends Brightery_Controller {
                 echo '<option value=' . $value->clinic_doctor_reservation_type_id . '>' . $value->title . '</option>';
             }
         }
+    }
+
+    public function saveAction() {
+        print_r($_POST);
+        $clinic_doctor_id = $this->input->post('doctor_id');
+        $user_id = $this->input->post('patient_id');
+        $date = $this->input->post('date');
+        $time = $this->input->post('time');
+        $status = $this->input->post('status');
+//        $clinic_doctor_reservation_type_id = $this->input->post('clinic_doctor_reservation_type_id');
+        $model_res = new \modules\clinic\models\Clinic_reservations(FALSE);
+        $model_res->created = date("Y-m-d H:i:s");
+        $model_res->time = $time;
+        $model_res->date = $date;
+        $model_res->user_id = $user_id;
+        $model_res->clinic_doctor_id = $clinic_doctor_id;
+//        $model_res->clinic_doctor_reservation_type_id = $clinic_doctor_reservation_type_id;
+        $model_res->clinic_reservation_status = $status;
+        $model_res->status = '';
+        if ($model_res->save())
+            return true;
+        else
+            return false;
     }
 
 }

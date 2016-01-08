@@ -290,23 +290,32 @@ class Clinic_schedules extends \Model {
         $i = 0;
         $x = 0;
 //        $final_result = [];
-        foreach ($time as $key) {
+//        $newtime[]->time = (object) array('time', 'user_id', 'date');
+        foreach ($time as $key => $value) {
+            $newtime[$key]->time = $value;
+        }
+        foreach ($newtime as $key => $value) {
             $model_rev = new \modules\clinic\models\Clinic_reservations();
             $model_rev->_select = 'user_id , date , time';
-            $model_rev->time = $key;
+            $model_rev->time = $value->time;
             $model_rev->date = $date;
             $model_rev->clinic_doctor_id = $doctor_id;
-            $model_rev->clinic_reservation_status = "confirmed";
+            $model_rev->where = 'clinic_reservation_status = "confirmed" of clinic_reservation_status = "pending"';
             $result_f = $model_rev->get();
             $user_id = $result_f[0]->user_id;
-            $time_r = $result_f[0]->time;
-            $date_r = $result_f[0]->date;
-            if ($model_rev->get()) {
-//                echo $time->$key->user_id = $user_id;
-                $result[$i]->user_id = $user_id;
-                $result[$i]->date = $date_r;
-                $result[$i]->time = $time_r;
-                $i++;
+            if ($result_f) {
+                foreach ($result_f as $key => $value) {
+                    $tim = $result_f[$key]->time;
+                    foreach ($newtime as $k => $val) {
+                        if ($newtime[$k]->time == $tim) {
+                            $user_id = $result_f[$key]->user_id;
+                            $newtime[$k]->user_id = $user_id;
+                            $newtime[$k]->date = $date;
+                            $newtime[$k]->time = $tim;
+                            $newtime[$k]->status = 'reserved';
+                        }
+                    }
+                }
             }
         }
 
@@ -316,43 +325,23 @@ class Clinic_schedules extends \Model {
         $model_ex->date = $date;
         $exception = $model_ex->get();
 
-        $times = [];
-        foreach ($time as $value) {
-            $times[$value] = '';
-        }
         foreach ($exception as $key => $v) {
             $ffff = strtotime("1970-01-01 $v->from_time UTC");
             $tttt = strtotime("1970-01-01 $v->to_time UTC");
-            foreach ($times as $k => $value) {
-                $exxxx = strtotime("1970-01-01 $k UTC");
-                if ($exxxx == $ffff) {
-                    $times[$k]->status = 'except';
-                } elseif ($exxxx == $tttt) {
-                    $times[$k]->status = 'except';
-                } elseif ($exxxx > $ffff && $exxxx < $tttt) {
-                    $times[$k]->status = 'except';
+            foreach ($newtime as $k => $value) {
+                $newwww = $newtime[$k]->time;
+                $convert = strtotime("1970-01-01 $newwww UTC");
+                if ($convert == $ffff) {
+                    $newtime[$k]->status = 'except';
+                    $newtime[$k]->time = $newwww;
+                } elseif ($convert == $tttt) {
+                    $newtime[$k]->status = 'except';
+                } elseif ($convert > $ffff && $convert < $tttt) {
+                    $newtime[$k]->status = 'except';
                 }
             }
         }
-
-        $model_re = new \modules\clinic\models\Clinic_reservations();
-        $model_re->select = '';
-        $model_re->clinic_doctor_id = $doctor_id;
-        $model_re->date = $date;
-        $reservation = $model_re->get();
-//        print_r($reservation);
-//        exit();
-        foreach ($reservation as $key => $v) {
-            $ffff = strtotime("1970-01-01 $v->time UTC");
-//            $tttt = strtotime("1970-01-01 $v->to_time UTC");
-            foreach ($times as $k => $value) {
-                $exxxx = strtotime("1970-01-01 $k UTC");
-                if ($exxxx == $ffff) {
-                    $times[$k]->status = 'reserved';
-                }
-            }
-        }
-        return $times;
+        return $newtime;
     }
 
 }
