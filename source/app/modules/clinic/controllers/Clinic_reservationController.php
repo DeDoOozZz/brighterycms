@@ -80,6 +80,7 @@ class Clinic_reservationController extends Brightery_Controller {
 
     public function get_scheduleAction($id) {
 
+        $userInfo = $this->permissions->checkUserCredentials();
         $model_id = new \modules\clinic\models\Clinic_doctors();
         $model_id->_select = 'user_id';
         $model_id->clinic_doctor_id = $id;
@@ -92,7 +93,7 @@ class Clinic_reservationController extends Brightery_Controller {
         $model->user_id = $user_id;
 
         ////////////////////////////Clinic Schedule Exceptions//////////////////
-        $model_Expcetion = new \modules\clinic\models\Clinic_schedule_exceptions();
+//        $model_Expcetion = new \modules\clinic\models\Clinic_schedule_exceptions();
         ////////////////////////////doctors//////////////////////////////////
         $model_doctors = new \modules\clinic\models\Clinic_doctors();
         $model_doctors->_select = 'clinic_doctor_id, period_average';
@@ -100,7 +101,7 @@ class Clinic_reservationController extends Brightery_Controller {
         $res = $model_doctors->get();
         $period = $res[0]->period_average;
         $doctor_id = $res[0]->clinic_doctor_id;
-        
+
 
 
         ////////////////////////////doctors//////////////////////////////////
@@ -114,6 +115,10 @@ class Clinic_reservationController extends Brightery_Controller {
         $model_schedule->_select = 'clinic_doctor_id, day , from_time , to_time ';
         $model_schedule->clinic_doctor_id = $doctor_id;
         $time = $model_schedule->get();
+        if (!$time)
+            return $this->render('clinic_reservations/clinic_schedule', [
+                        'items' => $model->get()
+            ]);
         $from = $time[0]->from_time;
         $to = $time[0]->to_time;
         foreach ($time as $key => $value) {
@@ -136,7 +141,6 @@ class Clinic_reservationController extends Brightery_Controller {
         $exceptions = $model_schedule->exceptions($doctor_id);
         $model_schedule->pre($reserved, $result, $date_new);
         $final = $model_schedule->Final_Array($reserved, $exceptions);
-        $userInfo = $this->permissions->checkUserCredentials();
         return $this->render('clinic_reservations/clinic_schedule', [
                     'dates' => $date_new,
                     'items' => $model->get(),

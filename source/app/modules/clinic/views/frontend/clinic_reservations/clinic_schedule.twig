@@ -269,7 +269,7 @@
                         <label for="field-5" class="col-sm-3 control-label">Reservation</label>
                         <div id="reserved" class="form-horizontal col-sm-9"{#{%if user == null%} hidden {%endif%}#} style="color:#666;">
                             {%for item in type%}
-                                <input type="radio" name="clinic_doctor_reservation_type_id" value="{{item.clinic_doctor_reservation_type_id}}"> {{item.title}}<br>
+                                <input type="radio" id="clinic_doctor_reservation_type_id" name="clinic_doctor_reservation_type_id" value="{{item.clinic_doctor_reservation_type_id}}"> {{item.title}}<br>
                             {%endfor%}
                         </div>
                     </div>
@@ -307,20 +307,27 @@
                                     $('#login_form').remove();
                                     $('#Reserve').show();
                                 }
+                                else if (status == 0)
+                                    alert('Wrong User Name Of Password, Please Try Again Later ');
                             });
                             return false;
                         });
                         $('#Reserve').submit(function () {
                             var id = '#' + $('#id').val();
                             var lock_id = '#lock_' + $('#id').val();
-                            $.post("{{helper.uri.url('clinic_reservation/save')}}", $(this).serialize(), function (status) {
-                                if (status == 1) {
-                                    $('#myModal2').hide();
-                                    $(id).removeClass('availabe');
-                                    $(id).addClass('reserved');
-                                    $(lock_id).parent().html('<i class="fa fa-lock"></i>Reserved');
-                                }
-                            });
+                            if ($("input[name='clinic_doctor_reservation_type_id'").is(':checked'))
+                            {
+                                $.post("{{helper.uri.url('clinic_reservation/save')}}", $(this).serialize(), function (status) {
+                                    if (status == 1) {
+                                        $('#myModal2').hide();
+                                        $(id).removeClass('availabe');
+                                        $(id).addClass('reserved');
+                                        $(lock_id).parent().html('<i class="fa fa-lock"></i>Reserved');
+                                    }
+                                });
+                            }
+                            else if (!$("input[name='clinic_doctor_reservation_type_id'").is(':checked'))
+                                alert('Please Choose Type');
                             return false;
                         });
                         $(document).on("click", ".available", function () {
@@ -331,5 +338,4 @@
                             $("#id").attr('value', id);
                             $("#time").attr('value', time);
                         });
-        });
 </script>

@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-sm-5 search_input">
                     <input type="hidden" name="user_id" id="user" value="{{ helper.form.value('user_id', item.user_id) }}">
-                    {{ helper.form.dropdown('fullname', user_fullname, helper.form.value('fullname', item.user_id), 'class="form-control select2" id="fullname"') }}
+                    {{ helper.form.dropdown('user_id', user_fullname, helper.form.value('fullname', item.user_id), 'class="form-control select2" id="fullname"') }}
                     {{ helper.form.dropdown('email', user_email, helper.form.value('email', item.user_id), 'class="form-control select2" id="email"') }}
                     {{ helper.form.dropdown('phone', user_phone, helper.form.value('phone', item.user_id), 'class="form-control select2" id="phone"') }}
                 </div>
@@ -28,7 +28,7 @@
         {% else %}
             <input type="hidden" name="user_id" value="{{ user_id }}" />
             <script>
-                $(document).ready(function(){
+                $(document).ready(function () {
                     loadUserInfo({{ user_id }});
                 });
             </script>

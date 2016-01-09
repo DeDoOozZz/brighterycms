@@ -161,32 +161,34 @@ class Clinic_schedules extends \Model {
             $model_reservations->date = $res[$keyy]->date;
             $model_reservations->clinic_doctor_id = $doctor_id;
             $dates = $model_reservations->get();
+            
+            if ($dates) {
+                foreach ($dates as $key => $value) {
+                    foreach ($date_new as $keyy => $valuee) {
+                        if ($date_new[$keyy]->date == $dates[$key]->date) {
+                            $time = $dates[$key]->time;
+                            $date = $dates[$key]->date;
+                            $user_id = $dates[$key]->user_id;
+                            /////////////////////get day////////////////////////////////////////
+                            $timestamp = strtotime($date);
+                            $day = date("l", $timestamp);
+                            //////////////////////get full name from users//////////////////////
+                            $user = new \modules\users\models\Users();
+                            $user->_select = 'fullname';
+                            $user->user_id = $user_id;
+                            $user->status = 'active';
+                            $res_name = $user->get();
+                            $fullname = $res_name->fullname;
 
-            foreach ($dates as $key => $value) {
-                foreach ($date_new as $keyy => $valuee) {
-                    if ($date_new[$keyy]->date == $dates[$key]->date) {
-                        $time = $dates[$key]->time;
-                        $date = $dates[$key]->date;
-                        $user_id = $dates[$key]->user_id;
-                        /////////////////////get day////////////////////////////////////////
-                        $timestamp = strtotime($date);
-                        $day = date("l", $timestamp);
-                        //////////////////////get full name from users//////////////////////
-                        $user = new \modules\users\models\Users();
-                        $user->_select = 'fullname';
-                        $user->user_id = $user_id;
-                        $user->status = 'active';
-                        $res_name = $user->get();
-                        $fullname = $res_name->fullname;
-
-                        //////////////////insert in array///////////////////////////////////
-                        if (isset($i[$time]->schedule->{$day})) {
-                            $test = $i[$time]->schedule->{$day};
-                            $test->time = $time;
-                            $test->day = $day;
-                            $test->date = $date;
-                            $test->fullname = $fullname;
-                            $test->status = 'reserved';
+                            //////////////////insert in array///////////////////////////////////
+                            if (isset($i[$time]->schedule->{$day})) {
+                                $test = $i[$time]->schedule->{$day};
+                                $test->time = $time;
+                                $test->day = $day;
+                                $test->date = $date;
+                                $test->fullname = $fullname;
+                                $test->status = 'reserved';
+                            }
                         }
                     }
                 }
