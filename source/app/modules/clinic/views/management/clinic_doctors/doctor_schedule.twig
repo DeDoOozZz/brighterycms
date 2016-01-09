@@ -15,7 +15,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label" for="name">
                 <span class="schedul-day">Saturday</span>
-                <input type="checkbox" name="day[0]" {% if item.Saturday.status == 'on'%} checked {% endif %} value="1" class="iswitch iswitch-secondary"></label>
+                <input type="checkbox" name="day[0]" {% if item.Saturday.status == 'on' or not item.Saturday.status%} checked {% endif %} value="1" class="iswitch iswitch-secondary"></label>
             <div class="col-sm-9 doctoe-list-schedule">
                 <div class="col-sm-6">
                     <div class="col-sm-2" style="padding:0;">
@@ -53,7 +53,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label" for="name">
                 <span class="schedul-day">Sunday</span>
-                <input type="checkbox" name="day[1]" {% if item.Sunday.status == 'on'%} checked {% endif %}value="1" class="iswitch iswitch-secondary">
+                <input type="checkbox" name="day[1]" {% if item.Saturday.status == 'on' or not item.Saturday.status%} checked {% endif %}value="1" class="iswitch iswitch-secondary">
             </label>
             <div class="col-sm-9 doctoe-list-schedule">
                 <div class="col-sm-6">
@@ -93,7 +93,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label" for="name">
                 <span class="schedul-day">Monday</span>
-                <input type="checkbox" name="day[2]" {% if item.Monday.status == 'on'%} checked {% endif %} value="1" class="iswitch iswitch-secondary">
+                <input type="checkbox" name="day[2]" {% if item.Saturday.status == 'on' or not item.Saturday.status%} checked {% endif %} value="1" class="iswitch iswitch-secondary">
             </label>
 
             <div class="col-sm-9 doctoe-list-schedule">
@@ -134,7 +134,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label" for="name">
                 <span class="schedul-day">Tuesday</span>
-                <input type="checkbox" name="day[3]" {% if item.Tuesday.status == 'on'%} checked {% endif %} value="1" class="iswitch iswitch-secondary">
+                <input type="checkbox" name="day[3]" {% if item.Saturday.status == 'on' or not item.Saturday.status%} checked {% endif %} value="1" class="iswitch iswitch-secondary">
             </label>
 
             <div class="col-sm-9 doctoe-list-schedule">
@@ -175,7 +175,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label" for="name">
                 <span class="schedul-day">Wednesday</span>
-                <input type="checkbox" name="day[4]" {% if item.Wednesday.status == 'on'%} checked {% endif %} value="1"  class="iswitch iswitch-secondary">
+                <input type="checkbox" name="day[4]" {% if item.Saturday.status == 'on' or not item.Saturday.status%} checked {% endif %} value="1"  class="iswitch iswitch-secondary">
             </label>
 
             <div class="col-sm-9 doctoe-list-schedule">
@@ -216,7 +216,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label" for="name">
                 <span class="schedul-day">Thursday</span>
-                <input type="checkbox" name="day[5]" {% if item.Thursday.status == 'on'%} checked {% endif %} value="1" class="iswitch iswitch-secondary">
+                <input type="checkbox" name="day[5]" {% if item.Saturday.status == 'on' or not item.Saturday.status%} checked {% endif %} value="1" class="iswitch iswitch-secondary">
             </label>
             <div class="col-sm-9 doctoe-list-schedule">
                 <div class="col-sm-6">
@@ -256,7 +256,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label" for="name">
                 <span class="schedul-day">Friday</span>
-                <input type="checkbox" name="day[6]" {% if item.Friday.status == 'on'%} checked {% endif %} value="1" class="iswitch iswitch-secondary">
+                <input type="checkbox" name="day[6]" {% if item.Saturday.status == 'on' or not item.Saturday.status%} checked {% endif %} value="1" class="iswitch iswitch-secondary">
             </label>
 
             <div class="col-sm-9 doctoe-list-schedule">

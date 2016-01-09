@@ -107,7 +107,8 @@ class Clinic_doctorsController extends Brightery_Controller {
             $status = $this->input->post('day');
             $clinic_schedule_id = $this->input->post('clinic_schedule_id');
             foreach ($this->input->post('from') as $key => $value) {
-                $model->clinic_schedule_id = $clinic_schedule_id[$key];
+                if ($clinic_schedule_id[$key])
+                    $model->clinic_schedule_id = $clinic_schedule_id[$key];
                 $model->day = $days[$key];
                 $model->from_time = $for_time[$key];
                 $model->to_time = $to_time[$key];
@@ -183,20 +184,20 @@ class Clinic_doctorsController extends Brightery_Controller {
         }
         $model_schedules = new \modules\clinic\models\Clinic_schedules();
         $model_schedules->clinic_doctor_id = $id;
-        
+
         $model_exceptions = new modules\clinic\models\Clinic_schedule_exceptions();
         $model_exceptions->clinic_doctor_id = $id;
-        
+
         $model = new \modules\clinic\models\Clinic_doctors();
         $model->clinic_doctor_id = $id;
-        
+
         $model_resevration_type = new \modules\clinic\models\Clinic_doctor_reservation_types();
         $model_resevration_type->clinic_doctor_id = $id;
-        
+
         $model_reservation = new \modules\clinic\models\Clinic_reservations();
-        $model_reservation->clinic_doctor_id = $id ;
-        
-        if ($model->delete() && $model_exceptions->delete() && $model_schedules->delete() && $model_resevration_type->delete() && $model_reservation->delete() )
+        $model_reservation->clinic_doctor_id = $id;
+
+        if ($model->delete() && $model_exceptions->delete() && $model_schedules->delete() && $model_resevration_type->delete() && $model_reservation->delete())
             Uri_helper::redirect("management/clinic_doctors");
     }
 
