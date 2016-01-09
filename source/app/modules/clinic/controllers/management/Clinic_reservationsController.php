@@ -97,8 +97,9 @@ class Clinic_reservationsController extends Brightery_Controller {
             'canceled' => $this->Language->phrase('canceled'),
             'pending' => $this->Language->phrase('pending')];
         $schedules = Form_helper::queryToDropdown('clinic_schedules', 'clinic_schedule_id', 'clinic_schedule_id');
+        $patients = Form_helper::queryToDropdown('users', 'user_id', 'fullname');
 
-        $patients = Form_helper::fullqueryToDropdown('SELECT clinic_patients.clinic_patient_id, users.fullname FROM clinic_patients  INNER JOIN users ON users.user_id = clinic_patients.user_id', 'clinic_patient_id', 'fullname');
+//        $patients = Form_helper::fullqueryToDropdown('SELECT clinic_patients.clinic_patient_id, users.fullname FROM clinic_patients  INNER JOIN users ON users.user_id = clinic_patients.user_id', 'clinic_patient_id', 'fullname');
         if ($id)
             $model->clinic_reservation_id = $id;
         $model->language_id = $this->language->getDefaultLanguage();
@@ -185,7 +186,6 @@ class Clinic_reservationsController extends Brightery_Controller {
     }
 
     public function saveAction() {
-        print_r($_POST);
         $clinic_doctor_id = $this->input->post('doctor_id');
         $user_id = $this->input->post('patient_id');
         $date = $this->input->post('date');

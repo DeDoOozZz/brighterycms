@@ -185,7 +185,7 @@
                     method: "post",
                     params: {doctor_id: user_id}
                 });
-                $('#save_reserve').click(function () {
+                $('#save_reserve').click(function (status) {
                     var patient_id = $('#patient_id').val();
                     var doctor_id = $('#doctor_id').val();
                     var status = $('#status').val();
