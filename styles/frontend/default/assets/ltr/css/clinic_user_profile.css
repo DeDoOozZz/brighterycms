@@ -1,0 +1,51 @@
+
+
+.profile {
+    margin-top: 148px;
+    margin-bottom: 30px;
+}
+
+a {
+    color: rgb(119, 119, 119);
+}
+
+.active {
+    color: rgb(119, 119, 119);
+    font-weight: bold;
+    border-right-color: #fff;
+}
+
+.user-info-list li i {
+    margin-right: 15px;
+}
+/*.user-img {*/
+    /*/!*height: 500px;*!/*/
+/*}*/
+
+/*.profile-pic {*/
+    /*width: 50%;*/
+/*}*/
+
+/*.profile-pic h4 {*/
+    /*margin-left: 16px;*/
+    /*margin-top: 20px;*/
+/*}*/
+
+/*.info {*/
+    /*background-color: #eee;*/
+    /*padding: 10px;*/
+/*}*/
+
+/*.info h3 {*/
+    /*margin-bottom: 36px;*/
+    /*/!*color: rgb(255, 186, 0);*!/*/
+/*}*/
+
+/*span.col-sm-2 {*/
+    /*font-weight: bold;*/
+/*}*/
+
+ /**/
+
+
+
