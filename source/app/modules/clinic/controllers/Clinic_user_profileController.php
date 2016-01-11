@@ -83,10 +83,12 @@ class Clinic_user_profileController extends Brightery_Controller{
 
         $this->permission('manage');
         $this->layout('ajax');
-
+        print_r($_POST);
+        print_r($_GET);
+        exit();
         if ($id)
 
-            $model = new \modules\users\models\Users();
+        $model = new \modules\users\models\Users();
             $model->usr_id = $id;
             $phone = new \modules\users\models\User_phones();
             $phone->_select = 'user_phone_id ,phone';
