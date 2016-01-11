@@ -163,8 +163,8 @@ class Brightery
         /**
          * CHECK THE LICENSE
          */
-        if (!CMD_MODE)
-            self::SuperInstance()->license->check_license();
+//        if (!CMD_MODE)
+//            self::SuperInstance()->license->check_license();
 
         /**
          * LOAD LIBRARIES

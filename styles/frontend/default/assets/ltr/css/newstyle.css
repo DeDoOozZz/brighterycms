@@ -47,7 +47,7 @@ p.show_faq {
 }
 span.add-another-option-address,
 span.add-another-option-phone {
-    margin: 30px 0;
+    margin: 8px 0;
     display: block;
     cursor: pointer;
 }
@@ -111,7 +111,7 @@ input.datepicker-registration{
     color:#666;
 }
 
-//   start login home   //
+/*   start login home  */
 
 .top-line p span i {
     font-size: 16px;
@@ -296,4 +296,4 @@ span.reservation-details-content {
 .menu-links li a{
     color:#fff;
 }
-//  end login home   //
+/*end login home*/

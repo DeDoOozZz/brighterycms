@@ -1,242 +1,273 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
 
-        <h3 class="panel-title">{{ lang.patient_details}} </h3>
 
-        <div class="panel-options">
+<div class="container">
+
+    <div class="panel panel-default profile">
+        <div class="panel-heading">
+
+            <h2 class="panel-title" style="font-weight:bold">{{ lang.patient_details}} Profile and Reports </h2>
+
+            <div class="panel-options">
+
+            </div>
 
         </div>
+        <div class="panel-body">
 
-    </div>
-    <div class="panel-body">
+            <section class="profile-env col-sm-12">
 
-        <section class="profile-env col-sm-12">
+                <div class="row">
 
-            <div class="row">
+                    <div class="col-sm-3">
 
-                <div class="col-sm-3">
+                        <!-- User Info Sidebar -->
+                        <div class="user-info-sidebar">
+                            <a href="#" class="user-img">
+                                <img src="{{ helper.uri.cdn() }}users/{{ item.image }}" alt="user-img" class="img-cirlce img-responsive img-thumbnail" />
+                            </a>
 
-                    <!-- User Info Sidebar -->
-                    <div class="user-info-sidebar">
-                        <a href="#" class="user-img">
-                            <img src="{{ constant('STYLE_IMAGES') }}/user-2.png" alt="user-img" class="img-cirlce img-responsive img-thumbnail" />
-                        </a>
-
-                        <span class="user-name">
-                            {{patient.fullname}}
-                        </span>
-                    </div>
-
-                </div>
-
-                <div class="col-sm-9">
-                    <div class="tabs-vertical-env tabs-vertical-bordered"><!-- add class "right-aligned" for the right aligned tabs -->
-
-                        <ul class="nav tabs-vertical">
-                            <li class="active"><a href="#v4-profile" data-toggle="tab">{{lang.profile}}</a></li>
-                            <li class><a href="#v4-disease" data-toggle="tab">{{lang.diseases}}</a></li>
-                            <li><a href="#v4-xrays" data-toggle="tab">{{lang.xrays}}</a></li>
-                            <li><a href="#v4-notes" data-toggle="tab">{{lang.notes}}</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="v4-profile">
-                                <a href="{{ helper.uri.url('management/users/manage', id  ) }}" class="btn btn-secondary  btn-icon btn-icon-standalone patient-edit-profile" style="color: #FFF; float:right;">
-                                    <i class="fa fa-pencil-square-o"></i>
-                                    <span>{{ lang.edit_user }}</span>
-                                </a>
-                                <ul class="list-unstyled user-info-list">
-                                    <li> <i class="fa-home"></i> {{ patient.address }} </li>
-                                    <li> <i class="fa fa-phone"></i> {{ patient.phone }} </li>
-                                    <li> <i class="fa fa-envelope"></i> {{ patient.email }} </li>
-                                    <li> <i class="fa fa-user"></i> {{ patient.gender }} </li>
-                                    <li> <i class="fa fa-calendar"></i> {{ patient.birthdate }} </li>
-                                </ul>
-                            </div>
-                            <div class="tab-pane" id="v4-disease">
-                                <a href="#" class="btn btn-secondary show-diseases" style="color: #FFF; float:right;" href="#" data-toggle="modal" data-target="#myModal" rel="add" data-id="{{ id }}"> {{ lang.add }} </a>
-
-                                <table class="table table-bordered table-striped data_diseases" >
-                                    <thead>
-                                    <tr>
-                                        <th>{{ lang.disease }}</th>
-                                        <th>{{ lang.note }}</th>
-                                        <th>{{ lang.operations }}</th>
-                                    </tr>
-                                    </thead>
-
-                                    <tbody class="middle-align">
-
-                                    {% for disease in diseases %}
-
-                                        <tr class="disease_{{disease.clinic_patient_disease_id}}">
-                                            <td>{{ disease.title }}</td>
-                                            <td>{{ disease.note }}</td>
-                                            <td>
-                                                <a href="#" class="btn btn-secondary btn-sm show-diseases" href="#" data-toggle="modal" data-target="#myModal" rel="edit" data-id="{{ disease.clinic_patient_disease_id }}">{{lang.edit}}</a>
-                                                <a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patient_diseases/delete', disease.clinic_patient_disease_id) }}">{{ lang.delete }}</a>
-                                            </td>
-                                        </tr>
-
-                                    {% endfor %}
-
-                                    </tbody>
-
-                                </table>
-                            </div>
-                            <div class="tab-pane" id="v4-xrays">
-                                <a href="#" class="btn btn-secondary show-xrays" style="color: #FFF; float:right;" href="#" data-toggle="modal" data-target="#myModal2" rel="add" data-id="{{ id }}"> {{ lang.add }} </a>
-
-                                <table class="table table-bordered table-striped data_xrays" >
-                                    <thead>
-                                    <tr>
-                                        <th>{{ lang.title }}</th>
-                                        <th>{{ lang.description }}</th>
-                                        <th>{{ lang.operations }}</th>
-                                    </tr>
-                                    </thead>
-
-                                    <tbody class="middle-align">
-                                    {% for xray in xrays %}
-
-                                        <tr class="xray_{{xray.clinic_xray_negative_id}}">
-                                            <td>{{ xray.title }}</td>
-                                            <td>{{ xray.description }}</td>
-                                            <td>
-                                                <a href="#" class="btn btn-secondary btn-sm show-xrays" href="#" data-toggle="modal" data-target="#myModal2" rel="edit" data-id="{{ xray.clinic_xray_negative_id}}">{{lang.edit}}</a>
-                                                <a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_xray_negative/delete', xray.clinic_xray_negative_id) }}">{{ lang.delete }}</a>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-
-                                </table>
-                            </div>
-                            <div class="tab-pane" id="v4-notes">
-                                <a href="#" class="btn btn-secondary show-notes" style="color: #FFF; float:right;" href="#" data-toggle="modal" data-target="#myModal3" rel="add" data-id="{{ id }}"> {{ lang.add }} </a>
-
-                                <table class="table table-bordered table-striped data_note" >
-                                    <thead>
-                                    <tr>
-                                        <th>{{ lang.note }}</th>
-
-                                        <th>{{ lang.operations }}</th>
-                                    </tr>
-                                    </thead>
-
-                                    <tbody class="middle-align">
-                                    {% for note in notes %}
-                                        <tr class="note_{{note.clinic_patient_note_id}}" >
-                                            <td>{{ note.note }}</td>
-                                            <td>
-                                                <a href="#" class="btn btn-secondary btn-sm show-notes" href="#" data-toggle="modal" data-target="#myModal3" rel="edit" data-id="{{ note.clinic_patient_note_id}}">{{lang.edit}}</a>
-                                                <a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patients_notes/delete', note.clinic_patient_note_id) }}">{{ lang.delete }}</a>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
+            <span class="user-name">
+                {{item.fullname}}
+            </span>
                         </div>
 
                     </div>
+
+                    <div class="col-sm-9">
+                        <div class="tabs-vertical-env tabs-vertical-bordered"><!-- add class "right-aligned" for the right aligned tabs -->
+
+                            <ul class="nav tabs-vertical">
+                                <li class="active"><a href="#v4-profile" data-toggle="tab">{{lang.profile}}Personal Info</a></li>
+                                <li class><a href="#v4-disease" data-toggle="tab">{{lang.diseases}}Diseases</a></li>
+                                <li><a href="#v4-xrays" data-toggle="tab">{{lang.xrays}}Xrays</a></li>
+                                <li><a href="#v4-notes" data-toggle="tab">{{lang.notes}}Notes</a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                {#-------Personal Info-------#}
+
+                                <div class="tab-pane active" id="v4-profile">
+                                    <a href="#" data-toggle="modal" data-target="#personal_info" class="btn btn-warning  btn-icon btn-icon-standalone patient-edit-profile" style="color: #FFF; float:right;">
+                                        <i class="fa fa-pencil-square-o"></i>
+                                        <span>{{ lang.edit_user }}Edit</span>
+                                    </a>
+                                    <ul class="list-unstyled user-info-list">
+                                        <li> <i class="fa-home"></i> {{ item.address }} </li>
+                                        <li> <i class="fa fa-phone"></i> {{ phones.phone }} </li>
+                                        <li> <i class="fa fa-envelope"></i> {{ item.email }} </li>
+                                        <li> <i class="fa fa-lock"></i>
+                                            <input type="password" value="{{ item.password }}"style="border: medium none; background-color: #fff;" disabled>
+                                        </li>
+                                        <li> <i class="fa fa-user"></i> {{ item.gender }} </li>
+                                        <li> <i class="fa fa-calendar"></i> {{ item.birthdate }} </li>
+                                    </ul>
+                                </div>
+                                {#-------Disease-------#}
+                                <div class="tab-pane" id="v4-disease">
+                                    <table class="table table-bordered table-striped data_diseases" >
+                                        <thead>
+                                        <tr>
+                                            <th>{{ lang.disease }}Diseases</th>
+                                            <th>{{ lang.note }}Notes</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody class="middle-align">
+
+                                        {% for disease in diseases %}
+
+                                            <tr class="disease_{{disease.clinic_patient_disease_id}}">
+                                                <td>{{ disease.title }}</td>
+                                                <td>{{ disease.note }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                {#-------X-Rays-------#}
+                                <div class="tab-pane" id="v4-xrays">
+                                    <table class="table table-bordered table-striped data_xrays" >
+                                        <thead>
+                                        <tr>
+                                            <th>{{ lang.title }} Title</th>
+                                            <th>{{ lang.description }} Description</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody class="middle-align">
+                                        {% for xray in xrays %}
+
+                                            <tr class="xray_{{xray.clinic_xray_negative_id}}">
+                                                <td>{{ xray.title }} title</td>
+                                                <td>{{ xray.description }} description</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                                {#-------Notes-------#}
+                                <div class="tab-pane" id="v4-notes">
+                                    <table class="table table-bordered table-striped data_note" >
+                                        <thead>
+                                        <tr>
+                                            <th>{{ lang.note }}notes</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody class="middle-align">
+                                        {% for note in notes %}
+                                            <tr class="note_{{note.clinic_patient_note_id}}" >
+                                                <td>{{ note.note }}</td>
+                                                {#<td>#}
+                                                {#<a href="#" class="btn btn-secondary btn-sm show-notes" href="#" data-toggle="modal" data-target="#myModal3" rel="edit" data-id="{{ note.clinic_patient_note_id}}">{{lang.edit}}</a>#}
+                                                {#<a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patients_notes/delete', note.clinic_patient_note_id) }}">{{ lang.delete }}</a>#}
+                                                {#</td>#}
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
-
-            </div>
-
-        </section>
+            </section>
+        </div>
     </div>
-</div>
 
-{#     Disease     #}
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content ">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><spanaria-hidden="true">&times;</span></button>
-                <h4 class="modal-title " id="myModalLabel">{{lang.disease}}</h4>
-            </div>
-            <div class="modal-body">
-                <div class="for-show-diseases"></div>
+
+    <div class="modal fade" id="personal_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title " id="myModalLabel">Personal Information</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="for-show-personal-info">
+                        {{ helper.form.open(null,false,true,'role="form" id="edit-form" class="form-horizontal"') }}
+                        {{ error }}
+                        {#<form role="form" class="form-horizontal dashboard-forms" method="post">#}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="fullname">Fullname</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control validate[required]" id="fullname" placeholder="{{ item.fullname }}" name="fullname"
+                                       value="{{ helper.form.value('fullname', item.fullname) }}">
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="email">Email</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control validate[required]" id="fullname" placeholder="{{ item.email }}" name="email"
+                                       value="{{ helper.form.value('email', item.email) }}">
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="password">Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control validate[required]" id="fullname" placeholder="{{ item.password }}" name="password"
+                                       value="{{ helper.form.value('password', item.password) }}">
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"  for="gender">Gender</label>
+                            <div class="col-sm-10">
+                                <input type="radio" value="{{ helper.form.value('gender', item.gender) }}" name="gender"> Female <br>
+                                <input type="radio" value="{{ helper.form.value('gender', item.gender) }}" name="gender"> Male <br>
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div>
+                        <div class="form-group dashboard-birthdate">
+                            <label class="col-sm-2 control-label" for="datepicker">Birthdate</label>
+                            <div class="col-sm-10">
+                                {#<input type="text" class="form-control" id="datepicker" placeholder="birthdate" name="birthdate"#}
+                                {#value="{{ helper.form.value('birthdate', item.birthdate) }}">#}
+                                {#<i class="fa fa-calendar calendar-form"></i>#}
+
+                                <div class="input-group">
+                                    <input type="text" class="form-control datepicker" id="datepicker" placeholder="birthdate" name="birthdate" data-format=" dd MM yyyy" value="{{ helper.form.value('birthdate', item.birthdate) }}">
+
+                                    <div class="input-group-addon">
+                                        <a href="#"><i class="fa fa-calendar"></i></a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Phone</label>
+                            <div class="col-md-9">
+                                <input class="form-control" name="phone" id="phone" type="text" placeholder="Phone">
+                            </div>
+                            <span class="add-another-option-phone col-sm-1"><i class="fa fa-plus-square"></i></span>
+                        </div>
+                        <div class="form-group-separator"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-md-9">
+                                <div class="show-phone-option"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Address</label>
+                            <div class="col-md-9">
+                                <input class="form-control" name="address" id="address" type="text" placeholder="Address">
+                            </div>
+                            <span class="add-another-option-address col-sm-1"><i class="fa fa-plus-square"></i></span>
+                        </div>
+                        <div class="form-group-separator"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-md-9">
+                                <div class="show-address-option"></div>
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div>
+                        <div class="form-group">
+                            <label for="field-5" class="col-sm-2 control-label"></label>
+                            <div class="col-sm-10">
+                                <input type="submit" value="Change" class="form-control submit-edit">
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div>
+                        {{ helper.form.close() }}
+                        {#</form>#}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-{#     X-RAYS     #}
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content ">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><spanaria-hidden="true">&times;</span></button>
-                <h4 class="modal-title " id="myModalLabel">{{lang.xrays}}</h4>
-            </div>
-            <div class="modal-body">
-                <div class="for-show-xrays"></div>
-            </div>
-        </div>
-    </div>
+
 </div>
 
-{#    Notes     #}
-<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content ">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><spanaria-hidden="true">&times;</span></button>
-                <h4 class="modal-title " id="myModalLabel">{{lang.notes}}</h4>
-            </div>
-            <div class="modal-body">
-                <div class="for-show-notes"></div>
-            </div>
-        </div>
-    </div>
-</div>
+<script src="{{ constant('STYLE_JS') }}/datepicker/bootstrap-datepicker.js"></script>
 
+<script>
 
-<script src="{{ constant('STYLE_JS') }}/select2/select2.min.js"></script>
-
-<script type="text/javascript">
-
-    $('.show-diseases').click(function () {
-        patient.diseases($(this).attr('rel'),$(this).data('id'));
-    });
-    $('.show-xrays').click(function () {
-        patient.xrays($(this).attr('rel'),$(this).data('id'));
-    });
-    $('.show-notes').click(function () {
-        patient.notes($(this).attr('rel'),$(this).data('id'));
+    $(document).ready(function () {
+        $(".add-another-option-phone ").click(function () {
+            $(".show-phone-option").append('<input name="address" id="address" type="text" placeholder="add another phone" class="form-control">'+'<div class="form-group-separator"></div>');
+        });
+        $(".add-another-option-address ").click(function () {
+            $(".show-address-option").append('<input name="address" id="address" type="text" placeholder="add another address" class="form-control">'+'<div class="form-group-separator"></div>');
+        });
     });
 
-    var patient = {
-        diseases: function (op, id) {
-            $.get('{{ helper.uri.url('management/clinic_patient_diseases/manage/') }}' + op + '/' + id, function (data) {
-                $('.for-show-diseases').html(data);
-            });
-        },
-        xrays: function (op, id) {
-            $.get('{{ helper.uri.url('management/clinic_xray_negative/manage/') }}' + op + '/' + id, function (data) {
-                $('.for-show-xrays').html(data);
-            });
-        },
-        notes: function (op, id) {
-            $.get('{{ helper.uri.url('management/clinic_patients_notes/manage/') }}' + op + '/' + id, function (data) {
-                $('.for-show-notes').html(data);
-            });
-        }
-    };
-
-    // DELETE BUTTONS
-    $('.delete').click(function () {
-        var button = $(this);
-        $.get($(this).attr('href'), function (data) {
-            button.parent().parent().remove();
+    $('.submit-edit').click(function (){
+        alert('hi');
+        $.post('{{ helper.uri.url('clinic_user_profile/manage/')}}/{{ item.user_id }}',$(this).serialize(), function(response){
+            //        alert('hi');
+            response = $.parseJSON(response);
         });
         return false;
     });
-
-
 </script>
-
-
-
-

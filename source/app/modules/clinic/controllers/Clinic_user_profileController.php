@@ -1,3 +1,4 @@
+
 <?php
 
 defined('ROOT') OR exit('No direct script access allowed');
@@ -18,8 +19,8 @@ defined('ROOT') OR exit('No direct script access allowed');
  * */
 
 class Clinic_user_profileController extends Brightery_Controller{
-    
-    
+
+
     protected $interface = 'frontend';
     protected $layout = 'clinic';
 
@@ -67,7 +68,7 @@ class Clinic_user_profileController extends Brightery_Controller{
             . " FROM clinic_xray_negative "
             . "WHERE clinic_xray_negative.user_id = '$id'")->result();
 
-        return $this->render('clinic_user_profile/test', [
+        return $this->render('clinic_user_profile/index', [
                 'item' => $user->get(),
                 'phones'=>$phones,
                 'patient' => $patient,
@@ -107,7 +108,7 @@ class Clinic_user_profileController extends Brightery_Controller{
         }
         $phone->phone = $this->input->post('phone');
         if ($sid = $model->save())
-            return json_encode(['sucess' => 1, 'id' => $sid, 'items' =>$model,
+            return json_encode(['sucess' => 1, 'id' => $sid, 'item' =>$model,
                 'phones' => $phone]);
 
         else
@@ -117,5 +118,4 @@ class Clinic_user_profileController extends Brightery_Controller{
     }
 
 }
-    
 
