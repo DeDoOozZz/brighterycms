@@ -26,9 +26,9 @@
                                 <img src="{{ helper.uri.cdn() }}users/{{ item.image }}" alt="user-img" class="img-cirlce img-responsive img-thumbnail" />
                             </a>
 
-            <span class="user-name">
-                {{item.fullname}}
-            </span>
+                            <span class="user-name">
+                                {{item.fullname}}
+                            </span>
                         </div>
 
                     </div>
@@ -52,8 +52,12 @@
                                         <span>{{ lang.edit_user }}Edit</span>
                                     </a>
                                     <ul class="list-unstyled user-info-list">
-                                        <li> <i class="fa-home"></i> {{ item.address }} </li>
-                                        <li> <i class="fa fa-phone"></i> {{ phones.phone }} </li>
+                                        {%for add in address%}
+                                            <li> <i class="fa-home"></i> {{ add.address }} </li>
+                                            {%endfor%}
+                                            {%for no in phones%}
+                                            <li> <i class="fa fa-phone"></i> {{ no.phone }} </li>
+                                            {%endfor%}
                                         <li> <i class="fa fa-envelope"></i> {{ item.email }} </li>
                                         <li> <i class="fa fa-lock"></i>
                                             <input type="password" value="{{ item.password }}"style="border: medium none; background-color: #fff;" disabled>
@@ -66,21 +70,21 @@
                                 <div class="tab-pane" id="v4-disease">
                                     <table class="table table-bordered table-striped data_diseases" >
                                         <thead>
-                                        <tr>
-                                            <th>{{ lang.disease }}Diseases</th>
-                                            <th>{{ lang.note }}Notes</th>
-                                        </tr>
+                                            <tr>
+                                                <th>{{ lang.disease }}Diseases</th>
+                                                <th>{{ lang.note }}Notes</th>
+                                            </tr>
                                         </thead>
 
                                         <tbody class="middle-align">
 
-                                        {% for disease in diseases %}
+                                            {% for disease in diseases %}
 
-                                            <tr class="disease_{{disease.clinic_patient_disease_id}}">
-                                                <td>{{ disease.title }}</td>
-                                                <td>{{ disease.note }}</td>
-                                            </tr>
-                                        {% endfor %}
+                                                <tr class="disease_{{disease.clinic_patient_disease_id}}">
+                                                    <td>{{ disease.title }}</td>
+                                                    <td>{{ disease.note }}</td>
+                                                </tr>
+                                            {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -89,20 +93,20 @@
                                 <div class="tab-pane" id="v4-xrays">
                                     <table class="table table-bordered table-striped data_xrays" >
                                         <thead>
-                                        <tr>
-                                            <th>{{ lang.title }} Title</th>
-                                            <th>{{ lang.description }} Description</th>
-                                        </tr>
+                                            <tr>
+                                                <th>{{ lang.title }} Title</th>
+                                                <th>{{ lang.description }} Description</th>
+                                            </tr>
                                         </thead>
 
                                         <tbody class="middle-align">
-                                        {% for xray in xrays %}
+                                            {% for xray in xrays %}
 
-                                            <tr class="xray_{{xray.clinic_xray_negative_id}}">
-                                                <td>{{ xray.title }} title</td>
-                                                <td>{{ xray.description }} description</td>
-                                            </tr>
-                                        {% endfor %}
+                                                <tr class="xray_{{xray.clinic_xray_negative_id}}">
+                                                    <td>{{ xray.title }} title</td>
+                                                    <td>{{ xray.description }} description</td>
+                                                </tr>
+                                            {% endfor %}
                                         </tbody>
 
                                     </table>
@@ -112,21 +116,21 @@
                                 <div class="tab-pane" id="v4-notes">
                                     <table class="table table-bordered table-striped data_note" >
                                         <thead>
-                                        <tr>
-                                            <th>{{ lang.note }}notes</th>
-                                        </tr>
+                                            <tr>
+                                                <th>{{ lang.note }}notes</th>
+                                            </tr>
                                         </thead>
 
                                         <tbody class="middle-align">
-                                        {% for note in notes %}
-                                            <tr class="note_{{note.clinic_patient_note_id}}" >
-                                                <td>{{ note.note }}</td>
-                                                {#<td>#}
-                                                {#<a href="#" class="btn btn-secondary btn-sm show-notes" href="#" data-toggle="modal" data-target="#myModal3" rel="edit" data-id="{{ note.clinic_patient_note_id}}">{{lang.edit}}</a>#}
-                                                {#<a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patients_notes/delete', note.clinic_patient_note_id) }}">{{ lang.delete }}</a>#}
-                                                {#</td>#}
-                                            </tr>
-                                        {% endfor %}
+                                            {% for note in notes %}
+                                                <tr class="note_{{note.clinic_patient_note_id}}" >
+                                                    <td>{{ note.note }}</td>
+                                                    {#<td>#}
+                                                    {#<a href="#" class="btn btn-secondary btn-sm show-notes" href="#" data-toggle="modal" data-target="#myModal3" rel="edit" data-id="{{ note.clinic_patient_note_id}}">{{lang.edit}}</a>#}
+                                                    {#<a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patients_notes/delete', note.clinic_patient_note_id) }}">{{ lang.delete }}</a>#}
+                                                    {#</td>#}
+                                                </tr>
+                                            {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -180,8 +184,8 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label"  for="gender">Gender</label>
                             <div class="col-sm-10">
-                                <input type="radio" value="{{ helper.form.value('gender', item.gender) }}" name="gender"> Female <br>
-                                <input type="radio" value="{{ helper.form.value('gender', item.gender) }}" name="gender"> Male <br>
+                                <input type="radio" value="{{ helper.form.value('gender', item.gender) }} {%if item.gender == 'female'%} checked {%endif%} name="gender"> Female <br>
+                                <input type="radio" value="{{ helper.form.value('gender', item.gender) }} {%if item.gender == 'male'%} checked {%endif%} name="gender"> Male <br>
                             </div>
                         </div>
                         <div class="form-group-separator"></div>
@@ -206,7 +210,9 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Phone</label>
                             <div class="col-md-9">
-                                <input class="form-control" name="phone" id="phone" type="text" placeholder="Phone">
+                                {%for no in phones%}
+                                    <input class="form-control" name="phone" id="phone" type="text" placeholder="{{no.phone}}">
+                                {%endfor%}
                             </div>
                             <span class="add-another-option-phone col-sm-1"><i class="fa fa-plus-square"></i></span>
                         </div>
@@ -218,9 +224,13 @@
                             </div>
                         </div>
                         <div class="form-group">
+
                             <label class="col-sm-2 control-label">Address</label>
+
                             <div class="col-md-9">
-                                <input class="form-control" name="address" id="address" type="text" placeholder="Address">
+                                {%for add in address%}
+                                    <input class="form-control" name="address" id="address" type="text" placeholder="{{add.address}}">
+                                {%endfor%}
                             </div>
                             <span class="add-another-option-address col-sm-1"><i class="fa fa-plus-square"></i></span>
                         </div>
@@ -255,19 +265,19 @@
 
     $(document).ready(function () {
         $(".add-another-option-phone ").click(function () {
-            $(".show-phone-option").append('<input name="address" id="address" type="text" placeholder="add another phone" class="form-control">'+'<div class="form-group-separator"></div>');
+            $(".show-phone-option").append('<input name="address" id="address" type="text" placeholder="add another phone" class="form-control">' + '<div class="form-group-separator"></div>');
         });
         $(".add-another-option-address ").click(function () {
-            $(".show-address-option").append('<input name="address" id="address" type="text" placeholder="add another address" class="form-control">'+'<div class="form-group-separator"></div>');
+            $(".show-address-option").append('<input name="address" id="address" type="text" placeholder="add another address" class="form-control">' + '<div class="form-group-separator"></div>');
         });
     });
 
-    $('.submit-edit').click(function (){
-        alert('hi');
-        $.post('{{ helper.uri.url('clinic_user_profile/manage/')}}/{{ item.user_id }}',$(this).serialize(), function(response){
-            //        alert('hi');
-            response = $.parseJSON(response);
+    $('#edit-form').submit(function () {
+    {#        alert('hi');#}
+            $.post('{{ helper.uri.url('clinic_user_profile/manage/')}}{{ item.user_id }}', $(this).serialize(), function (response) {
+                //        alert('hi');
+                response = $.parseJSON(response);
+            });
+            return false;
         });
-        return false;
-    });
 </script>

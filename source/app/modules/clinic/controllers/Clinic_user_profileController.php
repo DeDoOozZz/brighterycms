@@ -40,6 +40,11 @@ class Clinic_user_profileController extends Brightery_Controller{
         $res = $phones->get();
         $user_phone_id = $res[0]->user_phone_id;
         $phones->user_phone_id = $user_phone_id;
+        
+        $address = new modules\users\models\User_addresses();
+        $address->user_id = $id ;
+        $address->select = 'user_id';
+        $add = $address->get();
 
         $patient = $this->Database->query("SELECT users.*, `user_addresses`.`address`, `user_phones`.`phone`"
             . "FROM `users` "
@@ -50,7 +55,6 @@ class Clinic_user_profileController extends Brightery_Controller{
 
         if (!$patient)
             Brightery::error404();
-
 
         $diseases = $this->Database->query("SELECT clinic_patient_diseases.*, `clinic_disease_templates`.`title`"
             . "FROM `clinic_patient_diseases` "
@@ -68,9 +72,12 @@ class Clinic_user_profileController extends Brightery_Controller{
             . " FROM clinic_xray_negative "
             . "WHERE clinic_xray_negative.user_id = '$id'")->result();
 
+//        print_r($user->get());
+//        exit();
         return $this->render('clinic_user_profile/index', [
                 'item' => $user->get(),
-                'phones'=>$phones,
+                'phones'=>$res,
+                'address'=>$add,
                 'patient' => $patient,
                 'diseases' => $diseases,
                 'notes' => $notes,
@@ -82,10 +89,7 @@ class Clinic_user_profileController extends Brightery_Controller{
     public function manageAction ($id = null){
 
         $this->permission('manage');
-        $this->layout('ajax');
-        print_r($_POST);
-        print_r($_GET);
-        exit();
+        
         if ($id)
 
         $model = new \modules\users\models\Users();
