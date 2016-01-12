@@ -116,6 +116,8 @@ class Clinic_user_profileController extends Brightery_Controller{
             $address->attributes['address'] = $this->input->post('address');
 
         }
+        //print_r($_POST);
+        //exit();
         if ($id) {
             $model->user_id = $id;
             $phone->user_id = $id;
@@ -135,8 +137,7 @@ class Clinic_user_profileController extends Brightery_Controller{
                 $add_res[$item->user_id] = $item->address;
             }
             $add_res->save();
-//        print_r($_POST);
-//        exit();
+
 
         if ($sid = $model->save())
             return json_encode(['sucess' => 1,
