@@ -2,8 +2,7 @@
     <div class="panel-heading">
         <h3 class="panel-title">{{ lang.clinic_reservations }}</h3>
     </div>
-    <div class="panel-body">
-        {#{{ helper.form.open(null,false,true,'role="form" class="form-horizontal"') }}#}
+    <div class="panel-body mar-items-bottom">
         {{ error }}
         <form id="search_form" name="search_form" mehtod="POST" ng-submit="draw()">
             <div class="form-group">
@@ -12,9 +11,7 @@
                     {{ helper.form.dropdown('clinic_dcotor_id', doctors, helper.form.value('user_id', item.fullname), 'class="form-control select" name="user_id" id="user_id" ng-model="form.user_id" ') }} 
                 </div>
             </div>
-            <div class="form-group-separator"></div>
-
-
+            {#<div class="form-group-separator"></div>#}
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="date">{{ lang.date }}</label>
                 <div class="col-sm-10">
@@ -26,18 +23,17 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group-separator"></div> 
-
+            {#<div class="form-group-separator"></div>#}
             <div class="form-group">
                 <label class="col-sm-2 control-label"></label>
-
                 <div class="col-sm-10">
                     <input type="submit" id="search" class="btn btn-secondary search-time" style="float: right;">
                 </div>
             </div>
-            {#        </form>#}
-            {{ helper.form.close() }}
-            <div class="search-result" id="search-result">
+        </form>
+        <div class="search-result" id="search-result">
+
+                {#<div class="form-group-separator"></div>#}
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="time">{{ lang.time }}</label>
@@ -61,9 +57,8 @@
 
                         </div>
                     </div>
-                    <div class="form-group-separator"></div> 
-
-                    <div class="form-group">
+                    <div class="form-group-separator"></div>
+                <div class="form-group">
                         <label class="col-sm-2 control-label"></label>
 
                         <div class="col-sm-10">
@@ -71,9 +66,9 @@
                             <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
                         </div>
                     </div>
-                </div>
             </div>
     </div>
+</div>
 
     <div class="modal fade reservation-schedule-details" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -123,53 +118,54 @@
     <script src="{{ constant('STYLE_JS') }}/select2/select2.min.js"></script>
     <script src="{{ constant('STYLE_JS') }}/timepicker/bootstrap-timepicker.min.js"></script>
     <script>
-                                            var app = angular.module('myApp', []);
-                                            app.controller('customersCtrl', function ($scope, $http) {
-                                                $scope.draw = function () {
-                                                    $http({
-                                                        url: "{{helper.uri.url('management/clinic_reservations/getdoctorTypes')}}",
-                                                        method: "get",
-                                                        params: {user_id: $scope.form.user_id}
-                                                    }).then(function (response) {
-                                                        $scope.result = response.data.reservation_type;
-                                                        if ($scope.result == 0)
-                                                        {
-                                                            console.log($scope.result);
-                                                            alert('sorry the doctoce has no schedule this day .');
-                                                        }
-                                                        else
-                                                        {
-                                                            console.log($scope.result);
-                                                            $('#search-result').show();
-                                                        }
-                                                    });
-                                                    $http({
-                                                        url: "{{helper.uri.url('management/clinic_reservations/getSearch')}}",
-                                                        method: "get",
-                                                        params: {date: $scope.form.date, user_id: $scope.form.user_id}
-                                                    }).then(function (response) {
-                                                        $scope.result = response.data.result;
-                                                        if ($scope.result == 0)
-                                                        {
-{#                                                            console.log($scope.result);#}
-                                                            alert('sorry the doctoce has no schedule this day .');
-                                                        }
-                                                        else
-                                                            $('#search-result').show();
-                                                    });
-                                                };
-                                                $scope.reserve = function (idx) {
-                                                    $http({
-                                                        url: "{{helper.uri.url('management/clinic_reservations/manage/save')}}",
-                                                        method: "get",
-                                                        params: {time: $scope.result[idx].time, date: $scope.result[idx].date, patient_id: $scope.patient_id, status: $scope.status, type: $scope.type}
-                                                    }).then(function (response) {
-                                                        $scope.result = response.data.result;
-                                                        console.log($scope.result);
-                                                        $('#search-result').show();
-                                                    });
-                                                };
-                                            });</script>
+    var app = angular.module('myApp', []);
+    app.controller('customersCtrl', function ($scope, $http) {
+    $scope.draw = function () {
+    $http({
+        url: "{{helper.uri.url('management/clinic_reservations/getdoctorTypes')}}",
+        method: "get",
+        params: {user_id: $scope.form.user_id}
+    }).then(function (response) {
+        $scope.result = response.data.reservation_type;
+        if ($scope.result == 0)
+        {
+            console.log($scope.result);
+            alert('sorry the doctoce has no schedule this day .');
+        }
+        else
+        {
+            console.log($scope.result);
+            $('#search-result').show();
+        }
+    });
+    $http({
+        url: "{{helper.uri.url('management/clinic_reservations/getSearch')}}",
+        method: "get",
+        params: {date: $scope.form.date, user_id: $scope.form.user_id}
+    }).then(function (response) {
+        $scope.result = response.data.result;
+        if ($scope.result == 0)
+        {
+    {#                                                            console.log($scope.result);#}
+            alert('sorry the doctoce has no schedule this day .');
+        }
+        else
+            $('#search-result').show();
+    });
+    };
+    $scope.reserve = function (idx) {
+    $http({
+        url: "{{helper.uri.url('management/clinic_reservations/manage/save')}}",
+        method: "get",
+        params: {time: $scope.result[idx].time, date: $scope.result[idx].date, patient_id: $scope.patient_id, status: $scope.status, type: $scope.type}
+    }).then(function (response) {
+        $scope.result = response.data.result;
+        console.log($scope.result);
+        $('#search-result').show();
+    });
+    };
+    });
+    </script>
     <script type="text/javascript">
         jQuery(document).ready(function ($)
         {
@@ -245,6 +241,9 @@
         .not-available{
             color:silver;
             background-color: #f1f1f1;
+        }
+        .mar-items-bottom div {
+            margin-bottom: 10px;
         }
 
     </style>
