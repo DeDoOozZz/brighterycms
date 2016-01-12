@@ -72,8 +72,6 @@ class Clinic_user_profileController extends Brightery_Controller{
             . " FROM clinic_xray_negative "
             . "WHERE clinic_xray_negative.user_id = '$id'")->result();
 
-//        print_r($user->get());
-//        exit();
         return $this->render('clinic_user_profile/index', [
                 'item' => $user->get(),
                 'phones'=>$res,
@@ -93,29 +91,62 @@ class Clinic_user_profileController extends Brightery_Controller{
         if ($id)
 
         $model = new \modules\users\models\Users();
-            $model->usr_id = $id;
-            $phone = new \modules\users\models\User_phones();
-            $phone->_select = 'user_phone_id ,phone';
-            $phone->user_id = $id;
-            $res = $phone->get();
-            $user_phone_id = $res[0]->user_phone_id;
-            $phone->user_phone_id = $user_phone_id;
+        $model->usr_id = $id;
+        $phone = new \modules\users\models\User_phones();
+        $phone->_select = 'user_phone_id ,phone';
+        $phone->user_id = $id;
+        $res = $phone->get();
+        $user_phone_id = $res[0]->user_phone_id;
+        $phone->user_phone_id = $user_phone_id;
+
+        $address = new \modules\users\models\User_addresses();
+        $address->_select = 'user_address_id ,address';
+        $address->user_id = $id;
+        $res = $address->get();
+        $user_add_id = $res[0]->user_address_id;
+        $address->user_address_id = $user_add_id;
+
         if ($_POST)
         {
             $model->attributes['fullname'] = $this->input->post('fullname');
             $model->attributes['birthdate'] = $this->input->post('birthdate');
             $model->attributes['email'] = $this->input->post('email');
             $model->attributes['gender'] = $this->input->post('gender');
+            $phone->attributes['phone'] = $this->input->post('phone');
+            $address->attributes['address'] = $this->input->post('address');
 
         }
         if ($id) {
             $model->user_id = $id;
             $phone->user_id = $id;
         }
-        $phone->phone = $this->input->post('phone');
+         //phones $ address
+            $phone = new \modules\users\models\User_phones();
+            $phones_num = [''];
+            foreach ($this->input->post('phone') as $item) {
+                $phones_num[$item->user_id] = $item->phone;
+            }
+            $phones_num->save();
+
+
+            $address = new \modules\users\models\User_addresses();
+            $add_res = [''];
+            foreach ($this->input->post('address')  as $item) {
+                $add_res[$item->user_id] = $item->address;
+            }
+            $add_res->save();
+//        print_r($_POST);
+//        exit();
+
         if ($sid = $model->save())
-            return json_encode(['sucess' => 1, 'id' => $sid, 'item' =>$model,
-                'phones' => $phone]);
+            return json_encode(['sucess' => 1,
+                'id' => $sid,
+                'item' =>$model,
+                'phones' => $phone ,
+                'phone_numbers' => $phones_num ,
+                'add_res' =>$add_res ,
+                'address'=> $address
+            ]);
 
         else
             return json_encode(['sucess' => 0, 'errors' => $this->validation->errors()]);

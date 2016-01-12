@@ -103,8 +103,8 @@
                                             {% for xray in xrays %}
 
                                                 <tr class="xray_{{xray.clinic_xray_negative_id}}">
-                                                    <td>{{ xray.title }} title</td>
-                                                    <td>{{ xray.description }} description</td>
+                                                    <td>{{ xray.title }}</td>
+                                                    <td>{{ xray.description }}</td>
                                                 </tr>
                                             {% endfor %}
                                         </tbody>
@@ -125,10 +125,6 @@
                                             {% for note in notes %}
                                                 <tr class="note_{{note.clinic_patient_note_id}}" >
                                                     <td>{{ note.note }}</td>
-                                                    {#<td>#}
-                                                    {#<a href="#" class="btn btn-secondary btn-sm show-notes" href="#" data-toggle="modal" data-target="#myModal3" rel="edit" data-id="{{ note.clinic_patient_note_id}}">{{lang.edit}}</a>#}
-                                                    {#<a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patients_notes/delete', note.clinic_patient_note_id) }}">{{ lang.delete }}</a>#}
-                                                    {#</td>#}
                                                 </tr>
                                             {% endfor %}
                                         </tbody>
@@ -157,6 +153,8 @@
                         {{ helper.form.open(null,false,true,'role="form" id="edit-form" class="form-horizontal"') }}
                         {{ error }}
                         {#<form role="form" class="form-horizontal dashboard-forms" method="post">#}
+
+                        {#----------fullname------------#}
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="fullname">Fullname</label>
                             <div class="col-sm-10">
@@ -165,6 +163,7 @@
                             </div>
                         </div>
                         <div class="form-group-separator"></div>
+                        {#---------------email--------------#}
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="email">Email</label>
                             <div class="col-sm-10">
@@ -173,6 +172,7 @@
                             </div>
                         </div>
                         <div class="form-group-separator"></div>
+                        {#-----------password-----------#}
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="password">Password</label>
                             <div class="col-sm-10">
@@ -181,6 +181,7 @@
                             </div>
                         </div>
                         <div class="form-group-separator"></div>
+                        {#-----------gender------------#}
                         <div class="form-group">
                             <label class="col-sm-2 control-label"  for="gender">Gender</label>
                             <div class="col-sm-10">
@@ -189,6 +190,7 @@
                             </div>
                         </div>
                         <div class="form-group-separator"></div>
+                        {#---------------birthdate----------#}
                         <div class="form-group dashboard-birthdate">
                             <label class="col-sm-2 control-label" for="datepicker">Birthdate</label>
                             <div class="col-sm-10">
@@ -207,34 +209,39 @@
                             </div>
                         </div>
                         <div class="form-group-separator"></div>
+                        {#--------------phone-----------------#}
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Phone</label>
                             <div class="col-md-9">
                                 {%for no in phones%}
-                                    <input class="form-control" name="phone" id="phone" type="text" placeholder="{{no.phone}}">
+                                    <input class="form-control" name="phone" id="phone" value="{{ helper.form.value('phone', no.phone) }}" type="text" placeholder="{{no.phone}}">
                                 {%endfor%}
                             </div>
+                            <div class="form-group-separator"></div>
+
                             <span class="add-another-option-phone col-sm-1"><i class="fa fa-plus-square"></i></span>
                         </div>
                         <div class="form-group-separator"></div>
+                        {#-----------new phone---------#}
                         <div class="form-group">
                             <label class="col-sm-2 control-label"></label>
                             <div class="col-md-9">
                                 <div class="show-phone-option"></div>
                             </div>
                         </div>
+                        {#------------address------------#}
                         <div class="form-group">
-
                             <label class="col-sm-2 control-label">Address</label>
 
                             <div class="col-md-9">
                                 {%for add in address%}
-                                    <input class="form-control" name="address" id="address" type="text" placeholder="{{add.address}}">
+                                    <input class="form-control" name="address" id="address" value="{{ helper.form.value('address', add.address) }}" type="text" placeholder="{{add.address}}">
                                 {%endfor%}
                             </div>
                             <span class="add-another-option-address col-sm-1"><i class="fa fa-plus-square"></i></span>
                         </div>
                         <div class="form-group-separator"></div>
+                        {#-------------new address--------------#}
                         <div class="form-group">
                             <label class="col-sm-2 control-label"></label>
                             <div class="col-md-9">
@@ -242,6 +249,7 @@
                             </div>
                         </div>
                         <div class="form-group-separator"></div>
+                        {#--------------submit----------#}
                         <div class="form-group">
                             <label for="field-5" class="col-sm-2 control-label"></label>
                             <div class="col-sm-10">
@@ -266,7 +274,7 @@
 
     $(document).ready(function () {
         $(".add-another-option-phone ").click(function () {
-            $(".show-phone-option").append('<input name="address" id="address" type="text" placeholder="add another phone" class="form-control">' + '<div class="form-group-separator"></div>');
+            $(".show-phone-option").append('<input name="phone" id="phone" type="text" placeholder="add another phone" class="form-control">' + '<div class="form-group-separator"></div>');
         });
         $(".add-another-option-address ").click(function () {
             $(".show-address-option").append('<input name="address" id="address" type="text" placeholder="add another address" class="form-control">' + '<div class="form-group-separator"></div>');

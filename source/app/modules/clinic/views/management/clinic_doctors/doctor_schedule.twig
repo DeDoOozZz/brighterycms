@@ -367,13 +367,13 @@
 </script>
 
 <script type="text/javascript">
-{#    var deleteException = function (this) {
+    var deleteException = function (this) {
         var button = $(this);
         $.get($(this).attr('href'), function (data) {
             button.parent().parent().remove();
         });
         return false;
-    });#}
+    });
         jQuery(document).ready(function ($) {
             $(".select").select2({
                 placeholder: 'Select Specification...',
