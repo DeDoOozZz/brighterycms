@@ -43,9 +43,20 @@ class Clinic_welcome_screenController extends Brightery_Controller
         $model_late->status = 'late';
         $late = $model_late->get();
 
+        // GETTING TIME FROM DOCTOR SCHEDULE 
+        $model_time = new \modules\clinic\models\Clinic_schedules();
+        $model_time->_select = "from_time , to_time ";
+        $model_time->clinic_doctor_id = $doctor_id ;
+        $model_time->day = date('l') ;
+        $time = $model_time->get();
+        $from_time = $time[0]->from_time;
+        $to_time = $time[0]->to_time;
+
         return $this->render('welcome_screen/main', [
-            'date' => $date,
-            'queue' => $queue,
+            'from_time' => $from_time,
+            'to_time' => $to_time,
+            'day' => $date,
+            'names' => $queue,
             'late' => $late,
             'doctor_id' => $doctor_id,
             'assets_url' => BASE_URL . 'source/app/modules/clinic/assets/'
