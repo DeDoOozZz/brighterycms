@@ -129,55 +129,28 @@ class Clinic_doctorsController extends Brightery_Controller {
         }
 
         return $this->render('clinic_doctors/doctor_schedule', [
-                    'item' => $schedule
+                    'item' => $schedule,
         ]);
     }
 
+
     public function exceptionsAction($id = false) {
-        if ($_POST) {
-            $date = $this->input->post('exc_date');
-            $from_time = $this->input->post('exc_from');
-            $to_time = $this->input->post('exc_to');
-            $clinic_schedule_exception_id = $this->input->post('clinic_schedule_exception_id');
-            foreach ($date as $key => $value) {
-                $exceptions = new \modules\clinic\models\Clinic_schedule_exceptions();
-                $exceptions->clinic_doctor_id = $id;
-                $exceptions->from_time = $from_time[$key];
-                $exceptions->to_time = $to_time[$key];
-                $exceptions->date = $value;
-                if ($clinic_schedule_exception_id[$key]) {
-                    $exceptions->clinic_schedule_exception_id = $clinic_schedule_exception_id[$key];
-                }
-                $exceptions->save();
-            }
-            return $this->render('clinic_doctors/exceptions/'.$id);
+        $exceptions = new \modules\clinic\models\Clinic_schedule_exceptions();
+        $exceptions->clinic_doctor_id = $id;
+        $exceptions->date = $this->input->post('exc_date');
+        $exceptions->from_time = $this->input->post('exc_from');
+        $exceptions->to_time = $this->input->post('exc_to');
+        $exp_schedule = [];
+        foreach ($exceptions->get() as $item) {
+            $exp_schedule[$item->clinic_doctor_id] = $item;
         }
-//        if ($_POST) {
-//            $exceptions = new \modules\clinic\models\Clinic_schedule_exceptions();
-//            $exceptions->clinic_doctor_id = $id;
-//            $date = $this->input->post('exc_date');
-//            $from_time = $this->input->post('exc_from');
-//            $to_time = $this->input->post('exc_to');
-//            foreach ($exceptions->get() as $item) {
-//                $exp_schedule[$item->clinic_doctor_id] = $item;
-//            }
-//            $exceptions->save();
-//            return $this->render('clinic_doctors/exceptions', [
-//                        'exp_schedule' => $exp_schedule,
-//                        'doctor' => $id
-//            ]);
-//        }
-        if (!$_POST) {
-            $exception = new \modules\clinic\models\Clinic_schedule_exceptions();
-            $exception->select;
-            $exception->clinic_doctor_id = $id;
-            $result = $exception->get();
-            return $this->render('clinic_doctors/exceptions', [
-                        'items' => $result,
-                        'doctor' => $id
-            ]);
-        }
+        $exceptions->save();
+        return $this->render('clinic_doctors/exceptions', [
+                    'exp_schedule' => $exp_schedule,
+                    'doctor' => $id
+        ]);
     }
+
 
     public function delete_schedule_exceptionsAction($id = false) {
         $this->permission('delete');

@@ -114,7 +114,6 @@ class Clinic_user_profileController extends Brightery_Controller {
             }
         }
 
-        exit();
         if ($sid = $model->save())
             return json_encode(['sucess' => 1,
                 'id' => $sid,

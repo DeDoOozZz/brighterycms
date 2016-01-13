@@ -1,0 +1,215 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ lang.exceptions }} Exceptions</h3>
+    </div>
+    <div class="panel-body">
+    {{ helper.form.open(null,false,true,'role="form" class="form-horizontal" id="schedule_exceptions"') }}
+        {{ error }}
+    <div class="row">
+        <div class="col-sm-11"></div>
+        <button class="btn btn-secondary col-sm-1"  onclick="return add_new_exception();">Add</button>
+    </div>
+    {#{% for item in exp_schedule %}#}
+    <div class="main-manage-schedule-exception ">
+        <div class="row manage-schedule-exception exception-{{ item.clinic_schedule_exception_id }}" >
+            <div class="form-group">
+                <div class="col-sm-4 schedule-input-calender">
+                <div class="input-group">
+                    <input type="text" name="exc_date" class="form-control datepicker" value="{{ item.date }}"  data-format="D, dd MM yyyy">
+
+                    <div class="input-group-addon">
+                        <a href="#"><i class="linecons-calendar"></i></a>
+                    </div>
+                </div>
+            </div>
+                <div class="col-sm-3">
+                    <div class="col-sm-4" style="padding:0;">
+                        From:
+                    </div>
+                    <div class="col-sm-8" style="padding:0;">
+                        <div class="input-group input-group-minimal">
+                            <input type="text" name ="exc_from" class="form-control timepicker" id="time" placeholder="{{ lang.time }}" name="time" value="{{ item.from_time }}" data-template="dropdown" data-show-seconds="false" data-default-time="11:25 AM" data-show-meridian="true" >
+                            <div class="input-group-addon">
+                                <i class="linecons-clock"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="col-sm-4" style="padding:0;">
+                        To:
+                    </div>
+                    <div class="col-sm-8" style="padding:0;">
+                        <div class="input-group input-group-minimal">
+                            <input type="text" name="exc_to" class="form-control timepicker" id="time" placeholder="{{ lang.time }}" name="time" value="{{ item.to_time }}" data-template="dropdown" data-show-seconds="false" data-default-time="11:25 AM" data-show-meridian="true" >
+                            <div class="input-group-addon">
+                                <i class="linecons-clock"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2" style="width:auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+    {#{% endfor %}#}
+    <div class="form-group-separator"></div>
+    <!--Button-->
+    <div class="form-group">
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-secondary" style="float: left;">{{ lang.submit }}</button>
+        </div>
+    </div>
+{{ helper.form.close() }}
+    </div>
+</div>
+<script src="{{ constant('STYLE_JS') }}/timepicker/bootstrap-timepicker.min.js"></script>
+<script src="{{ constant('STYLE_JS') }}/datepicker/bootstrap-datepicker.js"></script>
+<script id="exp" type="text/template">
+    <div class="row manage-schedule-exception exception-{{ item.clinic_schedule_exception_id }}" >
+        <div class="form-group">
+            <div class="col-sm-4 schedule-input-calender">
+                <div class="input-group">
+                    <input type="text" name="exc_date" class="form-control datepicker" data-format="D, dd MM yyyy">
+
+                    <div class="input-group-addon">
+                        <a href="#"><i class="linecons-calendar"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="col-sm-4" style="padding:0;">
+                    From:
+                </div>
+                <div class="col-sm-8" style="padding:0;">
+                    <div class="input-group input-group-minimal">
+                        <input type="text" name ="exc_from" class="form-control timepicker" id="time" placeholder="{{ lang.time }}" name="time" value="{{ helper.form.value('time', item.time) }}" data-template="dropdown" data-show-seconds="false" data-default-time="11:25 AM" data-show-meridian="true" >
+                        <div class="input-group-addon">
+                            <i class="linecons-clock"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="col-sm-4" style="padding:0;">
+                    To:
+                </div>
+                <div class="col-sm-8" style="padding:0;">
+                    <div class="input-group input-group-minimal">
+                        <input type="text" name="exc_to" class="form-control timepicker" id="time" placeholder="{{ lang.time }}" name="time" value="{{ helper.form.value('time', item.time) }}" data-template="dropdown" data-show-seconds="false" data-default-time="11:25 AM" data-show-meridian="true" >
+                        <div class="input-group-addon">
+                            <i class="linecons-clock"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2" style="width:auto;">
+                <a class="delete" href="{{ helper.uri.url('management/clinic_doctors/delete_schedule_exceptions', item.clinic_schedule_exception_id) }}">
+                    <button type="button" class="close" data-dismiss="row" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </a>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/javascript">
+
+    add_new_exception = function () {
+        $('.main-manage-schedule-exception').append($('#exp').html());
+        if($.isFunction($.fn.timepicker)) {
+            $(".timepicker").each(function(i, el)
+            {
+                var $this = $(el),
+                        opts = {
+                            template: attrDefault($this, 'template', false),
+                            showSeconds: attrDefault($this, 'showSeconds', false),
+                            defaultTime: attrDefault($this, 'defaultTime', 'current'),
+                            showMeridian: attrDefault($this, 'showMeridian', true),
+                            minuteStep: attrDefault($this, 'minuteStep', 15),
+                            secondStep: attrDefault($this, 'secondStep', 15)
+                        },
+                        $n = $this.next(),
+                        $p = $this.prev();
+
+                $this.timepicker(opts);
+
+                if($n.is('.input-group-addon') && $n.has('a'))
+                {
+                    $n.on('click', function(ev)
+                    {
+                        ev.preventDefault();
+
+                        $this.timepicker('showWidget');
+                    });
+                }
+
+                if($p.is('.input-group-addon') && $p.has('a'))
+                {
+                    $p.on('click', function(ev)
+                    {
+                        ev.preventDefault();
+
+                        $this.timepicker('showWidget');
+                    });
+                }
+            });
+        }
+
+        if($.isFunction($.fn.datepicker)) {
+            $(".datepicker").each(function(i, el)
+            {
+                var $this = $(el),
+                        opts = {
+                            format: attrDefault($this, 'format', 'mm/dd/yyyy'),
+                            startDate: attrDefault($this, 'startDate', ''),
+                            endDate: attrDefault($this, 'endDate', ''),
+                            daysOfWeekDisabled: attrDefault($this, 'disabledDays', ''),
+                            startView: attrDefault($this, 'startView', 0),
+                            rtl: rtl()
+                        },
+                        $n = $this.next(),
+                        $p = $this.prev();
+
+                $this.datepicker(opts);
+
+                if($n.is('.input-group-addon') && $n.has('a'))
+                {
+                    $n.on('click', function(ev)
+                    {
+                        ev.preventDefault();
+
+                        $this.datepicker('show');
+                    });
+                }
+
+                if($p.is('.input-group-addon') && $p.has('a'))
+                {
+                    $p.on('click', function(ev)
+                    {
+                        ev.preventDefault();
+
+                        $this.datepicker('show');
+                    });
+                }
+            });
+        }
+
+        return false;
+    };
+
+    $('#schedule_exceptions').click(function () {
+        $.post(site_url + '/management/clinic_doctors/exceptions/{{ item.clinic_doctor_id }}', $('#submit_id').serialize(), function (response) {
+            response = $.parseJSON(response);
+        });
+    });
+
+    $('.delete').click(function () {
+        var button = $(this);
+        $.get($(this).attr('href'), function (data) {
+            button.parent().parent().remove();
+        });
+        return false;
+    });
+
+</script>
