@@ -214,7 +214,8 @@
                             <label class="col-sm-2 control-label">Phone</label>
                             <div class="col-md-9">
                                 {%for no in phones%}
-                                    <input class="form-control" name="phone" id="phone" value="{{ helper.form.value('phone', no.phone) }}" type="text" placeholder="{{no.phone}}">
+                                    <input class="form-control" name="phone[]" id="phone" value="{{ helper.form.value('phone', no.phone) }}" type="text" placeholder="{{no.phone}}">
+                                    <input type="hidden" name="user_phone_id[]" id="phone" value="{{no.user_phone_id}}">
                                 {%endfor%}
                             </div>
                             <div class="form-group-separator"></div>
@@ -235,7 +236,8 @@
 
                             <div class="col-md-9">
                                 {%for add in address%}
-                                    <input class="form-control" name="address" id="address" value="{{ helper.form.value('address', add.address) }}" type="text" placeholder="{{add.address}}">
+                                    <input class="form-control" name="address[]" id="address" value="{{ helper.form.value('address', add.address) }}" type="text" placeholder="{{add.address}}">
+                                    <input type="hidden" name="user_address_id[]" id="address" value="{{add.user_address_id}}">
                                 {%endfor%}
                             </div>
                             <span class="add-another-option-address col-sm-1"><i class="fa fa-plus-square"></i></span>
@@ -274,10 +276,10 @@
 
     $(document).ready(function () {
         $(".add-another-option-phone ").click(function () {
-            $(".show-phone-option").append('<input name="phone" id="phone" type="text" placeholder="add another phone" class="form-control">' + '<div class="form-group-separator"></div>');
+            $(".show-phone-option").append('<input name="phone[]" id="phone" type="text" placeholder="add another phone" class="form-control">' + '<div class="form-group-separator"></div>');
         });
         $(".add-another-option-address ").click(function () {
-            $(".show-address-option").append('<input name="address" id="address" type="text" placeholder="add another address" class="form-control">' + '<div class="form-group-separator"></div>');
+            $(".show-address-option").append('<input name="address[]" id="address" type="text" placeholder="add another address" class="form-control">' + '<div class="form-group-separator"></div>');
         });
     });
 

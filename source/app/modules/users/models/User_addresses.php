@@ -27,15 +27,15 @@ class User_addresses extends \Model
 
     public function rules()
     {
-        return array(
-            'all' => array(
-                'zipcode' => array('required'),
-                'city_id' => array('required', 'numeric'),
-                'address' => array('required'),
-                'user_id' => array('required', 'numeric'),
-                'type' => array('required'),
-                'primary' => array('required'),
-            ),);
+//        return array(
+//            'not' => array(
+//                'zipcode' => array('required'),
+//                'city_id' => array('required', 'numeric'),
+//                'address' => array('required'),
+//                'user_id' => array('required', 'numeric'),
+//                'type' => array('required'),
+//                'primary' => array('required'),
+//            ),);
 
 
     }
