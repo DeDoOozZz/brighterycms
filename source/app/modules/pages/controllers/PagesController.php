@@ -16,7 +16,6 @@
  **/
 class PagesController extends Brightery_Controller
 {
-    protected $layout = 'classfied';
 
     public function indexAction($page = null)
     {
