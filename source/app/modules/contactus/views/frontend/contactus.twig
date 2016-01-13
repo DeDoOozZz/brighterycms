@@ -1,12 +1,12 @@
-<div class="col-sm-10">
     <!-- map
-    ================================================== -->
+        ================================================== -->
     <div id="map"></div>
     <!-- map -->
 
     <!-- contact section
         ================================================== -->
     <section class="contact-section">
+        <div class="container">
             <div class="col-md-4">
                 <div class="contact-info">
                     <h2>{{lang.contact_info}}</h2>
@@ -20,26 +20,26 @@
             </div>
             <div class="col-md-8">
                 {{ helper.form.open(null,false,false,'role="form" class="comment-form"') }}
-                <h2>{{lang.send_message}}</h2>
-                {{ error }}
-                <div class="row">
-                    <div class="col-md-6">
-                        <input name="name" id="name" type="text" placeholder="{{lang.name}}" value="{{ helper.form.value('name') }}">
+                    <h2>{{lang.send_message}}</h2>
+                    {{ error }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input name="name" id="name" type="text" placeholder="{{lang.name}}" value="{{ helper.form.value('name') }}">
+                        </div>
+                        <div class="col-md-6">
+                            <input name="email" id="email" type="text" placeholder="{{lang.email}}" value="{{ helper.form.value('email') }}">
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <input name="email" id="email" type="text" placeholder="{{lang.email}}" value="{{ helper.form.value('email') }}">
-                    </div>
-                </div>
-                <textarea name="message" id="comment" placeholder="{{lang.message}}"></textarea>
-                <input type="submit" value="{{lang.send_message}}">
-                <div id="msg" class="message"></div>
+                    <textarea name="message" id="comment" placeholder="{{lang.message}}"></textarea>
+                    <input type="submit" value="{{lang.send_message}}">
+                    <div id="msg" class="message"></div>
                 {{ helper.form.close() }}
             </div>
+        </div>
     </section>
     <!-- End contact section -->
-</div>
 
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
-<script type="text/javascript" src="{{ constant('STYLE_JS') }}/gmap3.min.js"></script>
-<script type="text/javascript" src="{{ constant('STYLE_JS') }}/script.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+    <script type="text/javascript" src="{{ constant('STYLE_JS') }}/gmap3.min.js"></script>
+    <script type="text/javascript" src="{{ constant('STYLE_JS') }}/script.js"></script>
