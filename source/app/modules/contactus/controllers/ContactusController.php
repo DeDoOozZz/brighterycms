@@ -18,8 +18,6 @@ defined('ROOT') OR exit('No direct script access allowed');
  * */
 class ContactusController extends Brightery_Controller {
 
-    protected $layout = 'classfied';
-
     public function __construct() {
         parent::__construct();
         $this->language->load('contactus');

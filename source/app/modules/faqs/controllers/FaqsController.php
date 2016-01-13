@@ -16,7 +16,6 @@
  * */
 class FaqsController extends Brightery_Controller {
 
-    protected $layout = 'classfied';
 
     public function indexAction() {
         $this->Language->load('faqs');
