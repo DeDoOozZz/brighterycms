@@ -1,36 +1,23 @@
 
 
 <div class="container">
-
     <div class="panel panel-default profile">
         <div class="panel-heading">
-
-            <h2 class="panel-title" style="font-weight:bold">{{ lang.patient_details}} Profile and Reports </h2>
-
-            <div class="panel-options">
-
-            </div>
-
+            <h2 class="panel-title" style="font-weight:bold">{{ lang.profile_reports}} </h2>
         </div>
         <div class="panel-body">
-
             <section class="profile-env col-sm-12">
-
                 <div class="row">
-
                     <div class="col-sm-3">
-
                         <!-- User Info Sidebar -->
                         <div class="user-info-sidebar">
                             <a href="#" class="user-img">
                                 <img src="{{ helper.uri.cdn() }}users/{{ item.image }}" alt="user-img" class="img-cirlce img-responsive img-thumbnail" />
                             </a>
-
                             <span class="user-name">
                                 {{item.fullname}}
                             </span>
                         </div>
-
                     </div>
 
                     <div class="col-sm-9">
@@ -49,21 +36,21 @@
                                 <div class="tab-pane active" id="v4-profile">
                                     <a href="#" data-toggle="modal" data-target="#personal_info" class="btn btn-warning  btn-icon btn-icon-standalone patient-edit-profile" style="color: #FFF; float:right;">
                                         <i class="fa fa-pencil-square-o"></i>
-                                        <span>{{ lang.edit_user }}Edit</span>
+                                        <span>{{ lang.edit_profile }}</span>
                                     </a>
                                     <ul class="list-unstyled user-info-list">
                                         {%for add in address%}
-                                            <li> <i class="fa-home"></i> {{ add.address }} </li>
-                                            {%endfor%}
-                                            {%for no in phones%}
-                                            <li> <i class="fa fa-phone"></i> {{ no.phone }} </li>
-                                            {%endfor%}
-                                        <li> <i class="fa fa-envelope"></i> {{ item.email }} </li>
-                                        <li> <i class="fa fa-lock"></i>
+                                        <li class="address"> <i class="fa-home"></i> {{ add.address }} </li>
+                                        {%endfor%}
+                                        {%for no in phones%}
+                                        <li class="phone"> <i class="fa fa-phone"></i> {{ no.phone }} </li>
+                                        {%endfor%}
+                                        <li class="email"> <i class="fa fa-envelope"></i> {{ item.email }} </li>
+                                        <li class="password"> <i class="fa fa-lock"></i>
                                             <input type="password" value="{{ item.password }}"style="border: medium none; background-color: #fff;" disabled>
                                         </li>
-                                        <li> <i class="fa fa-user"></i> {{ item.gender }} </li>
-                                        <li> <i class="fa fa-calendar"></i> {{ item.birthdate }} </li>
+                                        <li class="gender"> <i class="fa fa-user"></i> {{ item.gender }} </li>
+                                        <li class="birthdate"> <i class="fa fa-calendar"></i> {{ item.birthdate }} </li>
                                     </ul>
                                 </div>
                                 {#-------Disease-------#}
@@ -139,24 +126,21 @@
             </section>
         </div>
     </div>
-
-
     <div class="modal fade" id="personal_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content ">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title " id="myModalLabel">Personal Information</h4>
+                    <a type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+                    <h4 class="modal-title " id="myModalLabel">{{ lang.personal_info }}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="for-show-personal-info">
+                        <div class="modal_errors"></div>
                         {{ helper.form.open(null,false,true,'role="form" id="edit-form" class="form-horizontal"') }}
                         {{ error }}
-                        {#<form role="form" class="form-horizontal dashboard-forms" method="post">#}
-
                         {#----------fullname------------#}
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="fullname">Fullname</label>
+                            <label class="col-sm-2 control-label" for="fullname">{{ lang.fullname }}</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control validate[required]" id="fullname" placeholder="{{ item.fullname }}" name="fullname"
                                        value="{{ helper.form.value('fullname', item.fullname) }}">
@@ -165,42 +149,37 @@
                         <div class="form-group-separator"></div>
                         {#---------------email--------------#}
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="email">Email</label>
+                            <label class="col-sm-2 control-label" for="email">{{ lang.email }}</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control validate[required]" id="fullname" placeholder="{{ item.email }}" name="email"
+                                <input type="text" class="form-control validate[required]" id="email" placeholder="{{ item.email }}" name="email"
                                        value="{{ helper.form.value('email', item.email) }}">
                             </div>
                         </div>
                         <div class="form-group-separator"></div>
                         {#-----------password-----------#}
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="password">Password</label>
+                            <label class="col-sm-2 control-label" for="password">{{ lang.pass }}</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control validate[required]" id="fullname" placeholder="{{ item.password }}" name="password"
+                                <input type="password" class="form-control validate[required]" id="password" placeholder="{{ item.password }}" name="password"
                                        value="{{ helper.form.value('password', item.password) }}">
                             </div>
                         </div>
                         <div class="form-group-separator"></div>
                         {#-----------gender------------#}
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"  for="gender">Gender</label>
+                            <label class="col-sm-2 control-label"  for="gender">{{ lang.gender }}</label>
                             <div class="col-sm-10">
-                                <input type="radio" value="{{ helper.form.value('gender', item.gender) }} {%if item.gender == 'female'%} checked {%endif%} name="gender"> Female <br>
-                                <input type="radio" value="{{ helper.form.value('gender', item.gender) }} {%if item.gender == 'male'%} checked {%endif%} name="gender"> Male <br>
+                                <input type="radio" value="{{ helper.form.value('gender', item.gender) }}" {%if item.gender == 'female'%} checked {%endif%} name="gender"> {{ lang.female }} <br>
+                                <input type="radio"  value="{{ helper.form.value('gender', item.gender) }}" {%if item.gender == 'male'%} checked {%endif%} name="gender"> {{ lang.male }} <br>
                             </div>
                         </div>
                         <div class="form-group-separator"></div>
                         {#---------------birthdate----------#}
                         <div class="form-group dashboard-birthdate">
-                            <label class="col-sm-2 control-label" for="datepicker">Birthdate</label>
+                            <label class="col-sm-2 control-label" for="datepicker">{{ lang.birthdate }}</label>
                             <div class="col-sm-10">
-                                {#<input type="text" class="form-control" id="datepicker" placeholder="birthdate" name="birthdate"#}
-                                {#value="{{ helper.form.value('birthdate', item.birthdate) }}">#}
-                                {#<i class="fa fa-calendar calendar-form"></i>#}
-
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker" id="datepicker" placeholder="birthdate" name="birthdate" data-format=" dd MM yyyy" value="{{ helper.form.value('birthdate', item.birthdate) }}">
-
+                                    <input type="text" class="form-control datepicker" id="birthdate" placeholder="birthdate" name="birthdate" data-format="yyyy-mm-dd" value="{{ helper.form.value('birthdate', item.birthdate) }}">
                                     <div class="input-group-addon">
                                         <a href="#"><i class="fa fa-calendar"></i></a>
                                     </div>
@@ -211,18 +190,21 @@
                         <div class="form-group-separator"></div>
                         {#--------------phone-----------------#}
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Phone</label>
+                            <label class="col-sm-2 control-label">{{ lang.phone }}</label>
                             <div class="col-md-9">
+                                {% if not phones %}
+                                <input class="form-control" name="phone[]" id="phone" value="{{ helper.form.value('phone', no.phone) }}" type="text" placeholder="{{no.phone}}"   style="margin-bottom:10px;">
+                                    {% endif %}
                                 {%for no in phones%}
-                                    <input class="form-control" name="phone[]" id="phone" value="{{ helper.form.value('phone', no.phone) }}" type="text" placeholder="{{no.phone}}">
+                                    <input class="form-control" name="phone[]" id="phone2" value="{{ helper.form.value('phone', no.phone) }}" type="text" placeholder="{{no.phone}}"  style="margin-bottom:10px;">
                                     <input type="hidden" name="user_phone_id[]" id="phone" value="{{no.user_phone_id}}">
                                 {%endfor%}
                             </div>
-                            <div class="form-group-separator"></div>
+                            {#<div class="form-group-separator"></div>#}
 
                             <span class="add-another-option-phone col-sm-1"><i class="fa fa-plus-square"></i></span>
                         </div>
-                        <div class="form-group-separator"></div>
+                        {#<div class="form-group-separator"></div>#}
                         {#-----------new phone---------#}
                         <div class="form-group">
                             <label class="col-sm-2 control-label"></label>
@@ -232,17 +214,20 @@
                         </div>
                         {#------------address------------#}
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Address</label>
+                            <label class="col-sm-2 control-label">{{ lang.address }}</label>
 
                             <div class="col-md-9">
+                                {% if not address %}
+                                    <input class="form-control" name="address[]" id="address" value="{{ helper.form.value('address', add.address) }}" type="text" placeholder="{{add.address}}"  style="margin-bottom:10px;">
+                                {% endif %}
                                 {%for add in address%}
-                                    <input class="form-control" name="address[]" id="address" value="{{ helper.form.value('address', add.address) }}" type="text" placeholder="{{add.address}}">
+                                    <input class="form-control" name="address[]" id="address2" value="{{ helper.form.value('address', add.address) }}" type="text" placeholder="{{add.address}}">
                                     <input type="hidden" name="user_address_id[]" id="address" value="{{add.user_address_id}}">
                                 {%endfor%}
                             </div>
                             <span class="add-another-option-address col-sm-1"><i class="fa fa-plus-square"></i></span>
                         </div>
-                        <div class="form-group-separator"></div>
+                        {#<div class="form-group-separator"></div>#}
                         {#-------------new address--------------#}
                         <div class="form-group">
                             <label class="col-sm-2 control-label"></label>
@@ -254,11 +239,11 @@
                         {#--------------submit----------#}
                         <div class="form-group">
                             <label for="field-5" class="col-sm-2 control-label"></label>
-                            <div class="col-sm-10">
-                                <input type="submit" value="Change" class="form-control submit-edit">
+                            <div class="col-sm-9">
+                                <input type="submit" value="Change" class="form-control submit-edit" style="line-height: normal;">
                             </div>
                         </div>
-                        <div class="form-group-separator"></div>
+                        {#<div class="form-group-separator"></div>#}
                         {{ helper.form.close() }}
                         {#</form>#}
                     </div>
@@ -270,10 +255,7 @@
 </div>
 
 <script src="{{ constant('STYLE_JS') }}/datepicker/bootstrap-datepicker.js"></script>
-
 <script>
-
-
     $(document).ready(function () {
         $(".add-another-option-phone ").click(function () {
             $(".show-phone-option").append('<input name="phone[]" id="phone" type="text" placeholder="add another phone" class="form-control">' + '<div class="form-group-separator"></div>');
@@ -284,11 +266,67 @@
     });
 
     $('#edit-form').submit(function () {
-    {#        alert('hi');#}
+
             $.post('{{ helper.uri.url('clinic_user_profile/manage/')}}{{ item.user_id }}', $(this).serialize(), function (response) {
-                //        alert('hi');
-                response = $.parseJSON(response);
+                obj = jQuery.parseJSON(response);
+                fullname = $('#fullname').val();
+//                email = $('#email').val();
+//                password = $('#password').val();
+////                gender = $('#gender').val();
+//                birthdate = $('#birthdate').val();
+//                phone = $('#phone').val();
+//                address = $('#address').val();
+
+                if(obj.sucess == 1){
+                    $('#personal_info').modal('hide');
+                    $('.user-name').text(fullname);
+//                    $('.email').html('<li class="email"> <i class="fa-home"></i>' +email+ '</li>');
+//                    $('.password').html(password);
+////                    $('.gender').text(gender);
+//                    $('.birthdate').html(birthdate);
+//                    $('.phone').html('<li class="phone"> <i class="fa-home"></i>' +phone+ '</li>');
+//                    $('.address').html(address);
+                }
             });
             return false;
         });
+
+//    if($.isFunction($.fn.datepicker)) {
+//        $(".datepicker").each(function(i, el)
+//        {
+//            var $this = $(el),
+//                    opts = {
+//                        format: attrDefault($this, 'format', 'yyyy-mm-dd'),
+//                        startDate: attrDefault($this, 'startDate', ''),
+//                        endDate: attrDefault($this, 'endDate', ''),
+//                        daysOfWeekDisabled: attrDefault($this, 'disabledDays', ''),
+//                        startView: attrDefault($this, 'startView', 0),
+//                        rtl: rtl()
+//                    },
+//                    $n = $this.next(),
+//                    $p = $this.prev();
+//
+//            $this.datepicker(opts);
+//
+//            if($n.is('.input-group-addon') && $n.has('a'))
+//            {
+//                $n.on('click', function(ev)
+//                {
+//                    ev.preventDefault();
+//
+//                    $this.datepicker('show');
+//                });
+//            }
+//
+//            if($p.is('.input-group-addon') && $p.has('a'))
+//            {
+//                $p.on('click', function(ev)
+//                {
+//                    ev.preventDefault();
+//
+//                    $this.datepicker('show');
+//                });
+//            }
+//        });
+//    }
 </script>
