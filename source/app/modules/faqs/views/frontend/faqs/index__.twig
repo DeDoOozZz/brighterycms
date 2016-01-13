@@ -1,0 +1,31 @@
+<!-- faq section 
+   ================================================== -->
+
+<div class="col-sm-10">
+    <section class="about-section">
+        <h2 style="color:#1883C8;">{{lang.faqs}}</h2>
+        {% for item in items %}
+            <div class="single-faq">
+                <h2 class="toshow_faq">
+                    <i class="fa fa-question-circle new-font"></i>
+                    {{item.question}} <br>
+                    {#                        <span class="faqs-answered">{{item.answered}}</span>#}
+                </h2>
+                <p class="show_faq">
+                    {{item.answer}}
+                </p> 
+            </div>
+        {% endfor %}
+    </section>
+</div>
+
+<!-- End faq section -->
+<script>
+    $(document).ready(function () {
+
+        $(".toshow_faq").click(function () {
+            $(".show_faq").not($(this).find(".show_faq")).hide();
+            $(this).next(".show_faq").slideToggle();
+        });
+    });
+</script>
