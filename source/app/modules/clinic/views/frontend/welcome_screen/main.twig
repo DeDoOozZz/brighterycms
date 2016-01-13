@@ -124,69 +124,66 @@
     </body>
 </html>
 <script>
-    function atttend(time, name, n, id) {
-        var that = $(this);
-        $.post("{{helper.uri.url('clinic_welcome_screen/attend')}}", {
-            user_id: id,
-            date: "{{day}}",
-            time: time
-        }, function (status) {
-            if (!status.connected == 1) {
-                that.parent().removeClass('entered');
-                that.parent().addClass('attend');
-            }
-        });
-        return false;
-    }
-    ;
-    function enter(time, name, n, id) {
-        var that = $(this);
-        $.post("{{helper.uri.url('clinic_welcome_screen/enter')}}", {
-            user_id: id,
-            date: "{{day}}",
-            time: time
-        }, function (status) {
-            if (!status.connected == 1) {
-                that.parent().parent().remove();
-            }
-        });
-        return false;
-    }
-    ;
-    function late(time, name, n, id) {
-        var late = $('#sortable2');
-        var that = $(this);
-    {#            var time = that.data('time');#}
-    {#console.log(time);
-    var name = $(this).data('name');
-    var n = $(this).data('no');#}
-            $.post("{{helper.uri.url('clinic_welcome_screen/late')}}", {
-                user_id: id,
-                date: "{{day}}",
-                time: time
-            }, function (status) {
-                if (!status.connected == 1) {
-                    that.parent().parent().remove();
-                    late.append('<tr><td>' + n + '</td><td class="patient-name late" >' + name + ' <input type="button" data-id="' + id + '" data-time="' + time + '" class="enter" value="Enter" id="enter"></td><tr> ');
-                }
-            });
-        }
-        ;
-        function cancel(time, name, n, id) {
+            function atttend(time, name, n, id) {
             var that = $(this);
-            $.post("{{helper.uri.url('clinic_welcome_screen/cancel')}}", {
-            user_id: id,
-                    date: "{{day}}",
-                    time: time
-            }, function (status) {
-                if (!status.connected == 1) {
-                    that.parent().parent().remove();
-                }
-                }
-                );
-                        return false;
+                    $.post("{{helper.uri.url('clinic_welcome_screen/attend')}}", {
+                    user_id: id,
+                            date: "{{day}}",
+                            time: time
+                    }, function (status) {
+                    if (!status.connected == 1) {
+                    that.parent().removeClass('entered');
+                            that.parent().addClass('attend');
+                    }
+                    });
+                    return false;
             }
-            ;{#$(function () {
+    ;
+            function enter(time, name, n, id) {
+            var that = $(this);
+                    $.post("{{helper.uri.url('clinic_welcome_screen/enter')}}", {
+                    user_id: id,
+                            date: "{{day}}",
+                            time: time
+                    }, function (status) {
+                    if (!status.connected == 1) {
+                    that.parent().parent().remove();
+                    }
+                    });
+                    return false;
+            };
+            function late(time, name, n, id) {
+            var ltime = time;
+                    var lid = id;
+                    var late = $('#sortable2');
+                    var that = $(this);
+                    $.post("{{helper.uri.url('clinic_welcome_screen/late')}}", {
+                    user_id: lid,
+                    date: "{{day}}",
+                    time: ltime
+                    }, function (status) {
+                    if (!status.connected == 1) {
+                    that.parent().parent().remove();
+                            late.append('<tr><td>' + n + '</td><td class="patient-name late" >' + name + ' <input type="button" data-id="' + lid + '" data-time="' + ltime + '" class="enter" value="Enter" id="enter"></td><tr> ');
+                    }
+                    });
+            }
+    ;
+            function cancel(time, name, n, id) {
+            var that = $(this);
+                    $.post("{{helper.uri.url('clinic_welcome_screen/cancel')}}", {
+                    user_id: id,
+                            date: "{{day}}",
+                            time: time
+                    }, function (status) {
+                    if (!status.connected == 1) {
+                    that.parent().parent().remove();
+                    }
+                    }
+                    );
+                    return false;
+            }
+    ;{#$(function () {
         $("#sortable").sortable();
                 $("#sortable").disableSelection();
         });
@@ -194,10 +191,10 @@
         $("#sortable2").sortable();
                 $("#sortable2").disableSelection();
         });#}
-                    $(document).ready(function () {
-                $("#page").load('{{helper.uri.url('clinic_welcome_screen/index/')}}' + {{doctor_id}});
-                        var refreshId = setInterval(function () {
-                            $("#page").load('{{helper.uri.url('clinic_welcome_screen/index/')}}' + {{doctor_id}});{# $(function () {
+            $(document).ready(function () {
+    $("#page").load('{{helper.uri.url('clinic_welcome_screen/index/')}}' + {{doctor_id}});
+            var refreshId = setInterval(function () {
+            $("#page").load('{{helper.uri.url('clinic_welcome_screen/index/')}}' + {{doctor_id}});{# $(function () {
                  $("#sortable").sortable();
                  $("#sortable").disableSelection();
              });
@@ -205,74 +202,74 @@
          $("#sortable2").sortable();
          $("#sortable2").disableSelection();
         });#}
-                        }, 20000);
-                $.ajaxSetup({cache: false});
-                $('.cancel').click(function () {
-                    var that = $(this);
-                    var id = $(this).data('id');
-                    var time = $(this).data('time');
-                    $.post("{{helper.uri.url('clinic_welcome_screen/cancel')}}", {
-                    user_id: id,
-                            date: "{{day}}",
-                            time: time
-                    }, function (status) {
-                    if (!status.connected == 1) {
-                        that.parent().parent().remove();
-                    }
-                });
-                return false;
+            }, 9000000);
+            $.ajaxSetup({cache: false});
+            $('.cancel').click(function () {
+    var that = $(this);
+            var id = $(this).data('id');
+            var time = $(this).data('time');
+            $.post("{{helper.uri.url('clinic_welcome_screen/cancel')}}", {
+            user_id: id,
+                    date: "{{day}}",
+                    time: time
+            }, function (status) {
+            if (!status.connected == 1) {
+            that.parent().parent().remove();
+            }
             });
+            return false;
+    });
             $('.late').click(function () {
-                var late = $('#sortable2');
-                var that = $(this);
-                var id = $(this).data('id');
-                var time = $(this).data('time');
-                var name = $(this).data('name');
-                var n = $(this).data('no');
-                $.post("{{helper.uri.url('clinic_welcome_screen/late')}}", {
-                    user_id: id,
+    var late = $('#sortable2');
+            var that = $(this);
+            var id = $(this).data('id');
+            var time = $(this).data('time');
+            var name = $(this).data('name');
+            var n = $(this).data('no');
+            $.post("{{helper.uri.url('clinic_welcome_screen/late')}}", {
+            user_id: id,
                     date: "{{day}}",
                     time: time
-                }, function (status) {
-                    if (!status.connected == 1) {
-                        that.parent().parent().remove();
-                        late.append('<tr><td>' + n + '</td><td class="patient-name late" >' + name + ' <input type="button" data-id="' + id + '" data-time="' + time + '" class="enter" value="Enter" id="enter"></td><tr> ');
-                    }
-                });
+            }, function (status) {
+            if (!status.connected == 1) {
+            that.parent().parent().remove();
+                    late.append('<tr><td>' + n + '</td><td class="patient-name late" >' + name + ' <input type="button" data-id="' + id + '" data-time="' + time + '" class="enter" value="Enter" id="enter"></td><tr> ');
+            }
             });
+    });
             $(document).on('click', '.enter', function () {
-                var that = $(this);
-                var id = $(this).data('id');
-                var time = $(this).data('time');
-                $.post("{{helper.uri.url('clinic_welcome_screen/enter')}}", {
-                    user_id: id,
-                    date: "{{day}}",
-                    time: time
-                }, function (status) {
-                    if (!status.connected == 1) {
-                        that.parent().parent().remove();
-                    }
-                });
-                return false;
+    var that = $(this);
+            var id = $(this).data('id');
+            var time = $(this).data('time');
+            $.post("{{helper.uri.url('clinic_welcome_screen/enter')}}", {
+            user_id: id,
+            date: "{{day}}",
+            time: time
+            }, function (status) {
+            if (!status.connected == 1) {
+            that.parent().parent().parent().remove();
+            }
             });
+            return false;
+    });
             $('.atttend').click(function () {
-                var that = $(this);
-                var id = $(this).data('id');
-                var time = $(this).data('time');
-                $.post("{{helper.uri.url('clinic_welcome_screen/attend')}}", {
-                    user_id: id,
+    var that = $(this);
+            var id = $(this).data('id');
+            var time = $(this).data('time');
+            $.post("{{helper.uri.url('clinic_welcome_screen/attend')}}", {
+            user_id: id,
                     date: "{{day}}",
                     time: time
-                }, function (status) {
-                    if (!status.connected == 1) {
-                        that.parent().removeClass('entered');
-                        that.parent().addClass('attend');
-                    }
-                });
-                return false;
+            }, function (status) {
+            if (!status.connected == 1) {
+            that.parent().removeClass('entered');
+                    that.parent().addClass('attend');
+            }
             });
-        }
-        );
+            return false;
+    });
+    }
+    );
 </script>
 <style>
     body {
