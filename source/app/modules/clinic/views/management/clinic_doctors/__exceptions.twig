@@ -16,7 +16,7 @@
                     <div class="form-group">
                         <div class="col-sm-4 schedule-input-calender">
                             <div class="input-group">
-                                <input type="text" name="exc_date[]" class="form-control datepicker" value="{{ item.date }}"  data-format="yyyy-mm-dd">
+                                <input type="text" name="exc_date[]" class="form-control datepicker" value="{{ item.date }}"  data-format="D, dd MM yyyy">
                                 <input type='hidden' name='clinic_schedule_exception_id[]' value='{{item.clinic_schedule_exception_id}}'>
                                     <div class="input-group-addon">
                                     <a href="#"><i class="linecons-calendar"></i></a>
@@ -29,7 +29,7 @@
                             </div>
                             <div class="col-sm-8" style="padding:0;">
                                 <div class="input-group input-group-minimal">
-                                    <input type="text" name ="exc_from[]" class="form-control timepicker" placeholder="{{ lang.time }}" value="{{ item.from_time }}" data-template="dropdown" data-maxHours="24" data-show-seconds="true" data-default-time="11:25:00" data-show-meridian="false" >
+                                    <input type="text" name ="exc_from[]" class="form-control timepicker" placeholder="{{ lang.time }}" value="{{ item.from_time }}" data-template="dropdown" data-show-seconds="false" data-default-time="11:25 AM" data-show-meridian="true" >
                                     <div class="input-group-addon">
                                         <i class="linecons-clock"></i>
                                     </div>
@@ -42,7 +42,7 @@
                             </div>
                             <div class="col-sm-8" style="padding:0;">
                                 <div class="input-group input-group-minimal">
-                                    <input type="text" name="exc_to[]" class="form-control timepicker" placeholder="{{ lang.time }}" value="{{ item.to_time }}" data-template="dropdown"  data-maxHours="24" data-show-seconds="true" data-default-time="11:25:00" data-show-meridian="false" >
+                                    <input type="text" name="exc_to[]" class="form-control timepicker" placeholder="{{ lang.time }}" value="{{ item.to_time }}" data-template="dropdown" data-show-seconds="false" data-default-time="11:25 AM" data-show-meridian="true" >
                                     <div class="input-group-addon">
                                         <i class="linecons-clock"></i>
                                     </div>
@@ -74,7 +74,7 @@
     <div class="form-group">
     <div class="col-sm-4 schedule-input-calender">
     <div class="input-group">
-    <input type="text" name="exc_date[]" class="form-control datepicker" data-format="yyyy-mm-dd">
+    <input type="text" name="exc_date[]" class="form-control datepicker" data-format="D, dd MM yyyy">
 
     <div class="input-group-addon">
     <a href="#"><i class="linecons-calendar"></i></a>
@@ -87,7 +87,7 @@
     </div>
     <div class="col-sm-8" style="padding:0;">
     <div class="input-group input-group-minimal">
-    <input type="text" name ="exc_from[]" class="form-control timepicker"  placeholder="{{ lang.time }}" value="{{ helper.form.value('time', item.time) }}" data-template="dropdown"  data-maxHours="24" data-show-seconds="true" data-default-time="11:25:00" data-show-meridian="false" >
+    <input type="text" name ="exc_from[]" class="form-control timepicker"  placeholder="{{ lang.time }}" value="{{ helper.form.value('time', item.time) }}" data-template="dropdown" data-show-seconds="false" data-default-time="11:25 AM" data-show-meridian="true" >
     <div class="input-group-addon">
     <i class="linecons-clock"></i>
     </div>
@@ -100,7 +100,7 @@
     </div>
     <div class="col-sm-8" style="padding:0;">
     <div class="input-group input-group-minimal">
-    <input type="text" name="exc_to[]" class="form-control timepicker" placeholder="{{ lang.time }}" value="{{ helper.form.value('time', item.time) }}" data-template="dropdown"  data-maxHours="24" data-show-seconds="true" data-default-time="11:25:00" data-show-meridian="false">
+    <input type="text" name="exc_to[]" class="form-control timepicker" placeholder="{{ lang.time }}" value="{{ helper.form.value('time', item.time) }}" data-template="dropdown" data-show-seconds="false" data-default-time="11:25 AM" data-show-meridian="true" >
     <div class="input-group-addon">
     <i class="linecons-clock"></i>
     </div>
@@ -125,10 +125,9 @@
                             var $this = $(el),
                                     opts = {
                                         template: attrDefault($this, 'template', false),
-                                        showSeconds: attrDefault($this, 'showSeconds', true),
-                                        defaultTime: attrDefault($this, 'defaultTime', false),
-                                        maxHours: attrDefault($this, 'maxHours', 24),
-                                        showMeridian: attrDefault($this, 'showMeridian', false),
+                                        showSeconds: attrDefault($this, 'showSeconds', false),
+                                        defaultTime: attrDefault($this, 'defaultTime', 'current'),
+                                        showMeridian: attrDefault($this, 'showMeridian', true),
                                         minuteStep: attrDefault($this, 'minuteStep', 15),
                                         secondStep: attrDefault($this, 'secondStep', 15)
                                     },
@@ -164,7 +163,7 @@
                         {
                             var $this = $(el),
                                     opts = {
-                                        format: attrDefault($this, 'format', 'yyyy-mm-dd'),
+                                        format: attrDefault($this, 'format', 'mm/dd/yyyy'),
                                         startDate: attrDefault($this, 'startDate', ''),
                                         endDate: attrDefault($this, 'endDate', ''),
                                         daysOfWeekDisabled: attrDefault($this, 'disabledDays', ''),
