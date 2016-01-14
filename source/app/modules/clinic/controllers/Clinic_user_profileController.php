@@ -87,15 +87,23 @@ class Clinic_user_profileController extends Brightery_Controller {
         $this->permission('manage');
 
         if ($_POST) {
+            $model = new \modules\users\models\Users();
             $phones = $this->input->post('phone');
-            $model->attributes['fullname'] = $this->input->post('fullname');
-            $model->attributes['birthdate'] = $this->input->post('birthdate');
-            $model->attributes['email'] = $this->input->post('email');
-            $model->attributes['gender'] = $this->input->post('gender');
+            $model->user_id = $id ;
+            $model->fullname = $this->input->post('fullname');
+            $model->birthdate = $this->input->post('birthdate');
+            $model->email = $this->input->post('email');
+            $model->password =md5($this->input->post('password'));
+            $model->gender = $this->input->post('gender');
+//            print_r($model->attributes);
+            $model->save();
+//            exit();
             $address = $this->input->post('address');
             $user_phone_id = $this->input->post('user_phone_id');
             $user_address_id = $this->input->post('user_address_id');
             foreach ($phones as $key => $value) {
+                if(!$value)
+                    continue;
                 $phone = new \modules\users\models\User_phones();
                 $phone->user_id = $id;
                 $phone->phone = $value;
@@ -104,7 +112,9 @@ class Clinic_user_profileController extends Brightery_Controller {
                 $phone->save();
             }
             
-            foreach ($address as $key => $value) {            
+            foreach ($address as $key => $value) {
+                if(!$value)
+                    continue;
                 $addres = new \modules\users\models\User_addresses();
                 $addres->user_id = $id;
                 $addres->address = $value;
@@ -112,15 +122,13 @@ class Clinic_user_profileController extends Brightery_Controller {
                     $addres->user_address_id = $user_address_id[$key];
                 $addres->save();
             }
+            $model->save();
         }
 
-        if ($sid = $model->save())
+        if ($model->save())
             return json_encode(['sucess' => 1,
-                'id' => $sid,
                 'item' => $model,
                 'phones' => $phone,
-                'phone_numbers' => $phones_num,
-                'add_res' => $add_res,
                 'address' => $address
             ]);
         else
