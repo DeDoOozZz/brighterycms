@@ -33,15 +33,17 @@ class Clinic_user_profileController extends Brightery_Controller {
         $user->user_id = $id;
         $user->_select = "user_id, fullname, email, password, image, gender, birthdate";
         $phones = new \modules\users\models\User_phones();
-        $phones->_select = "user_phone_id,phone,user_id";
+        $phones->_select = "user_phone_id, phone, user_id";
         $phones->user_id = $id;
+//        $phones->primary = 1;
         $res = $phones->get();
         $user_phone_id = $res[0]->user_phone_id;
         $phones->user_phone_id = $user_phone_id;
 
         $address = new modules\users\models\User_addresses();
-        $address->user_id = $id;
         $address->select = 'user_address_id ,user_id';
+        $address->user_id = $id;
+//        $address->primary = 1;
         $add = $address->get();
 
         $patient = $this->Database->query("SELECT users.*, `user_addresses`.`address`, `user_phones`.`phone`"
@@ -95,9 +97,7 @@ class Clinic_user_profileController extends Brightery_Controller {
             $model->email = $this->input->post('email');
             $model->password =md5($this->input->post('password'));
             $model->gender = $this->input->post('gender');
-//            print_r($model->attributes);
             $model->save();
-//            exit();
             $address = $this->input->post('address');
             $user_phone_id = $this->input->post('user_phone_id');
             $user_address_id = $this->input->post('user_address_id');
@@ -133,6 +133,26 @@ class Clinic_user_profileController extends Brightery_Controller {
             ]);
         else
             return json_encode(['sucess' => 0, 'errors' => $this->validation->errors()]);
+    }
+    
+    public function deletePhoneAction($id = null) {
+        $this->permission('deletePhone');
+        $phone = new \modules\users\models\User_phones();
+        $phone->user_phone_id = $id ;
+        if($phone->delete())
+            return TRUE ;
+        else
+            return FALSE;
+    }
+    
+    public function deleteAddressAction($id = null) {
+        $this->permission('deleteAddress');
+        $phone = new \modules\users\models\User_addresses();
+        $phone->user_address_id = $id ;
+        if($phone->delete())
+            return TRUE ;
+        else
+            return FALSE;
     }
 
 }

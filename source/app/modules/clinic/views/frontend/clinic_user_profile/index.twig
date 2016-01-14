@@ -1,5 +1,4 @@
 
-
 <div class="container">
     <div class="panel panel-default profile">
         <div class="panel-heading">
@@ -40,11 +39,17 @@
                                     </a>
                                     <ul class="list-unstyled user-info-list">
                                         {%for add in address%}
-                                        <li class="address"> <i class="fa-home"></i> {{ add.address }} </li>
-                                        {%endfor%}
-                                        {%for no in phones%}
-                                        <li class="phone"> <i class="fa fa-phone"></i> {{ no.phone }} </li>
-                                        {%endfor%}
+                                            <li class="address"> <i class="fa-home"></i> {{ add.address }} </li>
+                                            {%endfor%}
+                                            {%if not address%}
+                                            <li class="address"> <i class="fa-home"></i></li>
+                                            {%endif%}
+                                            {%for no in phones%}
+                                            <li class="phone"> <i class="fa fa-phone"></i> {{ no.phone }} </li>
+                                            {%endfor%}
+                                            {%if not phones%}
+                                            <li class="phone"> <i class="fa fa-phone"></i></li>
+                                            {%endif%}
                                         <li class="email"> <i class="fa fa-envelope"></i> {{ item.email }} </li>
                                         <li class="password"> <i class="fa fa-lock"></i>
                                             <input type="password" value="{{ item.password }}"style="border: medium none; background-color: #fff;" disabled>
@@ -169,8 +174,8 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label"  for="gender">{{ lang.gender }}</label>
                             <div class="col-sm-10">
-                                <input type="radio" value="{{ helper.form.value('gender', item.gender) }}" {%if item.gender == 'female'%} checked {%endif%} name="gender"> {{ lang.female }} <br>
-                                <input type="radio"  value="{{ helper.form.value('gender', item.gender) }}" {%if item.gender == 'male'%} checked {%endif%} name="gender"> {{ lang.male }} <br>
+                                <input type="radio"  value="Female" {#value="{{ helper.form.value('gender', item.gender) }}"#} {%if item.gender == 'Female'%} checked {%endif%} name="gender"> {{ lang.female }} <br>
+                                <input type="radio"  value="Male" {#value="{{ helper.form.value('gender', item.gender) }}"#} {%if item.gender == 'Male'%} checked {%endif%} name="gender"> {{ lang.male }} <br>
                             </div>
                         </div>
                         <div class="form-group-separator"></div>
@@ -179,7 +184,7 @@
                             <label class="col-sm-2 control-label" for="datepicker">{{ lang.birthdate }}</label>
                             <div class="col-sm-10">
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker" id="birthdate" placeholder="birthdate" name="birthdate" data-format="yyyy-mm-dd" value="{{ helper.form.value('birthdate', item.birthdate) }}">
+                                    <input type="datetime" class="form-control datepicker" id="birthdate" placeholder="birthdate" name="birthdate" data-format="yyyy-mm-dd" value="{{ helper.form.value('birthdate', item.birthdate) }}">
                                     <div class="input-group-addon">
                                         <a href="#"><i class="fa fa-calendar"></i></a>
                                     </div>
@@ -193,15 +198,14 @@
                             <label class="col-sm-2 control-label">{{ lang.phone }}</label>
                             <div class="col-md-9">
                                 {% if not phones %}
-                                <input class="form-control" name="phone[]" id="phone" value="{{ helper.form.value('phone', no.phone) }}" type="text" placeholder="{{no.phone}}"   style="margin-bottom:10px;">
-                                    {% endif %}
+                                    <input class="form-control" name="phone[]" pho="pho" id="phone" value="{{ helper.form.value('phone', no.phone) }}" type="text" placeholder="{{no.phone}}"   style="margin-bottom:10px;">
+                                {% endif %}
                                 {%for no in phones%}
-                                    <input class="form-control" name="phone[]" id="phone2" value="{{ helper.form.value('phone', no.phone) }}" type="text" placeholder="{{no.phone}}"  style="margin-bottom:10px;">
+                                    <span id="id_s{{no.user_phone_id}}" pho="pho" data-id="{{no.user_phone_id}}" class="delete-option delete-phone col-sm-1"><i class="fa fa-close"></i></span>
+                                    <input class="form-control" name="phone[]" id="id_{{no.user_phone_id}}" value="{{ helper.form.value('phone', no.phone) }}" type="text" placeholder="{{no.phone}}"  style="margin-bottom:10px;">
                                     <input type="hidden" name="user_phone_id[]" id="phone" value="{{no.user_phone_id}}">
                                 {%endfor%}
                             </div>
-                            {#<div class="form-group-separator"></div>#}
-
                             <span class="add-another-option-phone col-sm-1"><i class="fa fa-plus-square"></i></span>
                         </div>
                         {#<div class="form-group-separator"></div>#}
@@ -218,10 +222,11 @@
 
                             <div class="col-md-9">
                                 {% if not address %}
-                                    <input class="form-control" name="address[]" id="address" value="{{ helper.form.value('address', add.address) }}" type="text" placeholder="{{add.address}}"  style="margin-bottom:10px;">
+                                    <input class="form-control" name="address[]" add="add" id="address" value="{{ helper.form.value('address', add.address) }}" type="text" placeholder="{{add.address}}"  style="margin-bottom:10px;">
                                 {% endif %}
                                 {%for add in address%}
-                                    <input class="form-control" name="address[]" id="address2" value="{{ helper.form.value('address', add.address) }}" type="text" placeholder="{{add.address}}">
+                                    <span id="id_a{{add.user_address_id}}" data-id="{{add.user_address_id}}" class="delete-option address-delete col-sm-1"><i class="fa fa-close"></i></span>
+                                    <input class="form-control" name="address[]" add="add" id="id_{{add.user_address_id}}" value="{{ helper.form.value('address', add.address) }}" type="text" pla_ceholder="{{add.address}}"  style="margin-bottom:10px;">
                                     <input type="hidden" name="user_address_id[]" id="address" value="{{add.user_address_id}}">
                                 {%endfor%}
                             </div>
@@ -258,38 +263,72 @@
 <script>
     $(document).ready(function () {
         $(".add-another-option-phone ").click(function () {
-            $(".show-phone-option").append('<input name="phone[]" id="phone" type="text" placeholder="add another phone" class="form-control">' + '<div class="form-group-separator"></div>');
+            $(".show-phone-option").append('<input name="phone[]" id="phone" type="text" placeholder="add another phone" class="form-control">' + ' <span class="delete-option col-sm-1" style="position: relative; top:-27px;"><i class="fa fa-close"></i></span>' + '<div class="form-group-separator"></div>');
         });
         $(".add-another-option-address ").click(function () {
-            $(".show-address-option").append('<input name="address[]" id="address" type="text" placeholder="add another address" class="form-control">' + '<div class="form-group-separator"></div>');
+            $(".show-address-option").append('<input name="address[]" id="address" type="text" placeholder="add another address" class="form-control">' + ' <span class="delete-option col-sm-1" style="position: relative; top:-27px;"><i class="fa fa-close"></i></span>' + '<div class="form-group-separator"></div>');
         });
     });
 
     $('#edit-form').submit(function () {
+        $.post('{{ helper.uri.url('clinic_user_profile/manage/')}}{{ item.user_id }}', $(this).serialize(), function (response) {
+            obj = jQuery.parseJSON(response);
 
-            $.post('{{ helper.uri.url('clinic_user_profile/manage/')}}{{ item.user_id }}', $(this).serialize(), function (response) {
-                obj = jQuery.parseJSON(response);
-                fullname = $('#fullname').val();
-//                email = $('#email').val();
+            fullname = $('#fullname').val();
+            email = '<i class="fa fa-envelope"></i>' + $('#email').val();
 //                password = $('#password').val();
-////                gender = $('#gender').val();
-//                birthdate = $('#birthdate').val();
+            gender = '<i class="fa fa-user"></i>' + $('input[name=gender]:checked').val();
+            birthdate = '<i class="fa fa-calendar"></i>' + $('#birthdate').val();
 //                phone = $('#phone').val();
-//                address = $('#address').val();
 
-                if(obj.sucess == 1){
-                    $('#personal_info').modal('hide');
-                    $('.user-name').text(fullname);
-//                    $('.email').html('<li class="email"> <i class="fa-home"></i>' +email+ '</li>');
+            address = '<i class="fa-home"></i>' + $("[add=add]").val();
+
+            phone = '<i class="fa fa-phone"></i>' + $("[pho=pho]").val();
+
+
+
+            if (obj.sucess == 1) {
+                $('#personal_info').modal('hide');
+                $('.user-name').text(fullname);
+                $('.email').html(email);
 //                    $('.password').html(password);
-////                    $('.gender').text(gender);
-//                    $('.birthdate').html(birthdate);
-//                    $('.phone').html('<li class="phone"> <i class="fa-home"></i>' +phone+ '</li>');
-//                    $('.address').html(address);
-                }
-            });
-            return false;
+                $('.gender').html(gender);
+                $('.birthdate').html(birthdate);
+                $('.phone').html(phone);
+                $('.address').html(address);
+            }
         });
+        return false;
+    });
+    $('.delete-phone').click(function () {
+        user_phone_id = $(this).data('id');
+        id = '#id_' + user_phone_id;
+        ids = '#id_s' + user_phone_id;
+
+        $.post('{{ helper.uri.url('clinic_user_profile/deletePhone/')}}' + user_phone_id,{#        user_phone_id : $('.delete-option').data('id'),#}
+                function (response) {
+                    if (response == 1) {
+                        $(id).hide();
+                        $(ids).hide();
+                    }
+                    $
+                });
+        return false;
+    });
+    $('.address-delete').click(function () {
+        user_address_id = $(this).data('id');
+        ida = '#id_' + user_address_id;
+        id_a = '#id_a' + user_address_id;
+
+        $.post('{{ helper.uri.url('clinic_user_profile/deleteAddress/')}}' + user_address_id,{#        user_phone_id : $('.delete-option').data('id'),#}
+                function (response) {
+                    if (response == 1) {
+                        $(id_a).hide();
+                        $(ida).hide();
+                    }
+                });
+        return false;
+    });
 
 //    if($.isFunction($.fn.datepicker)) {
 //        $(".datepicker").each(function(i, el)
@@ -330,3 +369,22 @@
 //        });
 //    }
 </script>
+
+<style>
+    .delete-option {
+        position: relative;
+        left: 411px;
+        top: 27px;
+        margin: 0px 0;
+        display: block;
+        cursor: pointer;
+    }
+
+    .delete-option:hover {
+        color: #ffab00;
+    }
+    .fa-close {
+        color: rgb(177, 177, 177);
+    }
+
+</style>
