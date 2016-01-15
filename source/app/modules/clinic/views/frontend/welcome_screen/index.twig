@@ -45,24 +45,24 @@
                                     <td>{{ item.number }}</td>
                                     <td class="patient-name {% if item.status == 'attend' %}attend{% else %}entered{% endif %}"
                                         value="{{ item.name }}" id="{{ item.user_id }}">{{ item.name }}
-                                        {% if item.status == 'attend' %}
-                                            <input type="button" data-id="{{ item.user_id }}" data-time="{{ item.time }}" class="enter"
-                                                   onclick="enter('{{ item.time }}', '{{ item.name }}', '{{ item.number }}', '{{ item.user_id }}')"
-                                                   value="Enter" id="enter">
-                                        {% else %}
-                                            <input type="button" data-id="{{ item.user_id }}" data-time="{{ item.time }}" class="attend"
-                                                   onclick="atttend('{{ item.time }}', '{{ item.name }}', '{{ item.number }}', '{{ item.user_id }}')"
-                                                   value="Attned" id="attend">
-                                        {% endif %}
-                                        <input type="button" data-no="{{ item.number }}" data-id="{{ item.user_id }}"
-                                               data-time="{{ item.time }}" data-name="{{ item.name }}" class="late"
-                                               onclick="late('{{ item.time }}', '{{ item.name }}', '{{ item.number }}', '{{ item.user_id }}')"
-                                               value="Late" id="late">
-                                        {% if item.status != 'attend' %}
-                                            <input type="button" data-id="{{ item.user_id }}" data-time="{{ item.time }}" class="cancel"
-                                                   onclick="cancel('{{ item.time }}', '{{ item.name }}', '{{ item.number }}', '{{ item.user_id }}')"
-                                                   value="Cancel" id="cancel">
-                                        {% endif %}
+                                        {#{% if item.status == 'attend' %}#}
+                                            {#<input type="button" data-id="{{ item.user_id }}" data-time="{{ item.time }}" class="enter"#}
+                                                   {#onclick="enter('{{ item.time }}', '{{ item.name }}', '{{ item.number }}', '{{ item.user_id }}')"#}
+                                                   {#value="Enter" id="enter">#}
+                                        {#{% else %}#}
+                                            {#<input type="button" data-id="{{ item.user_id }}" data-time="{{ item.time }}" class="attend"#}
+                                                   {#onclick="atttend('{{ item.time }}', '{{ item.name }}', '{{ item.number }}', '{{ item.user_id }}')"#}
+                                                   {#value="Attned" id="attend">#}
+                                        {#{% endif %}#}
+                                        {#<input type="button" data-no="{{ item.number }}" data-id="{{ item.user_id }}"#}
+                                               {#data-time="{{ item.time }}" data-name="{{ item.name }}" class="late"#}
+                                               {#onclick="late('{{ item.time }}', '{{ item.name }}', '{{ item.number }}', '{{ item.user_id }}')"#}
+                                               {#value="Late" id="late">#}
+                                        {#{% if item.status != 'attend' %}#}
+                                            {#<input type="button" data-id="{{ item.user_id }}" data-time="{{ item.time }}" class="cancel"#}
+                                                   {#onclick="cancel('{{ item.time }}', '{{ item.name }}', '{{ item.number }}', '{{ item.user_id }}')"#}
+                                                   {#value="Cancel" id="cancel">#}
+                                        {#{% endif %}#}
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -81,9 +81,10 @@
                             {% for item in late %}
                                 <tr>
                                     <td>{{ item.number }}</td>
-                                    <td class="patient-name late">{{ item.name }} <input type="button" data-id="{{ item.user_id }}"
-                                                                                         data-time="{{ item.time }}" class="enter"
-                                                                                         value="Enter" id="enter"></td>
+                                    <td class="patient-name late">{{ item.name }}
+                                        {#<input type="button" data-id="{{ item.user_id }}"#}
+                                                                                         {#data-time="{{ item.time }}" class="enter"#}
+                                                                                         {#value="Enter" id="enter"></td>#}
                                 </tr>
                             {% endfor %}
                         </tbody>

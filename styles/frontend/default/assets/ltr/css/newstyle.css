@@ -47,7 +47,7 @@ p.show_faq {
 }
 span.add-another-option-address,
 span.add-another-option-phone {
-    margin: 8px 0;
+    margin: 0px 0;
     display: block;
     cursor: pointer;
 }

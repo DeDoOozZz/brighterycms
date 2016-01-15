@@ -33,15 +33,17 @@ class Clinic_user_profileController extends Brightery_Controller {
         $user->user_id = $id;
         $user->_select = "user_id, fullname, email, password, image, gender, birthdate";
         $phones = new \modules\users\models\User_phones();
-        $phones->_select = "user_phone_id,phone,user_id";
+        $phones->_select = "user_phone_id, phone, user_id";
         $phones->user_id = $id;
+//        $phones->primary = 1;
         $res = $phones->get();
         $user_phone_id = $res[0]->user_phone_id;
         $phones->user_phone_id = $user_phone_id;
 
         $address = new modules\users\models\User_addresses();
-        $address->user_id = $id;
         $address->select = 'user_address_id ,user_id';
+        $address->user_id = $id;
+//        $address->primary = 1;
         $add = $address->get();
 
         $patient = $this->Database->query("SELECT users.*, `user_addresses`.`address`, `user_phones`.`phone`"
@@ -87,15 +89,21 @@ class Clinic_user_profileController extends Brightery_Controller {
         $this->permission('manage');
 
         if ($_POST) {
+            $model = new \modules\users\models\Users();
             $phones = $this->input->post('phone');
-            $model->attributes['fullname'] = $this->input->post('fullname');
-            $model->attributes['birthdate'] = $this->input->post('birthdate');
-            $model->attributes['email'] = $this->input->post('email');
-            $model->attributes['gender'] = $this->input->post('gender');
+            $model->user_id = $id ;
+            $model->fullname = $this->input->post('fullname');
+            $model->birthdate = $this->input->post('birthdate');
+            $model->email = $this->input->post('email');
+            $model->password =md5($this->input->post('password'));
+            $model->gender = $this->input->post('gender');
+            $model->save();
             $address = $this->input->post('address');
             $user_phone_id = $this->input->post('user_phone_id');
             $user_address_id = $this->input->post('user_address_id');
             foreach ($phones as $key => $value) {
+                if(!$value)
+                    continue;
                 $phone = new \modules\users\models\User_phones();
                 $phone->user_id = $id;
                 $phone->phone = $value;
@@ -104,7 +112,9 @@ class Clinic_user_profileController extends Brightery_Controller {
                 $phone->save();
             }
             
-            foreach ($address as $key => $value) {            
+            foreach ($address as $key => $value) {
+                if(!$value)
+                    continue;
                 $addres = new \modules\users\models\User_addresses();
                 $addres->user_id = $id;
                 $addres->address = $value;
@@ -112,19 +122,37 @@ class Clinic_user_profileController extends Brightery_Controller {
                     $addres->user_address_id = $user_address_id[$key];
                 $addres->save();
             }
+            $model->save();
         }
 
-        if ($sid = $model->save())
+        if ($model->save())
             return json_encode(['sucess' => 1,
-                'id' => $sid,
                 'item' => $model,
                 'phones' => $phone,
-                'phone_numbers' => $phones_num,
-                'add_res' => $add_res,
                 'address' => $address
             ]);
         else
             return json_encode(['sucess' => 0, 'errors' => $this->validation->errors()]);
+    }
+    
+    public function deletePhoneAction($id = null) {
+        $this->permission('deletePhone');
+        $phone = new \modules\users\models\User_phones();
+        $phone->user_phone_id = $id ;
+        if($phone->delete())
+            return TRUE ;
+        else
+            return FALSE;
+    }
+    
+    public function deleteAddressAction($id = null) {
+        $this->permission('deleteAddress');
+        $phone = new \modules\users\models\User_addresses();
+        $phone->user_address_id = $id ;
+        if($phone->delete())
+            return TRUE ;
+        else
+            return FALSE;
     }
 
 }

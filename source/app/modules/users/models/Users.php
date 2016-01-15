@@ -20,7 +20,8 @@ class Users extends \Model {
         'facebook_id' => ['varchar', 300],
         'facebook_access_token' => ['text'],
         'status' => ['enum', ['pending', 'active', 'banned']],
-        'gender' => ['enum', ['female', 'male']]
+        'gender' => ['enum', ['female', 'male']],
+        'birthdate' => ['datetime']
     ];
 
     public function rules() {

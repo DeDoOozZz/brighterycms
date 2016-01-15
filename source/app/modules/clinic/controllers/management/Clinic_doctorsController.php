@@ -129,7 +129,9 @@ class Clinic_doctorsController extends Brightery_Controller {
         }
 
         return $this->render('clinic_doctors/doctor_schedule', [
-                    'item' => $schedule
+                    'item' => $schedule,
+                    'id' => $id
+
         ]);
     }
 
@@ -150,23 +152,9 @@ class Clinic_doctorsController extends Brightery_Controller {
                 }
                 $exceptions->save();
             }
-            return $this->render('clinic_doctors/exceptions/'.$id);
+            if ($exceptions->save())
+                Uri_helper::redirect("management/clinic_doctors/doctor_schedule/".$id);
         }
-//        if ($_POST) {
-//            $exceptions = new \modules\clinic\models\Clinic_schedule_exceptions();
-//            $exceptions->clinic_doctor_id = $id;
-//            $date = $this->input->post('exc_date');
-//            $from_time = $this->input->post('exc_from');
-//            $to_time = $this->input->post('exc_to');
-//            foreach ($exceptions->get() as $item) {
-//                $exp_schedule[$item->clinic_doctor_id] = $item;
-//            }
-//            $exceptions->save();
-//            return $this->render('clinic_doctors/exceptions', [
-//                        'exp_schedule' => $exp_schedule,
-//                        'doctor' => $id
-//            ]);
-//        }
         if (!$_POST) {
             $exception = new \modules\clinic\models\Clinic_schedule_exceptions();
             $exception->select;
