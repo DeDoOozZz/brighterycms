@@ -39,13 +39,17 @@
                                     </a>
                                     <ul class="list-unstyled user-info-list">
                                         {%for add in address%}
-                                            <li class="address"> <i class="fa-home"></i> {{ add.address }} </li>
+                                            {%if add.primary == 1%}
+                                                <li class="address"> <i class="fa-home"></i> {{ add.address }} </li>
+                                                {%endif%}
                                             {%endfor%}
                                             {%if not address%}
                                             <li class="address"> <i class="fa-home"></i></li>
                                             {%endif%}
                                             {%for no in phones%}
-                                            <li class="phone"> <i class="fa fa-phone"></i> {{ no.phone }} </li>
+                                                {%if no.primary == 1 %}
+                                                <li class="phone"> <i class="fa fa-phone"></i> {{ no.phone }} </li>
+                                                {%endif%}
                                             {%endfor%}
                                             {%if not phones%}
                                             <li class="phone"> <i class="fa fa-phone"></i></li>
@@ -201,8 +205,8 @@
                                     <input class="form-control" name="phone[]" pho="pho" id="phone" value="{{ helper.form.value('phone', no.phone) }}" type="text" placeholder="{{no.phone}}"   style="margin-bottom:10px;">
                                 {% endif %}
                                 {%for no in phones%}
-                                    <span id="id_s{{no.user_phone_id}}" pho="pho" data-id="{{no.user_phone_id}}" class="delete-option delete-phone col-sm-1"><i class="fa fa-close"></i></span>
-                                    <input class="form-control" name="phone[]" id="id_{{no.user_phone_id}}" value="{{ helper.form.value('phone', no.phone) }}" type="text" placeholder="{{no.phone}}"  style="margin-bottom:10px;">
+                                    <span id="id_s{{no.user_phone_id}}" data-id="{{no.user_phone_id}}" class="delete-option delete-phone col-sm-1"><i class="fa fa-close"></i></span>
+                                    <input class="form-control" name="phone[]" pho="pho" id="id_{{no.user_phone_id}}" value="{{ helper.form.value('phone', no.phone) }}" type="text" placeholder="{{no.phone}}"  style="margin-bottom:10px;">
                                     <input type="hidden" name="user_phone_id[]" id="phone" value="{{no.user_phone_id}}">
                                 {%endfor%}
                             </div>

@@ -33,10 +33,11 @@ class Clinic_user_profileController extends Brightery_Controller {
         $user->user_id = $id;
         $user->_select = "user_id, fullname, email, password, image, gender, birthdate";
         $phones = new \modules\users\models\User_phones();
-        $phones->_select = "user_phone_id, phone, user_id";
+        $phones->_select = "user_phone_id, phone, user_id , `primary`";
         $phones->user_id = $id;
 //        $phones->primary = 1;
         $res = $phones->get();
+        print_r($res);
         $user_phone_id = $res[0]->user_phone_id;
         $phones->user_phone_id = $user_phone_id;
 
