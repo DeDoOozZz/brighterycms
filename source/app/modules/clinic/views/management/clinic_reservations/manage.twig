@@ -63,7 +63,7 @@
 
                         <div class="col-sm-10 time-hide">
                             <a href="{{ helper.uri.url('management/clinic_reservations/index') }}" class="btn btn-danger cancel-button">{{lang.cancel}}</a>
-                            <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+                            <button type="submit"class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
                         </div>
                     </div>
             </div>
@@ -216,8 +216,12 @@
                         method: "post",
                         data: {doctor_id: doctor_id, patient_id: patient_id, status: status, date: date, time: time{#, type: type#}}
                     });
+                    $('#myModal').modal('hide');
                     return false;
                 });
+//                $('#save_reserve').click(function(){
+//                    $('#myModal').modal('hide');
+//                });
 
             });
             $(".select").select2({
