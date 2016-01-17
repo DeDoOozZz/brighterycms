@@ -39,8 +39,8 @@
                     <label class="col-sm-2 control-label" for="time">{{ lang.time }}</label>
                     <div class="col-sm-10">
                         {% verbatim %}
-                            <div class="col-sm-12"  ng-repeat="x in result">
-                                <div class="col-sm-3">
+                            <!--<div class="col-sm-12"  ng-repeat="x in result">-->
+                                <div class="col-sm-3"  ng-repeat="x in result">
                                     <div class="time-block not-available" ng-if="x.status == 'reserved'">
                                         <i class="fa fa-lock"></i> {{x.time}}
                                     </div>
@@ -132,7 +132,7 @@
             console.log($scope.result);
             alert('sorry the doctoce has no schedule this day .');
         }
-        else
+        else if ($scope.result == 1)
         {
             console.log($scope.result);
             $('#search-result').show();
