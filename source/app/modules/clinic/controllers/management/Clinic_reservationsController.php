@@ -150,6 +150,7 @@ class Clinic_reservationsController extends Brightery_Controller {
         $model_date = new \modules\clinic\models\Clinic_schedules();
         $model_date->_select = 'from_time , to_time ';
         $model_date->clinic_doctor_id = $doctor_id;
+        $model_date->status = 'on';
         $model_date->day = $day;
         $period = $model_date->get();
         if (!$period)

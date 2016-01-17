@@ -28,14 +28,17 @@ class Clinic_user_profileController extends Brightery_Controller {
     }
 
     public function indexAction($id) {
+        
+        $userInfo = $this->permissions->getUserInformation('user_id');
+        
+        $user_id_log = $userInfo->user_id;
 
         $user = new \modules\users\models\Users();
         $user->user_id = $id;
         $user->_select = "user_id, fullname, email, password, image, gender, birthdate";
         $phones = new \modules\users\models\User_phones();
-        $phones->_select = "user_phone_id, phone, user_id";
+        $phones->_select = "user_phone_id, phone, user_id , `primary`";
         $phones->user_id = $id;
-//        $phones->primary = 1;
         $res = $phones->get();
         $user_phone_id = $res[0]->user_phone_id;
         $phones->user_phone_id = $user_phone_id;
@@ -43,7 +46,6 @@ class Clinic_user_profileController extends Brightery_Controller {
         $address = new modules\users\models\User_addresses();
         $address->select = 'user_address_id ,user_id';
         $address->user_id = $id;
-//        $address->primary = 1;
         $add = $address->get();
 
         $patient = $this->Database->query("SELECT users.*, `user_addresses`.`address`, `user_phones`.`phone`"
@@ -80,7 +82,8 @@ class Clinic_user_profileController extends Brightery_Controller {
                     'diseases' => $diseases,
                     'notes' => $notes,
                     'xrays' => $xrays,
-                    'id' => $id
+                    'id' => $id,
+                    'idlog' => $user_id_log
         ]);
     }
 
@@ -91,33 +94,63 @@ class Clinic_user_profileController extends Brightery_Controller {
         if ($_POST) {
             $model = new \modules\users\models\Users();
             $phones = $this->input->post('phone');
-            $model->user_id = $id ;
+            $primary_phone = $this->input->post('primary_phone');
+            $primary_address = $this->input->post('primary_address');
+            $model->user_id = $id;
             $model->fullname = $this->input->post('fullname');
             $model->birthdate = $this->input->post('birthdate');
             $model->email = $this->input->post('email');
-            $model->password =md5($this->input->post('password'));
+            $model->password = md5($this->input->post('password'));
             $model->gender = $this->input->post('gender');
             $model->save();
             $address = $this->input->post('address');
             $user_phone_id = $this->input->post('user_phone_id');
             $user_address_id = $this->input->post('user_address_id');
             foreach ($phones as $key => $value) {
-                if(!$value)
+                if (!$value)
                     continue;
+                $prPhone = new \modules\users\models\User_phones();
+                    $prPhone->_select = 'user_phone_id';
+                    $prPhone->user_id = $id ;
+                    $prPhone->primary = 1 ;
+                    $res = $prPhone->get();
+                    $userphoneid = $res[0]->user_phone_id;
                 $phone = new \modules\users\models\User_phones();
                 $phone->user_id = $id;
                 $phone->phone = $value;
+                if ($user_phone_id[$key] == $primary_phone) {
+                    $phone->primary = 1;
+                    $pPhone = new \modules\users\models\User_phones();
+                    $pPhone->user_phone_id = $userphoneid ;
+                    $pPhone->primary = 0 ;
+                    $pPhone->save();
+                }
+
                 if ($user_phone_id[$key])
                     $phone->user_phone_id = $user_phone_id[$key];
                 $phone->save();
             }
-            
+
             foreach ($address as $key => $value) {
-                if(!$value)
+                if (!$value)
                     continue;
+                $prAdd = new \modules\users\models\User_addresses() ;
+                    $prAdd->_select = 'user_address_id';
+                    $prAdd->user_id = $id ;
+                    $prAdd->primary = 1 ;
+                    $res = $prAdd->get();
+                    $useraddressid = $res[0]->user_address_id;
                 $addres = new \modules\users\models\User_addresses();
                 $addres->user_id = $id;
                 $addres->address = $value;
+                if ($user_address_id[$key] == $primary_address) {
+                    $addres->primary = 1;
+                    $pAddress = new \modules\users\models\User_addresses();
+                    $pAddress->user_address_id = $useraddressid ;
+                    $pAddress->primary = 0 ;
+                    $pAddress->save();
+                }
+                
                 if ($user_address_id[$key])
                     $addres->user_address_id = $user_address_id[$key];
                 $addres->save();
@@ -134,23 +167,23 @@ class Clinic_user_profileController extends Brightery_Controller {
         else
             return json_encode(['sucess' => 0, 'errors' => $this->validation->errors()]);
     }
-    
+
     public function deletePhoneAction($id = null) {
         $this->permission('deletePhone');
         $phone = new \modules\users\models\User_phones();
-        $phone->user_phone_id = $id ;
-        if($phone->delete())
-            return TRUE ;
+        $phone->user_phone_id = $id;
+        if ($phone->delete())
+            return TRUE;
         else
             return FALSE;
     }
-    
+
     public function deleteAddressAction($id = null) {
         $this->permission('deleteAddress');
         $phone = new \modules\users\models\User_addresses();
-        $phone->user_address_id = $id ;
-        if($phone->delete())
-            return TRUE ;
+        $phone->user_address_id = $id;
+        if ($phone->delete())
+            return TRUE;
         else
             return FALSE;
     }
