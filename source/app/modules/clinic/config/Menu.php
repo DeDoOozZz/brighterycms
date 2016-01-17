@@ -33,7 +33,7 @@ return [
                 ],
                 'reservations' => [
                     'title' => 'reservations',
-                    'url' => 'management/clinic_reservations',
+                    'url' => 'management/clinic_reservations/manage',
                     'icon' => 'fa fa-hospital-o'
                 ],
                 'reservation_types' => [
