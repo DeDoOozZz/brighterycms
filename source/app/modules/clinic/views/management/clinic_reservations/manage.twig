@@ -36,7 +36,7 @@
                 {#<div class="form-group-separator"></div>#}
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="time">{{ lang.time }}</label>
+                    <label class="col-sm-2 control-label time-hide" for="time">{{ lang.time }}</label>
                     <div class="col-sm-10">
                         {% verbatim %}
                             <!--<div class="col-sm-12"  ng-repeat="x in result">-->
@@ -61,7 +61,7 @@
                 <div class="form-group">
                         <label class="col-sm-2 control-label"></label>
 
-                        <div class="col-sm-10">
+                        <div class="col-sm-10 time-hide">
                             <a href="{{ helper.uri.url('management/clinic_reservations/index') }}" class="btn btn-danger cancel-button">{{lang.cancel}}</a>
                             <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
                         </div>
@@ -70,7 +70,7 @@
     </div>
 </div>
 
-    <div class="modal fade reservation-schedule-details" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade reservation-schedule-details" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content ">
                 <div class="modal-header">
@@ -105,8 +105,12 @@
                         <label class="col-sm-2 control-label"></label>
                         <div class="col-sm-10">
                             <input type="button" id='save_reserve' class="btn btn-secondary" value='{{lang.submit}}' style="float: right;">
-                            <a href="{{ helper.uri.url('management/users/manage') }}" class="btn btn-warning" style="color: #FFF;">
-                                Add New User
+                            {#<a href="{{ helper.uri.url('management/users/manage') }}" class="btn btn-warning" style="color: #FFF;">#}
+                                {#Add New User#}
+                            {#</a>#}
+                            <a href="{{ helper.uri.url('management/users/manage') }}" class="btn btn-warning btn-icon btn-icon-standalone col-sm-5 add-patient-option">
+                                <i class="fa fa-user"></i>
+                                <span>{{ lang.add_new_user }}Add a new User</span>
                             </a>
                         </div>
                     </div>
@@ -114,8 +118,24 @@
             </div>
         </div>
     </div>
+<div class="modal fade" id="message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">{{lang.system_msg}}</h4>
+            </div>
+            <div class="modal-body">
+                <p style="color: #393F3F;">Sorry The Doctor <span>{{ item.fullname }}</span> Has No Schedule This Day !</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">close{{ lang.no }}</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <script src="{{ constant('STYLE_JS') }}/select2/select2.min.js"></script>
+<script src="{{ constant('STYLE_JS') }}/select2/select2.min.js"></script>
     <script src="{{ constant('STYLE_JS') }}/timepicker/bootstrap-timepicker.min.js"></script>
     <script>
     var app = angular.module('myApp', []);
@@ -130,7 +150,9 @@
         if ($scope.result == 0)
         {
             console.log($scope.result);
-            alert('sorry the doctoce has no schedule this day .');
+//            alert('sorry the doctoce has no schedule this day .');
+            $('#message').modal('show');
+            $('.time-hide').hide();
         }
         else if ($scope.result == 1)
         {
@@ -147,7 +169,9 @@
         if ($scope.result == 0)
         {
     {#                                                            console.log($scope.result);#}
-            alert('sorry the doctoce has no schedule this day .');
+//            alert('sorry the doctoce has no schedule this day .');
+            $('.time-hide').hide();
+            $('#message').modal('show');
         }
         else
             $('#search-result').show();
