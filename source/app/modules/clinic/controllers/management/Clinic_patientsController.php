@@ -47,6 +47,7 @@ class Clinic_patientsController extends Brightery_Controller {
 
         $this->language->load("clinic_patients");
 
+
         $patient = $this->Database->query("SELECT users.*, `user_addresses`.`address`, `user_phones`.`phone`"
                         . "FROM `users` "
                         . "LEFT JOIN `user_addresses` ON `user_addresses`.`user_id`=`users`.`user_id`"
@@ -56,6 +57,17 @@ class Clinic_patientsController extends Brightery_Controller {
 
         if (!$patient)
             Brightery::error404();
+        $phones = new \modules\users\models\User_phones();
+        $phones->_select = "user_phone_id, phone, user_id , `primary`";
+        $phones->user_id = $id;
+        $res = $phones->get();
+        $user_phone_id = $res[0]->user_phone_id;
+        $phones->user_phone_id = $user_phone_id;
+
+        $address = new modules\users\models\User_addresses();
+        $address->select = 'user_address_id ,user_id';
+        $address->user_id = $id;
+        $add = $address->get();
 
 
         $info = $this->Database->query("SELECT clinic_patient_diseases.*, `clinic_disease_templates`.`title`"
@@ -79,6 +91,8 @@ class Clinic_patientsController extends Brightery_Controller {
         return $this->render('clinic_patients/details', [
                     'patient' => $patient,
                     'diseases' => $info,
+                    'phones' => $res,
+                    'address' => $add,
                     'notes' => $notes,
                     'xrays' => $xrays,
                     'id' => $id

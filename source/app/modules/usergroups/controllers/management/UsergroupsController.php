@@ -48,6 +48,10 @@ class UsergroupsController extends Brightery_Controller {
         $modules_zone = new \modules\usergroups\models\Zones(FALSE);
         $modules_zone->_select = "zone_id , module_id , permission , name";
         $modules_zone->usergroup_id = "$id";
+//        $permissions = fopen("config/Permissions.php", "r") or die("Unable to open file!");
+//        echo fread($permissions,filesize("config/Permissions.php.txt"));
+//        fclose($permissions);
+
 
         $modules_user_zone = new \modules\usergroups\models\Usergroup_zones(FALSE);
         $module_checked = new \modules\usergroups\models\Usergroup_zones();
@@ -79,7 +83,7 @@ class UsergroupsController extends Brightery_Controller {
             return $this->render('usergroups/manage', [
                         'item' => $id ? $model->get() : null,
                         'modules' => $modules->get(),
-                        'zones' => $modules_zone->get(),
+//                        'zones' => $modules_zone->get(),
                         'checked' => $module_checked->get()
             ]);
     }
