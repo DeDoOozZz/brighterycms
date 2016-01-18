@@ -1,3 +1,4 @@
+
 <div class="panel panel-default" ng-app="myApp" ng-controller="customersCtrl">
     <div class="panel-heading">
         <h3 class="panel-title">{{ lang.clinic_reservations }}</h3>
@@ -69,7 +70,6 @@
             </div>
     </div>
 </div>
-
 <div class="modal fade reservation-schedule-details" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content ">
@@ -129,149 +129,150 @@
                 <p style="color: #393F3F;">Sorry The Doctor <span>{{ item.fullname }}</span> Has No Schedule This Day !</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">close{{ lang.no }}</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">close{{ lang.close }}</button>
             </div>
         </div>
     </div>
 </div>
 
 <script src="{{ constant('STYLE_JS') }}/select2/select2.min.js"></script>
-    <script src="{{ constant('STYLE_JS') }}/timepicker/bootstrap-timepicker.min.js"></script>
-    <script>
-    var app = angular.module('myApp', []);
-    app.controller('customersCtrl', function ($scope, $http) {
-    $scope.draw = function () {
-    $http({
-        url: "{{helper.uri.url('management/clinic_reservations/getdoctorTypes')}}",
-        method: "get",
-        params: {user_id: $scope.form.user_id}
-    }).then(function (response) {
-        $scope.result = response.data.reservation_type;
-        if ($scope.result == 0)
-        {
-            console.log($scope.result);
+<script src="{{ constant('STYLE_JS') }}/timepicker/bootstrap-timepicker.min.js"></script>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function ($scope, $http) {
+$scope.draw = function () {
+$http({
+    url: "{{helper.uri.url('management/clinic_reservations/getdoctorTypes')}}",
+    method: "get",
+    params: {user_id: $scope.form.user_id}
+}).then(function (response) {
+    $scope.result = response.data.reservation_type;
+    if ($scope.result == 0)
+    {
+        console.log($scope.result);
 //            alert('sorry the doctoce has no schedule this day .');
-            $('#message').modal('show');
-            $('.time-hide').hide();
-        }
-        else if ($scope.result == 1)
-        {
-            console.log($scope.result);
-            $('#search-result').show();
-        }
-    });
-    $http({
-        url: "{{helper.uri.url('management/clinic_reservations/getSearch')}}",
-        method: "get",
-        params: {date: $scope.form.date, user_id: $scope.form.user_id}
-    }).then(function (response) {
-        $scope.result = response.data.result;
-        if ($scope.result == 0)
-        {
-    {#                                                            console.log($scope.result);#}
-//            alert('sorry the doctoce has no schedule this day .');
-            $('.time-hide').hide();
-            $('#message').modal('show');
-        }
-        else
-            $('#search-result').show();
-    });
-    };
-    $scope.reserve = function (idx) {
-    $http({
-        url: "{{helper.uri.url('management/clinic_reservations/manage/save')}}",
-        method: "get",
-        params: {time: $scope.result[idx].time, date: $scope.result[idx].date, patient_id: $scope.patient_id, status: $scope.status, type: $scope.type}
-    }).then(function (response) {
-        $scope.result = response.data.result;
+        $('#message').modal('show');
+        $('.time-hide').hide();
+    }
+    else if ($scope.result == 1)
+    {
         console.log($scope.result);
         $('#search-result').show();
-    });
-    };
-    });
-    </script>
-    <script type="text/javascript">
-        jQuery(document).ready(function ($)
-        {
-            $(document).on("click", ".available", function () {
-                var time = $(this).data('time');
-                $("#time_re").attr('value', time);
+    }
+});
+$http({
+    url: "{{helper.uri.url('management/clinic_reservations/getSearch')}}",
+    method: "get",
+    params: {date: $scope.form.date, user_id: $scope.form.user_id}
+}).then(function (response) {
+    $scope.result = response.data.result;
+    if ($scope.result == 0)
+    {
+{#                                                            console.log($scope.result);#}
+//            alert('sorry the doctoce has no schedule this day .');
+        $('.time-hide').hide();
+        $('#message').modal('show');
+    }
+    else
+        $('#search-result').show();
+});
+};
+$scope.reserve = function (idx) {
+$http({
+    url: "{{helper.uri.url('management/clinic_reservations/manage/save')}}",
+    method: "get",
+    params: {time: $scope.result[idx].time, date: $scope.result[idx].date, patient_id: $scope.patient_id, status: $scope.status, type: $scope.type}
+}).then(function (response) {
+    $scope.result = response.data.result;
+    console.log($scope.result);
+    $('#search-result').show();
+});
+};
+});
+</script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($)
+    {
+        $(document).on("click", ".available", function () {
+            var time = $(this).data('time');
+            $("#time_re").attr('value', time);
+        });
+        $('#user_id').change(function () {
+            var user_id = $('#user_id').val();
+            $("#doctor_id").attr('value', user_id);
+            $.ajax({
+                url: "{{helper.uri.url('management/clinic_reservations/manage')}}",
+                method: "post",
+                params: {doctor_id: user_id}
             });
-            $('#user_id').change(function () {
-                var user_id = $('#user_id').val();
-                $("#doctor_id").attr('value', user_id);
+            $('#save_reserve').click(function (status) {
+                var patient_id = $('#patient_id').val();
+                var doctor_id = $('#doctor_id').val();
+                var status = $('#status').val();
+                var time = $('#time_re').val();
+                var date = $('#date').val();
                 $.ajax({
-                    url: "{{helper.uri.url('management/clinic_reservations/manage')}}",
+                    url: "{{helper.uri.url('management/clinic_reservations/save')}}",
                     method: "post",
-                    params: {doctor_id: user_id}
+                    data: {doctor_id: doctor_id, patient_id: patient_id, status: status, date: date, time: time{#, type: type#}}
                 });
-                $('#save_reserve').click(function (status) {
-                    var patient_id = $('#patient_id').val();
-                    var doctor_id = $('#doctor_id').val();
-                    var status = $('#status').val();
-                    var time = $('#time_re').val();
-                    var date = $('#date').val();
-                    $.ajax({
-                        url: "{{helper.uri.url('management/clinic_reservations/save')}}",
-                        method: "post",
-                        data: {doctor_id: doctor_id, patient_id: patient_id, status: status, date: date, time: time{#, type: type#}}
-                    });
-                    $('#myModal').modal('hide');
-                    return false;
-                });
+                $('#myModal').modal('hide');
+                return false;
+            });
 //                $('#save_reserve').click(function(){
 //                    $('#myModal').modal('hide');
 //                });
 
-            });
-            $(".select").select2({
-                placeholder: '{{lang.select_specifications}} ',
-                allowClear: true
-            }).on('select2-open', function ()
-            {
-                // Adding Custom Scrollbar
-                $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-            });
         });
-    </script>
-    <style>
-        .search-result{
-            display: none;
-        }
-        .reservation-schedule-details {
-            -webkit-box-shadow: none;
-            -moz-box-shadow: none;
-            box-shadow: none;
-            border-color: #f5f5f5;
-            padding: 30px;
-            float: left;
-            width: 100%;
-        }
-        .reservation-schedule-details .modal-content {
-            padding: 20px 0;
-            float: left;
-            width: 100%;
-        }
-        .reservation-schedule-details .form-group {
-            margin-bottom: 15px;
-            float: left;
-            width: 100%;
-        }
-        .time-block{
-            cursor: pointer;
-            margin: 10px;
-            font-size: 13px;
-            color:#555;
-            background-color: #dedede;
-            line-height: 30px;
-            padding: 0 10px;
-        }
-        .not-available{
-            color:silver;
-            background-color: #f1f1f1;
-        }
-        .mar-items-bottom div {
-            margin-bottom: 10px;
-        }
+        $(".select").select2({
+            placeholder: '{{lang.select_specifications}} ',
+            allowClear: true
+        }).on('select2-open', function ()
+        {
+            // Adding Custom Scrollbar
+            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+        });
+    });
+</script>
+<style>
+    .search-result{
+        display: none;
+    }
+    .reservation-schedule-details {
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        border-color: #f5f5f5;
+        padding: 30px;
+        float: left;
+        width: 100%;
+    }
+    .reservation-schedule-details .modal-content {
+        padding: 20px 0;
+        float: left;
+        width: 100%;
+    }
+    .reservation-schedule-details .form-group {
+        margin-bottom: 15px;
+        float: left;
+        width: 100%;
+    }
+    .time-block{
+        cursor: pointer;
+        margin: 10px;
+        font-size: 13px;
+        color:#555;
+        background-color: #dedede;
+        line-height: 30px;
+        padding: 0 10px;
+    }
+    .not-available{
+        color:silver;
+        background-color: #f1f1f1;
+    }
+    .mar-items-bottom div {
+        margin-bottom: 10px;
+    }
 
-    </style>
+</style>

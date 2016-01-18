@@ -19,7 +19,7 @@
                     <!-- User Info Sidebar -->
                     <div class="user-info-sidebar">
                         <a href="#" class="user-img">
-                            <img src="{{ constant('STYLE_IMAGES') }}/user-2.png" alt="user-img" class="img-cirlce img-responsive img-thumbnail" />
+                            <img src="{{ helper.uri.cdn() }}users/{{ patient.image }}" alt="user-img" class="img-cirlce img-responsive img-thumbnail" />
                         </a>
 
                         <span class="user-name">
@@ -40,19 +40,25 @@
                         </ul>
 
                         <div class="tab-content">
+                            {#Profile#}
                             <div class="tab-pane active" id="v4-profile">
                                 <a href="{{ helper.uri.url('management/users/manage', id  ) }}" class="btn btn-secondary  btn-icon btn-icon-standalone patient-edit-profile" style="color: #FFF; float:right;"> 
                                     <i class="fa fa-pencil-square-o"></i>
                                     <span>{{ lang.edit_user }}</span>
                                 </a>
                                 <ul class="list-unstyled user-info-list">
-                                    <li> <i class="fa-home"></i> {{ patient.address }} </li>
-                                    <li> <i class="fa fa-phone"></i> {{ patient.phone }} </li>
+                                     {% for item in address %}
+                                    <li> <i class="fa-home"></i> {{ item.address }} </li>
+                                    {% endfor %}
+                                    {% for phone in phones %}
+                                    <li> <i class="fa fa-phone"></i> {{ phone.phone }} </li>
+                                    {% endfor %}
                                     <li> <i class="fa fa-envelope"></i> {{ patient.email }} </li>
                                     <li> <i class="fa fa-user"></i> {{ patient.gender }} </li>
                                     <li> <i class="fa fa-calendar"></i> {{ patient.birthdate }} </li>
                                 </ul>
                             </div>
+                            {#disease#}
                             <div class="tab-pane" id="v4-disease">
                                 <a href="#" class="btn btn-secondary show-diseases" style="color: #FFF; float:right;" href="#" data-toggle="modal" data-target="#myModal" rel="add" data-id="{{ id }}"> {{ lang.add }} </a>
 
@@ -73,7 +79,7 @@
                                                 <td>{{ disease.title }}</td>
                                                 <td>{{ disease.note }}</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-secondary btn-sm show-diseases" href="#" data-toggle="modal" data-target="#myModal" rel="edit" data-id="{{ disease.clinic_patient_disease_id }}">{{lang.edit}}</a>
+                                                    <a href="{{ helper.uri.url('management/clinic_patient_diseases/manage', disease.clinic_patient_disease_id) }}" class="btn btn-secondary btn-sm show-diseases" data-toggle="modal" data-target="#myModal" rel="edit" data-id="{{ disease.clinic_patient_disease_id }}">{{lang.edit}}</a>
                                                     <a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patient_diseases/delete', disease.clinic_patient_disease_id) }}">{{ lang.delete }}</a>
                                                 </td>  
                                             </tr>
@@ -84,6 +90,7 @@
 
                                 </table>
                             </div>
+                            {#xrays#}
                             <div class="tab-pane" id="v4-xrays">
                                 <a href="#" class="btn btn-secondary show-xrays" style="color: #FFF; float:right;" href="#" data-toggle="modal" data-target="#myModal2" rel="add" data-id="{{ id }}"> {{ lang.add }} </a>
 
@@ -103,7 +110,7 @@
                                                 <td>{{ xray.title }}</td>
                                                 <td>{{ xray.description }}</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-secondary btn-sm show-xrays" href="#" data-toggle="modal" data-target="#myModal2" rel="edit" data-id="{{ xray.clinic_xray_negative_id}}">{{lang.edit}}</a>
+                                                    <a href="{{ helper.uri.url('management/clinic_xray_negative/manage', xray.clinic_xray_negative_id) }}" class="btn btn-secondary btn-sm show-xrays"  data-toggle="modal" data-target="#myModal2" rel="edit" data-id="{{ xray.clinic_xray_negative_id}}">{{lang.edit}}</a>
                                                     <a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_xray_negative/delete', xray.clinic_xray_negative_id) }}">{{ lang.delete }}</a>
                                                 </td>  
                                             </tr>
@@ -112,6 +119,7 @@
 
                                 </table>                  
                             </div>
+                            {#notes#}
                             <div class="tab-pane" id="v4-notes">
                                 <a href="#" class="btn btn-secondary show-notes" style="color: #FFF; float:right;" href="#" data-toggle="modal" data-target="#myModal3" rel="add" data-id="{{ id }}"> {{ lang.add }} </a>
 
@@ -129,7 +137,7 @@
                                             <tr class="note_{{note.clinic_patient_note_id}}" >
                                                 <td>{{ note.note }}</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-secondary btn-sm show-notes" href="#" data-toggle="modal" data-target="#myModal3" rel="edit" data-id="{{ note.clinic_patient_note_id}}">{{lang.edit}}</a>
+                                                    <a href="{{ helper.uri.url('management/clinic_patients_notes/manage', note.clinic_patient_note_id) }}" class="btn btn-secondary btn-sm show-notes"  data-toggle="modal" data-target="#myModal3" rel="edit" data-id="{{ note.clinic_patient_note_id}}">{{lang.edit}}</a>
                                                     <a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patients_notes/delete', note.clinic_patient_note_id) }}">{{ lang.delete }}</a>
                                                 </td>  
                                             </tr>
@@ -153,7 +161,7 @@
     <div class="modal-dialog">
         <div class="modal-content ">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><spanaria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title " id="myModalLabel">{{lang.disease}}</h4>
             </div>
             <div class="modal-body">
@@ -167,7 +175,7 @@
     <div class="modal-dialog">
         <div class="modal-content ">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><spanaria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title " id="myModalLabel">{{lang.xrays}}</h4>
             </div>
             <div class="modal-body">
@@ -182,7 +190,7 @@
     <div class="modal-dialog">
         <div class="modal-content ">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><spanaria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title " id="myModalLabel">{{lang.notes}}</h4>
             </div>
             <div class="modal-body">
