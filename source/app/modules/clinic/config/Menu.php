@@ -41,12 +41,18 @@ return [
                     'url' => 'management/clinic_doctor_reservation_types',
                     'icon' => 'fa-sitemap'
                 ],
+//                'welcome_screen' => [
+//                    'title' => 'welcome_screen',
+//                    'url' => 'management/clinic/clinic_welcome_screen/index',
+//                    'icon' => 'fa fa-star-half-o'
+//                ],
             ],
-            'doctor_reviews' => [
-                'title' => 'doctor_reviews',
-                'url' => 'management/clinic_doctor_reviews',
-                'icon' => 'fa fa-star-half-o'
-            ],
+//            'doctor_reviews' => [
+//                'title' => 'doctor_reviews',
+//                'url' => 'management/clinic_doctor_reviews',
+//                'icon' => 'fa fa-star-half-o'
+//            ],
+
         ],
     ],
 ];

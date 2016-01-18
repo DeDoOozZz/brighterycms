@@ -10,6 +10,7 @@ return [
     'menu_reservations' => 'Reservations',
     'menu_reservation_types' => 'Reservation Types',
     'menu_doctor_reviews' => 'Doctor Reviews',
+    'menu_welcome_screen' => 'Welcome Screen',
     'permissions_manage_branch' => 'Manage Branches',
     'permissions_manage_specification' => 'Manage Specification',
     'permissions_manage_doctor' => 'Manage Doctors',

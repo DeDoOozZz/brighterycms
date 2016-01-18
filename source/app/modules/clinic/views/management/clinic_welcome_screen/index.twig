@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reservation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+</head>
+<body id="page">
+<header>
+    <div class="header-container">
+        <div class="reservation_head">
+            <div class="reservation-calender">
+                <img src="{{ constant("STYLE_IMAGES") }}/calender.png">
+                <span class="calender-day">{{ day }}</span>
+            </div>
+            <div class="calender-time">
+                <img src="{{ constant("STYLE_IMAGES") }}/time.png">
+                        <span class="calender-time-content">
+                            From
+                            <span>{{ from_time }}</span>
+                            To
+                            <span>{{ to_time }}</span>
+                        </span>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="sub-container">
+
+        <div class="patient_list" id="patient_list">
+            <h2 class="patient_list_title"> List Of Patient</h2>
+            <table>
+                <thead>
+                <th class="min-col">No</th>
+                <th>Name</th>
+                {#<th class="min-col">Attend</th>
+                <th class="min-col">Entered</th>#}
+                </thead>
+                <tbody id="sortable">
+                {% for item in names %}
+                    <tr>
+                        <td>{{ item.number }}</td>
+                        <td class="patient-name {% if item.status == 'attend' %}attend{% else %}entered{% endif %}"
+                            value="{{ item.name }}" id="{{ item.user_id }}">{{ item.name }}
+                            {#{% if item.status == 'attend' %}#}
+                            {#<input type="button" data-id="{{ item.user_id }}" data-time="{{ item.time }}" class="enter"#}
+                            {#onclick="enter('{{ item.time }}', '{{ item.name }}', '{{ item.number }}', '{{ item.user_id }}')"#}
+                            {#value="Enter" id="enter">#}
+                            {#{% else %}#}
+                            {#<input type="button" data-id="{{ item.user_id }}" data-time="{{ item.time }}" class="attend"#}
+                            {#onclick="atttend('{{ item.time }}', '{{ item.name }}', '{{ item.number }}', '{{ item.user_id }}')"#}
+                            {#value="Attned" id="attend">#}
+                            {#{% endif %}#}
+                            {#<input type="button" data-no="{{ item.number }}" data-id="{{ item.user_id }}"#}
+                            {#data-time="{{ item.time }}" data-name="{{ item.name }}" class="late"#}
+                            {#onclick="late('{{ item.time }}', '{{ item.name }}', '{{ item.number }}', '{{ item.user_id }}')"#}
+                            {#value="Late" id="late">#}
+                            {#{% if item.status != 'attend' %}#}
+                            {#<input type="button" data-id="{{ item.user_id }}" data-time="{{ item.time }}" class="cancel"#}
+                            {#onclick="cancel('{{ item.time }}', '{{ item.name }}', '{{ item.number }}', '{{ item.user_id }}')"#}
+                            {#value="Cancel" id="cancel">#}
+                            {#{% endif %}#}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="late_patients" id="late_patients">
+            <h2 class="late_patient_title">Late Patients</h2>
+            <table>
+                <thead>
+                <th>No</th>
+                <th>Name</th>
+                </thead>
+                {% set i = 0 %}
+                <tbody id="sortable2">
+                {% for item in late %}
+                    <tr>
+                        <td>{{ item.number }}</td>
+                        <td class="patient-name late">{{ item.name }}
+                            {#<input type="button" data-id="{{ item.user_id }}"#}
+                            {#data-time="{{ item.time }}" class="enter"#}
+                            {#value="Enter" id="enter"></td>#}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="guide-note">
+                <div class="reservation-note">
+                    <h2>Take care !</h2>
+                    <img src="{{ constant("STYLE_IMAGES") }}/warning.png">
+
+                    <div class="reservation-note-content">
+                        <span>Login precedence booking.</span>
+                    </div>
+                    <div class="reservation-note-content">
+                        <span>Login precedence booking Login precedence booking</span>
+                    </div>
+                    <div class="reservation-note-content">
+                        <span>Login precedence booking Login precedence booking Login precedence booking</span>
+                    </div>
+                </div>
+                <h2><img src="{{ constant("STYLE_IMAGES") }}/guide.png">Guide Posts</h2>
+
+                <div class="gide-note-content">
+                    <span class="gide attend"></span>
+                    <span>Patient Who Attend</span>
+                </div>
+                <div class="gide-note-content">
+                    <span class="gide entered"></span>
+                    <span>Patient Who Attend And Entered</span>
+                </div>
+                <div class="gide-note-content">
+                    <span class="gide late"></span>
+                    <span>Patient Who Isn't Attend Yet In His Time</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    function atttend(time, name, n, id) {
+        var that = $(this);
+        $.post("{{helper.uri.url('clinic_welcome_screen/attend')}}", {
+            user_id: id,
+            date: "{{day}}",
+            time: time
+        }, function (status) {
+            if (!status.connected == 1) {
+                that.parent().removeClass('entered');
+                that.parent().addClass('attend');
+            }
+        });
+        return false;
+    }
+    ;
+    function enter(time, name, n, id) {
+        var that = $(this);
+        $.post("{{helper.uri.url('clinic_welcome_screen/enter')}}", {
+            user_id: id,
+            date: "{{day}}",
+            time: time
+        }, function (status) {
+            if (!status.connected == 1) {
+                that.parent().parent().remove();
+            }
+        });
+        return false;
+    }
+    ;
+    function late(time, name, n, id) {
+        var late = $('#sortable2');
+        var that = $(this);
+        {#            var time = that.data('time');#}
+        {#console.log(time);
+        var name = $(this).data('name');
+        var n = $(this).data('no');#}
+        $.post("{{helper.uri.url('clinic_welcome_screen/late')}}", {
+            user_id: id,
+            date: "{{day}}",
+            time: time
+        }, function (status) {
+            if (!status.connected == 1) {
+                that.parent().parent().remove();
+                late.append('<tr><td>' + n + '</td><td class="patient-name late" >' + name + ' <input type="button" data-id="' + id + '" data-time="' + time + '" class="enter" value="Enter" id="enter"></td><tr> ');
+            }
+        });
+    }
+    ;
+    function cancel(time, name, n, id) {
+        var that = $(this);
+        $.post("{{helper.uri.url('clinic_welcome_screen/cancel')}}", {
+                    user_id: id,
+                    date: "{{day}}",
+                    time: time
+                }, function (status) {
+                    if (!status.connected == 1) {
+                        that.parent().parent().remove();
+                    }
+                }
+        );
+        return false;
+    }
+    ;{#$(function () {
+        $("#sortable").sortable();
+                $("#sortable").disableSelection();
+        });
+        $(function () {
+        $("#sortable2").sortable();
+                $("#sortable2").disableSelection();
+        });#}
+    $(document).ready(function () {
+                $("#page").load('{{helper.uri.url('clinic_welcome_screen/index/')}}' + {{doctor_id}});
+                var refreshId = setInterval(function () {
+                    $("#page").load('{{helper.uri.url('clinic_welcome_screen/index/')}}' + {{doctor_id}});{# $(function () {
+                 $("#sortable").sortable();
+                 $("#sortable").disableSelection();
+             });
+        $(function () {
+         $("#sortable2").sortable();
+         $("#sortable2").disableSelection();
+        });#}
+                }, 20000);
+                $.ajaxSetup({cache: false});
+                $('.cancel').click(function () {
+                    var that = $(this);
+                    var id = $(this).data('id');
+                    var time = $(this).data('time');
+                    $.post("{{helper.uri.url('clinic_welcome_screen/cancel')}}", {
+                        user_id: id,
+                        date: "{{day}}",
+                        time: time
+                    }, function (status) {
+                        if (!status.connected == 1) {
+                            that.parent().parent().remove();
+                        }
+                    });
+                    return false;
+                });
+                $('.late').click(function () {
+                    var late = $('#sortable2');
+                    var that = $(this);
+                    var id = $(this).data('id');
+                    var time = $(this).data('time');
+                    var name = $(this).data('name');
+                    var n = $(this).data('no');
+                    $.post("{{helper.uri.url('clinic_welcome_screen/late')}}", {
+                        user_id: id,
+                        date: "{{day}}",
+                        time: time
+                    }, function (status) {
+                        if (!status.connected == 1) {
+                            that.parent().parent().remove();
+                            late.append('<tr><td>' + n + '</td><td class="patient-name late" >' + name + ' <input type="button" data-id="' + id + '" data-time="' + time + '" class="enter" value="Enter" id="enter"></td><tr> ');
+                        }
+                    });
+                });
+                $(document).on('click', '.enter', function () {
+                    var that = $(this);
+                    var id = $(this).data('id');
+                    var time = $(this).data('time');
+                    $.post("{{helper.uri.url('clinic_welcome_screen/enter')}}", {
+                        user_id: id,
+                        date: "{{day}}",
+                        time: time
+                    }, function (status) {
+                        if (!status.connected == 1) {
+                            that.parent().parent().remove();
+                        }
+                    });
+                    return false;
+                });
+                $('.atttend').click(function () {
+                    var that = $(this);
+                    var id = $(this).data('id');
+                    var time = $(this).data('time');
+                    $.post("{{helper.uri.url('clinic_welcome_screen/attend')}}", {
+                        user_id: id,
+                        date: "{{day}}",
+                        time: time
+                    }, function (status) {
+                        if (!status.connected == 1) {
+                            that.parent().removeClass('entered');
+                            that.parent().addClass('attend');
+                        }
+                    });
+                    return false;
+                });
+            }
+    );
+</script>
+<style>
+    body {
+        margin: 0;
+        color: #555;
+    }
+
+    span {
+        color: #888;
+    }
+
+    header {
+        float: left;
+        width: 100%;
+    }
+
+    .header-container {
+        background-color: #eee;
+        float: left;
+        width: 100%;
+    }
+
+    .reservation_head {
+        padding: 10px 20px;
+    }
+
+    .reservation-calender {
+        position: relative;
+        float: left;
+        width: 200px;
+    }
+
+    .calender-time {
+        color: #555;
+        float: right;
+        position: relative;
+        font-size: 15px;
+    }
+
+    span.calender-day {
+        position: absolute;
+        top: 0px;
+        left: 35px;
+    }
+
+    .calender-time-content span {
+        color: #e74c3c;
+        font-size: 14px;
+    }
+
+    .calender-time img {
+        position: absolute;
+    }
+
+    .calender-time img {
+        position: absolute;
+        left: -35px;
+        top: -3px;
+    }
+
+    .container {
+        float: left;
+        width: 100%;
+    }
+
+    .sub-container {
+        margin: 20px;
+    }
+
+    .reservation-note {
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .reservation-note img {
+        position: absolute;
+        left: 0;
+    }
+
+    .guide-note h2 {
+        color: #e74c3c;
+        font-weight: normal;
+        font-size: 22px;
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+
+    .reservation-note-content {
+        padding-left: 40px;
+        margin-bottom: 10px;
+    }
+
+    .guide-note {
+        border: 1px solid #f5f5f5;
+        padding: 10px;
+        margin: 15px 0;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #dedede;
+    }
+
+    .gide-note h2 {
+        color: #555;
+        font-size: 20px;
+    }
+
+    .gide-note-content {
+        margin-bottom: 10px;
+    }
+
+    .patient_list {
+        float: left;
+        width: 64%;
+        margin-right: 5%
+    }
+
+    .late_patients {
+        width: 29%;
+        float: left;
+    }
+
+    table {
+        width: 100%;
+        border-color: #eee;
+        border-spacing: 0;
+    }
+
+    th.min-col {
+        width: 100px;
+    }
+
+    th, td {
+        line-height: 35px;
+        text-align: center;
+        border: 1px solid #eee;
+    }
+
+    td.patient-name {
+        background-color: #5ca323;
+        border-radius: 10px;
+        color: #fff;
+    }
+
+    .entered {
+        background-color: #ffab00 !important;
+        color: #fff !important;
+    }
+
+    .late {
+        background-color: #e74c3c !important;
+        color: #fff !important;
+    }
+
+    .late_patient_title,
+    .patient_list_title {
+        color: #555;
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .patient-entered-now {
+        background-color: #5ca323 !important;
+        color: #fff;
+        border-radius: 10px;
+    }
+
+    span.gide {
+        width: 15px;
+        height: 15px;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .attend {
+        background-color: #5ca323;
+    }
+
+    .entered {
+        background-color: #ffab00;
+    }
+
+    .late {
+        background-color: #e74c3c;
+    }
+
+    footer {
+        background-color: #eee;
+        float: left;
+        text-align: center;
+        width: 100%;
+        line-height: 35px;
+        color: #555;
+        font-size: 20px;
+    }
+
+</style>

@@ -44,7 +44,8 @@ class Clinic_patient_diseasesController extends Brightery_Controller {
                 ['id'] = $id;
 
         $data['disease'] = Form_helper::queryToDropdown('clinic_disease_templates', 'clinic_disease_template_id', 'title');
-
+print_r($_POST);
+        exit();
         if (!$_POST) {
             return $this->render('clinic_patients/diseases', $data);
         } else {

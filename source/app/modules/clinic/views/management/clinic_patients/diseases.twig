@@ -50,7 +50,7 @@
                                         + '<td>' + obj.title + '</td>'
                                         + '<td>' + obj.note + '</td>'
                                         + '<td>'
-                                        + '<a href="javascript:patient.diseases("edit",' + obj.id + ');" class="btn btn-secondary btn-sm show-diseases" href="#" data-toggle="modal" data-target="#myModal" rel="edit" data-id="' + obj.id + '">{{lang.edit}}</a>'
+                                        + '<a href="{{ helper.uri.url('management/clinic_patient_diseases/manage') }}/' + obj.id + '" class="btn btn-secondary btn-sm show-diseases"  data-toggle="modal" data-target="#myModal" rel="edit" data-id="' + obj.id + '">{{lang.edit}}</a>'
                                         + '<a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patient_diseases/delete') }}/' + obj.id + '">{{ lang.delete }}</a>'
                                         + '</td></tr>');
                             }
@@ -61,7 +61,7 @@
                                         + '<td>' + obj.title + '</td>'
                                         + '<td>' + obj.note + '</td>'
                                         + '<td>'
-                                        + '<a href="javascript:patient.diseases("edit",' + obj.id + ');" class="btn btn-secondary btn-sm show-diseases" href="#" data-toggle="modal" data-target="#myModal" rel="edit" data-id="' + obj.id + '">{{lang.edit}}</a>'
+                                        + '<a href="{{ helper.uri.url('management/clinic_patient_diseases/manage') }}/' + obj.id + '" class="btn btn-secondary btn-sm show-diseases" href="#" data-toggle="modal" data-target="#myModal" rel="edit" data-id="' + obj.id + '">{{lang.edit}}</a>'
                                         + '<a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patient_diseases/delete') }}/' + obj.id + '">{{ lang.delete }}</a>'
                                         + '</td>');
 

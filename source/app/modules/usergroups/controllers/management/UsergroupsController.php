@@ -37,6 +37,7 @@ class UsergroupsController extends Brightery_Controller {
 
     public function manageAction($id = false) {
         $this->permission('manage');
+        $this->config->get('Permissions');
 
         $model = new \modules\usergroups\models\Usergroups('management');
         $model->attributes = $this->Input->input['post'];
@@ -45,12 +46,12 @@ class UsergroupsController extends Brightery_Controller {
         $modules->select = "modules_id , name , code , status";
         $modules->status = "1";
 
-        $modules_zone = new \modules\usergroups\models\Zones(FALSE);
-        $modules_zone->_select = "zone_id , module_id , permission , name";
-        $modules_zone->usergroup_id = "$id";
-//        $permissions = fopen("config/Permissions.php", "r") or die("Unable to open file!");
-//        echo fread($permissions,filesize("config/Permissions.php.txt"));
-//        fclose($permissions);
+//        $modules_zone = new \modules\usergroups\models\Zones(FALSE);
+//        $modules_zone->_select = "zone_id , module_id , permission , name";
+//        $modules_zone->usergroup_id = "$id";
+
+        print_r($this->config->get('Permissions'));
+
 
 
         $modules_user_zone = new \modules\usergroups\models\Usergroup_zones(FALSE);
