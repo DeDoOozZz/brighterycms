@@ -8,7 +8,18 @@
  */
 class Menu
 {
-
+    public function getCustomMenu($param)
+    {
+        $links = [];
+        $menu = Brightery::SuperInstance()->Database->where('link_type_id', $param)->get('links')->result();
+        foreach($menu as $item){
+            $links[] = [
+                'name' => $item->name,
+                'url' => $item->url
+            ];
+        }
+        return $menu;
+    }
     public function getMenu($interface)
     {
         $menu = Brightery::SuperInstance()->Config->get('Menu.' . $interface);
