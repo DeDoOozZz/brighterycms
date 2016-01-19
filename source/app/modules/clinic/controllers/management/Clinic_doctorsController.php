@@ -74,10 +74,10 @@ class Clinic_doctorsController extends Brightery_Controller {
         $this->input->post($this->input->post('criteria'));
 
         if ($_POST) {
-            $model->attributes['user_id'] = $this->input->post('user_id')/* $this->input->post($this->input->post('criteria')) */;
-            $model->attributes['clinic_specification_id'] = $this->input->post('clinic_specification_id');
-            $model->attributes['description'] = $this->input->post('description');
-            $model->attributes['period_average'] = $this->input->post('period_average');
+            $model->user_id = $this->input->post('user_id')/* $this->input->post($this->input->post('criteria')) */;
+            $model->clinic_specification_id = $this->input->post('clinic_specification_id');
+            $model->description = $this->input->post('description');
+            $model->period_average = $this->input->post('period_average');
         }
         if ($model->save()) {
             Uri_helper::redirect("management/clinic_doctors");
