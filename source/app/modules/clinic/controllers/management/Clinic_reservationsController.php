@@ -116,7 +116,7 @@ class Clinic_reservationsController extends Brightery_Controller {
                     'item' => $id ? $model->get() : null,
                     'patient' => $patients,
                     'schedule' => $schedules,
-                    'reservation_type' => $reservation_type,
+//                    'reservation_type' => $reservation_type,
                     'clinic_reservation_status' => $clinic_reservation_status,
                     'doctors' => $doctor,
 //        'final' => $final
