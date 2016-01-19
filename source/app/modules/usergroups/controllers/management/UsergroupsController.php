@@ -37,27 +37,27 @@ class UsergroupsController extends Brightery_Controller {
 
     public function manageAction($id = false) {
         $this->permission('manage');
-        $this->config->get('Permissions');
-
         $model = new \modules\usergroups\models\Usergroups('management');
         $model->attributes = $this->Input->input['post'];
-
-        $modules = new \modules\clinic\models\Modules();
-        $modules->select = "modules_id , name , code , status";
-        $modules->status = "1";
-
+//
+//        $modules = new \modules\clinic\models\Modules();
+//        $modules->select = "modules_id , name , code , status";
+//        $modules->status = "1";
+        $permissions =   $this->config->get('Permissions');
+        print_r($permissions);
 //        $modules_zone = new \modules\usergroups\models\Zones(FALSE);
 //        $modules_zone->_select = "zone_id , module_id , permission , name";
 //        $modules_zone->usergroup_id = "$id";
 
-        print_r($this->config->get('Permissions'));
+//        print_r($this->config->get('Permissions'));
 
 
 
         $modules_user_zone = new \modules\usergroups\models\Usergroup_zones(FALSE);
         $module_checked = new \modules\usergroups\models\Usergroup_zones();
-        $module_checked->_select = "permission , usergroup_zone_id , usergroup_id , module_id";
+        $module_checked->_select = "permission , usergroup_zone_id , usergroup_id , module_title";
         $module_checked->usergroup_id = $id;
+        print_r($model->get());
 
         if ($id)
             $model->usergroup_id = $id;
@@ -83,8 +83,9 @@ class UsergroupsController extends Brightery_Controller {
         } else
             return $this->render('usergroups/manage', [
                         'item' => $id ? $model->get() : null,
-                        'modules' => $modules->get(),
+//                        'modules' => $modules->get(),
 //                        'zones' => $modules_zone->get(),
+                        'permissions' => $permissions,
                         'checked' => $module_checked->get()
             ]);
     }
