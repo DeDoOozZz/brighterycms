@@ -15,10 +15,11 @@ class Menu
         foreach($menu as $item){
             $links[] = [
                 'name' => $item->name,
-                'url' => $item->url
+                'url' => strpos($item->url, 'http') ? $item->url : Uri_helper::url($item->url)
             ];
         }
-        return $menu;
+
+        return $links;
     }
     public function getMenu($interface)
     {
