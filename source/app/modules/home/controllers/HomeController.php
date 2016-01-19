@@ -26,8 +26,7 @@ class HomeController extends Brightery_Controller
                 Uri_helper::redirect($setting->default_home_page);
     }
 
-    public function indexAction()
-    {
+    public function indexAction(){
         $this->language->load('welcome');
 
 //      --------start sliders---------

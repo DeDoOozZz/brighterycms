@@ -1,7 +1,7 @@
 <?php
 
-class Twig
-{
+class Twig {
+
     public $twig;
     public $layout = "default";
     public $layoutParams = [];
@@ -9,8 +9,7 @@ class Twig
     public $styleName = 'default';
     private $stylePath;
 
-    public function __construct()
-    {
+    public function __construct() {
         Log::set('Initialize Twig class');
         require_once SYSTEM . '/core/twig/vendor/autoload.php';
     }
@@ -21,8 +20,7 @@ class Twig
      * @param array $params
      * @return mixed
      */
-    public function render($template, $params = [])
-    {
+    public function render($template, $params = []) {
         if (!$this->twig) {
             $this->stylePath = STYLES . '/' . $this->interface . '/' . $this->styleName . '/';
             $this->moduleStylePath = APPLICATION . '/' . 'modules' . '/' . Brightery::$RunningModule . '/' . 'views' . '/' . $this->interface . '/';
@@ -51,10 +49,15 @@ class Twig
                 }
                 return $response;
             }));
+            $this->twig->addFilter(new Twig_SimpleFilter('debug', function ($stdClassObject) {
+                print_r($stdClassObject);
+            }));
+
         }
+        $params['this'] = Brightery::SuperInstance();
         $params = array_merge($params, $this->layoutParams);
-        $layout = $this->twig->render('styles/'.$this->interface . '/' . $this->styleName . '/layout/' . $this->layout . '.twig', $params);
+        $layout = $this->twig->render('styles/' . $this->interface . '/' . $this->styleName . '/layout/' . $this->layout . '.twig', $params);
         return str_replace("{layout}", $this->twig->render($template . '.twig', $params), $layout);
     }
-}
 
+}
