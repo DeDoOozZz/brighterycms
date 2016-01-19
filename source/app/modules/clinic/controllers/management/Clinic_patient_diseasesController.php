@@ -20,7 +20,7 @@ class Clinic_patient_diseasesController extends Brightery_Controller {
     protected $layout = 'default';
 
     public function manageAction($op = null, $id = null) {
-        if (!$id or ! $op)
+        if (!$id and !$op)
             return Brightery::error404();
 
         $this->layout = 'ajax';
@@ -30,8 +30,8 @@ class Clinic_patient_diseasesController extends Brightery_Controller {
         $diseases = new \modules\clinic\models\Clinic_patient_diseases();
         if ($op == 'add') {
             $diseases->attributes['user_id'] = $id;
-        } else {
-            $diseases->clinic_patient_disease_id = $id;
+        } else if ($op == 'edit') {
+            echo $diseases->clinic_patient_disease_id = $id;
             $data['disease'] = $diseases->get();
         }
 
@@ -39,13 +39,10 @@ class Clinic_patient_diseasesController extends Brightery_Controller {
         $diseases->attributes['note'] = $this->input->post('note');
 
         $data['op'] = $op;
-        $data
-
-                ['id'] = $id;
+        $data['id'] = $id;
 
         $data['disease'] = Form_helper::queryToDropdown('clinic_disease_templates', 'clinic_disease_template_id', 'title');
-print_r($_POST);
-        exit();
+
         if (!$_POST) {
             return $this->render('clinic_patients/diseases', $data);
         } else {
