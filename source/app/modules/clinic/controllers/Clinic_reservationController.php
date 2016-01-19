@@ -47,7 +47,8 @@ class Clinic_reservationController extends Brightery_Controller {
         $doctors->_order_by = false;
 
         if ($this->input->get('clinic_branch_id')) {
-            $doctors->where('clinic_branches.`clinic_branch_id`', $this->input->get('clinic_branch_id'));
+//            echo $this->input->get('clinic_branch_id');
+            $doctors->where = 'clinic_branches.`clinic_branch_id` = ' . $this->input->get('clinic_branch_id');
         }
         if ($this->input->get('specification_id')) {
             $doctors->where('clinic_specifications.`clinic_specification_id`', $this->input->get('specification_id'));
@@ -56,13 +57,19 @@ class Clinic_reservationController extends Brightery_Controller {
             $doctors->where('clinic_doctors.`clinic_doctor_id`', $this->input->get('clinic_doctor_id'));
         }
 
+//        if ($_GET) {
+//            print_r($doctors->attributes);
+//            echo "/////////";
+//            print_r($doctors->get());
+//            exit();
+//        }
 
         $this->load->library('pagination');
         $doctors->_limit = $this->config->get('limit');
         $doctors->_offset = $offset;
         $config = [
             'url' => Uri_helper::url('clinic_reservation/index'),
-            'total' => $doctors->get(true),
+            'doctors' => $doctors->get(true),
             'limit' => $doctors->_limit,
             'offset' => $doctors->_offset
         ];

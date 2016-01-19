@@ -246,7 +246,7 @@
                                 {%for add in address%}
                                     <div class="group" id="address-group{{add.user_address_id}}">
                                         <label class="control-label primary">Primary {{ lang.primary }}</label>
-                                        <input type="radio" id="id_rd{{add.user_address_id}}" class="primary  name="primary_address" value="{{add.user_address_id}}" {%if add.primary == 1%} checked {%endif%}>
+                                        <input type="radio" id="id_rd{{add.user_address_id}}" class="primary"  name="primary_address" value="{{add.user_address_id}}" {%if add.primary == 1%} checked {%endif%}>
                                         <span id="id_a{{add.user_address_id}}" data-id="{{add.user_address_id}}" class="delete-option address-delete col-sm-1"><i class="fa fa-close"></i></span>
                                         <input class="form-control" name="address[]" add="add" id="id_{{add.user_address_id}}" value="{{ helper.form.value('address', add.address) }}" type="text" pla_ceholder="{{add.address}}"  style="margin-bottom:10px;">
                                         <input type="hidden" name="user_address_id[]" id="address" value="{{add.user_address_id}}">

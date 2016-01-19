@@ -64,7 +64,12 @@
                         <div class="reservation-doctors">
                             <a class="view-doctor-schedule"
                                href="{{ helper.uri.url('clinic_reservation/get_schedule',item.clinic_doctor_id) }}"><i
-                                    class="fa fa-calendar"></i> View Schedule</a>
+                                    class="fa fa-calendar" style="text-decoration: none;color: #fff;"></i> View Schedule</a>
+                        </div>
+                        
+                        <div class="reservation-doctors">
+                            <a class="view-doctor-schedule" href="{{ helper.uri.url('clinic_welcome_screen/index',item.clinic_doctor_id) }}" target="_blank"><i
+                                    class="fa fa-calendar" style="text-decoration: none;color: #fff;"></i> View Queue</a>
                         </div>
                     </div>
 
@@ -118,53 +123,54 @@
 
     });
     {# $('#autocomplete').autocomplete({
- //                serviceUrl: '/autocomplete/countries',
+              serviceUrl: '/autocomplete/countries',
          onSelect: function (suggestion) {
              alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
          }#}
-    {#    });#}
-    {#$(document).ready(function () {#}
-    {#$('.clinic_branch').change(function () {#}
-    {#$.ajax({#}
-    {#type: 'POST', // define the type of HTTP verb we want to use (POST for our form)#}
-    {#url: '{{helper.uri.url('clinic_reservations/getspeceification')}}', // the url where we want to POST#}
-    {#data: $(this).serialize(), // our data object#}
-    {#//dataType: 'json', // what type of data do we expect back from the server#}
-    {#encode: true#}
-    {#})#}
-    {#.done(function (data) {#}
-    {#if (data) {#}
-    {#$(".clinic_specification").html(data);#}
-    {#$(".clinic_specification").select2('updateResults', true);#}
-    {#}#}
-    {#console.log(data);#}
-    {#}); #}
-    {#event.preventDefault();#}
-    {#return false;#}
-    {#}); #}
-    {#&#123;&#35;$('#autocomplete').keypress(function (e) {#}
-    {#var key = e.which;#}
-    {#if (key == 13)  // the enter key code#}
-    {#{#}
-    {#$.ajax({#}
-    {#type: 'POST', // define the type of HTTP verb we want to use (POST for our form)#}
-    {#url: '{{helper.uri.url('clinic_reservations/getdoctors')}}', // the url where we want to POST#}
-    {#data: $(this).serialize(),  // our data object#}
-    {#//dataType: 'json', // what type of data do we expect back from the server#}
-    {#encode: true#}
-    {#})#}
-    {#.done(function (data) {#}
-    {#if (data)#}
-    {#{#}
-    {#alert('data');#}
-    {#}#}
-    {#console.log(data);#}
-    {#}); #}
-    {#event.preventDefault();#}
-    {#return false;#}
-    {#}#}
-    {#}); & #35; & #125; #}
-    {#}); #}
+    {#        });#}
+        $(document).ready(function () {
+            $('.clinic_branch').change(function () {
+                $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url: '{{helper.uri.url('clinic_reservations/getspeceification')}}', // the url where we want to POST
+                    data: $(this).serialize(), // our data object
+                    //dataType: 'json', // what type of data do we expect back from the server
+                    encode: true
+                })
+                        .done(function (data) {
+                            if (data) {
+                                $(".clinic_specification").html(data);
+                                $(".clinic_specification").select2('updateResults', true);
+                            }
+    {#console.log(data);
+            ); }#}
+                                        event.preventDefault();
+                                        return false;
+                                    });
+    {#& #123; & #35;#}
+                    $('#autocomplete').keypress(function (e) {
+                        var key = e.which;
+                        if (key == 13)  // the enter key code
+                        {
+                            $.ajax({
+                                type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                                url: '{{helper.uri.url('clinic_reservations/getdoctors')}}', // the url where we want to POST
+                                data: $(this).serialize(), // our data object
+                                //dataType: 'json', // what type of data do we expect back from the server
+                                encode: true
+                            }).done(function (data) {
+                                if (data)
+                                {
+                                    alert('data');
+                                }
+                                console.log(data);
+                            });
+                            event.preventDefault();
+                            return false;
+                        }
+                    });{#& #35; & #125;#}
+                });
+            });
 </script>
 {#<script type="text/javascript">#}
 {#jQuery(document).ready(function($)#}
