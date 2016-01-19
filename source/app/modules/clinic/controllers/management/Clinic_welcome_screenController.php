@@ -5,7 +5,7 @@
  * @package Brightery CMS
  * @author Ahmed Magdy <a.magdymedany@gmail.com>
  * @version 1.0
- * @interface frontend
+ * @interface management
  * @module clinic
  * @category general
  * @module_version  1.0
@@ -53,7 +53,7 @@ class Clinic_welcome_screenController extends Brightery_Controller
         $to_time = $time[0]->to_time;
 
 
-        return $this->render('welcome_screen/main', [
+        return $this->render('clinic_welcome_screen/main', [
             'from_time' => $from_time,
             'to_time' => $to_time,
             'day' => $date,

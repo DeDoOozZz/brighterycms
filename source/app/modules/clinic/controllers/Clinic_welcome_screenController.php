@@ -53,7 +53,7 @@ class Clinic_welcome_screenController extends Brightery_Controller
         $to_time = $time[0]->to_time;
         
 
-        return $this->render('welcome_screen/index', [
+        return $this->render('clinic_welcome_screen/index', [
             'from_time' => $from_time,
             'to_time' => $to_time,
             'day' => $date,

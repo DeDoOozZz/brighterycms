@@ -147,14 +147,14 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="drop"><a class="active" href="{{ helper.uri.url('home') }}">Home</a> </li>
-                                <li class="drop"><a href="{{ helper.uri.url('portfolio/index')}}">Portfolio</a></li>
-                                <li><a href="{{ helper.uri.url('pages/index/about')}}">About</a></li>
-                                <li class="drop"><a href="{{ helper.uri.url('blog/index') }}">Blog</a></li>
-{#                                <li><a href="{{ helper.uri.url('resumes') }}">Resumes</a></li>#}
-                                <li><a href="{{ helper.uri.url('contactus') }}">Contact</a></li>
-                                <li><a href="{{ helper.uri.url('clinic_reservations') }}">Reservation</a></li>
-                                <li><a href="{{ helper.uri.url('faqs') }}">FAQS</a></li>
+                                {{debug.print_r(that.menu.getCustomMenu('1') )}}
+                                {% for item in that.menu.getCustomMenu('1') %}
+                                    <li>
+                                        <a href="{{ (item.url) }}">
+                                            {{ item.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
                                 <li class="search drop"><a href="#" class="open-search"><i class="fa fa-search"></i></a>
                                     <form class="form-search">
                                         <input type="search" placeholder="Search:"/>
@@ -184,7 +184,7 @@
                                 <div class="footer-widget">
                                     <h2>About Us</h2>
 
-                                   
+
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -195,7 +195,7 @@
                                         <li><a href="{{ helper.uri.url('portfolio/index')}}">Portfolio</a></li>
                                         <li><a href="{{ helper.uri.url('pages/index/about')}}">About</a></li>
                                         <li><a href="{{ helper.uri.url('blog/index') }}">Blog</a></li>
-{#                                        <li><a href="{{ helper.uri.url('resumes') }}">Resumes</a></li>#}
+                                            {#                                        <li><a href="{{ helper.uri.url('resumes') }}">Resumes</a></li>#}
                                         <li><a href="{{ helper.uri.url('contactus') }}">Contact</a></li>
                                         <li><a href="{{ helper.uri.url('clinic_reservations') }}">Reservation</a></li>
                                         <li><a href="{{ helper.uri.url('faqs') }}">FAQS</a></li>
@@ -206,7 +206,7 @@
                                 <div class="footer-widget">
                                     <h2>Flickr widget</h2>
                                     <ul class="flickr">
-                                        
+
                                     </ul>
                                 </div>
                             </div>
@@ -262,7 +262,7 @@
                     return false;
                 });
 
-                        });	//ready
+            });	//ready
 
         </script>
     </body>
