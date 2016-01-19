@@ -147,8 +147,8 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                                {{debug.print_r(that.menu.getCustomMenu('1') )}}
-                                {% for item in that.menu.getCustomMenu('1') %}
+
+                                {% for item in this.Menu.getCustomMenu('1') %}
                                     <li>
                                         <a href="{{ (item.url) }}">
                                             {{ item.name }}
@@ -191,14 +191,13 @@
                                 <div class="footer-widget">
                                     <h2>Tags</h2>
                                     <ul class="menu-links">
-                                        <li><a class="active" href="{{ helper.uri.url('home') }}">Home</a></li>
-                                        <li><a href="{{ helper.uri.url('portfolio/index')}}">Portfolio</a></li>
-                                        <li><a href="{{ helper.uri.url('pages/index/about')}}">About</a></li>
-                                        <li><a href="{{ helper.uri.url('blog/index') }}">Blog</a></li>
-                                            {#                                        <li><a href="{{ helper.uri.url('resumes') }}">Resumes</a></li>#}
-                                        <li><a href="{{ helper.uri.url('contactus') }}">Contact</a></li>
-                                        <li><a href="{{ helper.uri.url('clinic_reservations') }}">Reservation</a></li>
-                                        <li><a href="{{ helper.uri.url('faqs') }}">FAQS</a></li>
+                                        {% for item in this.Menu.getCustomMenu('1') %}
+                                            <li>
+                                                <a href="{{ (item.url) }}">
+                                                    {{ item.name }}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                             </div>
@@ -206,7 +205,13 @@
                                 <div class="footer-widget">
                                     <h2>Flickr widget</h2>
                                     <ul class="flickr">
-
+                                        {% for item in this.Menu.getCustomMenu('2') %}
+                                            <li>
+                                                <a href="{{ (item.url) }}">
+                                                    {{ item.name }}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                             </div>
