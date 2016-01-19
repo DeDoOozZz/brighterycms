@@ -81,8 +81,7 @@
                             <a class="btn btn-info btn-sm" href="{{ helper.uri.url('management/clinic_doctors/manage', item.clinic_doctor_id ) }}">{{ lang.edit }}</a>
                             <a href="#" class="btn btn-danger btn-sm delete_msg" data-url_id="{{ helper.uri.url('management/clinic_doctors/delete', item.clinic_doctor_id ) }}" data-toggle="modal" data-target="#deleteMsg" style="color:#fff;">{{lang.delete}}</a>
                             <a class="btn btn-icon btn-warning" href="{{ helper.uri.url('management/clinic_doctors/doctor_schedule',item.clinic_doctor_id ) }}">{{ lang.schedule }}</a>
-                            <a class="btn btn-icon btn-secondary" href="{{ helper.uri.url('management/clinic_welcome_screen/index',item.clinic_doctor_id ) }}">{{ lang.schedule }}</a>
-
+                            <a class="btn btn-icon btn-secondary" href="{{ helper.uri.url('management/clinic_welcome_screen/index',item.clinic_doctor_id ) }}">{{ lang.welcome_screen }}</a>
                         </td>
 
                     </tr>
