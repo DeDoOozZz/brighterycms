@@ -14,7 +14,6 @@ return [
     'title' => 'Title',
     'field' => 'Field',
     'details' => 'Details',
-    'title' => 'Title',
     'patient_details' => 'Patient Details',
     'add_patient' => ' Add Patient',
     'search_user' => 'search User',
@@ -27,4 +26,5 @@ return [
     'patient_note' => 'Patient Note',
     'profile' => 'Profile',
     'edit_user' => 'Edit User',
+    'back' => "Go Back"
 ];

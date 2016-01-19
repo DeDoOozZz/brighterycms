@@ -1,6 +1,6 @@
 <?php
       return [ 
-        'barnches' => "الفروع",
+        'branches' => "الفروع",
         'clinic_branch' => "اسم الفرع",
         'branch' => "الفرع", 
         'name' => "اسم الفرع", 
@@ -13,4 +13,5 @@
         'search'=>"البحث",
         'search_by_branch'=>"البحث  بإسم الفرع",
         'search_by_phone'=>"البحث بالهاتف",
+        'back' => "رجوع"
 ]; 

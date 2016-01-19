@@ -112,28 +112,28 @@
 </section>
 
 
-<script type="text/javascript">
-    jQuery(document).ready(function ($) {
-        $(".select").select2();
-
-    });
+{#<script type="text/javascript">#}
+{#//    jQuery(document).ready(function ($) {#}
+{#//        $(".select").select2();#}
+{#//#}
+{#//    });#}
     {# $('#autocomplete').autocomplete({
  //                serviceUrl: '/autocomplete/countries',
          onSelect: function (suggestion) {
              alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
          }#}
     {#    });#}
-    {#$(document).ready(function () {#}
-    {#$('.clinic_branch').change(function () {#}
-    {#$.ajax({#}
+    {#$(document).ready(function () &#123;&#35;}
+    {#$('.clinic_branch').change(function () &#123;&#35;}
+    {#$.ajax(&#123;&#35;}
     {#type: 'POST', // define the type of HTTP verb we want to use (POST for our form)#}
     {#url: '{{helper.uri.url('clinic_reservations/getspeceification')}}', // the url where we want to POST#}
     {#data: $(this).serialize(), // our data object#}
     {#//dataType: 'json', // what type of data do we expect back from the server#}
     {#encode: true#}
     {#})#}
-    {#.done(function (data) {#}
-    {#if (data) {#}
+    {#.done(function (data) &#123;&#35;}
+    {#if (data) &#123;&#35;}
     {#$(".clinic_specification").html(data);#}
     {#$(".clinic_specification").select2('updateResults', true);#}
     {#}#}
@@ -142,20 +142,20 @@
     {#event.preventDefault();#}
     {#return false;#}
     {#}); #}
-    {#&#123;&#35;$('#autocomplete').keypress(function (e) {#}
+    {#&#123;&#35;$('#autocomplete').keypress(function (e) &#123;&#35;}
     {#var key = e.which;#}
     {#if (key == 13)  // the enter key code#}
-    {#{#}
-    {#$.ajax({#}
+    {#&#123;&#35;}
+    {#$.ajax(&#123;&#35;}
     {#type: 'POST', // define the type of HTTP verb we want to use (POST for our form)#}
     {#url: '{{helper.uri.url('clinic_reservations/getdoctors')}}', // the url where we want to POST#}
     {#data: $(this).serialize(),  // our data object#}
     {#//dataType: 'json', // what type of data do we expect back from the server#}
     {#encode: true#}
     {#})#}
-    {#.done(function (data) {#}
+    {#.done(function (data) &#123;&#35;}
     {#if (data)#}
-    {#{#}
+    {#&#123;&#35;}
     {#alert('data');#}
     {#}#}
     {#console.log(data);#}
@@ -165,23 +165,23 @@
     {#}#}
     {#}); & #35; & #125; #}
     {#}); #}
-</script>
+{#</script>#}
 {#<script type="text/javascript">#}
-{#jQuery(document).ready(function($)#}
-{#{#}
-{#$("#multi-select").multiSelect({#}
-{#afterInit: function()#}
-{#{#}
-{#// Add alternative scrollbar to list#}
-{#this.$selectableContainer.add(this.$selectionContainer).find('.ms-list').perfectScrollbar();#}
-{#},#}
-{#afterSelect: function()#}
-{#{#}
-{#// Update scrollbar size#}
-{#this.$selectableContainer.add(this.$selectionContainer).find('.ms-list').perfectScrollbar('update');#}
-{#}#}
-{#});#}
-{#});#}
+    {#jQuery(document).ready(function($)#}
+    {#{#}
+    {#$("#multi-select").multiSelect({#}
+    {#afterInit: function()#}
+    {#{#}
+    {#// Add alternative scrollbar to list#}
+    {#this.$selectableContainer.add(this.$selectionContainer).find('.ms-list').perfectScrollbar();#}
+    {#},#}
+    {#afterSelect: function()#}
+    {#{#}
+    {#// Update scrollbar size#}
+    {#this.$selectableContainer.add(this.$selectionContainer).find('.ms-list').perfectScrollbar('update');#}
+    {#}#}
+    {#});#}
+    {#});#}
 {#</script>#}
 
 

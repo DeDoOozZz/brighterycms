@@ -15,5 +15,6 @@ return [
     'address' => "Address",
     'add_phone' => "Add another phone",
     'add_address' => "Add another address",
+    'back' => "Go Back"
 
 ];

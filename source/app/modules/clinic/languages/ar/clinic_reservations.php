@@ -20,10 +20,9 @@ return [
     'late'=>'متأخر',
     'entered'=>'دخل',
     'reservation_details'=>'التفاصيل',
-    'doctor' => 'Doctor',
-    'reservation_details' => 'Reservation Details',
     'list_of_doctors' => 'List of Doctors',
     'specification' => 'Specification',
     'location' => 'Location',
     'schedule' => 'Schedule',
+    'back' => "رجوع"
 ]; 

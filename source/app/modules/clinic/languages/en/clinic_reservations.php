@@ -19,13 +19,11 @@ return [
     'attend' => 'attend',
     'late' => 'late',
     'entered' => 'entered',
-    'canceled' => 'canceled',
     'reservation_details'=>'Details',
-    'doctor' => 'Doctor',
-    'reservation_details' => 'Reservation Details',
     'list_of_doctors' => 'List of Doctors',
     'specification' => 'Specification',
     'location' => 'Location',
     'schedule' => 'Schedule',
+    'back' => "Go Back"
 
 ]; 

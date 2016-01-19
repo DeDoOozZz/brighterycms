@@ -4,4 +4,5 @@ return [
     'title' => "الاسم",
     'price' => "السعر",
     'clinic_doctor_id' => "الدكتور",
+    'back' => "رجوع"
 ]; 
