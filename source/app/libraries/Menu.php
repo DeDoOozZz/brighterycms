@@ -15,11 +15,12 @@ class Menu
         foreach($menu as $item){
             $links[] = [
                 'name' => $item->name,
-                'url' => strpos($item->url, 'http') ? $item->url : Uri_helper::url($item->url)
+                'url' => strpos($item->url, 'http') !== false ? $item->url : Uri_helper::url($item->url)
             ];
         }
 
         return $links;
+//        return 'b3sh2k ya gazma';
     }
     public function getMenu($interface)
     {
