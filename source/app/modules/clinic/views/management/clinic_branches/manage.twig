@@ -1,6 +1,13 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">{{ lang.branch }}</h3>
+        <h3 class="panel-title">{{ lang.branches }}</h3>
+        <button class="btn btn-secondary" onclick="goBack()" style="float: right;">{{ lang.back }}</button>
+
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
     </div>
     <div class="panel-body">
         {{ helper.form.open(null,false,true,'role="form" class="form-horizontal"') }}

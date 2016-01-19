@@ -5,4 +5,5 @@
          'review' => "Review",
          'clinic_patient_id' => "Patient",
          'clinic_doctor_id' => "Doctor",
+          'back' => "Go Back"
 ]; 

@@ -1,6 +1,6 @@
 <?php
       return [ 
-        'barnches' => "Branches", 
+        'branches' => "Branches",
         'clinic_branch' => "Name",
         'branch' => "Branch",
         'name' => "Name",
@@ -13,4 +13,5 @@
         'search'=>"Search",
         'search_by_branch'=>"Search By Branch",
         'search_by_phone'=>"Search By Phone",
+        'back' => "Go Back"
 ]; 
