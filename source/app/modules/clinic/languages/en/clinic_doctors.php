@@ -15,8 +15,8 @@
         'field' => 'Field',
         'details' => 'Details',
         'period_average'=>'period_average',
-        'doctor_name'=>'name',
         'search_by_doctor'=>'Search By Specification',
         'doctor_name'=>'name',
-        'welcome_screen' => 'Welcome Screen'
+        'welcome_screen' => 'Queue',
+        'back' => "Go Back"
 ]; 

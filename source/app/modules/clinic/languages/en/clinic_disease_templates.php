@@ -4,4 +4,5 @@
             'title' => "Title",
             'content' => "Content",
             'language_id' => "Language",
+            'back' => "Go Back"
 ]; 

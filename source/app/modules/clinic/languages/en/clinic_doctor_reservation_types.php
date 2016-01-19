@@ -4,4 +4,5 @@ return [
     'title' => "Title",
     'price' => "Price",
     'clinic_doctor_id' => "Doctor",
+    'back' => "Go Back"
 ]; 

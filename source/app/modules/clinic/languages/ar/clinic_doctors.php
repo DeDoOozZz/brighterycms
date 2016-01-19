@@ -17,4 +17,5 @@
         'period_average'=>'مدة الكشف',
         'doctor_name'=>'اسم الدكتور',
         'search_by_doctor'=>'البحث بإسم الطبيب',
+        'back' => "رجوع"
 ]; 

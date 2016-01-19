@@ -2,6 +2,13 @@
 <div class="panel panel-default" ng-app="myApp" ng-controller="customersCtrl">
     <div class="panel-heading">
         <h3 class="panel-title">{{ lang.clinic_reservations }}</h3>
+        <button class="btn btn-secondary" onclick="goBack()" style="float: right;">{{ lang.back }}</button>
+
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
     </div>
     <div class="panel-body mar-items-bottom">
         {{ error }}

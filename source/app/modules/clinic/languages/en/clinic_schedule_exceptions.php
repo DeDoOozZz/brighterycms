@@ -6,4 +6,5 @@
          'date' => "Date",
          'from_time' => "From Time",
          'to_time' => "To Time",
+          'back' => "Go Back"
 ]; 

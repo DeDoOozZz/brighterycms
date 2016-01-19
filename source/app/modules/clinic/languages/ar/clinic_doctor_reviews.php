@@ -5,4 +5,5 @@
          'review' => "التقيم",
          'clinic_patient_id' => "المريض",
          'clinic_doctor_id' => "الدكتور",
+          'back' => "رجوع"
 ]; 
