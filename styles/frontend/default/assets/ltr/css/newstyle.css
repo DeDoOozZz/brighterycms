@@ -251,6 +251,7 @@ section.main-section-page {
 }
 .doctor-image  img{
     width: 100%;
+    height: 151px;
 }
 .doctor-details h2 {
     margin-top: 0;
