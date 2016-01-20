@@ -32,10 +32,11 @@
                             <tbody class="middle-align">
                             {% for module,permissions in per_management %}
                                 <tr>
-                                    <td>{{ module }}</td>
+                                    <td>{{ attribute(lang,'module_'~module) }}</td>
                                     <td>
                                         {% for item in permissions %}
-                                        <input type="checkbox" name="checkbox[]" value=""><span style="padding-left: 10px;">{{ item }}</span>
+                                        <input type="checkbox" name="checkbox[]" value=""><span style="padding-left: 10px;">{{ attribute(lang,'permission_'~item) }}</span>
+                                            <br>
                                         {% endfor %}
                                     </td>
                                 </tr>

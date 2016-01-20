@@ -59,7 +59,7 @@ class UsergroupsController extends Brightery_Controller {
         $module_checked = new \modules\usergroups\models\Usergroup_zones();
         $module_checked->_select = "permission , usergroup_zone_id , usergroup_id , module";
         $module_checked->usergroup_id = $id;
-        print_r($model->get());
+//        print_r($model->get());
 
         if ($id)
             $model->usergroup_id = $id;

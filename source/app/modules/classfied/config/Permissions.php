@@ -2,7 +2,7 @@
 
 return [
     'management' => [
-        'module_classfied'=>[
+        'classfied'=>[
             'manage_class',
 
         ]

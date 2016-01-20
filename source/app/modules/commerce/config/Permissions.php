@@ -2,13 +2,13 @@
 
 return [
     'management' => [
-        'module_commerce'=>[
+        'commerce'=>[
             'manage_products',
 
         ]
     ],
     'frontend' => [
-        'module_commerce'=>[
+        'commerce'=>[
             'frontend_edit_user_profile',
         ]
     ]
