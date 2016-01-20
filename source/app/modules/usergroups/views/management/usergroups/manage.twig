@@ -30,10 +30,14 @@
                                 </tr>
                             </thead>
                             <tbody class="middle-align">
-                            {% for inerface in permissions %}
+                            {% for module,permissions in per_management %}
                                 <tr>
-                                    <td>{{ interface.management }}</td>
-                                    <td><input type="checkbox" name="checkbox[]" value=""><span style="padding-left: 10px;">Permission</span></td>
+                                    <td>{{ module }}</td>
+                                    <td>
+                                        {% for item in permissions %}
+                                        <input type="checkbox" name="checkbox[]" value=""><span style="padding-left: 10px;">{{ item }}</span>
+                                        {% endfor %}
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>

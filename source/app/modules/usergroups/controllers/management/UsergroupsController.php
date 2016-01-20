@@ -42,9 +42,11 @@ class UsergroupsController extends Brightery_Controller {
 //
 //        $modules = new \modules\clinic\models\Modules();
 //        $modules->select = "modules_id , name , code , status";
+        $permissions_management =   $this->config->get('Permissions.management');
+        $permissions_frontend =   $this->config->get('Permissions.frontend');
 //        $modules->status = "1";
-        $permissions =   $this->config->get('Permissions');
-        print_r($permissions);
+//        $modules->status = "1";
+
 //        $modules_zone = new \modules\usergroups\models\Zones(FALSE);
 //        $modules_zone->_select = "zone_id , module_id , permission , name";
 //        $modules_zone->usergroup_id = "$id";
@@ -55,7 +57,7 @@ class UsergroupsController extends Brightery_Controller {
 
         $modules_user_zone = new \modules\usergroups\models\Usergroup_zones(FALSE);
         $module_checked = new \modules\usergroups\models\Usergroup_zones();
-        $module_checked->_select = "permission , usergroup_zone_id , usergroup_id , module_title";
+        $module_checked->_select = "permission , usergroup_zone_id , usergroup_id , module";
         $module_checked->usergroup_id = $id;
         print_r($model->get());
 
@@ -85,7 +87,9 @@ class UsergroupsController extends Brightery_Controller {
                         'item' => $id ? $model->get() : null,
 //                        'modules' => $modules->get(),
 //                        'zones' => $modules_zone->get(),
-                        'permissions' => $permissions,
+                        'per_management' => $permissions_management,
+                        'per_frontend' => $permissions_frontend,
+
                         'checked' => $module_checked->get()
             ]);
     }

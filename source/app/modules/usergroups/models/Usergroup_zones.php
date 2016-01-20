@@ -28,7 +28,7 @@ class Usergroup_zones extends \Model {
     public function fields() {
         return [
             'usergroup_id' => 'usergroup id',
-            'module_id' => 'module id',
+            'module' => 'module',
             'permission' => 'permission',
         ];
     }
