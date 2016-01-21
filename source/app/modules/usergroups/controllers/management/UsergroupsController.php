@@ -48,13 +48,13 @@ class UsergroupsController extends Brightery_Controller {
         $module_checked->usergroup_id = $id;
 
 
-        if ($id){
-            $model->usergroup_id = $id;
-            foreach ($model as $row) {
-
-                $selected_permissions[$row->module][] = $row->permission;
-            }
-        }
+//        if ($id){
+//            $model->usergroup_id = $id;
+//            foreach ($model as $row) {
+//
+//                $selected_permissions[$row->module][] = $row->permission;
+//            }
+//        }
 
         $model->language_id = $this->language->getDefaultLanguage();
 
