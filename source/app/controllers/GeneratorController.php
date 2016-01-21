@@ -630,7 +630,7 @@ CONTROLLER;
 </script>";
         }
 
-        $myfile = fopen(PATH_VIEW . $tablename . "\\" . 'manage.twig', "w") or die("Unable to open file!");
+        $myfile = fopen(PATH_VIEW . $tablename . "\\" . '_manage.twig', "w") or die("Unable to open file!");
         fwrite($myfile, $txtIndex);
         fclose($myfile);
     }

@@ -11,7 +11,7 @@ class Usergroup_zones extends \Model {
     public $_fields = [
         'usergroup_zone_id' => ['int', 11, 'PRI'],
         'usergroup_id' => ['int', 11],
-        'module_id' => ['int', 11],
+        'module' => ['varchar', 100],
         'permission' => ['varchar', 100],
     ];
 
@@ -28,7 +28,7 @@ class Usergroup_zones extends \Model {
     public function fields() {
         return [
             'usergroup_id' => 'usergroup id',
-            'module_id' => 'module id',
+            'module' => 'module',
             'permission' => 'permission',
         ];
     }

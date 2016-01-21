@@ -8,5 +8,6 @@ return [
     'menu_countries' => 'Countries',
     'menu_currencies' => 'Currencies',
     'menu_experience' => 'Experience',
+    'module_classfied' => "Classified",
     'all' => 'All',
 ];

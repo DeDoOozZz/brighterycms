@@ -1,0 +1,53 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{lang.usergroups}}</h3>
+    </div>
+    <div class="panel-body">
+        {{ helper.form.open(null,false,false,'role="form" id="usergroup" class="form-horizontal"') }}
+        {{ error }}
+        <table class="table table-bordered table-striped" id="example-2">
+            <thead>
+                <tr>
+                    <th class="col-sm-3">{{lang.modules}}</th>
+                    <th class="col-sm-9">{{lang.permissions}}</th>
+                </tr>
+            </thead>
+            <tbody class="middle-align">
+                <tr>
+                    <td>{{lang.name}}</td>
+                    <td> <input type="text" class="form-control validate[required]" id="name" placeholder="{{lang.name}}" name="name"
+                                value="{{ helper.form.value('name', model.name) }}"></td>
+                </tr>
+                {% for module in modules %}
+                    <tr>
+                        <td>{{module.name}}</td>
+                        <td>
+                            {% for zone in zones %}
+                                {% if zone.module_id == module.module_id %}
+                                    <input type="checkbox" name="checkbox[]" {% for check in checked %} {% if zone.name == check.permission and zone.module_id == check.module_id  and model.usergroup_id == check.usergroup_id %} checked {% endif %} {% endfor %} value="{{zone.name}}-{{zone.module_id}}">{{zone.name}}<br>
+                                    {#{% for check in checked %}
+                                        <input type="checkbox" name="checkbox[]" {% for check in checked %} {% if ite.name == check.permission and ite.module_id == check.module_id %} checked {% endif %} {% endfor %} value="{{ite.name}}-{{ite.module_id}}"> {{ite.name}}<br>
+                                    {% endfor %}#}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">
+
+            </label>
+
+            <div class="col-sm-9">
+                <a href="{{ helper.uri.url('management/usergroups/index') }}" class="btn btn-danger cancel-button">Cancel</a>
+                <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+
+            </div>
+        </div>
+        {{ helper.form.close() }}
+    </div>
+</div>

@@ -2,7 +2,7 @@
 
 return [
     'management' => [
-        'clinic'=>[
+         'clinic'=> [
             'manage_branch',
             'manage_specification',
             'manage_doctor',
@@ -18,7 +18,7 @@ return [
         ]
     ],
     'frontend' => [
-        'clinic'=>[
+         'clinic'=>[
             'frontend_edit_user_profile',
             'frontend_reservations',
             'frontend_doctor_schedule',

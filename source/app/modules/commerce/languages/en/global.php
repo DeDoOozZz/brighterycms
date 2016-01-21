@@ -12,5 +12,6 @@ return [
     'menu_payment_method' => 'Payment Method',
     'sharing' => 'Sharing',
     'brands' => 'Brands',
+    'module_commerce' => 'Ecommerce',
     'all' => 'All',
 ];
