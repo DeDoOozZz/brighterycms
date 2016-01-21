@@ -24,7 +24,7 @@ return [
     'permission_manage_diseases' => 'Manage Diseases',
     'permission_reservations' => 'Manage Reservations',
     'permission_reservation_types' => 'Manage Reservations Types',
-    'permission_frontend_edit_user_profile' => 'Manage Edit User Profile ',
+    'permission_frontend_edit_user_profile' => 'Edit User Profile ',
     'permission_frontend_reservations' => 'Manage Reservations',
     'permission_frontend_doctor_schedule' => 'Manage Doctor Schedule',
     'permission_manage_welcome_screen'  => 'Manage Welcome Screen'

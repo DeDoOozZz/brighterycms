@@ -59,6 +59,10 @@
                                         <li class="email"> <i class="fa fa-envelope"></i> {{ item.email }} </li>
                                         <li class="password"> <i class="fa fa-lock"></i>
                                             <input type="password" value="{{ item.password }}"style="border: medium none; background-color: #fff;" disabled>
+                                            <a href="#" data-toggle="modal" data-target="#edit" style="margin-left:10px;">
+                                                {#<i class="fa fa-pencil-square-o"></i>#}
+                                                <span>{{ lang.edit }}</span>
+                                            </a>
                                         </li>
                                         <li class="gender"> <i class="fa fa-user"></i> {{ item.gender }} </li>
                                         <li class="birthdate"> <i class="fa fa-calendar"></i> {{ item.birthdate }} </li>
@@ -167,15 +171,6 @@
                             </div>
                         </div>
                         <div class="form-group-separator"></div>
-                        {#-----------password-----------#}
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="password">{{ lang.pass }}</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control validate[required]" id="password" placeholder="{{ item.password }}" name="password"
-                                       value="{{ helper.form.value('password', item.password) }}">
-                            </div>
-                        </div>
-                        <div class="form-group-separator"></div>
                         {#-----------gender------------#}
                         <div class="form-group">
                             <label class="col-sm-2 control-label"  for="gender">{{ lang.gender }}</label>
@@ -278,6 +273,51 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <a type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+                    <h4 class="modal-title " id="myModalLabel">{{ lang.personal_info }}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="for-show-personal-info">
+                        <div class="modal_errors"></div>
+                        {{ helper.form.open(null,false,true,'role="form" id="edit-form" class="form-horizontal"') }}
+                        {{ error }}
+                        {#-----------old password-----------#}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="password">{{ lang.old_pass }}Your Old Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control validate[required]" id="password" placeholder="your old password" name="password"
+                                       value="">
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div>
+                        {#-----------new password-----------#}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="password">{{ lang.new_pass }}Your New Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control validate[required]" id="password" placeholder="New password" name="password"
+                                       value="">
+                            </div>
+                        </div>
+                        <div class="form-group-separator"></div>
+                        {#--------------submit----------#}
+                        <div class="form-group">
+                            <label for="field-5" class="col-sm-2 control-label"></label>
+                            <div class="col-sm-9">
+                                <input type="submit" value="Change" class="form-control submit-edit" style="line-height: normal;">
+                            </div>
+                        </div>
+                        {#<div class="form-group-separator"></div>#}
+                        {{ helper.form.close() }}
+                        {#</form>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
@@ -319,6 +359,12 @@
                 $('.phone').html(phone);
                 $('.address').html(address);
             }
+        });
+        return false;
+    });
+    $('#edit').submit(function () {
+        $.post('{{ helper.uri.url('clinic_user_profile/manage/')}}{{ item.user_id }}', $(this).serialize(), function (response) {
+            obj = jQuery.parseJSON(response);
         });
         return false;
     });

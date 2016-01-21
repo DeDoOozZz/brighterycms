@@ -3,7 +3,7 @@
         <h3 class="panel-title">{{lang.usergroups}}</h3>
     </div>
     <div class="panel-body">
-        {{ helper.form.open(null,false,false,'role="form" id="usergroup" class="form-horizontal"') }}
+        {{ helper.form.open(null,false,false,'role="form" method="post" id="usergroup" class="form-horizontal"') }}
         {{ error }}
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="field-1">{{ lang.name }}</label>
@@ -12,10 +12,9 @@
                            value="{{ helper.form.value('name', model.name) }}">
                 </div>
             </div>
-        {{ helper.form.close() }}
+
         <div class="row">
             <!--Management-->
-
             <div class="col-md-6 col-sm-12 management">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -35,7 +34,7 @@
                                     <td>{{ attribute(lang,'module_'~module) }}</td>
                                     <td>
                                         {% for item in permissions %}
-                                        <input type="checkbox" name="checkbox[]" value=""><span style="padding-left: 10px;">{{ attribute(lang,'permission_'~item) }}</span>
+                                        <input type="checkbox" name="checkbox[]" value="{{ item }}"><span style="padding-left: 10px;">{{ attribute(lang,'permission_'~item) }}</span>
                                             <br>
                                         {% endfor %}
                                     </td>
@@ -61,10 +60,17 @@
                             </tr>
                             </thead>
                             <tbody class="middle-align">
+                            {% for module,permissions in per_frontend %}
                             <tr>
-                                <td>Module</td>
-                                <td><input type="checkbox" name="checkbox[]" value="module name"><span style="padding-left: 10px;">Permission</span></td>
+                                <td>{{ attribute(lang,'module_'~module) }}</td>
+                                <td>
+                                    {% for item in permissions %}
+                                    <input type="checkbox" name="checkbox[]" value="{{ item }}"><span style="padding-left: 10px;">{{ attribute(lang,'permission_'~item) }}</span>
+                                        <br>
+                                    {% endfor %}
+                                </td>
                             </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -78,6 +84,7 @@
                 <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
             </div>
         </div>
+        {{ helper.form.close() }}
     </div>
 </div>
 

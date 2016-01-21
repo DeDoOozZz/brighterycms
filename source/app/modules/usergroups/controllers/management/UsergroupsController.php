@@ -35,34 +35,26 @@ class UsergroupsController extends Brightery_Controller {
         ]);
     }
 
-    public function manageAction($id = false) {
+    public function manageAction($id = false){
         $this->permission('manage');
         $model = new \modules\usergroups\models\Usergroups('management');
-        $model->attributes = $this->Input->input['post'];
-//
-//        $modules = new \modules\clinic\models\Modules();
-//        $modules->select = "modules_id , name , code , status";
-        $permissions_management =   $this->config->get('Permissions.management');
-        $permissions_frontend =   $this->config->get('Permissions.frontend');
-//        $modules->status = "1";
-//        $modules->status = "1";
-
-//        $modules_zone = new \modules\usergroups\models\Zones(FALSE);
-//        $modules_zone->_select = "zone_id , module_id , permission , name";
-//        $modules_zone->usergroup_id = "$id";
-
-//        print_r($this->config->get('Permissions'));
-
-
+        $model->attributes = $this->input->post();
+        $permissions_management = $this->config->get('Permissions.management');
+        $permissions_frontend = $this->config->get('Permissions.frontend');
 
         $modules_user_zone = new \modules\usergroups\models\Usergroup_zones(FALSE);
         $module_checked = new \modules\usergroups\models\Usergroup_zones();
         $module_checked->_select = "permission , usergroup_zone_id , usergroup_id , module";
         $module_checked->usergroup_id = $id;
-//        print_r($model->get());
 
-        if ($id)
+
+        if ($id){
             $model->usergroup_id = $id;
+            foreach ($model as $row) {
+
+                $selected_permissions[$row->module][] = $row->permission;
+            }
+        }
 
         $model->language_id = $this->language->getDefaultLanguage();
 
@@ -76,20 +68,18 @@ class UsergroupsController extends Brightery_Controller {
             foreach ($this->input->post('checkbox') as $key => $value) {
                 $array = explode('-', $value);
                 $q['permission'] = $array[0];
-                $q['module_id'] = $array[1];
+                $q['module'] = $array[1];
                 $q['usergroup_id'] = $id;
                 $modules_user_zone->attributes = $q;
                 $modules_user_zone->save();
             }
+
             Uri_helper::redirect("management/usergroups");
         } else
             return $this->render('usergroups/manage', [
                         'item' => $id ? $model->get() : null,
-//                        'modules' => $modules->get(),
-//                        'zones' => $modules_zone->get(),
                         'per_management' => $permissions_management,
                         'per_frontend' => $permissions_frontend,
-
                         'checked' => $module_checked->get()
             ]);
     }
