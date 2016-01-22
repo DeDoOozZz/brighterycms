@@ -28,9 +28,9 @@ class Clinic_user_profileController extends Brightery_Controller {
     }
 
     public function indexAction($id) {
-        
+
         $userInfo = $this->permissions->getUserInformation('user_id');
-        
+
         $user_id_log = $userInfo->user_id;
 
         $user = new \modules\users\models\Users();
@@ -110,19 +110,19 @@ class Clinic_user_profileController extends Brightery_Controller {
                 if (!$value)
                     continue;
                 $prPhone = new \modules\users\models\User_phones();
-                    $prPhone->_select = 'user_phone_id';
-                    $prPhone->user_id = $id ;
-                    $prPhone->primary = 1 ;
-                    $res = $prPhone->get();
-                    $userphoneid = $res[0]->user_phone_id;
+                $prPhone->_select = 'user_phone_id';
+                $prPhone->user_id = $id;
+                $prPhone->primary = 1;
+                $res = $prPhone->get();
+                $userphoneid = $res[0]->user_phone_id;
                 $phone = new \modules\users\models\User_phones();
                 $phone->user_id = $id;
                 $phone->phone = $value;
                 if ($user_phone_id[$key] == $primary_phone) {
                     $phone->primary = 1;
                     $pPhone = new \modules\users\models\User_phones();
-                    $pPhone->user_phone_id = $userphoneid ;
-                    $pPhone->primary = 0 ;
+                    $pPhone->user_phone_id = $userphoneid;
+                    $pPhone->primary = 0;
                     $pPhone->save();
                 }
 
@@ -134,23 +134,23 @@ class Clinic_user_profileController extends Brightery_Controller {
             foreach ($address as $key => $value) {
                 if (!$value)
                     continue;
-                $prAdd = new \modules\users\models\User_addresses() ;
-                    $prAdd->_select = 'user_address_id';
-                    $prAdd->user_id = $id ;
-                    $prAdd->primary = 1 ;
-                    $res = $prAdd->get();
-                    $useraddressid = $res[0]->user_address_id;
+                $prAdd = new \modules\users\models\User_addresses();
+                $prAdd->_select = 'user_address_id';
+                $prAdd->user_id = $id;
+                $prAdd->primary = 1;
+                $res = $prAdd->get();
+                $useraddressid = $res[0]->user_address_id;
                 $addres = new \modules\users\models\User_addresses();
                 $addres->user_id = $id;
                 $addres->address = $value;
                 if ($user_address_id[$key] == $primary_address) {
                     $addres->primary = 1;
                     $pAddress = new \modules\users\models\User_addresses();
-                    $pAddress->user_address_id = $useraddressid ;
-                    $pAddress->primary = 0 ;
+                    $pAddress->user_address_id = $useraddressid;
+                    $pAddress->primary = 0;
                     $pAddress->save();
                 }
-                
+
                 if ($user_address_id[$key])
                     $addres->user_address_id = $user_address_id[$key];
                 $addres->save();
@@ -186,6 +186,17 @@ class Clinic_user_profileController extends Brightery_Controller {
             return TRUE;
         else
             return FALSE;
+    }
+
+    public function checkAction($id, $old_password = NULL) {
+        if ($old_password) {
+            $check = new \modules\users\models\Users();
+            $check->user_id = $id;
+            $check->password = md5($old_password);
+            if ($check->get()){
+                return true;
+            }
+        }
     }
 
 }
