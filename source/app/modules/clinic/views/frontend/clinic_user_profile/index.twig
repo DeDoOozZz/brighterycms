@@ -59,7 +59,11 @@
                                         <li class="email"> <i class="fa fa-envelope"></i> {{ item.email }} </li>
                                         {#<li class="password"> <i class="fa fa-lock"></i>
                                             <input type="password" value="{{ item.password }}"style="border: medium none; background-color: #fff;" disabled>
-                                        </li>#}
+                                            <a href="#" data-toggle="modal" data-target="#edit" style="margin-left:10px;">
+                                                {#<i class="fa fa-pencil-square-o"></i>#}
+                                                <span>{{ lang.edit }}</span>
+                                            </a>
+                                        </li>
                                         <li class="gender"> <i class="fa fa-user"></i> {{ item.gender }} </li>
                                         <li class="birthdate"> <i class="fa fa-calendar"></i> {{ item.birthdate }} </li>
                                     </ul>
@@ -167,15 +171,6 @@
                             </div>
                         </div>
                         <div class="form-group-separator"></div>
-                        {#-----------password-----------#}
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="password">{{ lang.pass }}</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control validate[required]" id="password" placeholder="{{ item.password }}" name="password"
-                                       value="{{ helper.form.value('password', item.password) }}">
-                            </div>
-                        </div>
-                        <div class="form-group-separator"></div>
                         {#-----------gender------------#}
                         <div class="form-group">
                             <label class="col-sm-2 control-label"  for="gender">{{ lang.gender }}</label>
@@ -204,7 +199,7 @@
                             <label class="col-sm-2 control-label">{{ lang.phone }}</label>
                             <div class="col-md-9">
                                 {% if not phones %}
-                                    <div class="form-group">
+                                    <div class="form-group col-md-12">
                                         <label class="control-label primary">Primary {{ lang.primary }}</label>
                                         <input type="radio" class="primary" value="Primary" name="primary_phone" checked>
                                         <input class="form-control" name="phone[]" pho="pho" id="phone" value="{{ helper.form.value('phone', no.phone) }}" type="text" placeholder="{{no.phone}}"   style="margin-bottom:10px;">
@@ -278,10 +273,115 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <a type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+                    <h4 class="modal-title " id="myModalLabel">{{ lang.edit_pass }}Edit Password</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="for-show-personal-info">
+                        <div class="modal_errors"></div>
+                        {{ helper.form.open(null,false,true,'role="for1" id="rootwizard" class="form-wizard validate" novalidate') }}
+                        {{ error }}
+                            <ul class="tabs">
+                                <li class="active">
+                                    <a href="#fwv-1" data-toggle="tab">
+                                        Old password
+                                        <span>1</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#fwv-2" data-toggle="tab">
+                                        New Password
+                                        <span>2</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#fwv-3" data-toggle="tab">
+                                        Retype New Password
+                                        <span>3</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="progress-indicator">
+                                <span></span>
+                            </div>
+                            <div class="tab-content no-margin">
+
+                                <!-- Old Password -->
+                                <div class="tab-pane with-bg active" id="fwv-1">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label" for="old-pass">Old Password</label>
+                                                <input class="form-control" name="password" id="old-pass" data-validate="required" placeholder="Your old password" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- New Password -->
+                                <div class="tab-pane with-bg" id="fwv-2">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label" for="new">New Password</label>
+                                                <input class="form-control" name="password" id="new" data-validate="required" placeholder="Enter your New Password" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- retype new Password -->
+                                <div class="tab-pane with-bg" id="fwv-3">
+                                    <strong>New Password</strong>
+                                    <br />
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label" for="new">Retype New Password</label>
+                                                <input class="form-control" name="password" id="new" data-validate="required" placeholder="Enter your New Password again" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Tabs Pager -->
+
+                                <ul class="pager wizard">
+                                    <li class="previous">
+                                        <a href="#"><i class="entypo-left-open"></i> Previous</a>
+                                    </li>
+
+                                    <li class="next">
+                                        <a href="#">Next <i class="entypo-right-open"></i></a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        {#--------------submit----------#}
+                        <div class="form-group">
+                            <label for="field-5" class="col-sm-2 control-label"></label>
+                            <div class="col-sm-9">
+                                <input type="submit" value="Change" class="form-control submit-edit" style="line-height: normal;">
+                            </div>
+                        </div>
+                        {{ helper.form.close() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
 <script src="{{ constant('STYLE_JS') }}/datepicker/bootstrap-datepicker.js"></script>
+<script src="{{ constant('STYLE_JS') }}/jquery-validate/jquery.validate.min.js"></script>
+<script src="{{ constant('STYLE_JS') }}/formwizard/jquery.bootstrap.wizard.min.js"></script>
+<script src="{{ constant('STYLE_JS') }}/jquery-ui/jquery-ui.min.js"></script>
+
 <script>
     $(document).ready(function () {
         $(".add-another-option-phone ").click(function () {
@@ -318,6 +418,15 @@
                 $('.birthdate').html(birthdate);
                 $('.phone').html(phone);
                 $('.address').html(address);
+            }
+        });
+        return false;
+    });
+    $('#edit').submit(function () {
+        $.post('{{ helper.uri.url('clinic_user_profile/manage/')}}{{ item.user_id }}', $(this).serialize(), function (response) {
+            obj = jQuery.parseJSON(response);
+            if (obj.sucess == 1) {
+                $('#personal_info').modal('hide');
             }
         });
         return false;
@@ -398,6 +507,9 @@
 </script>
 
 <style>
+    a:hover {
+        text-decoration: none;
+    }
     .delete-option {
         position: relative;
         left: 411px;
