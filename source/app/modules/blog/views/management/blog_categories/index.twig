@@ -30,7 +30,7 @@
                         <td><img src="{{helper.uri.cdn('blog', item.image)}}" height="42" width="42"></td>
                         <td>
                             <a class="btn btn-info btn-sm" href="{{ helper.uri.url('management/blog_categories/manage', item.blog_category_id) }}">{{lang.edit}}</a>
-                            <a href="#" class="btn btn-secondary btn-sm delete_msg"   data-url_id="{{ helper.uri.url('management/blog_categories/delete', item.blog_category_id) }}" data-toggle="modal" data-id="{{item.blog_category_id}}"  data-target="#deleteMsg" style="color:#fff;">{{lang.delete}}</a>
+                            <a href="#" class="btn btn-danger btn-sm delete_msg"   data-url_id="{{ helper.uri.url('management/blog_categories/delete', item.blog_category_id) }}" data-toggle="modal" data-id="{{item.blog_category_id}}"  data-target="#deleteMsg" style="color:#fff;">{{lang.delete}}</a>
                         </td>
                     </tr>   
                     {% for sub_item in category_model.getSubCategories(item.blog_category_id) %}

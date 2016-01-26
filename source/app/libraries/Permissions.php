@@ -26,7 +26,7 @@ class Permissions
             $email = $this->input->cookie('email');
             $password = $this->input->cookie('password');
         }
-        $this->userInfo = $this->db->query("SELECT * FROM users WHERE users.email = '$email' AND users.password = '$password' AND users.status = 'active'")->row();
+        $this->userInfo = $this->db->query("SELECT users.*, usergroups.name as usergroup FROM users join usergroups on usergroups.usergroup_id = users.usergroup_id WHERE users.email = '$email' AND users.password = '$password' AND users.status = 'active'")->row();
         if ($this->userInfo)
             return $this->verified = TRUE;
         return FALSE;
