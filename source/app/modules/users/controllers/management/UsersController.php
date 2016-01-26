@@ -158,6 +158,7 @@ class UsersController extends Brightery_Controller {
                 $this->input->cookie('email', $userInfo->email);
                 $this->input->cookie('password', $userInfo->password);
                 $this->input->cookie('image', $userInfo->image);
+                $this->input->cookie('usergroup', $userInfo->usergroup);
             } else {
                 // Failed Attempts
                 $fa = $this->input->cookie('failed-attempts') ? $this->input->cookie('failed-attempts') : 0;
