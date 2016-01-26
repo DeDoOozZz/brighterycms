@@ -39,7 +39,7 @@ return [
                 'reservation_types' => [
                     'title' => 'reservation_types',
                     'url' => 'management/clinic_doctor_reservation_types',
-                    'icon' => 'fa-sitemap'
+                    'icon' => 'fa fa-sitemap'
                 ],
 //                'welcome_screen' => [
 //                    'title' => 'welcome_screen',
