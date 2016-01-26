@@ -57,10 +57,10 @@
                                             <li class="phone"> <i class="fa fa-phone"></i></li>
                                             {%endif%}
                                         <li class="email"> <i class="fa fa-envelope"></i> {{ item.email }} </li>
-                                        {#<li class="password"> <i class="fa fa-lock"></i>
-                                            <input type="password" value="{{ item.password }}"style="border: medium none; background-color: #fff;" disabled>
+                                        <li class="password"> <i class="fa fa-lock"></i>
+                                            {#                                            <input type="password" value="{{ item.password }}"style="border: medium none; background-color: #fff;" disabled>#}
                                             <a href="#" data-toggle="modal" data-target="#edit" style="margin-left:10px;">
-                                                {#<i class="fa fa-pencil-square-o"></i>#}
+                                                <i class="fa fa-pencil-square-o"></i>
                                                 <span>{{ lang.edit }}</span>
                                             </a>
                                         </li>
@@ -232,19 +232,19 @@
                             <div class="col-md-9">
                                 {% if not address %}
                                     {#<div class="form-group">#}
-                                        <label class="control-label primary">Primary {{ lang.primary }}</label>
-                                        <input type="radio" class="primary" value="Primary" name="primary_address" checked>
-                                        <input class="form-control" name="address[]" add="add" id="address" value="{{ helper.form.value('address', add.address) }}" type="text" placeholder="{{add.address}}"  style="margin-bottom:10px;">
+                                    <label class="control-label primary">Primary {{ lang.primary }}</label>
+                                    <input type="radio" class="primary" value="Primary" name="primary_address" checked>
+                                    <input class="form-control" name="address[]" add="add" id="address" value="{{ helper.form.value('address', add.address) }}" type="text" placeholder="{{add.address}}"  style="margin-bottom:10px;">
                                     {#</div>#}
                                 {% endif %}
                                 {%for add in address%}
-                                <div class="group" id="address-group{{add.user_address_id}}">
-                                    <label class="control-label primary">Primary {{ lang.primary }}</label>
-                                    <input type="radio" id="id_rd{{add.user_address_id}}" class="primary"  name="primary_address" value="{{add.user_address_id}}" {%if add.primary == 1%} checked {%endif%}>
-                                    <span id="id_a{{add.user_address_id}}" data-id="{{add.user_address_id}}" class="delete-option address-delete col-sm-1"><i class="fa fa-close"></i></span>
-                                    <input class="form-control" name="address[]" add="add" id="id_{{add.user_address_id}}" value="{{ helper.form.value('address', add.address) }}" type="text" pla_ceholder="{{add.address}}"  style="margin-bottom:10px;">
-                                    <input type="hidden" name="user_address_id[]" id="address" value="{{add.user_address_id}}">
-                                </div>
+                                    <div class="group" id="address-group{{add.user_address_id}}">
+                                        <label class="control-label primary">Primary {{ lang.primary }}</label>
+                                        <input type="radio" id="id_rd{{add.user_address_id}}" class="primary"  name="primary_address" value="{{add.user_address_id}}" {%if add.primary == 1%} checked {%endif%}>
+                                        <span id="id_a{{add.user_address_id}}" data-id="{{add.user_address_id}}" class="delete-option address-delete col-sm-1"><i class="fa fa-close"></i></span>
+                                        <input class="form-control" name="address[]" add="add" id="id_{{add.user_address_id}}" value="{{ helper.form.value('address', add.address) }}" type="text" pla_ceholder="{{add.address}}"  style="margin-bottom:10px;">
+                                        <input type="hidden" name="user_address_id[]" id="address" value="{{add.user_address_id}}">
+                                    </div>
                                 {%endfor%}
                             </div>
                             <span class="add-another-option-address col-sm-1"><i class="fa fa-plus-square"></i></span>
@@ -285,82 +285,83 @@
                         <div class="modal_errors"></div>
                         {{ helper.form.open(null,false,true,'role="for1" id="rootwizard" class="form-wizard validate" novalidate') }}
                         {{ error }}
-                            <ul class="tabs">
-                                <li class="active">
-                                    <a href="#fwv-1" data-toggle="tab">
-                                        Old password
-                                        <span>1</span>
-                                    </a>
+                        <ul class="tabs">
+                            <li class="active">
+                                <a href="#fwv-1" data-toggle="tab">
+                                    Old password
+                                    <span>1</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#fwv-2" data-toggle="tab">
+                                    New Password
+                                    <span>2</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#fwv-3" data-toggle="tab">
+                                    Retype New Password
+                                    <span>3</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="progress-indicator">
+                            <span></span>
+                        </div>
+                        <div class="tab-content no-margin">
+
+                            <!-- Old Password -->
+                            <div class="tab-pane with-bg active" id="fwv-1">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="old-pass">Old Password</label>
+                                            <input class="form-control" name="old-password" id="old-pass" data-validate="required" placeholder="Your old password" />
+                                            <input type="text" id="status" value>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- New Password -->
+                            <div class="tab-pane with-bg" id="fwv-2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="new">New Password</label>
+                                            <input class="form-control" name="password" id="new" data-validate="required" placeholder="Enter your New Password" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- retype new Password -->
+                            <div class="tab-pane with-bg" id="fwv-3">
+                                <strong>New Password</strong>
+                                <br />
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="new">Retype New Password</label>
+                                            <input class="form-control" name="password-conf" id="new" data-validate="required" placeholder="Enter your New Password again" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Tabs Pager -->
+
+                            <ul class="pager wizard">
+                                <li class="previous">
+                                    <a href="#"><i class="entypo-left-open"></i> Previous</a>
                                 </li>
-                                <li>
-                                    <a href="#fwv-2" data-toggle="tab">
-                                        New Password
-                                        <span>2</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#fwv-3" data-toggle="tab">
-                                        Retype New Password
-                                        <span>3</span>
-                                    </a>
+
+                                <li class="next">
+                                    <a id='next' href="#">Next <i class="entypo-right-open"></i></a>
                                 </li>
                             </ul>
-                            <div class="progress-indicator">
-                                <span></span>
-                            </div>
-                            <div class="tab-content no-margin">
 
-                                <!-- Old Password -->
-                                <div class="tab-pane with-bg active" id="fwv-1">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="control-label" for="old-pass">Old Password</label>
-                                                <input class="form-control" name="password" id="old-pass" data-validate="required" placeholder="Your old password" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- New Password -->
-                                <div class="tab-pane with-bg" id="fwv-2">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="control-label" for="new">New Password</label>
-                                                <input class="form-control" name="password" id="new" data-validate="required" placeholder="Enter your New Password" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- retype new Password -->
-                                <div class="tab-pane with-bg" id="fwv-3">
-                                    <strong>New Password</strong>
-                                    <br />
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label class="control-label" for="new">Retype New Password</label>
-                                                <input class="form-control" name="password" id="new" data-validate="required" placeholder="Enter your New Password again" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <!-- Tabs Pager -->
-
-                                <ul class="pager wizard">
-                                    <li class="previous">
-                                        <a href="#"><i class="entypo-left-open"></i> Previous</a>
-                                    </li>
-
-                                    <li class="next">
-                                        <a href="#">Next <i class="entypo-right-open"></i></a>
-                                    </li>
-                                </ul>
-
-                            </div>
+                        </div>
                         {#--------------submit----------#}
                         <div class="form-group">
                             <label for="field-5" class="col-sm-2 control-label"></label>
@@ -385,17 +386,23 @@
 <script>
     $(document).ready(function () {
         $(".add-another-option-phone ").click(function () {
-            $(".show-phone-option").append('<label class="control-label primary">'+'Primary {{ lang.primary }}</label>'+'<input type="radio" class="primary" value="primary" name="primary_phone" style="position: relative;right: 90px;">'+'<input name="phone[]" id="phone" type="text" placeholder="add another phone" class="form-control">' + ' <span class="delete-option col-sm-1" style="position: relative; top:-27px;"><i class="fa fa-close"></i></span>' + '<div class="form-group-separator"></div>');
+            $(".show-phone-option").append('<label class="control-label primary">' + 'Primary {{ lang.primary }}</label>' + '<input type="radio" class="primary" value="primary" name="primary_phone" style="position: relative;right: 90px;">' + '<input name="phone[]" id="phone" type="text" placeholder="add another phone" class="form-control">' + ' <span class="delete-option col-sm-1" style="position: relative; top:-27px;"><i class="fa fa-close"></i></span>' + '<div class="form-group-separator"></div>');
         });
         $(".add-another-option-address ").click(function () {
-            $(".show-address-option").append('<label class="control-label primary">'+'Primary {{ lang.primary }}</label>'+'<input type="radio" class="primary" value="primary" name="primary_address"  style="position: relative;right: 90px;">'+' <input name="address[]" id="address" type="text" placeholder="add another address" class="form-control">' + ' <span class="delete-option col-sm-1" style="position: relative; top:-27px;"><i class="fa fa-close"></i></span>' + '<div class="form-group-separator"></div>');
+            $(".show-address-option").append('<label class="control-label primary">' + 'Primary {{ lang.primary }}</label>' + '<input type="radio" class="primary" value="primary" name="primary_address"  style="position: relative;right: 90px;">' + ' <input name="address[]" id="address" type="text" placeholder="add another address" class="form-control">' + ' <span class="delete-option col-sm-1" style="position: relative; top:-27px;"><i class="fa fa-close"></i></span>' + '<div class="form-group-separator"></div>');
+        });
+        $("#fwv-2").click(function () {
+            var status = $('#statis').val();
+            if (status == 1)
+                $('#fwv-2').show();
+            else
+                $('#fwv-1').show();
         });
     });
 
     $('#edit-form').submit(function () {
         $.post('{{ helper.uri.url('clinic_user_profile/manage/')}}{{ item.user_id }}', $(this).serialize(), function (response) {
             obj = jQuery.parseJSON(response);
-
             fullname = $('#fullname').val();
             email = '<i class="fa fa-envelope"></i>' + $('#email').val();
 //                password = $('#password').val();
@@ -406,9 +413,6 @@
             address = '<i class="fa-home"></i>' + $("[add=add]").val();
 
             phone = '<i class="fa fa-phone"></i>' + $("[pho=pho]").val();
-
-
-
             if (obj.sucess == 1) {
                 $('#personal_info').modal('hide');
                 $('.user-name').text(fullname);
@@ -433,34 +437,33 @@
     });
     $('.delete-phone').click(function () {
         user_phone_id = $(this).data('id');
-        phone_id ='#phone-group'+ user_phone_id;
-//        id = '#id_' + user_phone_id;
-//        ids = '#id_s' + user_phone_id;
-//        idrp = '#id_rp' + user_phone_id;
+        phone_id = '#phone-group' + user_phone_id;
 
         $.post('{{ helper.uri.url('clinic_user_profile/deletePhone/')}}' + user_phone_id,{#        user_phone_id : $('.delete-option').data('id'),#}
                 function (response) {
                     if (response == 1) {
                         $(phone_id).hide();
-//                        $(ids).hide();
-//                        $(idrp).hide();
                     }
                 });
         return false;
     });
     $('.address-delete').click(function () {
         user_address_id = $(this).data('id');
-        add_id = '#address-group'+ user_address_id;
-//        ida = '#id_' + user_address_id;
-//        id_a = '#id_a' + user_address_id;
-//        idrd = '#id_rd' + user_address_id;
-
-        $.post('{{ helper.uri.url('clinic_user_profile/deleteAddress/')}}' + user_address_id,{#        user_phone_id : $('.delete-option').data('id'),#}
+        add_id = '#address-group' + user_address_id;
+        $.post('{{ helper.uri.url('clinic_user_profile/deleteAddress/')}}' + user_address_id,
                 function (response) {
                     if (response == 1) {
                         $(add_id).hide();
-//                        $(ida).hide();
-//                        $(idrd).hide();
+                    }
+                });
+        return false;
+    });
+    $('#next').click(function () {
+        var old_pass = $('#old-pass').val();
+        $.post('{{ helper.uri.url('clinic_user_profile/check/')}}{{ item.user_id }}' , old_pass : old_pass,
+                function (response) {
+                    if (response == 1) {
+                        $('#status').val('1') ;
                     }
                 });
         return false;
@@ -518,25 +521,21 @@
         display: block;
         cursor: pointer;
     }
-
     .delete-option:hover {
         color: #ffab00;
     }
     .fa-close {
         color: rgb(177, 177, 177);
     }
-
     .primary {
         position: relative;
         top: 42px;
         right: 118px;
     }
-
     label.primary {
         display:block;
         position: relative;
         right: 413px;
         top: 63px;
     }
-
 </style>
