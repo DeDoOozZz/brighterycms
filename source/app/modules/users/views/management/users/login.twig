@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ constant('STYLE_CSS') }}/xenon-components.css">
     <link rel="stylesheet" href="{{ constant('STYLE_CSS') }}/xenon-skins.css">
     <link rel="stylesheet" href="{{ constant('STYLE_CSS') }}/custom.css">
+    <link rel="stylesheet" href="{{ constant('STYLE_CSS') }}/newstyle.css">
     <script src="{{ constant('STYLE_JS') }}/jquery-1.11.1.min.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -135,21 +136,19 @@
 
                 <div class="login-header">
                     <a href="dashboard-1.html" class="logo">
-                        <img src="{{ constant('STYLE_IMAGES') }}/logo@2x.png" alt="" width="80" />
-                        <span>log in</span>
+                        <img src="{{ constant('STYLE_IMAGES') }}/logo.png" alt="" width="160" />
+                        <span class="login-label">log in</span>
                     </a>
 
                     <p>{{ lang.welcome_login_message }}</p>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="username">{{ lang.email }}</label>
-                    <input type="text" class="form-control input-dark" name="username" id="username" autocomplete="off" />
+                    <input type="text" class="form-control input-dark" placeholder="{{ lang.email }}" name="username" id="username" autocomplete="off" />
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="passwd">{{ lang.password }}</label>
-                    <input type="password" class="form-control input-dark" name="passwd" id="passwd" autocomplete="off" />
+                    <input type="password" class="form-control input-dark" name="passwd" id="passwd" placeholder="{{ lang.password }}" autocomplete="off" />
                 </div>
 
                 <div class="form-group">
@@ -159,7 +158,7 @@
                     </button>
                 </div>
 
-                <div class="login-footer">
+              {#  <div class="login-footer">
                     <a href="#">Forgot your password?</a>
 
                     <div class="info-links">
@@ -167,16 +166,16 @@
                         <a href="#">Privacy Policy</a>
                     </div>
 
-                </div>
+                </div>#}
 
             </form>
 
             <!-- External login -->
             <div class="external-login">
-                <a href="#" class="facebook">
+               {# <a href="#" class="facebook">
                     <i class="fa-facebook"></i>
                     Facebook Login
-                </a>
+                </a>#}
 
                 <!--
                 <a href="<?php _hash(); ?>" class="twitter">

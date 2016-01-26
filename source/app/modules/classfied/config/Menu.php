@@ -4,7 +4,7 @@ return [
     'management' => [
         'classfied' => [
             'title' => 'classfied',
-            'icon' => 'fa fa-black-tie',
+            'icon' => 'fa fa-briefcase',
             'sub' => [
                 'categories' => [
                     'title' => 'categories',

@@ -2,10 +2,10 @@
 
 return [
     'default' => [
-        'hostname' => 'brightery.xyz',
-        'username' => 'bright',
-        'password' => 'bright',
-        'database' => 'bright_cms',
+        'hostname' => 'localhost',
+        'username' => 'root',
+        'password' => '',
+        'database' => 'brighterycms',
         'driver' => 'mysql',
         'charset' => 'utf8'
     ],

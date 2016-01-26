@@ -219,3 +219,11 @@ a.patient-name:hover{
 .user-info-navbar .user-info-menu>li>a {
    border:none;
 }
+.logo{
+    position: relative;
+}
+.login-label{
+    position: absolute;
+    left: 160px;
+    top: 23px;
+}
