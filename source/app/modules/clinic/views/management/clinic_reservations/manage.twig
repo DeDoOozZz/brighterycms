@@ -133,7 +133,7 @@
                 <h4 class="modal-title" id="myModalLabel">{{lang.system_msg}}</h4>
             </div>
             <div class="modal-body">
-                <p style="color: #393F3F;">Sorry The Doctor <span>{{ item.fullname }}</span> Has No Schedule This Day !</p>
+                <p style="color: #393F3F;">Sorry Dr. <span>{{ item.fullname }}</span> Has No Schedule This Day !</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">close{{ lang.close }}</button>
@@ -158,7 +158,6 @@ $http({
     if ($scope.result == 0)
     {
         console.log($scope.result);
-//            alert('sorry the doctoce has no schedule this day .');
         $('#message').modal('show');
         $('.time-hide').hide();
     }
@@ -176,8 +175,6 @@ $http({
     $scope.result = response.data.result;
     if ($scope.result == 0)
     {
-{#                                                            console.log($scope.result);#}
-//            alert('sorry the doctoce has no schedule this day .');
         $('.time-hide').hide();
         $('#message').modal('show');
     }
