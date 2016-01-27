@@ -23,13 +23,13 @@
                         <td><img src="{{helper.uri.cdn()}}users/{{item.image}}" height="42" width="42"></td>  
                         <td>
                             <a class="btn btn-info btn-sm " href="{{ helper.uri.url('management/users/manage', item.user_id ) }}">{{lang.edit}}</a>
-                            {%if item.resume_id%}
+                           {# {%if item.resume_id%}
                                 <a class="btn btn-info btn-sm " href="{{helper.uri.url('management/resumes/manage', item.resume_id)}}">{{lang.resume}}</a>
                                 <a href="#" class="btn btn-secondary btn-sm delete_msg_r" data-url_id="{{helper.uri.url('management/resumes/deleteR', item.resume_id )}}" data-toggle="modal" data-target="#deleteMsgR" style="color:#fff;">{{lang.delete_resume}}</a>
                             {%else%}
                                 <a href="#" class="btn btn-danger btn-sm addResume_msg" data-url="{{helper.uri.url('management/resumes/add', item.user_id)}}" data-toggle="modal" data-target="#addResumeMsg" style="color:#fff;">{{lang.resume}}</a>
-                            {%endif%}
-                            <a href="#" class="btn btn-secondary btn-sm delete_msg" data-url_id="{{helper.uri.url('management/users/delete', item.user_id )}}" data-toggle="modal" data-target="#deleteMsg" style="color:#fff;">{{lang.delete}}</a>
+                            {%endif%}#}
+                            <a href="#" class="btn btn-danger btn-sm delete_msg" data-url_id="{{helper.uri.url('management/users/delete', item.user_id )}}" data-toggle="modal" data-target="#deleteMsg" style="color:#fff;">{{lang.delete}}</a>
                         </td>
                     </tr>
                 {% endfor %}

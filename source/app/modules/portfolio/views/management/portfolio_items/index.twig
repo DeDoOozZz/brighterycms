@@ -26,7 +26,7 @@
                         <td><img src="{{helper.uri.cdn()}}portfolio/{{item.image}}" height="42" width="42"></td>
                         <td>
                             <a class="btn btn-info btn-sm" href="{{ helper.uri.url('management/portfolio_items/manage', item.portfolio_id ) }}">{{lang.edit}}</a>
-                            <a href="#" class="btn btn-secondary btn-sm delete_msg"  data-url_id="{{ helper.uri.url('management/portfolio_items/delete' , item.portfolio_id)}}" data-toggle="modal" data-target="#deleteMsg" style="color:#fff;">{{lang.delete}}</a>
+                            <a href="#" class="btn btn-danger btn-sm delete_msg"  data-url_id="{{ helper.uri.url('management/portfolio_items/delete' , item.portfolio_id)}}" data-toggle="modal" data-target="#deleteMsg" style="color:#fff;">{{lang.delete}}</a>
                         </td>
                     </tr>
                 {% endfor %}
