@@ -12,7 +12,7 @@
  * Doctorine ORM 2.3.3
  */
 
-define('PRODUCTION', 'development');
+define('environment', 'production');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
