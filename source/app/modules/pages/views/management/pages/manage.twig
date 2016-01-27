@@ -14,66 +14,76 @@
                        value="{{ helper.form.value('title', item.title) }}">
             </div>
 
+        </div>
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <div class="col-sm-2 control-label">
+                <a href="javascript:void(0)" onclick="seo()" class="btn btn-secondary custom-link">{{ lang.custom_permalink }}</a>
+            </div>
+
             <div class="col-sm-10">
                 <input style="display: none;" type="text" class="form-control permalink" id="seo"
                        placeholder="{{ lang.seo }}" name="seo" value="{{ helper.form.value('seo', item.seo) }}">
                 <span class="generated_permalink">{{ lang.permalink }}
                     <code>{{ helper.uri.url('page', item.seo) }}</code></span>
-
-                <div class="col-sm-2"><a href="javascript:void(0)" onclick="seo()"
-                                         class="btn btn-secondary">{{ lang.custom_permalink }}</a></div>
             </div>
-
-    </div>
-    {#<div class="form-group-separator" style="display: none;" class="permalink"></div>#}
-
-    {#<div class="form-group ">#}
-    {#<label class="col-sm-2 control-label" for="seo">{{lang.seo}}</label>#}
-    {#<div class="col-sm-10">#}
-    {#</div>#}
-    {#</div>#}
-
-    <div class="form-group-separator"></div>
-
-    <div class="form-group">
-        <label class="col-sm-2 control-label" for="content">{{ lang.content }}</label>
-
-        <div class="col-sm-10">
-            <textarea class="form-control ckeditor" rows="8" name="content" id="content"
-                      placeholder="{{ lang.content }}">{{ helper.form.value('content', item.content) }}</textarea>
         </div>
-    </div>
-    <div class="form-group-separator"></div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label" for="visibility_status_id">{{ lang.visibility }}</label>
+        {#<div class="form-group-separator" style="display: none;" class="permalink"></div>#}
 
-        <div class="col-sm-10">
-            {{ helper.form.dropdown('visibility_status_id', visibility_status_menu, helper.form.value('visibility_status_id', item.visibility_status_id), 'class="form-control select2" id="visibility_status_id"') }}
+        {#<div class="form-group ">#}
+        {#<label class="col-sm-2 control-label" for="seo">{{lang.seo}}</label>#}
+        {#<div class="col-sm-10">#}
+        {#</div>#}
+        {#</div>#}
+
+        <div class="form-group-separator"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="content">{{ lang.content }}</label>
+
+            <div class="col-sm-10">
+                {# <textarea class="form-control ckeditor" rows="8" name="content" id="content"
+                           placeholder="{{ lang.content }}">{{ helper.form.value('content', item.content) }}</textarea>#}
+                <textarea class="form-control wysihtml5" data-stylesheet-url="{{ constant('STYLE_CSS') }}/wysiwyg-color.css" name="content" id="sample_wysiwyg">{{ helper.form.value('content', item.content) }}</textarea>
+
+            </div>
         </div>
-    </div>
+        <div class="form-group-separator"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="visibility_status_id">{{ lang.visibility }}</label>
 
-    <div class="form-group">
-        <label class="col-sm-2 control-label"></label>
-
-        <div class="col-sm-10">
-            <a href="{{ helper.uri.url('management/pages/index') }}" class="btn btn-danger cancel-button">Cancel</a>
-            <button type="submit" class="btn btn-secondary" style="float: right;">{{ lang.submit }}</button>
+            <div class="col-sm-10">
+                {{ helper.form.dropdown('visibility_status_id', visibility_status_menu, helper.form.value('visibility_status_id', item.visibility_status_id), 'class="form-control select2" id="visibility_status_id"') }}
+            </div>
         </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-10">
+                <a href="{{ helper.uri.url('management/pages/index') }}" class="btn btn-danger cancel-button">Cancel</a>
+                <button type="submit" class="btn btn-secondary" style="float: right;">{{ lang.submit }}</button>
+            </div>
+        </div>
+        {{ helper.form.close() }}
     </div>
-    {{ helper.form.close() }}
 </div>
-</div>
-<script src="{{ constant("STYLE_JS") }}/ckeditor/ckeditor.js"></script>
+<link rel="stylesheet" href="{{ constant("STYLE_JS") }}/wysihtml5/src/bootstrap-wysihtml5.css">
+
+<script src="{{ constant("STYLE_JS") }}/wysihtml5/lib/js/wysihtml5-0.3.0.js"></script>
+
+<script src="{{ constant("STYLE_JS") }}/wysihtml5/src/bootstrap-wysihtml5.js"></script>
 <script>
-    $('#title').on('keyup', function () {
-        $.getJSON('{{ helper.uri.url('management/seo/url') }}', {url: $(this).val()}, function (res) {
-            $('.generated_permalink code').html(res.url);
-            $('#seo').val(res.permalink);
-        });
-    });
-    function seo() {
-        $('.permalink').show();
-        $('.generated_permalink').hide();
-    }
-    ;
+                    $('#title').on('keyup', function () {
+                        $.getJSON('{{ helper.uri.url('management/seo/url') }}', {url: $(this).val()}, function (res) {
+                            $('.generated_permalink code').html(res.url);
+                            $('#seo').val(res.permalink);
+                        });
+                    });
+                    function seo() {
+                        $('.permalink').show();
+                        $('.generated_permalink').hide();
+                    }
+                    ;
 </script>

@@ -25,7 +25,7 @@
                     <td>
                         <a class="btn btn-info btn-sm"
                            href="{{ helper.uri.url('management/faqs/manage', item.faq_id ) }}">{{ lang.edit }}</a>
-                        <a href="#" class="btn btn-secondary btn-sm delete_msg"
+                        <a href="#" class="btn btn-danger btn-sm delete_msg"
                            data-url_id="{{ helper.uri.url('management/faqs/delete', item.faq_id ) }}"
                            data-toggle="modal" data-target="#deleteMsg" style="color:#fff;">{{ lang.delete }}</a>
                     </td>

@@ -190,11 +190,11 @@
 
                         <!-- logo -->
                         <div class="logo">
-                            <a href="{{ helper.uri.url('management') }}" class="logo-expanded">
+                            <a href="{{ helper.uri.url('management/dashboard') }}" class="logo-expanded">
                                 <img src="{{ constant('STYLE_IMAGES') }}/logo.png" width="80" alt=""/>
                             </a>
 
-                            <a href="{{ helper.uri.url('management') }}" class="logo-collapsed">
+                            <a href="{{ helper.uri.url('management/dashboard') }}" class="logo-collapsed">
                                 <img src="{{ constant('STYLE_IMAGES') }}/shape.png" width="40" alt=""/>
                             </a>
                         </div>
@@ -781,7 +781,7 @@
 
                         <li class="dropdown user-profile">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="{{ constant('STYLE_IMAGES') }}/user-4.png" alt="user-image"
+                                <img src="{{ helper.uri.cdn() }}users/{{ input.cookie('image') }}" alt="user-image"
                                      class="img-circle img-inline userpic-32"
                                      width="28"/>
                                 <span>
@@ -955,7 +955,7 @@
                 {#</div>#}
 
                 <!-- end: Chat Section -->
-            </div>#}
+{#            </div>#}
 
         </div>
 

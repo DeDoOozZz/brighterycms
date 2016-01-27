@@ -13,8 +13,6 @@ class Links extends \Model {
         'link_type_id' => ['int', 11],
         'name' => ['varchar', 200],
         'url' => ['text'],
-        'var' => ['text'],
-        'visibility_status_id' => ['int', 11],
         'sort' => ['int', 11],
     ];
 
@@ -23,9 +21,7 @@ class Links extends \Model {
             'all' => [
                 'name' => ['required'],
                 'url' => ['required'],
-                'var' => ['required'],
-                'visibility_status_id' => ['required', 'numeric'],
-                'sort' => ['required', 'numeric'],
+//                'sort' => ['required', 'numeric'],
             ],
         ];
     }
@@ -35,8 +31,6 @@ class Links extends \Model {
             'link_type_id' => 'link_type_id',
             'name' => 'name',
             'url' => 'url',
-            'var' => 'var',
-            'visibility_status_id' => 'visibility_status_id',
             'sort' => 'sort',
         ];
     }

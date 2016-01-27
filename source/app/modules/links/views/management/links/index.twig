@@ -10,7 +10,7 @@
     </div>
     <div class="panel-body">
 
-        <table class="table table-bordered table-striped" id="example-2">
+        <table class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -18,10 +18,10 @@
                 </tr>
             </thead>
 
-            <tbody class="middle-align">
+            <tbody class="middle-align" id="sortable">
 
                 {% for item in items %}
-                    <tr>
+                    <tr data-id="{{item.link_id}}">
                         <td>{{item.name}}</td>
                         <td>
                             <a class="btn btn-info btn-sm" href="{{ helper.uri.url('management/links/manage', item.link_id ) }}">{{lang.edit}}</a>
@@ -51,3 +51,23 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(function() {
+        $( ".table tbody" ).sortable({
+            update: function( event, ui ) {
+                $json = [];
+                $i = 0;
+                $('#sortable tr').each(function(){
+                    $json.push({
+                        "link_id": $(this).data('id'),
+                        "sort" : $i
+                    });
+                    $i++;
+                });
+                $.post("{{ helper.uri.url('management/links/resort' ) }}", {sort: $json}, function(){});
+            }
+        });
+        $( ".table" ).disableSelection();
+    });
+</script>

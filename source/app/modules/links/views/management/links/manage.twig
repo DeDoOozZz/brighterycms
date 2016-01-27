@@ -22,30 +22,14 @@
         </div>
         <div class="form-group-separator"></div>
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="var">{{ lang.var }}</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="var" placeholder="{{lang.var}}" name="var"
-                       value="{{ helper.form.value('var', item.var) }}">
-            </div>
-        </div>
-        <div class="form-group-separator"></div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="clinic_schedule_id">{{ lang.visibility_status }}</label>
-            <div class="col-sm-10">
-                {{ helper.form.dropdown('visibility_status_id', visibility, helper.form.value('visibility_status_id', item.visibility_status_id), 'class="form-control select2" id="s2example-1" ') }}
-            </div>
-        </div>
-        <div class="form-group-separator"></div>
-
-        <div class="form-group">
+      {#  <div class="form-group">
             <label class="col-sm-2 control-label" for="sort">{{ lang.sort }}</label>
             <div class="col-sm-10">
                 <input type="number" class="form-control" id="sort" placeholder="{{lang.sort }}" name="sort"
                        value="{{ helper.form.value('sort', item.sort) }}">
             </div>
         </div>
-        <div class="form-group-separator"></div>
+        <div class="form-group-separator"></div>#}
 
         <div class="form-group">
             <label class="col-sm-2 control-label"></label>

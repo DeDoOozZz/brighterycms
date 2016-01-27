@@ -50,8 +50,9 @@ class PagesController extends Brightery_Controller {
             $model = new \modules\pages\models\Pages('edit');
         else
             $model = new \modules\pages\models\Pages('add');
-
-        $model->attributes = $this->input->post();
+        if ($_POST)
+            $model->attributes = $this->input->post();
+        $model->language_id = $this->language->getDefaultLanguage();
 
         if (!$id)
             $model->created = date("Y-m-d H:i:s");

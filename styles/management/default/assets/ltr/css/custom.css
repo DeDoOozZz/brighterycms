@@ -1,11 +1,21 @@
-/**
- *
- * Apply your custom CSS here
- *
-*/
-
-body {	
+.text-description{
+    height: 200px !important;
 }
-
-a {
+.generated_permalink {
+    display: inline-block;
+    width: 100%;
+}
+code {
+    padding: 8px 4px;
+    font-size: 90%;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    border-radius: 0;
+    width: 100%;
+    display: block;
+}
+a.custom-link {
+    width: 100%;
+    font-size: 12px;
+    margin-top: -6px;
 }

@@ -28,20 +28,21 @@ class SlidesController extends Brightery_Controller {
     public function indexAction($id = false, $offset = 0) {
         $this->permission('index');
         $model = new \modules\sliders\models\Slides();
+        $model->_order_by['sort']='ASC'; 
         $model->slider_id = $id;
         $model->_select = "slide_id, title, image, slider_id";
-        $this->load->library('pagination');
-        $model->_limit = $this->config->get('limit');
-        $model->_offset = $offset;
-        $config = [
-            'url' => Uri_helper::url('management/sliders/slides/' . $id),
-            'total' => $model->get(true),
-            'limit' => $model->_limit,
-            'offset' => $model->_offset,
-        ];
+//        $this->load->library('pagination');
+//        $model->_limit = $this->config->get('limit');
+//        $model->_offset = $offset;
+//        $config = [
+//            'url' => Uri_helper::url('management/sliders/slides/' . $id),
+//            'total' => $model->get(true),
+//            'limit' => $model->_limit,
+//            'offset' => $model->_offset,
+//        ];
         return $this->render('sliders/slides', [
                     'items' => $model->get(),
-                    'pagination' => $this->Pagination->generate($config),
+//                    'pagination' => $this->Pagination->generate($config),
                     'id' => $id
         ]);
     }
@@ -81,6 +82,15 @@ class SlidesController extends Brightery_Controller {
         $model->slide_id = $id;
         if ($model->delete())
             Uri_helper::redirect("management/sliders");
+    }
+
+    public function resortAction() {
+        $this->layout = 'ajax';
+        foreach ($this->input->post('sort') as $links) {
+            $this->database->where('slide_id', $links['slide_id'])->update('slides', array(
+                'sort' => $links['sort']
+            ));
+        }
     }
 
 }
