@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">{{ lang.branches }}</h3>
-        <button class="btn btn-secondary" onclick="goBack()" style="float: right;">{{ lang.back }}</button>
+{#        <button class="btn btn-secondary" onclick="goBack()" style="float: right;">{{ lang.back }}</button>#}
 
         <script>
             function goBack() {
@@ -107,8 +107,8 @@
 
     </div>
 </div>
-
-<script type="text/javascript">
+{#<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>#}
+{#<script type="text/javascript">
     jQuery(document).ready(function ($)
     {
 
@@ -226,7 +226,7 @@
             ev.preventDefault();
 
             var $inp = $('.location_search'),
-                address = $inp.val().trim();
+                    address = $inp.val().trim();
 
             $inp.prev().find('i').addClass('fa-spinner fa-spin');
 
@@ -253,15 +253,14 @@
             }
         });
 
-        $('#latitude, #longitude').on('change', function() {
+        $('#latitude, #longitude').on('change', function () {
             map.panTo(new google.maps.LatLng($('#latitude').val(), $('#longitude').val()));
         });
-
-
-
     });
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+
+</script>#}
+
 <style>
     .gmap.full-page-google-map {
         margin-bottom: 20px;

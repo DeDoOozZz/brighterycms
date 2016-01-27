@@ -21,6 +21,11 @@ return [
                     'url' => 'management/clinic_doctors',
                     'icon' => 'fa fa-user-md'
                 ],
+                'doctor_reviews' => [
+                    'title' => 'doctor_reviews',
+                    'url' => 'management/clinic_doctor_reviews',
+                    'icon' => 'fa fa-star-half-o'
+                ],
                 'patients' => [
                     'title' => 'patients',
                     'url' => 'management/clinic_patients',
@@ -47,12 +52,6 @@ return [
 //                    'icon' => 'fa fa-star-half-o'
 //                ],
             ],
-//            'doctor_reviews' => [
-//                'title' => 'doctor_reviews',
-//                'url' => 'management/clinic_doctor_reviews',
-//                'icon' => 'fa fa-star-half-o'
-//            ],
-
         ],
     ],
 ];
