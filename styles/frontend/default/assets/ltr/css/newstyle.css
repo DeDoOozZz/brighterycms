@@ -244,14 +244,10 @@ section.main-section-page {
 .doctors-blocks {
     background-color: #f5f5f5;
     margin-bottom: 20px;
-    padding: 10px 0;
+    padding: 10px;
     float: left;
     width: 100%;
     margin-left: 0;
-}
-.doctor-image  img{
-    width: 100%;
-    height: 151px;
 }
 .doctor-details h2 {
     margin-top: 0;
@@ -296,5 +292,24 @@ span.reservation-details-content {
 }
 .menu-links li a{
     color:#fff;
+}
+.col-sm-2.doctor-image {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 100%;
+    border: 1px solid #fab000;
+    padding: 10px;
+}
+.doctor-image img {
+    width: 100%;
+    border-radius: 100%;
+}
+.reservation-details i{
+    color: #fab000;
+    margin-right: 7px;
+}
+.queue-screen{
+    background-color: #333;
 }
 /*end login home*/
