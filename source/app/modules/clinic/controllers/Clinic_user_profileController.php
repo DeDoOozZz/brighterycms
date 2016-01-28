@@ -188,15 +188,26 @@ class Clinic_user_profileController extends Brightery_Controller {
             return FALSE;
     }
 
-    public function checkAction($id, $old_password = NULL) {
+    public function checkAction($id, $old_password) {
         if ($old_password) {
             $check = new \modules\users\models\Users();
             $check->user_id = $id;
             $check->password = md5($old_password);
-            if ($check->get()){
+            if ($check->get()) {
                 return true;
-            }
+            } else
+                return false;
         }
+    }
+
+    public function changePasswordAction($id, $new_password) {
+        $user = new \modules\users\models\Users();
+        $user->user_id = $id;
+        $user->password = md5($new_password);
+//        print_r($user->attributes);
+//        print_r($user->get());
+        if ($user->save())
+            return true;
     }
 
 }

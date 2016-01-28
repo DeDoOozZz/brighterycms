@@ -59,10 +59,12 @@
                                         <li class="email"> <i class="fa fa-envelope"></i> {{ item.email }} </li>
                                         <li class="password"> <i class="fa fa-lock"></i>
                                             {#                                            <input type="password" value="{{ item.password }}"style="border: medium none; background-color: #fff;" disabled>#}
+                                            {%if id == idlog%}
                                             <a href="#" data-toggle="modal" data-target="#edit" style="margin-left:10px;">
                                                 <i class="fa fa-pencil-square-o"></i>
                                                 <span>{{ lang.edit }}</span>
                                             </a>
+                                            {%endif%}
                                         </li>
                                         <li class="gender"> <i class="fa fa-user"></i> {{ item.gender }} </li>
                                         <li class="birthdate"> <i class="fa fa-calendar"></i> {{ item.birthdate }} </li>
@@ -285,7 +287,7 @@
                         <div class="modal_errors"></div>
                         {{ helper.form.open(null,false,true,'role="for1" id="rootwizard" class="form-wizard validate" novalidate') }}
                         {{ error }}
-                        <ul class="tabs">
+                        {#<ul class="tabs">
                             <li class="active">
                                 <a href="#fwv-1" data-toggle="tab">
                                     Old password
@@ -304,37 +306,46 @@
                                     <span>3</span>
                                 </a>
                             </li>
-                        </ul>
+                        </ul>#}
                         <div class="progress-indicator">
                             <span></span>
                         </div>
                         <div class="tab-content no-margin">
 
                             <!-- Old Password -->
-                            <div class="tab-pane with-bg active" id="fwv-1">
+                            <div class="tab-pane with-bg active" id="old">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="control-label" for="old-pass">Old Password</label>
-                                            <input class="form-control" name="old-password" id="old-pass" data-validate="required" placeholder="Your old password" />
-                                            <input type="text" id="status" value>
+                                            <input type="password" class="form-control" name="old-password" id="old-pass" data-validate="required" placeholder="Your old password" />
+                                            {#                                            <input type="text" id="status" value>#}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- New Password -->
-                            <div class="tab-pane with-bg" id="fwv-2">
+                            <div class="{#tab-pane with-bg#}row" id="new" hidden>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="control-label" for="new">New Password</label>
-                                            <input class="form-control" name="password" id="new" data-validate="required" placeholder="Enter your New Password" />
+                                            <input type="password" class="form-control" name="password" id="password-new" data-validate="required" placeholder="Enter your New Password" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="new">Retype New Password</label>
+                                            <input type="password" class="form-control" name="password-conf" id="password-conf" data-validate="required" placeholder="Enter your New Password again" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- retype new Password -->
-                            <div class="tab-pane with-bg" id="fwv-3">
+                            {#<div class="tab-pane with-bg row" id="new-conf" hidden>
                                 <strong>New Password</strong>
                                 <br />
                                 <br />
@@ -347,23 +358,28 @@
                                     </div>
                                 </div>
 
-                            </div>
+                            </div>#}
 
                             <!-- Tabs Pager -->
 
                             <ul class="pager wizard">
-                                <li class="previous">
+                                {#<li class="previous">
                                     <a href="#"><i class="entypo-left-open"></i> Previous</a>
-                                </li>
+                                </li>#}
 
-                                <li class="next">
+                                <input type="button" id="next" class="next" value="Next">
+                                <input type="button" id="next-conf" class="next" value="Submit" hidden>
+                                {#<li class="next" id="next-new">
                                     <a id='next' href="#">Next <i class="entypo-right-open"></i></a>
                                 </li>
+                                <li class="next" id="next-conf" hidden>
+                                    <a id='next-con' href="#">Next <i class="entypo-right-open"></i></a>
+                                </li>#}
                             </ul>
 
                         </div>
                         {#--------------submit----------#}
-                        <div class="form-group">
+                        <div class="form-group" hidden id="submit">
                             <label for="field-5" class="col-sm-2 control-label"></label>
                             <div class="col-sm-9">
                                 <input type="submit" value="Change" class="form-control submit-edit" style="line-height: normal;">
@@ -390,13 +406,6 @@
         });
         $(".add-another-option-address ").click(function () {
             $(".show-address-option").append('<label class="control-label primary">' + 'Primary {{ lang.primary }}</label>' + '<input type="radio" class="primary" value="primary" name="primary_address"  style="position: relative;right: 90px;">' + ' <input name="address[]" id="address" type="text" placeholder="add another address" class="form-control">' + ' <span class="delete-option col-sm-1" style="position: relative; top:-27px;"><i class="fa fa-close"></i></span>' + '<div class="form-group-separator"></div>');
-        });
-        $("#fwv-2").click(function () {
-            var status = $('#statis').val();
-            if (status == 1)
-                $('#fwv-2').show();
-            else
-                $('#fwv-1').show();
         });
     });
 
@@ -460,14 +469,38 @@
     });
     $('#next').click(function () {
         var old_pass = $('#old-pass').val();
-        $.post('{{ helper.uri.url('clinic_user_profile/check/')}}{{ item.user_id }}' , old_pass : old_pass,
-                function (response) {
-                    if (response == 1) {
-                        $('#status').val('1') ;
-                    }
-                });
-        return false;
-    });
+    {#        alert(old_pass);#}
+            $.post('{{ helper.uri.url('clinic_user_profile/check/')}}{{ item.user_id }}' + '/' + old_pass,
+                    function (response) {
+                        if (response == 1) {
+                            $('#old').hide();
+                            $('#new').show();
+                            $('#next').hide();
+                            $('#next-conf').show();
+                        } else 
+                            alert('Error Password');
+                    });
+            return false;
+        });
+        $('#next-conf').click(function () {
+            var password_new = $('#password-new').val();
+            var password_conf = $('#password-conf').val();
+            if (password_new === password_conf) {
+                $.post('{{ helper.uri.url('clinic_user_profile/changePassword/')}}{{ item.user_id }}' + '/' + password_new,
+                        function (response) {
+                            if (response == 1) {
+                                $('#edit').hide();
+                                $('#old').show();
+                                $('#new').hide();
+                                $('#next').show();
+                                $('#next-conf').hide();
+                            }
+                        });
+            }
+            else
+                alert('Tow Word Does Not Match');
+            return false;
+        });
 
 //    if($.isFunction($.fn.datepicker)) {
 //        $(".datepicker").each(function(i, el)

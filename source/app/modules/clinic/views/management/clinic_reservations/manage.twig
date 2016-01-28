@@ -149,7 +149,7 @@
 var app = angular.module('myApp', []);
 app.controller('customersCtrl', function ($scope, $http) {
 $scope.draw = function () {
-$http({
+{#$http({
     url: "{{helper.uri.url('management/clinic_reservations/getdoctorTypes')}}",
     method: "get",
     params: {user_id: $scope.form.user_id}
@@ -166,7 +166,7 @@ $http({
         console.log($scope.result);
         $('#search-result').show();
     }
-});
+});#}
 $http({
     url: "{{helper.uri.url('management/clinic_reservations/getSearch')}}",
     method: "get",
@@ -189,8 +189,8 @@ $http({
     params: {time: $scope.result[idx].time, date: $scope.result[idx].date, patient_id: $scope.patient_id, status: $scope.status, type: $scope.type}
 }).then(function (response) {
     $scope.result = response.data.result;
-    console.log($scope.result);
-    $('#search-result').show();
+    //console.log($scope.result);
+    //$('#search-result').show();
 });
 };
 });
