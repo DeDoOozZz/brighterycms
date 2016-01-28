@@ -312,4 +312,11 @@ span.reservation-details-content {
 .queue-screen{
     background-color: #333;
 }
+.blog-section {
+    padding-top: 180px !important;
+}
+section.main-section-page {
+    margin-top: 190px;
+    margin-bottom: 20px;
+}
 /*end login home*/
