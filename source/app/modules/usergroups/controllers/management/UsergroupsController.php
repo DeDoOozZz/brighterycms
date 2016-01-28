@@ -35,8 +35,9 @@ class UsergroupsController extends Brightery_Controller {
         ]);
     }
 
-    public function manageAction($id = false){
+    public function manageAction($id = false) {
         $this->permission('manage');
+//        print_r($_POST);
         $model = new \modules\usergroups\models\Usergroups('management');
         $model->attributes = $this->input->post();
         $permissions_management = $this->config->get('Permissions.management');
@@ -47,6 +48,7 @@ class UsergroupsController extends Brightery_Controller {
         $module_checked->_select = "permission , usergroup_zone_id , usergroup_id , module";
         $module_checked->usergroup_id = $id;
 
+        print_r($module_checked->get());
 
 //        if ($id){
 //            $model->usergroup_id = $id;
@@ -74,6 +76,8 @@ class UsergroupsController extends Brightery_Controller {
                 $modules_user_zone->save();
             }
 
+            print_r($permissions_frontend);
+            print_r($permissions_management);
             Uri_helper::redirect("management/usergroups");
         } else
             return $this->render('usergroups/manage', [

@@ -47,8 +47,7 @@ class Clinic_reservationController extends Brightery_Controller {
         $doctors->_order_by = false;
 
         if ($this->input->get('clinic_branch_id')) {
-//            echo $this->input->get('clinic_branch_id');
-            $doctors->where = 'clinic_branches.`clinic_branch_id` = ' . $this->input->get('clinic_branch_id');
+            $doctors->where('clinic_branches.`clinic_branch_id` ', $this->input->get('clinic_branch_id'));
         }
         if ($this->input->get('specification_id')) {
             $doctors->where('clinic_specifications.`clinic_specification_id`', $this->input->get('specification_id'));
@@ -56,13 +55,6 @@ class Clinic_reservationController extends Brightery_Controller {
         if ($this->input->get('clinic_doctor_id')) {
             $doctors->where('clinic_doctors.`clinic_doctor_id`', $this->input->get('clinic_doctor_id'));
         }
-
-//        if ($_GET) {
-//            print_r($doctors->attributes);
-//            echo "/////////";
-//            print_r($doctors->get());
-//            exit();
-//        }
 
         $this->load->library('pagination');
         $doctors->_limit = $this->config->get('limit');
@@ -121,6 +113,7 @@ class Clinic_reservationController extends Brightery_Controller {
         $model_schedule = new \modules\clinic\models\Clinic_schedules();
         $model_schedule->_select = 'clinic_doctor_id, day , from_time , to_time ';
         $model_schedule->clinic_doctor_id = $doctor_id;
+        $model_schedule->status = 'on';
         $time = $model_schedule->get();
         if (!$time)
             return $this->render('clinic_reservations/clinic_schedule', [
@@ -141,9 +134,12 @@ class Clinic_reservationController extends Brightery_Controller {
         $result = $model_schedule->get();
         $time = $model_schedule->get_time($from, $to, $period, $doctor_id);
         if ($this->input->get('date')) {
-            $date_new = $model_schedule->get_newDate($this->input->get('date'));
+            if (strtotime($this->input->get('date')) <= strtotime(date("Y-0n-j")))
+                $date_new = $model_schedule->get_newDate(NULL, $doctor_id);
+            else
+                $date_new = $model_schedule->get_newDate($this->input->get('date'), $doctor_id);
         } else
-            $date_new = $model_schedule->get_newDate();
+            $date_new = $model_schedule->get_newDate(NULL, $doctor_id);
         $reserved = $model_schedule->get_schedule($date_new, $time, $doctor_id);
         $exceptions = $model_schedule->exceptions($doctor_id);
         $model_schedule->pre($reserved, $result, $date_new);

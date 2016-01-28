@@ -101,7 +101,7 @@ class Clinic_schedules extends \Model {
         return $time;
     }
 
-    function get_newDate($date = NULL) {
+    function get_newDate($date = NULL , $doctor_id) {
         $date_new = [];
         if ($date)
             $new_date = $date;
@@ -117,8 +117,19 @@ class Clinic_schedules extends \Model {
             $date_new[$x]->date = $new_date;
             $date_new[$x]->day = date_format(date_create($new_date), 'l');
         }
-//        if ($date)
-//            exit();
+        $model_schedule = new Clinic_schedules();
+        $model_schedule->_select = 'day , status';
+        $model_schedule->clinic_doctor_id = $doctor_id;
+        $model_schedule->status = 'on';
+        $result = $model_schedule->get();
+        foreach ($result as $value)
+        {
+            foreach ($date_new as $key => $date){
+                if($date->day == $value->day)
+                    $date_new[$key]->day_status = 'on';
+            }
+                
+        }
         return $date_new;
     }
 
@@ -134,8 +145,9 @@ class Clinic_schedules extends \Model {
 
         /////////////////////////////Clinic Schedules///////////////////////////
         $model_schedule = new Clinic_schedules();
-        $model_schedule->_select = 'day , from_time , to_time ';
+        $model_schedule->_select = 'day , from_time , to_time , status';
         $model_schedule->clinic_doctor_id = $doctor_id;
+//        $model_schedule->status = 'on';
         $res = $model_schedule->get();
         foreach ($date as $key => $value) {
             $day = $date[$key]->day;
@@ -146,9 +158,15 @@ class Clinic_schedules extends \Model {
                 $i[$k]->schedule->$day->status = '';
                 $i[$k]->schedule->$day->from_time = '';
                 $i[$k]->schedule->$day->to_time = '';
+                foreach ($res as $value) {
+                    if ($day == $value->day && $value->status == 'on')
+                        $i[$k]->schedule->$day->day_status = 'on';
+                }
                 foreach ($res as $tare) {
                     if ($tare->day == $day) {
                         $tare->date = $d;
+//                        if($tare->status == 'on')
+//                            $tare->
                     }
                 }
             }
@@ -161,7 +179,7 @@ class Clinic_schedules extends \Model {
             $model_reservations->date = $res[$keyy]->date;
             $model_reservations->clinic_doctor_id = $doctor_id;
             $dates = $model_reservations->get();
-            
+
             if ($dates) {
                 foreach ($dates as $key => $value) {
                     foreach ($date_new as $keyy => $valuee) {
