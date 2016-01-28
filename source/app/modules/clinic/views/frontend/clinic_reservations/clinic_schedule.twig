@@ -159,48 +159,52 @@
             </div>
 
             {{date}}
-            <table>
-                <thead>
-                <th class="fc-header">Times</th>
+            {% if dates %}
+                <table>
+                    <thead>
+                    <th class="fc-header">Times</th>
 
-                {% for item in dates %}
-                    <th class="fc-header">{{item.day}} <br><span class="reservation-day">{{item.date}}</span><br>
-                        {% for i in item_schedule %}
-                            {% if i.day == item.day and item.day_status %}
-                                <span class="reservation-day">{{i.from_time}} - {{i.to_time}}</span>
-                            {% endif %}
-                        {%endfor%}
-                    </th>
-                {%endfor%}
-                </thead>
-                <tbody>
-                    {% for final in finals %}
-                        <tr>
-                            <td class="fc-record times">{{final.time}}</td>
-                            {% for itt in final.schedule|cast_to_array %}
-                                {% if itt.day_status == 'on'%}
-                                    {% if not itt.from_time %}
-                                        <td class="fc-record vacation last-record"></td>
-                                    {%elseif itt.status == 'reserved' and itt.time == final.time and itt.day_status == 'on' %}
-                                        <td class="fc-record reserved"><i class="fa fa-lock"></i>Reserved</td>
-                                    {%elseif itt.status == 'except' and itt.day_status == 'on' %}
-                                        <td class="fc-record vacation last-record"></td>
-                                    {%elseif itt.to_time < final.time %}
-                                        <td class="fc-record vacation last-record"></td>
-                                    {%elseif itt.from_time > final.time %}
-                                        <td class="fc-record vacation last-record"></td>
-                                    {%elseif itt.from_time <= final.time and final.time <= itt.to_time %}
-                                        <td class="fc-record available" id="id_{{i}}" data-id="id_{{i}}" data-toggle="modal" data-date="{{itt.date}}" data-time="{{final.time}}" data-target='#myModal2'><i id="lock_id_{{i}}" class="fa fa-unlock"></i> Available</td>
-                                        {%set i = i + 1%}
-                                    {%endif%}
-                                {%else%}
-                                    <td class="fc-record vacation last-record"></td>
-                                {%endif%}
+                    {% for item in dates %}
+                        <th class="fc-header">{{item.day}} <br><span class="reservation-day">{{item.date}}</span><br>
+                            {% for i in item_schedule %}
+                                {% if i.day == item.day and item.day_status %}
+                                    <span class="reservation-day">{{i.from_time}} - {{i.to_time}}</span>
+                                {% endif %}
                             {%endfor%}
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                        </th>
+                    {%endfor%}
+                    </thead>
+                    <tbody>
+                        {% for final in finals %}
+                            <tr>
+                                <td class="fc-record times">{{final.time}}</td>
+                                {% for itt in final.schedule|cast_to_array %}
+                                    {% if itt.day_status == 'on'%}
+                                        {% if not itt.from_time %}
+                                            <td class="fc-record vacation last-record"></td>
+                                        {%elseif itt.status == 'reserved' and itt.time == final.time and itt.day_status == 'on' %}
+                                            <td class="fc-record reserved"><i class="fa fa-lock"></i>Reserved</td>
+                                        {%elseif itt.status == 'except' and itt.day_status == 'on' %}
+                                            <td class="fc-record vacation last-record"></td>
+                                        {%elseif itt.to_time < final.time %}
+                                            <td class="fc-record vacation last-record"></td>
+                                        {%elseif itt.from_time > final.time %}
+                                            <td class="fc-record vacation last-record"></td>
+                                        {%elseif itt.from_time <= final.time and final.time <= itt.to_time %}
+                                            <td class="fc-record available" id="id_{{i}}" data-id="id_{{i}}" data-toggle="modal" data-date="{{itt.date}}" data-time="{{final.time}}" data-target='#myModal2'><i id="lock_id_{{i}}" class="fa fa-unlock"></i> Available</td>
+                                            {%set i = i + 1%}
+                                        {%endif%}
+                                    {%else%}
+                                        <td class="fc-record vacation last-record"></td>
+                                    {%endif%}
+                                {%endfor%}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {%else%}
+                {#      low el DR malosh Schedule      #}
+            {%endif %}
         </div>
     </div>
 </section>
