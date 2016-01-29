@@ -13,7 +13,7 @@
                 {% for item in slides %}  
                     <li data-transition="fade" data-slotamount="7" data-masterspeed="500" data-saveperformance="on"  data-title="Intro Slide">
                         <!-- MAIN IMAGE -->
-                        <img src="{{ constant("STYLE_IMAGES") }}/upload/slide/1.jpg"  alt="slidebg1" data-lazyload="{{ constant("STYLE_IMAGES") }}/upload/slide/1.jpg" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+                        <img src="{{helper.uri.cdn('sliders', item.image )}}"  alt="slidebg1" data-lazyload="{{helper.uri.cdn('sliders', item.image )}}" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
                         <!-- LAYERS -->
 
                         <!-- LAYER NR. 1 -->

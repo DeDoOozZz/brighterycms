@@ -8,8 +8,8 @@
                     <div class="blog-post single-post">
                         <img src="{{helper.uri.cdn('blog', item.image )}}" alt="">
                         <div class="post-content-text">
-                            <h1>{{item.title}}</h1>
-                            <span>{{ item.created|date("d F Y")}}</span>
+                            <h1>{{item.title}}</h1> 
+                            <span>{{ item.created|date("d F Y")}}</span> <br>
                             {{item.content}}
                         </div>
                     </div>
@@ -22,7 +22,8 @@
                                         <img alt="" src="{{ constant("STYLE_IMAGES") }}/upload/team/2.jpg">
                                         <div class="comment-content">
                                             <h4>{{comment.name}}</h4>
-                                            <span>{{ comment.created|date("d F Y")}}</span><br>
+                                            <span>{{ comment.created|date("d F Y")}}</span>
+                                            <br>
                                             {{comment.comment}}
                                         </div>
                                     </div>
@@ -55,7 +56,7 @@
                         </ul>
                     </div>
 
-                    <div class="text-widget widget">
+                    {#<div class="text-widget widget">
                         <h2>Text Widget</h2>
                         <div class="text-box">
                             <p>Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.</p>
@@ -83,7 +84,7 @@
                             <li><a href="#">kitchen</a></li>
                             <li><a href="#">energy</a></li>
                         </ul>
-                    </div>
+                    </div>#}
 
                 </div>
             </div>
