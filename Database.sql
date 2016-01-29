@@ -1,5 +1,7 @@
 /*
-SQLyog Ultimate v11.5 (64 bit)
+SQLyog Job Agent v11.5 (64 bit) Copyright(c) Webyog Inc. All Rights Reserved.
+
+
 MySQL - 5.6.17 : Database - brighterycms
 *********************************************************************
 */
@@ -13,8 +15,6 @@ MySQL - 5.6.17 : Database - brighterycms
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 /*Table structure for table `blog_categories` */
-
-DROP TABLE IF EXISTS `blog_categories`;
 
 CREATE TABLE `blog_categories` (
   `blog_category_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -36,8 +36,6 @@ insert  into `blog_categories`(`blog_category_id`,`language_id`,`title`,`seo`,`p
 
 /*Table structure for table `blog_keywords` */
 
-DROP TABLE IF EXISTS `blog_keywords`;
-
 CREATE TABLE `blog_keywords` (
   `blog_keyword_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` varchar(3) DEFAULT NULL,
@@ -51,8 +49,6 @@ CREATE TABLE `blog_keywords` (
 insert  into `blog_keywords`(`blog_keyword_id`,`language_id`,`blog_post_id`,`keyword_id`) values (1,NULL,2,1),(2,NULL,2,2),(3,NULL,2,3),(4,NULL,3,4),(5,NULL,3,5),(23,NULL,7,2),(24,NULL,7,17),(25,NULL,7,18),(26,NULL,7,10),(38,NULL,0,28),(39,NULL,0,29);
 
 /*Table structure for table `blog_post_comments` */
-
-DROP TABLE IF EXISTS `blog_post_comments`;
 
 CREATE TABLE `blog_post_comments` (
   `blog_post_comment_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -69,8 +65,6 @@ CREATE TABLE `blog_post_comments` (
 
 /*Table structure for table `blog_post_tags` */
 
-DROP TABLE IF EXISTS `blog_post_tags`;
-
 CREATE TABLE `blog_post_tags` (
   `blog_tag_id` int(11) NOT NULL AUTO_INCREMENT,
   `blog_post_id` int(11) DEFAULT NULL,
@@ -83,8 +77,6 @@ CREATE TABLE `blog_post_tags` (
 insert  into `blog_post_tags`(`blog_tag_id`,`blog_post_id`,`tag_id`) values (13,1,1),(14,1,2),(15,1,3),(16,1,6),(17,1,17),(18,2,14),(19,2,18),(20,3,19),(34,7,23),(35,7,26),(36,7,14),(47,0,35),(48,0,36),(49,0,37);
 
 /*Table structure for table `blog_posts` */
-
-DROP TABLE IF EXISTS `blog_posts`;
 
 CREATE TABLE `blog_posts` (
   `blog_post_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -106,8 +98,6 @@ insert  into `blog_posts`(`blog_post_id`,`user_id`,`blog_category_id`,`language_
 
 /*Table structure for table `brightery_invoices` */
 
-DROP TABLE IF EXISTS `brightery_invoices`;
-
 CREATE TABLE `brightery_invoices` (
   `brightery_invoice_id` int(11) NOT NULL AUTO_INCREMENT,
   `brightery_license_id` int(11) DEFAULT NULL,
@@ -121,8 +111,6 @@ CREATE TABLE `brightery_invoices` (
 insert  into `brightery_invoices`(`brightery_invoice_id`,`brightery_license_id`,`due_date`,`status`) values (1,117,'2015-07-29','paid'),(2,117,'2015-07-28','canceled'),(3,117,'2015-07-08','canceled'),(4,119,'2013-08-20','due'),(5,117,'2015-08-28','canceled'),(6,117,'2015-08-29','due'),(7,119,'2015-08-20','due'),(10,117,'2015-08-29','due'),(9,227,'2015-08-29','due'),(11,117,'2015-08-29','due'),(12,117,'2015-08-29','due');
 
 /*Table structure for table `brightery_licenses` */
-
-DROP TABLE IF EXISTS `brightery_licenses`;
 
 CREATE TABLE `brightery_licenses` (
   `brightery_license_id` int(10) NOT NULL AUTO_INCREMENT,
@@ -143,8 +131,6 @@ insert  into `brightery_licenses`(`brightery_license_id`,`license_code`,`brighte
 
 /*Table structure for table `brightery_products` */
 
-DROP TABLE IF EXISTS `brightery_products`;
-
 CREATE TABLE `brightery_products` (
   `brightery_product_id` int(10) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
@@ -160,8 +146,6 @@ insert  into `brightery_products`(`brightery_product_id`,`title`,`fixed_price_st
 
 /*Table structure for table `brightery_products_subscriptions` */
 
-DROP TABLE IF EXISTS `brightery_products_subscriptions`;
-
 CREATE TABLE `brightery_products_subscriptions` (
   `brightery_products_subscription_id` int(11) NOT NULL AUTO_INCREMENT,
   `brightery_product_id` int(11) NOT NULL,
@@ -176,8 +160,6 @@ CREATE TABLE `brightery_products_subscriptions` (
 insert  into `brightery_products_subscriptions`(`brightery_products_subscription_id`,`brightery_product_id`,`period_cycle`,`period`,`price`) values (3,0,'Year',2,1),(5,84,'Month',1,50),(71,84,'Day',2,2525),(72,95,'Day',1,0),(73,95,'Day',3,0),(74,95,'Day',7,0),(75,96,'Day',4,5),(76,96,'Day',2,0),(77,96,'Day',5,0),(78,97,'Day',5,0),(79,97,'Day',5,0);
 
 /*Table structure for table `chat_conversation_messages` */
-
-DROP TABLE IF EXISTS `chat_conversation_messages`;
 
 CREATE TABLE `chat_conversation_messages` (
   `chat_conversation_message_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -196,8 +178,6 @@ insert  into `chat_conversation_messages`(`chat_conversation_message_id`,`user_i
 
 /*Table structure for table `chat_conversation_users` */
 
-DROP TABLE IF EXISTS `chat_conversation_users`;
-
 CREATE TABLE `chat_conversation_users` (
   `chat_conversation_user_id` int(11) NOT NULL AUTO_INCREMENT,
   `chat_conversation_id` int(11) NOT NULL,
@@ -213,8 +193,6 @@ insert  into `chat_conversation_users`(`chat_conversation_user_id`,`chat_convers
 
 /*Table structure for table `chat_conversations` */
 
-DROP TABLE IF EXISTS `chat_conversations`;
-
 CREATE TABLE `chat_conversations` (
   `chat_conversation_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`chat_conversation_id`)
@@ -225,8 +203,6 @@ CREATE TABLE `chat_conversations` (
 insert  into `chat_conversations`(`chat_conversation_id`) values (1),(2),(3),(10),(11),(12),(13);
 
 /*Table structure for table `classfied_areas` */
-
-DROP TABLE IF EXISTS `classfied_areas`;
 
 CREATE TABLE `classfied_areas` (
   `classfied_area_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -240,8 +216,6 @@ CREATE TABLE `classfied_areas` (
 insert  into `classfied_areas`(`classfied_area_id`,`name`,`classfied_city_id`) values (5,'محمد المفتري',1),(6,'مروة المفتييييييييييي',1),(7,'mohammad',93);
 
 /*Table structure for table `classfied_categories` */
-
-DROP TABLE IF EXISTS `classfied_categories`;
 
 CREATE TABLE `classfied_categories` (
   `classfied_category_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -262,8 +236,6 @@ insert  into `classfied_categories`(`classfied_category_id`,`name`,`var_name`,`t
 
 /*Table structure for table `classfied_cities` */
 
-DROP TABLE IF EXISTS `classfied_cities`;
-
 CREATE TABLE `classfied_cities` (
   `classfied_city_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -276,8 +248,6 @@ CREATE TABLE `classfied_cities` (
 insert  into `classfied_cities`(`classfied_city_id`,`name`,`classfied_country_id`) values (1,'الأردن',1),(2,'مصر',NULL),(3,'الجزائر',NULL),(4,'البحرين',NULL),(5,'الإمارات العربية المتحدة',NULL),(73,'العراق',NULL),(74,'الكويت',NULL),(75,'المغرب',NULL),(76,'المملكة العربية السعودية',NULL),(77,'اليمن',NULL),(78,'تونس',NULL),(79,'عمان',NULL),(80,'قطر',NULL),(81,'لبنان',NULL),(82,'ليبيا',NULL),(83,'سوريا',NULL),(84,'السودان',NULL),(85,'فلسطين',NULL),(93,'cairooooooooooooooo',85);
 
 /*Table structure for table `classfied_countries` */
-
-DROP TABLE IF EXISTS `classfied_countries`;
 
 CREATE TABLE `classfied_countries` (
   `classfied_country_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -292,8 +262,6 @@ insert  into `classfied_countries`(`classfied_country_id`,`name`,`image`) values
 
 /*Table structure for table `classfied_currencies` */
 
-DROP TABLE IF EXISTS `classfied_currencies`;
-
 CREATE TABLE `classfied_currencies` (
   `classfied_currency_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) DEFAULT NULL,
@@ -305,8 +273,6 @@ CREATE TABLE `classfied_currencies` (
 insert  into `classfied_currencies`(`classfied_currency_id`,`name`) values (1,'dollar'),(2,'LE');
 
 /*Table structure for table `classfied_experience` */
-
-DROP TABLE IF EXISTS `classfied_experience`;
 
 CREATE TABLE `classfied_experience` (
   `classfied_experience_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -320,8 +286,6 @@ insert  into `classfied_experience`(`classfied_experience_id`,`name`) values (1,
 
 /*Table structure for table `classfied_job_applications` */
 
-DROP TABLE IF EXISTS `classfied_job_applications`;
-
 CREATE TABLE `classfied_job_applications` (
   `classfied_job_application_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `classfied_job_id` int(10) unsigned NOT NULL,
@@ -334,8 +298,6 @@ CREATE TABLE `classfied_job_applications` (
 /*Data for the table `classfied_job_applications` */
 
 /*Table structure for table `classfied_jobs` */
-
-DROP TABLE IF EXISTS `classfied_jobs`;
 
 CREATE TABLE `classfied_jobs` (
   `classfied_job_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -375,8 +337,6 @@ CREATE TABLE `classfied_jobs` (
 
 /*Table structure for table `classfied_types` */
 
-DROP TABLE IF EXISTS `classfied_types`;
-
 CREATE TABLE `classfied_types` (
   `classfied_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(16) NOT NULL,
@@ -391,8 +351,6 @@ insert  into `classfied_types`(`classfied_type_id`,`name`,`var_name`,`color`) va
 
 /*Table structure for table `clients` */
 
-DROP TABLE IF EXISTS `clients`;
-
 CREATE TABLE `clients` (
   `client_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -405,8 +363,6 @@ CREATE TABLE `clients` (
 insert  into `clients`(`client_id`,`name`,`image`) values (3,'jdsj','483792_489207341128752_1998018065_n1.jpg');
 
 /*Table structure for table `clinic_branches` */
-
-DROP TABLE IF EXISTS `clinic_branches`;
 
 CREATE TABLE `clinic_branches` (
   `clinic_branch_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -425,8 +381,6 @@ insert  into `clinic_branches`(`clinic_branch_id`,`clinic_branch`,`phone`,`addre
 
 /*Table structure for table `clinic_disease_templates` */
 
-DROP TABLE IF EXISTS `clinic_disease_templates`;
-
 CREATE TABLE `clinic_disease_templates` (
   `clinic_disease_template_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
@@ -440,8 +394,6 @@ CREATE TABLE `clinic_disease_templates` (
 insert  into `clinic_disease_templates`(`clinic_disease_template_id`,`title`,`content`,`language_id`) values (5,'eyes','ssss','en'),(6,'cancer','uyuyu','en');
 
 /*Table structure for table `clinic_doctor_reservation_types` */
-
-DROP TABLE IF EXISTS `clinic_doctor_reservation_types`;
 
 CREATE TABLE `clinic_doctor_reservation_types` (
   `clinic_doctor_reservation_type_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -457,8 +409,6 @@ insert  into `clinic_doctor_reservation_types`(`clinic_doctor_reservation_type_i
 
 /*Table structure for table `clinic_doctor_reviews` */
 
-DROP TABLE IF EXISTS `clinic_doctor_reviews`;
-
 CREATE TABLE `clinic_doctor_reviews` (
   `clinic_doctor_review_id` int(11) NOT NULL AUTO_INCREMENT,
   `review` tinyint(4) DEFAULT NULL,
@@ -473,8 +423,6 @@ insert  into `clinic_doctor_reviews`(`clinic_doctor_review_id`,`review`,`clinic_
 
 /*Table structure for table `clinic_doctors` */
 
-DROP TABLE IF EXISTS `clinic_doctors`;
-
 CREATE TABLE `clinic_doctors` (
   `clinic_doctor_id` int(11) NOT NULL AUTO_INCREMENT,
   `clinic_specification_id` int(11) NOT NULL,
@@ -486,11 +434,9 @@ CREATE TABLE `clinic_doctors` (
 
 /*Data for the table `clinic_doctors` */
 
-insert  into `clinic_doctors`(`clinic_doctor_id`,`clinic_specification_id`,`description`,`user_id`,`period_average`) values (6,0,'',0,''),(7,30,'sssss',1,'30'),(8,30,'sssss',25,'30');
+insert  into `clinic_doctors`(`clinic_doctor_id`,`clinic_specification_id`,`description`,`user_id`,`period_average`) values (7,30,'sssss',1,'30'),(8,30,'sssss',25,'30');
 
 /*Table structure for table `clinic_patient_diseases` */
-
-DROP TABLE IF EXISTS `clinic_patient_diseases`;
 
 CREATE TABLE `clinic_patient_diseases` (
   `clinic_patient_disease_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -506,8 +452,6 @@ insert  into `clinic_patient_diseases`(`clinic_patient_disease_id`,`user_id`,`cl
 
 /*Table structure for table `clinic_patients` */
 
-DROP TABLE IF EXISTS `clinic_patients`;
-
 CREATE TABLE `clinic_patients` (
   `clinic_patient_id` int(11) NOT NULL AUTO_INCREMENT,
   `birthdate` date DEFAULT NULL,
@@ -521,8 +465,6 @@ CREATE TABLE `clinic_patients` (
 insert  into `clinic_patients`(`clinic_patient_id`,`birthdate`,`note`,`user_id`) values (18,'2015-07-16','ttttttttttttttttt',1);
 
 /*Table structure for table `clinic_patients_notes` */
-
-DROP TABLE IF EXISTS `clinic_patients_notes`;
 
 CREATE TABLE `clinic_patients_notes` (
   `clinic_patient_note_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -538,8 +480,6 @@ insert  into `clinic_patients_notes`(`clinic_patient_note_id`,`clinic_doctor_id`
 
 /*Table structure for table `clinic_recommended_centers` */
 
-DROP TABLE IF EXISTS `clinic_recommended_centers`;
-
 CREATE TABLE `clinic_recommended_centers` (
   `clinic_recommended_center_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
@@ -553,8 +493,6 @@ CREATE TABLE `clinic_recommended_centers` (
 /*Data for the table `clinic_recommended_centers` */
 
 /*Table structure for table `clinic_reservations` */
-
-DROP TABLE IF EXISTS `clinic_reservations`;
 
 CREATE TABLE `clinic_reservations` (
   `clinic_reservation_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -577,8 +515,6 @@ insert  into `clinic_reservations`(`clinic_reservation_id`,`clinic_doctor_id`,`d
 
 /*Table structure for table `clinic_schedule_exceptions` */
 
-DROP TABLE IF EXISTS `clinic_schedule_exceptions`;
-
 CREATE TABLE `clinic_schedule_exceptions` (
   `clinic_schedule_exception_id` int(11) NOT NULL AUTO_INCREMENT,
   `clinic_doctor_id` int(11) DEFAULT NULL,
@@ -594,8 +530,6 @@ insert  into `clinic_schedule_exceptions`(`clinic_schedule_exception_id`,`clinic
 
 /*Table structure for table `clinic_schedules` */
 
-DROP TABLE IF EXISTS `clinic_schedules`;
-
 CREATE TABLE `clinic_schedules` (
   `clinic_schedule_id` int(11) NOT NULL AUTO_INCREMENT,
   `clinic_doctor_id` int(11) DEFAULT NULL,
@@ -604,15 +538,13 @@ CREATE TABLE `clinic_schedules` (
   `to_time` time DEFAULT NULL,
   `status` enum('on','off') DEFAULT NULL,
   PRIMARY KEY (`clinic_schedule_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 /*Data for the table `clinic_schedules` */
 
-insert  into `clinic_schedules`(`clinic_schedule_id`,`clinic_doctor_id`,`day`,`from_time`,`to_time`,`status`) values (4,1,'Sunday','03:00:00','01:00:00',NULL),(24,1,'Saturday','03:00:00','19:00:00',NULL),(25,NULL,NULL,'02:00:00','07:00:00',NULL),(26,1,'Tuesday','04:00:00','00:00:09',NULL);
+insert  into `clinic_schedules`(`clinic_schedule_id`,`clinic_doctor_id`,`day`,`from_time`,`to_time`,`status`) values (4,1,'Sunday','03:00:00','01:00:00',NULL),(24,1,'Saturday','03:00:00','19:00:00',NULL),(25,NULL,NULL,'02:00:00','07:00:00',NULL),(26,1,'Tuesday','04:00:00','00:00:09',NULL),(27,7,'Saturday','11:25:00','11:25:00','on'),(28,7,'Sunday','11:25:00','11:25:00','on'),(29,7,'Monday','11:25:00','11:25:00','on'),(30,7,'Tuesday','11:25:00','11:25:00','on'),(31,7,'Wednesday','11:25:00','11:25:00','on'),(32,7,'Thursday','11:25:00','11:25:00','on'),(33,7,'Friday','11:25:00','11:25:00','on');
 
 /*Table structure for table `clinic_specification_branches` */
-
-DROP TABLE IF EXISTS `clinic_specification_branches`;
 
 CREATE TABLE `clinic_specification_branches` (
   `clinic_specification_branch_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -627,8 +559,6 @@ insert  into `clinic_specification_branches`(`clinic_specification_branch_id`,`c
 
 /*Table structure for table `clinic_specifications` */
 
-DROP TABLE IF EXISTS `clinic_specifications`;
-
 CREATE TABLE `clinic_specifications` (
   `clinic_specification_id` int(11) NOT NULL AUTO_INCREMENT,
   `specification` varchar(255) NOT NULL,
@@ -641,8 +571,6 @@ CREATE TABLE `clinic_specifications` (
 insert  into `clinic_specifications`(`clinic_specification_id`,`specification`,`description`) values (28,'eyes',''),(29,'heart',''),(30,'head',''),(32,'ramad','sss');
 
 /*Table structure for table `clinic_xray_negative` */
-
-DROP TABLE IF EXISTS `clinic_xray_negative`;
 
 CREATE TABLE `clinic_xray_negative` (
   `clinic_xray_negative_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -660,8 +588,6 @@ insert  into `clinic_xray_negative`(`clinic_xray_negative_id`,`title`,`descripti
 
 /*Table structure for table `commerce_brands` */
 
-DROP TABLE IF EXISTS `commerce_brands`;
-
 CREATE TABLE `commerce_brands` (
   `commerce_brand_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
@@ -674,8 +600,6 @@ CREATE TABLE `commerce_brands` (
 insert  into `commerce_brands`(`commerce_brand_id`,`name`,`image`) values (1,'ZEADES','zeades-blason-gris-200x1201.png'),(2,'Samsung','samsung-logo.png'),(3,'Sony','sony-corp-logo1.png');
 
 /*Table structure for table `commerce_cart` */
-
-DROP TABLE IF EXISTS `commerce_cart`;
 
 CREATE TABLE `commerce_cart` (
   `commerce_cart_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -697,8 +621,6 @@ insert  into `commerce_cart`(`commerce_cart_id`,`commerce_product_id`,`user_id`,
 
 /*Table structure for table `commerce_categories` */
 
-DROP TABLE IF EXISTS `commerce_categories`;
-
 CREATE TABLE `commerce_categories` (
   `commerce_category_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
@@ -717,8 +639,6 @@ insert  into `commerce_categories`(`commerce_category_id`,`title`,`parent`,`seo`
 
 /*Table structure for table `commerce_category_attributes` */
 
-DROP TABLE IF EXISTS `commerce_category_attributes`;
-
 CREATE TABLE `commerce_category_attributes` (
   `commerce_category_attribute_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) CHARACTER SET latin1 DEFAULT NULL,
@@ -730,8 +650,6 @@ CREATE TABLE `commerce_category_attributes` (
 /*Data for the table `commerce_category_attributes` */
 
 /*Table structure for table `commerce_invoices` */
-
-DROP TABLE IF EXISTS `commerce_invoices`;
 
 CREATE TABLE `commerce_invoices` (
   `commerce_invoice_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -747,8 +665,6 @@ CREATE TABLE `commerce_invoices` (
 insert  into `commerce_invoices`(`commerce_invoice_id`,`commerce_order_id`,`status`) values (1,7,''),(2,8,'');
 
 /*Table structure for table `commerce_order_details` */
-
-DROP TABLE IF EXISTS `commerce_order_details`;
 
 CREATE TABLE `commerce_order_details` (
   `commerce_order_detail_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -768,8 +684,6 @@ CREATE TABLE `commerce_order_details` (
 insert  into `commerce_order_details`(`commerce_order_detail_id`,`option`,`qty`,`weight`,`commerce_product_id`,`price`,`product_total`,`commerce_order_id`) values (1,NULL,1,0,22,3360,3360,6),(2,NULL,4,0,22,3360,13440,7),(3,NULL,2,0,38,2500,5000,8),(4,NULL,1,0,27,3000,3000,8);
 
 /*Table structure for table `commerce_orders` */
-
-DROP TABLE IF EXISTS `commerce_orders`;
 
 CREATE TABLE `commerce_orders` (
   `commerce_order_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -792,8 +706,6 @@ insert  into `commerce_orders`(`commerce_order_id`,`subtotal`,`total`,`commerce_
 
 /*Table structure for table `commerce_payment_method` */
 
-DROP TABLE IF EXISTS `commerce_payment_method`;
-
 CREATE TABLE `commerce_payment_method` (
   `commerce_payment_method_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
@@ -808,8 +720,6 @@ CREATE TABLE `commerce_payment_method` (
 insert  into `commerce_payment_method`(`commerce_payment_method_id`,`name`,`fees`,`image`,`settings`) values (1,'Paypal',NULL,NULL,NULL),(2,'Cash on delivery',NULL,NULL,NULL);
 
 /*Table structure for table `commerce_product_attributes` */
-
-DROP TABLE IF EXISTS `commerce_product_attributes`;
 
 CREATE TABLE `commerce_product_attributes` (
   `commerce_product_attribute_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -826,8 +736,6 @@ CREATE TABLE `commerce_product_attributes` (
 
 /*Table structure for table `commerce_product_detail_options` */
 
-DROP TABLE IF EXISTS `commerce_product_detail_options`;
-
 CREATE TABLE `commerce_product_detail_options` (
   `commerce_product_detail_option_id` int(11) NOT NULL AUTO_INCREMENT,
   `commerce_product_detail_id` int(11) DEFAULT NULL,
@@ -841,8 +749,6 @@ CREATE TABLE `commerce_product_detail_options` (
 
 /*Table structure for table `commerce_product_details` */
 
-DROP TABLE IF EXISTS `commerce_product_details`;
-
 CREATE TABLE `commerce_product_details` (
   `commerce_product_detail_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text,
@@ -854,8 +760,6 @@ CREATE TABLE `commerce_product_details` (
 /*Data for the table `commerce_product_details` */
 
 /*Table structure for table `commerce_product_images` */
-
-DROP TABLE IF EXISTS `commerce_product_images`;
 
 CREATE TABLE `commerce_product_images` (
   `commerce_product_image_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -870,8 +774,6 @@ CREATE TABLE `commerce_product_images` (
 insert  into `commerce_product_images`(`commerce_product_image_id`,`product_image`,`primary`,`commerce_product_id`) values (19,'mf8if24rb4l.jpg',NULL,NULL),(21,'left_angle.jpg',NULL,NULL),(31,'dell-inspiron-im501r-1212lpk-laptop-with-amd-athlon-ii1.jpg',NULL,8),(32,'mf8if24rb4l1.jpg',NULL,7),(33,'hp_pavilion_x360_021.jpg',NULL,9),(34,'72157605564604036_model_huge_9b35338624.jpg',NULL,10),(35,'32250_1_l1.jpg',NULL,11),(36,'adidas-shoes-adidas-big-tongue-small-broken-flowe-37_lrg.jpg',NULL,12),(37,'lenovo-vibe-z.jpg',NULL,6),(38,'tablet_samsung_galaxy_p3100_branco__39919_zoom.jpg',NULL,15),(39,'lenovo-tab-a8_400-wide.jpg',NULL,16),(40,'k2-_b8d5815c-d743-4737-86d9-e5933879500b.v1.jpg-2d9a0761d585bd6319313f9606e011ff1b272b55-optim-500x500.jpg',NULL,17),(41,'41scbxa8eel.jpg',NULL,18),(42,'cemc189_mercury_av_quick_case_samsung_tablet_4_10_black.jpg',NULL,19),(43,'adidas-shoes-adidas-js-wings-shoes-for-girls-pink-22_6_lrg1.jpg',NULL,20),(44,'samsung-galaxy-grand-duos-i9082-mobile-phone-samsung-bhm1300-bluetooth-blue-medium_46aaf4dd26d85c84d7c3a8bfc4d70ac6.jpg',NULL,13),(45,'samsung_galaxy_s4_android_touchscreen_synaptic_mobile_phone_photos_img_image_14.jpg',NULL,21),(46,'xperia-m5-gold-1280x840.jpg-683013dca1c4f71783a7cd2ec24354f4.jpg',NULL,22),(47,'lenovo-yoga-y-11-laptop-nvidia-tegra-t30-2gb-64gb-ssd-11-6-inch-win-8-rt-razor-grey-with-laptop-bag1.jpg',NULL,23),(48,'lenovo-image-15.jpg',NULL,24),(49,'hp-pavilion-hdx.jpg',NULL,25),(50,'party-rock-shoes-women-stacked_web1.jpg',NULL,26),(51,'lebron-10-x-blue-gold-red-basketball-shoes_041.jpg',NULL,14),(52,'sony-xperia-z2-android-lollipop1.jpg',NULL,27),(54,'1319394_sd.jpg',NULL,29),(55,'72157600289362064_model_huge_a35a7f15a1.jpg',NULL,30),(56,'sony-cybershot-digital-camera-wx200-pink-.jpg',NULL,31),(57,'41lfado-vyl._sx395_.jpg',NULL,32),(58,'image.jpg',NULL,33),(59,'o_women-s-super-beautiful-sun-glasses-sunglasses-with-box-75901.jpg',NULL,34),(60,'1408679313587.jpg',NULL,35),(61,'u0289l1-nc.jpg',NULL,36),(63,'silver-steel-wrist-watch-delano-gold-face-classic-brand-jbw-jb-6218-c-.jpg',NULL,38),(66,'automatic.png',NULL,40),(67,'watches.jpeg',NULL,37),(68,'omega-duty-free.jpg',NULL,39),(69,'u0289l1-nc1.jpg',NULL,39),(70,'iwc_pilots_watch1000x13001.jpeg',NULL,39),(71,'silver-steel-wrist-watch-delano-gold-face-classic-brand-jbw-jb-6218-c-1.jpg',NULL,39),(72,'omega-duty-free1.jpg',NULL,39),(73,'51d2i9is4wl._sl246_sx190_cr0-0-190-246_1.jpg',NULL,39),(77,'1895_011.jpg',NULL,4),(78,'xperia-z3-white-1240x840-430fa6376c394cf59a94a9edca67ed7d1.jpg',NULL,28),(79,'item_xl_6901759_46329356.jpg',NULL,28),(80,'item_xs_8334726_83440716.jpg',NULL,28),(81,'item_xs_8334726_83440746.jpg',NULL,28);
 
 /*Table structure for table `commerce_products` */
-
-DROP TABLE IF EXISTS `commerce_products`;
 
 CREATE TABLE `commerce_products` (
   `commerce_product_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -892,8 +794,6 @@ insert  into `commerce_products`(`commerce_product_id`,`name`,`commerce_category
 
 /*Table structure for table `commerce_products_offers` */
 
-DROP TABLE IF EXISTS `commerce_products_offers`;
-
 CREATE TABLE `commerce_products_offers` (
   `commerce_products_offer_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
@@ -907,8 +807,6 @@ CREATE TABLE `commerce_products_offers` (
 insert  into `commerce_products_offers`(`commerce_products_offer_id`,`title`,`commerce_product_id`,`offer_image`) values (1,'Lenovo 7200',6,'bt_gm_lenovo-tablets_en_28092015.jpg'),(2,'addidas 1',7,'bt_f_adidas_newcollection_en_05102015.jpg.jpg'),(3,'glaxy tab',4,'bt_gm_xtouch-x4_en_28092015.jpg'),(4,'hp dv900',9,'sony_laptop.jpg'),(5,'dell',8,'dell-laptop-price-saudi-arabia.jpg');
 
 /*Table structure for table `commerce_shares` */
-
-DROP TABLE IF EXISTS `commerce_shares`;
 
 CREATE TABLE `commerce_shares` (
   `commerce_shares_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -929,8 +827,6 @@ insert  into `commerce_shares`(`commerce_shares_id`,`from_title`,`from_descripti
 
 /*Table structure for table `commerce_wishlist` */
 
-DROP TABLE IF EXISTS `commerce_wishlist`;
-
 CREATE TABLE `commerce_wishlist` (
   `commerce_wishlist_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -946,8 +842,6 @@ insert  into `commerce_wishlist`(`commerce_wishlist_id`,`user_id`,`commerce_prod
 
 /*Table structure for table `contactus` */
 
-DROP TABLE IF EXISTS `contactus`;
-
 CREATE TABLE `contactus` (
   `message_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -960,8 +854,6 @@ CREATE TABLE `contactus` (
 /*Data for the table `contactus` */
 
 /*Table structure for table `coupons_business` */
-
-DROP TABLE IF EXISTS `coupons_business`;
 
 CREATE TABLE `coupons_business` (
   `coupons_business_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -976,8 +868,6 @@ CREATE TABLE `coupons_business` (
 /*Data for the table `coupons_business` */
 
 /*Table structure for table `coupons_business_branches` */
-
-DROP TABLE IF EXISTS `coupons_business_branches`;
 
 CREATE TABLE `coupons_business_branches` (
   `coupons_business_branch_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -994,8 +884,6 @@ CREATE TABLE `coupons_business_branches` (
 
 /*Table structure for table `coupons_business_branches_availability` */
 
-DROP TABLE IF EXISTS `coupons_business_branches_availability`;
-
 CREATE TABLE `coupons_business_branches_availability` (
   `coupons_business_branches_availability_id` int(11) NOT NULL AUTO_INCREMENT,
   `day` enum('Sat','Sun','Mon','Tue','Wed','Thu','Fri') DEFAULT NULL,
@@ -1009,8 +897,6 @@ CREATE TABLE `coupons_business_branches_availability` (
 
 /*Table structure for table `coupons_business_types` */
 
-DROP TABLE IF EXISTS `coupons_business_types`;
-
 CREATE TABLE `coupons_business_types` (
   `coupons_business_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(300) DEFAULT NULL,
@@ -1022,8 +908,6 @@ CREATE TABLE `coupons_business_types` (
 /*Data for the table `coupons_business_types` */
 
 /*Table structure for table `coupons_cities` */
-
-DROP TABLE IF EXISTS `coupons_cities`;
 
 CREATE TABLE `coupons_cities` (
   `coupons_city_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1038,8 +922,6 @@ CREATE TABLE `coupons_cities` (
 
 /*Table structure for table `coupons_countries` */
 
-DROP TABLE IF EXISTS `coupons_countries`;
-
 CREATE TABLE `coupons_countries` (
   `coupons_country_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(300) DEFAULT NULL,
@@ -1049,8 +931,6 @@ CREATE TABLE `coupons_countries` (
 /*Data for the table `coupons_countries` */
 
 /*Table structure for table `coupons_offer_locations` */
-
-DROP TABLE IF EXISTS `coupons_offer_locations`;
 
 CREATE TABLE `coupons_offer_locations` (
   `coupons_offer_location_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1062,8 +942,6 @@ CREATE TABLE `coupons_offer_locations` (
 /*Data for the table `coupons_offer_locations` */
 
 /*Table structure for table `coupons_offers` */
-
-DROP TABLE IF EXISTS `coupons_offers`;
 
 CREATE TABLE `coupons_offers` (
   `coupons_offer_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1092,8 +970,6 @@ CREATE TABLE `coupons_offers` (
 
 /*Table structure for table `downloads` */
 
-DROP TABLE IF EXISTS `downloads`;
-
 CREATE TABLE `downloads` (
   `download_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` varchar(3) DEFAULT NULL,
@@ -1109,8 +985,6 @@ insert  into `downloads`(`download_id`,`language_id`,`url`,`image`,`created`) va
 
 /*Table structure for table `email_templates` */
 
-DROP TABLE IF EXISTS `email_templates`;
-
 CREATE TABLE `email_templates` (
   `email_template_id` int(11) NOT NULL AUTO_INCREMENT,
   `email_type` enum('html','plain') DEFAULT 'plain',
@@ -1125,8 +999,6 @@ CREATE TABLE `email_templates` (
 /*Data for the table `email_templates` */
 
 /*Table structure for table `enquiries` */
-
-DROP TABLE IF EXISTS `enquiries`;
 
 CREATE TABLE `enquiries` (
   `enquiry_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1148,8 +1020,6 @@ CREATE TABLE `enquiries` (
 
 /*Table structure for table `faqs` */
 
-DROP TABLE IF EXISTS `faqs`;
-
 CREATE TABLE `faqs` (
   `faq_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` varchar(3) DEFAULT NULL,
@@ -1167,8 +1037,6 @@ insert  into `faqs`(`faq_id`,`language_id`,`question`,`answer`,`created`,`answer
 
 /*Table structure for table `keywords` */
 
-DROP TABLE IF EXISTS `keywords`;
-
 CREATE TABLE `keywords` (
   `keyword_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) DEFAULT NULL,
@@ -1182,8 +1050,6 @@ CREATE TABLE `keywords` (
 insert  into `keywords`(`keyword_id`,`name`,`parent`) values (1,'sshpass',0),(2,'Ubuntu',0),(3,'Debian',0),(4,'Photography',0),(5,'10 Stupid Things',0),(6,'css3',0),(7,'media queries',0),(8,'Ubuntu Server',0),(9,'LAMP',0),(10,'Apache',0),(11,'PHP',0),(12,'MySQL',0),(13,'how to install lamp',0),(14,'how to install apache php mysql',0),(15,'Update Firefox',0),(16,'Update',0),(17,'Virtual host',0),(18,'Configuration',0),(19,'Linux',0),(20,'Unix',0),(21,'difference between linux and unix',0),(22,'Infinite loops',0),(23,'Virtual table',0),(24,'Query',0),(25,'Arduino Uno',0),(26,'Launchpad',0),(27,'TM4C123G',0),(28,'Pertol',0),(29,'FUEL',0);
 
 /*Table structure for table `languages` */
-
-DROP TABLE IF EXISTS `languages`;
 
 CREATE TABLE `languages` (
   `language_id` varchar(3) NOT NULL,
@@ -1200,8 +1066,6 @@ insert  into `languages`(`language_id`,`name`,`code`,`path`,`default`) values ('
 
 /*Table structure for table `link_types` */
 
-DROP TABLE IF EXISTS `link_types`;
-
 CREATE TABLE `link_types` (
   `link_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(150) DEFAULT NULL,
@@ -1214,8 +1078,6 @@ insert  into `link_types`(`link_type_id`,`name`) values (1,'Header'),(2,'Footer'
 
 /*Table structure for table `links` */
 
-DROP TABLE IF EXISTS `links`;
-
 CREATE TABLE `links` (
   `link_id` int(11) NOT NULL AUTO_INCREMENT,
   `link_type_id` int(11) NOT NULL,
@@ -1223,15 +1085,13 @@ CREATE TABLE `links` (
   `url` text,
   `sort` int(11) DEFAULT '0',
   PRIMARY KEY (`link_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Data for the table `links` */
 
-insert  into `links`(`link_id`,`link_type_id`,`name`,`url`,`sort`) values (1,1,'Home','{url}',NULL),(2,1,'Portfolio','{url}portfolio',NULL),(3,1,'Resume','{url}resume',NULL),(5,1,'FAQ','{url}faq',NULL),(6,1,'Contact','{url}contact',NULL),(11,1,'About','https://bitbucket.org/melsaeed/brighterycms/commits/f2a13cf25605d307d545cc11909f8eec7d937501',1);
+insert  into `links`(`link_id`,`link_type_id`,`name`,`url`,`sort`) values (1,1,'Home','home',1),(2,1,'About','page/about',1),(3,1,'Reservations','clinic_reservation',0),(4,1,'Faqs','faqs',0),(5,1,'Portfolio','portfolio',0),(6,1,'Contact Us','contactus',1);
 
 /*Table structure for table `logs` */
-
-DROP TABLE IF EXISTS `logs`;
 
 CREATE TABLE `logs` (
   `log_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1246,8 +1106,6 @@ CREATE TABLE `logs` (
 
 /*Table structure for table `marital_status` */
 
-DROP TABLE IF EXISTS `marital_status`;
-
 CREATE TABLE `marital_status` (
   `marital_status_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` varchar(3) DEFAULT NULL,
@@ -1260,8 +1118,6 @@ CREATE TABLE `marital_status` (
 insert  into `marital_status`(`marital_status_id`,`language_id`,`name`) values (1,NULL,'Single'),(2,NULL,'Married');
 
 /*Table structure for table `modules` */
-
-DROP TABLE IF EXISTS `modules`;
 
 CREATE TABLE `modules` (
   `module_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1279,8 +1135,6 @@ insert  into `modules`(`module_id`,`name`,`raw_name`,`status`,`settings`) values
 
 /*Table structure for table `nationalities` */
 
-DROP TABLE IF EXISTS `nationalities`;
-
 CREATE TABLE `nationalities` (
   `nationality_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` varchar(3) DEFAULT NULL,
@@ -1294,8 +1148,6 @@ insert  into `nationalities`(`nationality_id`,`language_id`,`name`) values (1,'e
 
 /*Table structure for table `news_categories` */
 
-DROP TABLE IF EXISTS `news_categories`;
-
 CREATE TABLE `news_categories` (
   `news_category_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
@@ -1305,8 +1157,6 @@ CREATE TABLE `news_categories` (
 /*Data for the table `news_categories` */
 
 /*Table structure for table `news_posts` */
-
-DROP TABLE IF EXISTS `news_posts`;
 
 CREATE TABLE `news_posts` (
   `news_post_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1322,8 +1172,6 @@ CREATE TABLE `news_posts` (
 
 /*Table structure for table `notifications` */
 
-DROP TABLE IF EXISTS `notifications`;
-
 CREATE TABLE `notifications` (
   `notification_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -1338,11 +1186,9 @@ CREATE TABLE `notifications` (
 
 /*Table structure for table `pages` */
 
-DROP TABLE IF EXISTS `pages`;
-
 CREATE TABLE `pages` (
   `page_id` int(11) NOT NULL AUTO_INCREMENT,
-  `language_id` varchar(3) DEFAULT NULL,
+  `language_id` varchar(3) DEFAULT 'en',
   `title` varchar(300) DEFAULT NULL,
   `seo` varchar(150) DEFAULT NULL,
   `content` longtext,
@@ -1350,15 +1196,13 @@ CREATE TABLE `pages` (
   `visibility_status_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`page_id`),
   UNIQUE KEY `seo` (`seo`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `pages` */
 
-insert  into `pages`(`page_id`,`language_id`,`title`,`seo`,`content`,`created`,`visibility_status_id`) values (1,'en','About2222','about','<p>cczxceeeeeeeeeeeeee</p>\r\n','2015-06-04 15:30:33',1),(2,NULL,'ddd','ssss','<p>eeeeeeeeeeee</p>\r\n','2015-07-16 14:33:38',1),(3,NULL,'سسسس','سسسسسسسسسسسسس','<p>سسس</p>\r\n','2015-07-16 15:41:30',2),(4,NULL,'sssss','sssss','<p>dhhdhh</p>\r\n','2015-07-23 14:55:33',2);
+insert  into `pages`(`page_id`,`language_id`,`title`,`seo`,`content`,`created`,`visibility_status_id`) values (1,'en','About2222','about','<p>cczxceeeeeeeeeeeeee</p>\r\n','2015-06-04 15:30:33',1),(2,'en','ddd','ssss','<p>eeeeeeeeeeee</p>\r\n','2015-07-16 14:33:38',1),(3,'en','سسسس','سسسسسسسسسسسسس','<p>سسس</p>\r\n','2015-07-16 15:41:30',2),(4,'en','sssss','sssss','<p>dhhdhh</p>\r\n','2015-07-23 14:55:33',2),(5,'en','Hello','Hello','<p>asdfasdfasdfasdfasdf</p>\r\n','2016-01-24 16:13:20',1);
 
 /*Table structure for table `pm_announcements` */
-
-DROP TABLE IF EXISTS `pm_announcements`;
 
 CREATE TABLE `pm_announcements` (
   `pm_announce_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1373,8 +1217,6 @@ CREATE TABLE `pm_announcements` (
 insert  into `pm_announcements`(`pm_announce_id`,`title`,`content`,`time`) values (6,'VIP','Please Put Your Content Here ! ','1899-11-09 00:00:00'),(9,'Hello',' Hello Hello Hello Hello ','0000-00-00 00:00:00'),(12,'CMS','Project Project Project Project Project Project ','0000-00-00 00:00:00');
 
 /*Table structure for table `pm_attachments` */
-
-DROP TABLE IF EXISTS `pm_attachments`;
 
 CREATE TABLE `pm_attachments` (
   `pm_attachment_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1393,8 +1235,6 @@ insert  into `pm_attachments`(`pm_attachment_id`,`file_name`,`count`,`attachment
 
 /*Table structure for table `pm_clients` */
 
-DROP TABLE IF EXISTS `pm_clients`;
-
 CREATE TABLE `pm_clients` (
   `pm_client_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -1411,8 +1251,6 @@ CREATE TABLE `pm_clients` (
 
 /*Table structure for table `pm_comments` */
 
-DROP TABLE IF EXISTS `pm_comments`;
-
 CREATE TABLE `pm_comments` (
   `pm_comment_id` int(11) NOT NULL AUTO_INCREMENT,
   `pm_issue_id` int(11) NOT NULL,
@@ -1427,8 +1265,6 @@ CREATE TABLE `pm_comments` (
 
 /*Table structure for table `pm_departments` */
 
-DROP TABLE IF EXISTS `pm_departments`;
-
 CREATE TABLE `pm_departments` (
   `pm_department_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(225) NOT NULL,
@@ -1442,8 +1278,6 @@ CREATE TABLE `pm_departments` (
 insert  into `pm_departments`(`pm_department_id`,`title`,`time`,`description`) values (10,'Web & Mobile Applications','0000-00-00 00:00:00','Unwilling departure education is be dashwoods or an. Use off agreeable law unwilling sir deficient curiosity instantly. Easy mind life fact with see has bore ten. Parish any chatty can elinor direct for former. Up as meant widow equal an share least.\r\nFolly words widow one downs few age every seven. If miss part by fact he park just shew. Discovered had get considered projection who favourable. Necessary up knowledge it tolerably.'),(11,'Web Development','0000-00-00 00:00:00','Unwilling departure education is be dashwoods or an. Use off agreeable law unwilling sir deficient curiosity instantly. Easy mind life fact with see has bore ten. Parish any chatty can elinor direct for former. Up as meant widow equal an share least.\r\nFolly words widow one downs few age every seven. If miss part by fact he park just shew. Discovered had get considered projection who favourable. Necessary up knowledge it tolerably.');
 
 /*Table structure for table `pm_history` */
-
-DROP TABLE IF EXISTS `pm_history`;
 
 CREATE TABLE `pm_history` (
   `pm_history_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1461,8 +1295,6 @@ insert  into `pm_history`(`pm_history_id`,`pm_issue_id`,`actions`,`from_user_id`
 
 /*Table structure for table `pm_infractions` */
 
-DROP TABLE IF EXISTS `pm_infractions`;
-
 CREATE TABLE `pm_infractions` (
   `pm_infraction_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -1475,8 +1307,6 @@ CREATE TABLE `pm_infractions` (
 /*Data for the table `pm_infractions` */
 
 /*Table structure for table `pm_invoices` */
-
-DROP TABLE IF EXISTS `pm_invoices`;
 
 CREATE TABLE `pm_invoices` (
   `pm_invoice_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1491,8 +1321,6 @@ CREATE TABLE `pm_invoices` (
 
 /*Table structure for table `pm_issue_statues` */
 
-DROP TABLE IF EXISTS `pm_issue_statues`;
-
 CREATE TABLE `pm_issue_statues` (
   `pm_issue_statues_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(225) DEFAULT NULL,
@@ -1505,8 +1333,6 @@ CREATE TABLE `pm_issue_statues` (
 insert  into `pm_issue_statues`(`pm_issue_statues_id`,`title`,`color`) values (1,'yuyi','#e7addd');
 
 /*Table structure for table `pm_issues` */
-
-DROP TABLE IF EXISTS `pm_issues`;
 
 CREATE TABLE `pm_issues` (
   `pm_issue_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1530,8 +1356,6 @@ insert  into `pm_issues`(`pm_issue_id`,`title`,`description`,`pm_reviewer_id`,`p
 
 /*Table structure for table `pm_issues_types` */
 
-DROP TABLE IF EXISTS `pm_issues_types`;
-
 CREATE TABLE `pm_issues_types` (
   `pm_issue_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
@@ -1543,8 +1367,6 @@ CREATE TABLE `pm_issues_types` (
 insert  into `pm_issues_types`(`pm_issue_type_id`,`title`) values (1,'Bug'),(4,'Task');
 
 /*Table structure for table `pm_priorities` */
-
-DROP TABLE IF EXISTS `pm_priorities`;
 
 CREATE TABLE `pm_priorities` (
   `pm_priority_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1558,8 +1380,6 @@ CREATE TABLE `pm_priorities` (
 insert  into `pm_priorities`(`pm_priority_id`,`name`,`color`) values (1,'orange','#ff8000'),(3,'Blue','#6555f9'),(4,'Red','#c52c2c'),(5,'test','#8000ff'),(7,'Important','#00ff40'),(8,'Pink','#ff80c0');
 
 /*Table structure for table `pm_projects` */
-
-DROP TABLE IF EXISTS `pm_projects`;
 
 CREATE TABLE `pm_projects` (
   `pm_project_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1579,8 +1399,6 @@ insert  into `pm_projects`(`pm_project_id`,`title`,`about`,`creation_time`,`pm_s
 
 /*Table structure for table `pm_reputations` */
 
-DROP TABLE IF EXISTS `pm_reputations`;
-
 CREATE TABLE `pm_reputations` (
   `pm_reputation_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -1594,8 +1412,6 @@ CREATE TABLE `pm_reputations` (
 
 /*Table structure for table `pm_roles` */
 
-DROP TABLE IF EXISTS `pm_roles`;
-
 CREATE TABLE `pm_roles` (
   `pm_role_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
@@ -1607,8 +1423,6 @@ CREATE TABLE `pm_roles` (
 insert  into `pm_roles`(`pm_role_id`,`title`) values (29,'developer'),(30,'designer'),(31,'project manager'),(32,'Marketer');
 
 /*Table structure for table `pm_sessions` */
-
-DROP TABLE IF EXISTS `pm_sessions`;
 
 CREATE TABLE `pm_sessions` (
   `pm_session_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1622,8 +1436,6 @@ CREATE TABLE `pm_sessions` (
 /*Data for the table `pm_sessions` */
 
 /*Table structure for table `pm_team_users` */
-
-DROP TABLE IF EXISTS `pm_team_users`;
 
 CREATE TABLE `pm_team_users` (
   `pm_team_users_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1639,8 +1451,6 @@ insert  into `pm_team_users`(`pm_team_users_id`,`pm_team_id`,`user_id`,`pm_role_
 
 /*Table structure for table `pm_teams` */
 
-DROP TABLE IF EXISTS `pm_teams`;
-
 CREATE TABLE `pm_teams` (
   `pm_team_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(225) NOT NULL,
@@ -1655,8 +1465,6 @@ insert  into `pm_teams`(`pm_team_id`,`title`,`description`,`pm_team_leader_id`) 
 
 /*Table structure for table `pm_teams_projects` */
 
-DROP TABLE IF EXISTS `pm_teams_projects`;
-
 CREATE TABLE `pm_teams_projects` (
   `pm_team_project_id` int(11) NOT NULL AUTO_INCREMENT,
   `pm_project_id` int(11) NOT NULL,
@@ -1670,8 +1478,6 @@ insert  into `pm_teams_projects`(`pm_team_project_id`,`pm_project_id`,`pm_team_i
 
 /*Table structure for table `portfolio` */
 
-DROP TABLE IF EXISTS `portfolio`;
-
 CREATE TABLE `portfolio` (
   `portfolio_id` int(11) NOT NULL AUTO_INCREMENT,
   `portfolio_category_id` int(11) DEFAULT NULL,
@@ -1682,13 +1488,13 @@ CREATE TABLE `portfolio` (
   `description` text,
   `created` datetime DEFAULT NULL,
   PRIMARY KEY (`portfolio_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Data for the table `portfolio` */
 
-/*Table structure for table `portfolio_categories` */
+insert  into `portfolio`(`portfolio_id`,`portfolio_category_id`,`language_id`,`title`,`seo`,`image`,`description`,`created`) values (2,3,'en','1','1','12498859_911163932313099_1128692278_n1.jpg','1231231','2016-01-24 16:20:57'),(3,2,'en','Portfolio one','Portfolio one','12506613_911163378979821_1728066923_n.jpg','Portfolio one description Portfolio one description Portfolio one description Portfolio ','2016-01-24 16:21:24');
 
-DROP TABLE IF EXISTS `portfolio_categories`;
+/*Table structure for table `portfolio_categories` */
 
 CREATE TABLE `portfolio_categories` (
   `portfolio_category_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1698,15 +1504,13 @@ CREATE TABLE `portfolio_categories` (
   `description` text,
   `created` datetime DEFAULT NULL,
   PRIMARY KEY (`portfolio_category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Data for the table `portfolio_categories` */
 
-insert  into `portfolio_categories`(`portfolio_category_id`,`language_id`,`title`,`seo`,`description`,`created`) values (2,'en','Ahmed Magdy','Ahmed','jjjjjjjjjjjjjjjj',NULL);
+insert  into `portfolio_categories`(`portfolio_category_id`,`language_id`,`title`,`seo`,`description`,`created`) values (2,'en','Ahmed Magdy','Ahmed','jjjjjjjjjjjjjjjj',NULL),(3,'en','Hello','Hello','adsfasdfasdf  ','2016-01-24 16:20:02');
 
 /*Table structure for table `resume_activities` */
-
-DROP TABLE IF EXISTS `resume_activities`;
 
 CREATE TABLE `resume_activities` (
   `resume_activity_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1727,8 +1531,6 @@ insert  into `resume_activities`(`resume_activity_id`,`resume_id`,`language_id`,
 
 /*Table structure for table `resume_contacts` */
 
-DROP TABLE IF EXISTS `resume_contacts`;
-
 CREATE TABLE `resume_contacts` (
   `resume_contact_id` int(11) NOT NULL AUTO_INCREMENT,
   `resume_id` int(11) DEFAULT NULL,
@@ -1745,8 +1547,6 @@ insert  into `resume_contacts`(`resume_contact_id`,`resume_id`,`language_id`,`co
 
 /*Table structure for table `resume_details` */
 
-DROP TABLE IF EXISTS `resume_details`;
-
 CREATE TABLE `resume_details` (
   `resume_detail_id` int(11) NOT NULL AUTO_INCREMENT,
   `resume_id` int(11) DEFAULT NULL,
@@ -1759,8 +1559,6 @@ CREATE TABLE `resume_details` (
 /*Data for the table `resume_details` */
 
 /*Table structure for table `resume_education` */
-
-DROP TABLE IF EXISTS `resume_education`;
 
 CREATE TABLE `resume_education` (
   `resume_education_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1784,8 +1582,6 @@ insert  into `resume_education`(`resume_education_id`,`resume_id`,`language_id`,
 
 /*Table structure for table `resume_hobbies` */
 
-DROP TABLE IF EXISTS `resume_hobbies`;
-
 CREATE TABLE `resume_hobbies` (
   `resume_hooby_id` int(11) NOT NULL AUTO_INCREMENT,
   `resume_id` int(11) DEFAULT NULL,
@@ -1800,8 +1596,6 @@ CREATE TABLE `resume_hobbies` (
 insert  into `resume_hobbies`(`resume_hooby_id`,`resume_id`,`language_id`,`name`,`sort`) values (1,1,NULL,'Photography and Designing',1),(2,1,NULL,'Chess',2),(3,1,NULL,'Football',3),(4,1,NULL,'Programming is my passion',4),(5,1,NULL,'Playstation',5),(11,0,'en','kl',NULL);
 
 /*Table structure for table `resume_languages` */
-
-DROP TABLE IF EXISTS `resume_languages`;
 
 CREATE TABLE `resume_languages` (
   `resume_language_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1818,8 +1612,6 @@ CREATE TABLE `resume_languages` (
 insert  into `resume_languages`(`resume_language_id`,`resume_id`,`language_id`,`name`,`level`,`sort`) values (1,1,NULL,'Arabic','Mother Tongue',0),(2,1,NULL,'English','Very Good',0),(3,1,NULL,'French','Little Knowledge',0);
 
 /*Table structure for table `resume_locations` */
-
-DROP TABLE IF EXISTS `resume_locations`;
 
 CREATE TABLE `resume_locations` (
   `resume_location_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1839,8 +1631,6 @@ insert  into `resume_locations`(`resume_location_id`,`resume_id`,`language_id`,`
 
 /*Table structure for table `resume_skills` */
 
-DROP TABLE IF EXISTS `resume_skills`;
-
 CREATE TABLE `resume_skills` (
   `resume_skill_id` int(11) NOT NULL AUTO_INCREMENT,
   `resume_id` int(11) DEFAULT NULL,
@@ -1856,8 +1646,6 @@ CREATE TABLE `resume_skills` (
 insert  into `resume_skills`(`resume_skill_id`,`resume_id`,`language_id`,`category`,`content`,`sort`) values (1,1,NULL,'Operating Systems',NULL,0),(2,1,NULL,'Development',NULL,0),(3,1,NULL,'Graphics','Photoshop, Illustrator, Light room, InDesign, FreeHand, Flash, Swish',0),(5,1,NULL,'Database ','MySQL, SQL Server, Ridis DB, MS Access, SQLite',0),(6,1,NULL,'Tools',NULL,0),(7,1,NULL,'Other','Augmented Reality, NFC, Cloud Computing, Responsive Design, OOP, Agile Development',0),(8,1,NULL,'Courses/Self Studies','MCSE, MCITP, CCNA, Embedded Systems Programming (UT.6.01x)',0),(9,1,NULL,'VCS','Mercurial, SVN, Git, VCS Base and Bazaar',0),(10,1,NULL,'Web','Hand Coded HTML5/XHTML, XML, CSS3, PHP, ASP.NET, Perl, Python, Sharepoint, NodeJS, Knowlege of Dart and Go',0),(11,1,NULL,'Desktop','Java, Visal Basic.NET, C/C++, C#',0),(12,1,NULL,'Mobile','Android (Java), Windows Phone (C#), Ubuntu (QT)',0),(13,1,NULL,'Windows','Microsoft DOS, Windows 3.11, Windows 95, Windows 98, Windows ME, Windows NT4.0, Windows 2000 (Professional & Server), Windows XP, Windows Vista, Windows 2008 (Server), Windows 7, Windows 8.1, Windows Phone',0),(14,1,NULL,'Linux/Unix','Ubuntu, CentOS, Fedora, RedHat, Linpus, Klinux, Debian',0),(15,1,NULL,'Mac','Snow Leopard x10.6, Lion x10.7',0),(16,1,NULL,'Embedded Systems','Texas Lunchpad (Keil uVision), Ardino',0),(17,1,NULL,'Webservices','WSDL (SOAP), WADL (REST)',0),(19,1,NULL,'ORM','PDO, PHPBean, Doctorine',0),(20,1,NULL,'IDE','Netbeans, Eclipse, Keil, Visual studio .Net',NULL),(21,1,NULL,'Scripts','WooCommerce, Wordpress, joomla, magento, mambo, nuke, virtuemart, jigoshop, osCommerce, Zen Cart, TomatoCart, OpenCart, Drupal, 4images, osDate, Datalife, vBulletin, Invision Power Board, PHPBB',NULL),(22,1,NULL,'Apache Packages','LAMP, MAMP, WAMP, XAMP',NULL),(23,1,NULL,'Frameworks','MVC3, MVC4, jQuery, CodeIgniter, Yii, CakePHP, Zend, Symphony, Slim microframework, QTFramework',NULL),(24,1,NULL,'Template Systems','Smarty Template, Twig',NULL),(25,1,NULL,'SDK/API','Android, Facebook, Twitter, name.com',NULL),(36,0,'en','lk;l','kkl',NULL),(37,0,'en','lk;l','kkl',NULL),(38,0,'en','oi','hu',NULL),(39,0,'en','hi','hello',NULL);
 
 /*Table structure for table `resume_work_history` */
-
-DROP TABLE IF EXISTS `resume_work_history`;
 
 CREATE TABLE `resume_work_history` (
   `resume_work_history_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1880,8 +1668,6 @@ insert  into `resume_work_history`(`resume_work_history_id`,`resume_id`,`languag
 
 /*Table structure for table `resumes` */
 
-DROP TABLE IF EXISTS `resumes`;
-
 CREATE TABLE `resumes` (
   `resume_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` varchar(3) DEFAULT NULL,
@@ -1899,8 +1685,6 @@ insert  into `resumes`(`resume_id`,`language_id`,`user_id`,`date_of_birth`,`nati
 
 /*Table structure for table `sessions` */
 
-DROP TABLE IF EXISTS `sessions`;
-
 CREATE TABLE `sessions` (
   `session_id` varchar(60) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -1913,11 +1697,9 @@ CREATE TABLE `sessions` (
 
 /*Data for the table `sessions` */
 
-insert  into `sessions`(`session_id`,`user_id`,`ip`,`latest_activity`,`agent`,`data`) values ('0laqgatuokvom823b60jhu0347',0,'::1','2015-10-26 12:36:01','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('28f1kjhqapql87qs5l2ok70au4',0,'::1','2015-10-20 18:50:34','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('28gvh9gumor744mtoc6plll7g0',0,'::1','2015-10-31 07:04:08','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('2p1j9r67c3j011jqje0na5cc81',0,'::1','2015-10-26 12:36:03','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('30dpb9nm6a2p3c45humu4mr7b0',0,'::1','2015-10-20 18:50:35','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('3dt33a4o2sgq5e5d1ajem23so7',1,'::1','2015-10-22 19:02:53','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('3jnnkvgbg8ciur77tl4lj6ou30',0,'::1','2015-11-01 23:17:54','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('4a8k8nuilpl74r6dd1i28il651',1,'::1','2015-10-26 12:05:38','Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko',NULL),('4i4e4oh5pjl5bcmok8101g3eh7',0,'::1','2015-10-25 10:36:47','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0',NULL),('4iuliamlfi1vel4k3ggo88mfr4',0,'::1','2015-11-01 22:09:44','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('4vurhfcs5s42tj22qd6t07mdk5',0,'::1','2015-10-20 18:50:34','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('5k5gbttbhaanbh4olilrjq2c05',1,'127.0.0.1','2015-10-09 16:59:44','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36',NULL),('5qdro9gr91desoqaj09hruntv1',1,'::1','2015-10-31 16:57:03','Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36',NULL),('6k71rqvn6hb0bps905arq6cvr1',0,'','2015-10-10 14:41:44','',NULL),('6qfdu0qtf2rt7m43p209b75jv4',2,'127.0.0.1','2015-10-09 11:29:38','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('74c59j0c4hfr47b4np96qf9td1',0,'192.168.43.1','2015-11-05 19:29:31','Mozilla/5.0 (Linux; Android 5.1.1; D6503 Build/23.4.A.1.232) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36',NULL),('766g493qp5n5lsfoaoimvcnie1',0,'::1','2015-10-27 13:33:53','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('79p67lm7hfg1r4qpfpngiuon74',0,'::1','2015-10-27 13:33:54','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('7kq1ul57cdmam44d57lc6sgou6',0,'','2015-10-10 14:42:20','',NULL),('7qcne8o54hh6msl0066vou6u32',0,'::1','2015-10-26 12:36:01','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('8b50s187qunnldfn4f32551gu6',0,'::1','2015-10-31 07:04:04','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('8cmj6iu1s9urectnf6t83rt5j6',0,'::1','2015-11-01 23:17:55','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('8jn26umsigvf4esee80donbrm0',0,'::1','2015-10-26 12:36:01','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('a9260u0rgr2bqaolngj1peo852',0,'','2015-10-27 08:52:39','',NULL),('a9grfjj2a0b325is6dt7t12n90',0,'::1','2015-11-01 23:09:51','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('acgkf5v0b5n8chrrg1t2d9f010',0,'::1','2015-10-20 18:50:36','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('atdsioil0075fi1ig245kf9804',0,'::1','2015-10-20 18:50:33','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('av6r48cdcrtpc5gao3t6m6dov4',0,'::1','2015-10-31 07:04:04','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('b13o35rgflkghjt240kttdqen6',0,'::1','2015-10-20 18:50:36','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('b1nge4hi19krilkbp40pd1unq5',0,'','2015-11-04 13:08:21','',NULL),('b6skhj3ure7tvm9q4klmkii8k7',0,'::1','2015-11-01 23:18:00','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('bok5pebt3cnr94gihiu849vpm3',1,'192.168.43.238','2015-11-05 19:50:23','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2553.0 Safari/537.36',NULL),('bqtg9fd3u2g2goanreenvf3o26',1,'::1','2016-01-17 19:17:23','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.0 Safari/537.36',NULL),('d7sm2rbsgc21brtoarulejuho0',0,'::1','2015-10-20 18:50:34','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('dobgogg66dihbpgr76fa6ovl00',0,'::1','2015-11-01 23:09:43','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('drt40dlqbagkhtr4juudfkup57',1,'::1','2016-01-17 19:15:58','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.0 Safari/537.36',NULL),('dt2rdd9ohe7tiq7fc8kc68g9f2',0,'::1','2015-11-01 23:09:45','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('eoscm3n7nfdm3genb090742944',1,'::1','2015-11-02 23:22:10','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0',NULL),('f7lh6eglbljhaan5nucp999h33',1,'::1','2015-12-10 19:16:13','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.0 Safari/537.36',NULL),('f8g1ra57v4t45kua1nrmqhlj12',0,'::1','2015-10-25 10:36:55','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0',NULL),('fbus38kb4nvsg3dijtd1qk2i37',0,'::1','2015-10-31 07:04:05','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('fj78cansk87je9ns7gkc8phf21',0,'::1','2015-10-20 18:50:34','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('g6kj6mc76gvit6l3ok2uaj7iq1',0,'::1','2015-10-31 07:04:04','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('h7amvjha5runq63448poe08b87',0,'::1','2015-10-26 12:36:02','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('hmtineseu79tnuud40c3qi2mn1',0,'::1','2015-10-31 07:04:04','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('hpg5v29r44lqp0to0dnqrmkg34',0,'::1','2015-10-31 07:04:05','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('hqniqgksjvnpnkbe7ihp2a6mt5',0,'::1','2015-10-20 18:50:35','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('ioip4bbi2n27mb39sie52pq8a3',0,'::1','2015-11-01 22:09:50','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('isruk9stqfhniep0os52qbn6d5',0,'::1','2015-11-01 23:17:54','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('j2gsa2h5mntuafuokrkgs5i8d2',0,'192.168.43.1','2015-11-05 18:32:35','Mozilla/5.0 (Linux; Android 5.1.1; D6503 Build/23.4.A.1.232; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/46.0.2490.76 Mobile Safari/537.36',NULL),('jms7vsifni1424gmsfh07q6hk2',0,'::1','2015-10-25 10:36:51','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0',NULL),('k3599ie36dtm6j5v8msqg344o6',0,'::1','2015-10-26 12:36:01','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('k76gr1fij63k54noif0lka2mp5',0,'::1','2015-11-01 23:17:54','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('k850vv94o822gn9dq6r5h3geq1',0,'::1','2015-11-01 22:17:59','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('kc3qj9phg54g7h3ikk2d50vbg3',0,'::1','2015-11-01 23:18:00','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('l7bpu8njhou8hboqg42rtn7b16',0,'::1','2015-10-20 18:50:37','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('ldbhlpolssgprskdnnkjbt39a1',0,'::1','2015-10-20 18:50:36','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('ldh70duuka3hd88jj9bssvk7o6',0,'','2015-10-27 08:58:43','',NULL),('loj0chj941vui0tt85cndhbvu4',0,'','2015-11-07 22:09:11','',NULL),('m0b4in2fciq2hqo9h1fgab1ru4',0,'::1','2015-10-20 18:50:35','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('m6pik8m9lqtkbmijuan9k8jal0',0,'::1','2015-11-01 22:17:54','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('mqgr631k6hslf19ikhdkl18sj7',0,'::1','2015-12-04 20:31:23','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0',NULL),('nhf7h7g29h0k73cdolcphmliu7',0,'::1','2015-10-26 12:36:02','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('nrn2tv6msct5tcpho5ie1nrgj5',0,'::1','2015-10-31 07:04:07','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('p5v489lsdsgkvuqnvfn9g3ner6',0,'::1','2015-10-20 18:50:35','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('pv56bvba3j9iat3dahnhctnka0',0,'::1','2015-10-26 12:36:02','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('q1et7m59l0uiotog8tb8ps8tl6',0,'::1','2015-10-31 07:04:08','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('qeb1pfe8qi4702b29hp8qaavs1',0,'::1','2015-11-01 23:09:44','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('qjjnkbhchaa6noukqu2ku4qla3',0,'::1','2015-11-01 23:09:50','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('r132p05ht08shb0a88bipr01b2',0,'::1','2015-10-20 18:50:34','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('r1msoivq1mgcbidlpuh8s4ppb1',0,'::1','2015-11-01 23:09:44','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('sgi632jhtqk8anffoehs954dg1',0,'::1','2015-11-01 23:17:55','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('sgmodgrvnub2n563sr4smoai24',0,'::1','2015-10-20 18:50:35','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('sjkhjt50efnoit8n8aij1ugmh4',0,'::1','2015-10-25 10:36:44','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0',NULL),('sk5if3l7t15q8mjnh17rdtuud3',0,'::1','2015-10-20 18:50:36','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('taudokraca008lsav2ig70f0n7',0,'::1','2015-11-01 23:09:45','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('v8maoomkg3vhddrkk23350pla0',0,'::1','2015-10-20 18:50:34','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('vhcktaeelqdufu0b01i3btb545',0,'::1','2015-10-20 18:50:36','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('vn0gcpi8s7mcp8ohk9j38jcc62',0,'::1','2015-10-26 12:36:03','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL);
+insert  into `sessions`(`session_id`,`user_id`,`ip`,`latest_activity`,`agent`,`data`) values ('0laqgatuokvom823b60jhu0347',0,'::1','2015-10-26 12:36:01','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('28f1kjhqapql87qs5l2ok70au4',0,'::1','2015-10-20 18:50:34','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('28gvh9gumor744mtoc6plll7g0',0,'::1','2015-10-31 07:04:08','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('2p1j9r67c3j011jqje0na5cc81',0,'::1','2015-10-26 12:36:03','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('30dpb9nm6a2p3c45humu4mr7b0',0,'::1','2015-10-20 18:50:35','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('3dt33a4o2sgq5e5d1ajem23so7',1,'::1','2015-10-22 19:02:53','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('3jnnkvgbg8ciur77tl4lj6ou30',0,'::1','2015-11-01 23:17:54','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('4a8k8nuilpl74r6dd1i28il651',1,'::1','2015-10-26 12:05:38','Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko',NULL),('4i4e4oh5pjl5bcmok8101g3eh7',0,'::1','2015-10-25 10:36:47','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0',NULL),('4iuliamlfi1vel4k3ggo88mfr4',0,'::1','2015-11-01 22:09:44','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('4vurhfcs5s42tj22qd6t07mdk5',0,'::1','2015-10-20 18:50:34','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('5k5gbttbhaanbh4olilrjq2c05',1,'127.0.0.1','2015-10-09 16:59:44','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36',NULL),('5qdro9gr91desoqaj09hruntv1',1,'::1','2015-10-31 16:57:03','Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36',NULL),('6k71rqvn6hb0bps905arq6cvr1',0,'','2015-10-10 14:41:44','',NULL),('6qfdu0qtf2rt7m43p209b75jv4',2,'127.0.0.1','2015-10-09 11:29:38','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('74c59j0c4hfr47b4np96qf9td1',0,'192.168.43.1','2015-11-05 19:29:31','Mozilla/5.0 (Linux; Android 5.1.1; D6503 Build/23.4.A.1.232) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36',NULL),('766g493qp5n5lsfoaoimvcnie1',0,'::1','2015-10-27 13:33:53','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('79p67lm7hfg1r4qpfpngiuon74',0,'::1','2015-10-27 13:33:54','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('7kq1ul57cdmam44d57lc6sgou6',0,'','2015-10-10 14:42:20','',NULL),('7qcne8o54hh6msl0066vou6u32',0,'::1','2015-10-26 12:36:01','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('8b50s187qunnldfn4f32551gu6',0,'::1','2015-10-31 07:04:04','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('8cmj6iu1s9urectnf6t83rt5j6',0,'::1','2015-11-01 23:17:55','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('8jn26umsigvf4esee80donbrm0',0,'::1','2015-10-26 12:36:01','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('a9260u0rgr2bqaolngj1peo852',0,'','2015-10-27 08:52:39','',NULL),('a9grfjj2a0b325is6dt7t12n90',0,'::1','2015-11-01 23:09:51','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('acgkf5v0b5n8chrrg1t2d9f010',0,'::1','2015-10-20 18:50:36','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('atdsioil0075fi1ig245kf9804',0,'::1','2015-10-20 18:50:33','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('av6r48cdcrtpc5gao3t6m6dov4',0,'::1','2015-10-31 07:04:04','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('b13o35rgflkghjt240kttdqen6',0,'::1','2015-10-20 18:50:36','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('b1nge4hi19krilkbp40pd1unq5',0,'','2015-11-04 13:08:21','',NULL),('b6skhj3ure7tvm9q4klmkii8k7',0,'::1','2015-11-01 23:18:00','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('bok5pebt3cnr94gihiu849vpm3',1,'192.168.43.238','2015-11-05 19:50:23','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2553.0 Safari/537.36',NULL),('bqtg9fd3u2g2goanreenvf3o26',1,'::1','2016-01-19 14:16:21','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.0 Safari/537.36',NULL),('d7sm2rbsgc21brtoarulejuho0',0,'::1','2015-10-20 18:50:34','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('dobgogg66dihbpgr76fa6ovl00',0,'::1','2015-11-01 23:09:43','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('drt40dlqbagkhtr4juudfkup57',1,'::1','2016-01-17 19:15:58','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.0 Safari/537.36',NULL),('dt2rdd9ohe7tiq7fc8kc68g9f2',0,'::1','2015-11-01 23:09:45','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('eoscm3n7nfdm3genb090742944',1,'::1','2015-11-02 23:22:10','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0',NULL),('f7lh6eglbljhaan5nucp999h33',1,'::1','2015-12-10 19:16:13','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.0 Safari/537.36',NULL),('f8g1ra57v4t45kua1nrmqhlj12',0,'::1','2015-10-25 10:36:55','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0',NULL),('fbus38kb4nvsg3dijtd1qk2i37',0,'::1','2015-10-31 07:04:05','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('fj78cansk87je9ns7gkc8phf21',0,'::1','2015-10-20 18:50:34','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('g6kj6mc76gvit6l3ok2uaj7iq1',0,'::1','2015-10-31 07:04:04','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('h7amvjha5runq63448poe08b87',0,'::1','2015-10-26 12:36:02','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('hbm05jofdapsudqvd464qtkrr0',0,'::1','2016-01-26 16:11:02','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2629.0 Safari/537.36',NULL),('hmtineseu79tnuud40c3qi2mn1',0,'::1','2015-10-31 07:04:04','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('hpg5v29r44lqp0to0dnqrmkg34',0,'::1','2015-10-31 07:04:05','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('hqniqgksjvnpnkbe7ihp2a6mt5',0,'::1','2015-10-20 18:50:35','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('ioip4bbi2n27mb39sie52pq8a3',0,'::1','2015-11-01 22:09:50','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('isruk9stqfhniep0os52qbn6d5',0,'::1','2015-11-01 23:17:54','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('j2gsa2h5mntuafuokrkgs5i8d2',0,'192.168.43.1','2015-11-05 18:32:35','Mozilla/5.0 (Linux; Android 5.1.1; D6503 Build/23.4.A.1.232; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/46.0.2490.76 Mobile Safari/537.36',NULL),('jms7vsifni1424gmsfh07q6hk2',0,'::1','2015-10-25 10:36:51','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0',NULL),('k3599ie36dtm6j5v8msqg344o6',0,'::1','2015-10-26 12:36:01','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('k76gr1fij63k54noif0lka2mp5',0,'::1','2015-11-01 23:17:54','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('k850vv94o822gn9dq6r5h3geq1',0,'::1','2015-11-01 22:17:59','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('kc3qj9phg54g7h3ikk2d50vbg3',0,'::1','2015-11-01 23:18:00','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('l7bpu8njhou8hboqg42rtn7b16',0,'::1','2015-10-20 18:50:37','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('ldbhlpolssgprskdnnkjbt39a1',0,'::1','2015-10-20 18:50:36','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('ldh70duuka3hd88jj9bssvk7o6',0,'','2015-10-27 08:58:43','',NULL),('loj0chj941vui0tt85cndhbvu4',0,'','2015-11-07 22:09:11','',NULL),('m0b4in2fciq2hqo9h1fgab1ru4',0,'::1','2015-10-20 18:50:35','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('m6pik8m9lqtkbmijuan9k8jal0',0,'::1','2015-11-01 22:17:54','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('mqgr631k6hslf19ikhdkl18sj7',0,'::1','2015-12-04 20:31:23','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0',NULL),('nhf7h7g29h0k73cdolcphmliu7',0,'::1','2015-10-26 12:36:02','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('nrn2tv6msct5tcpho5ie1nrgj5',0,'::1','2015-10-31 07:04:07','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('p5v489lsdsgkvuqnvfn9g3ner6',0,'::1','2015-10-20 18:50:35','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('pv56bvba3j9iat3dahnhctnka0',0,'::1','2015-10-26 12:36:02','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('q1et7m59l0uiotog8tb8ps8tl6',0,'::1','2015-10-31 07:04:08','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('qeb1pfe8qi4702b29hp8qaavs1',0,'::1','2015-11-01 23:09:44','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('qjjnkbhchaa6noukqu2ku4qla3',0,'::1','2015-11-01 23:09:50','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('r132p05ht08shb0a88bipr01b2',0,'::1','2015-10-20 18:50:34','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('r1msoivq1mgcbidlpuh8s4ppb1',0,'::1','2015-11-01 23:09:44','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('sabahud334t0aapla5ubif6f53',1,'192.168.1.77','2016-01-24 19:01:32','Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36',NULL),('sgi632jhtqk8anffoehs954dg1',0,'::1','2015-11-01 23:17:55','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('sgmodgrvnub2n563sr4smoai24',0,'::1','2015-10-20 18:50:35','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('sjkhjt50efnoit8n8aij1ugmh4',0,'::1','2015-10-25 10:36:44','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0',NULL),('sk5if3l7t15q8mjnh17rdtuud3',0,'::1','2015-10-20 18:50:36','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('taudokraca008lsav2ig70f0n7',0,'::1','2015-11-01 23:09:45','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL),('v8maoomkg3vhddrkk23350pla0',0,'::1','2015-10-20 18:50:34','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('vhcktaeelqdufu0b01i3btb545',0,'::1','2015-10-20 18:50:36','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36',NULL),('vn0gcpi8s7mcp8ohk9j38jcc62',0,'::1','2015-10-26 12:36:03','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',NULL);
 
 /*Table structure for table `settings` */
-
-DROP TABLE IF EXISTS `settings`;
 
 CREATE TABLE `settings` (
   `key` varchar(100) NOT NULL,
@@ -1933,21 +1715,17 @@ insert  into `settings`(`key`,`value`,`default_value`,`required`) values ('alexa
 
 /*Table structure for table `sliders` */
 
-DROP TABLE IF EXISTS `sliders`;
-
 CREATE TABLE `sliders` (
   `slider_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`slider_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `sliders` */
 
-insert  into `sliders`(`slider_id`,`name`) values (1,'mk');
+insert  into `sliders`(`slider_id`,`name`) values (1,'mk'),(2,'MySlider');
 
 /*Table structure for table `slides` */
-
-DROP TABLE IF EXISTS `slides`;
 
 CREATE TABLE `slides` (
   `slide_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1962,15 +1740,13 @@ CREATE TABLE `slides` (
   `sort` int(11) DEFAULT '0',
   `slider_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`slide_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 /*Data for the table `slides` */
 
-insert  into `slides`(`slide_id`,`language_id`,`title`,`image`,`caption`,`url`,`from_date`,`to_date`,`created`,`sort`,`slider_id`) values (28,NULL,'YES','mylogo1.png','yes','https://mail.google.com/mail/u/0/#all/14ebb7ae3c7d2b02','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-06-11 18:49:58',1,NULL),(29,NULL,'slider2','483792_489207341128752_1998018065_n.jpg','sss','http://www.el-saeed.info','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-06-11 18:59:19',1,NULL),(30,NULL,'slider2','','sss','http://www.el-saeed.info','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-06-11 18:59:28',1,NULL),(31,NULL,'slider2','','sss','http://www.el-saeed.info','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-06-11 19:05:30',1,NULL),(32,NULL,'slider2','','sss','http://www.el-saeed.info','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-06-11 19:07:45',1,NULL),(33,NULL,'slider2','','sss','http://www.el-saeed.info','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-06-11 19:09:12',1,NULL),(35,NULL,'slider2','','sss','http://www.el-saeed.info','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-06-11 19:10:28',1,NULL),(36,NULL,'slider2','mylogo5.png','sss','http://www.el-saeed.info','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-06-11 19:14:11',1,NULL),(38,NULL,'slider2','mylogo1.png','sss','http://www.el-saeed.info','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-06-11 19:15:44',1,NULL),(40,NULL,'hiiiiiiii','11117940_934000016623300_1713238114_n.jpg','sasad','https://mail.google.com/mail/u/0/#all/14ebb7ae3c7d2b02','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-07-09 14:03:00',1,NULL),(41,NULL,'test','11.jpg','ssss','https://bitbucket.org/melsaeed/brighterycms/commits/f2a13cf25605d307d545cc11909f8eec7d937501','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-07-13 15:09:47',1,NULL),(42,NULL,'hfghg','20094_1420919491571094_1216113210334566482_n.jpg','hgchf','https://mail.google.com/mail/u/0/#all/14ebb7ae3c7d2b02','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-07-23 18:38:35',1,NULL);
+insert  into `slides`(`slide_id`,`language_id`,`title`,`image`,`caption`,`url`,`from_date`,`to_date`,`created`,`sort`,`slider_id`) values (28,NULL,'YES','mylogo1.png','yes','https://mail.google.com/mail/u/0/#all/14ebb7ae3c7d2b02','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-06-11 18:49:58',1,NULL),(29,NULL,'slider2','483792_489207341128752_1998018065_n.jpg','sss','http://www.el-saeed.info','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-06-11 18:59:19',1,NULL),(30,NULL,'slider2','','sss','http://www.el-saeed.info','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-06-11 18:59:28',1,NULL),(31,NULL,'slider2','','sss','http://www.el-saeed.info','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-06-11 19:05:30',1,NULL),(32,NULL,'slider2','','sss','http://www.el-saeed.info','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-06-11 19:07:45',1,NULL),(33,NULL,'slider2','','sss','http://www.el-saeed.info','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-06-11 19:09:12',1,NULL),(35,NULL,'slider2','','sss','http://www.el-saeed.info','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-06-11 19:10:28',1,NULL),(36,NULL,'slider2','mylogo5.png','sss','http://www.el-saeed.info','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-06-11 19:14:11',1,NULL),(38,NULL,'slider2','mylogo1.png','sss','http://www.el-saeed.info','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-06-11 19:15:44',1,NULL),(40,NULL,'hiiiiiiii','11117940_934000016623300_1713238114_n.jpg','sasad','https://mail.google.com/mail/u/0/#all/14ebb7ae3c7d2b02','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-07-09 14:03:00',1,NULL),(41,NULL,'test','11.jpg','ssss','https://bitbucket.org/melsaeed/brighterycms/commits/f2a13cf25605d307d545cc11909f8eec7d937501','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-07-13 15:09:47',1,NULL),(42,NULL,'hfghg','20094_1420919491571094_1216113210334566482_n.jpg','hgchf','https://mail.google.com/mail/u/0/#all/14ebb7ae3c7d2b02','0000-00-00 00:00:00','0000-00-00 00:00:00','2015-07-23 18:38:35',1,NULL),(43,NULL,'One','12573689_1013948888650843_3048583811480267127_n.jpg','one','#','2016-01-18 16:14:00','2016-01-30 16:14:00','2016-01-24 16:14:16',1,2),(44,NULL,'2','12573689_1013948888650843_3048583811480267127_n1.jpg','2','#','2016-01-13 16:14:00','2016-01-30 16:14:00','2016-01-24 16:14:50',2,2),(45,NULL,'asdfasdf','12435761_903802349715924_400772505_n.jpg','a','a','2016-01-13 16:19:00','2016-01-28 16:19:00','2016-01-24 16:19:34',3,2);
 
 /*Table structure for table `store_categories` */
-
-DROP TABLE IF EXISTS `store_categories`;
 
 CREATE TABLE `store_categories` (
   `store_category_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1982,8 +1758,6 @@ CREATE TABLE `store_categories` (
 /*Data for the table `store_categories` */
 
 /*Table structure for table `store_modules` */
-
-DROP TABLE IF EXISTS `store_modules`;
 
 CREATE TABLE `store_modules` (
   `store_module_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2002,8 +1776,6 @@ CREATE TABLE `store_modules` (
 
 /*Table structure for table `tags` */
 
-DROP TABLE IF EXISTS `tags`;
-
 CREATE TABLE `tags` (
   `tag_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) DEFAULT NULL,
@@ -2017,8 +1789,6 @@ insert  into `tags`(`tag_id`,`name`,`parent`) values (1,'PHP',0),(2,'MySQL',0),(
 
 /*Table structure for table `testimonials` */
 
-DROP TABLE IF EXISTS `testimonials`;
-
 CREATE TABLE `testimonials` (
   `testimonial_id` int(11) NOT NULL AUTO_INCREMENT,
   `client_name` varchar(200) DEFAULT NULL,
@@ -2026,15 +1796,13 @@ CREATE TABLE `testimonials` (
   `message` text,
   `visibility_status_id` int(1) NOT NULL,
   PRIMARY KEY (`testimonial_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Data for the table `testimonials` */
 
-insert  into `testimonials`(`testimonial_id`,`client_name`,`client_position`,`message`,`visibility_status_id`) values (2,'Ahmed','Accountant ','assss',1);
+insert  into `testimonials`(`testimonial_id`,`client_name`,`client_position`,`message`,`visibility_status_id`) values (2,'Bill Gates','CEO','Hello from the same world',1),(3,'Steve Jobs','CEO','Hello world',1);
 
 /*Table structure for table `user_addresses` */
-
-DROP TABLE IF EXISTS `user_addresses`;
 
 CREATE TABLE `user_addresses` (
   `user_address_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2054,8 +1822,6 @@ insert  into `user_addresses`(`user_address_id`,`zipcode`,`city_id`,`address`,`u
 
 /*Table structure for table `user_phones` */
 
-DROP TABLE IF EXISTS `user_phones`;
-
 CREATE TABLE `user_phones` (
   `user_phone_id` int(11) NOT NULL AUTO_INCREMENT,
   `primary` tinyint(4) DEFAULT NULL,
@@ -2063,15 +1829,13 @@ CREATE TABLE `user_phones` (
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`user_phone_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_phones` */
 
-insert  into `user_phones`(`user_phone_id`,`primary`,`phone`,`user_id`) values (1,1,'87878',1),(2,0,'989898952',2),(11,NULL,'2222222222222',24),(12,NULL,'01212121212',25),(13,NULL,'01221134355',28),(26,NULL,'01221134355',28),(27,NULL,'+201000709113',30);
+insert  into `user_phones`(`user_phone_id`,`primary`,`phone`,`user_id`) values (1,1,'87878',1),(2,0,'989898952',2),(11,NULL,'2222222222222',24),(12,NULL,'01212121212',25),(13,NULL,'01221134355',28),(26,NULL,'01221134355',28),(27,NULL,'+201000709113',30),(28,NULL,'01272656227',31);
 
 /*Table structure for table `usergroup_zones` */
-
-DROP TABLE IF EXISTS `usergroup_zones`;
 
 CREATE TABLE `usergroup_zones` (
   `usergroup_zone_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2087,8 +1851,6 @@ insert  into `usergroup_zones`(`usergroup_zone_id`,`usergroup_id`,`module_id`,`p
 
 /*Table structure for table `usergroups` */
 
-DROP TABLE IF EXISTS `usergroups`;
-
 CREATE TABLE `usergroups` (
   `usergroup_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
@@ -2100,8 +1862,6 @@ CREATE TABLE `usergroups` (
 insert  into `usergroups`(`usergroup_id`,`name`) values (1,'Administrator'),(2,'Employee'),(3,'Banned'),(4,'Membe'),(5,'Mosh Ay 7aga'),(6,'fen'),(7,'kol 7aga');
 
 /*Table structure for table `users` */
-
-DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2119,15 +1879,13 @@ CREATE TABLE `users` (
   `birthdate` date DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 /*Data for the table `users` */
 
-insert  into `users`(`user_id`,`fullname`,`email`,`password`,`image`,`usergroup_id`,`joindate`,`google_id`,`facebook_id`,`facebook_access_token`,`status`,`gender`,`birthdate`) values (1,'Muhammad','m.elsaeed@brightery.com','e10adc3949ba59abbe56e057f20f883e','photo.png',1,'2015-07-23 13:26:03','56',NULL,NULL,'active','male',NULL),(2,'Ahmed Magdy','a_owen1@hotmail.com','e10adc3949ba59abbe56e057f20f883e',NULL,1,'2015-07-23 13:26:00',NULL,NULL,NULL,'active','male','0000-00-00'),(3,'ay 7aga',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'active',NULL,NULL),(5,'Salma','a.magdymedany@gmail.com','111','20094_1420919491571094_1216113210334566482_n.jpg',1,NULL,NULL,NULL,NULL,'active','male',NULL),(28,'Hassan','Hassan@gmail.com','e10adc3949ba59abbe56e057f20f883e',NULL,NULL,NULL,NULL,NULL,NULL,'active','male',NULL),(29,'Marwa','marwa.900@brightery.com','e10adc3949ba59abbe56e057f20f883e','MJSD_Logo_12.jpg',2,NULL,NULL,NULL,NULL,'active','female',NULL),(30,'Muhammad El-Saeed','muhammad@el-saeed.info','e10adc3949ba59abbe56e057f20f883e','wallpaper-nature-3d-1024x6402.jpg',0,NULL,NULL,NULL,NULL,'active','male',NULL);
+insert  into `users`(`user_id`,`fullname`,`email`,`password`,`image`,`usergroup_id`,`joindate`,`google_id`,`facebook_id`,`facebook_access_token`,`status`,`gender`,`birthdate`) values (1,'Muhammad','m.elsaeed@brightery.com','e10adc3949ba59abbe56e057f20f883e','photo.png',1,'2015-07-23 13:26:03','56',NULL,NULL,'active','male',NULL),(2,'Ahmed Magdy','a_owen1@hotmail.com','e10adc3949ba59abbe56e057f20f883e',NULL,1,'2015-07-23 13:26:00',NULL,NULL,NULL,'active','male','0000-00-00'),(3,'ay 7aga',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'active',NULL,NULL),(5,'Salma','a.magdymedany@gmail.com','111','20094_1420919491571094_1216113210334566482_n.jpg',1,NULL,NULL,NULL,NULL,'active','male',NULL),(28,'Hassan','Hassan@gmail.com','e10adc3949ba59abbe56e057f20f883e',NULL,NULL,NULL,NULL,NULL,NULL,'active','male',NULL),(29,'Marwa','marwa.900@brightery.com','e10adc3949ba59abbe56e057f20f883e','MJSD_Logo_12.jpg',2,NULL,NULL,NULL,NULL,'active','female',NULL),(30,'Muhammad El-Saeed','muhammad@el-saeed.info','e10adc3949ba59abbe56e057f20f883e','wallpaper-nature-3d-1024x6402.jpg',0,NULL,NULL,NULL,NULL,'active','male',NULL),(31,'Ahmad El-Saeed','a.elsaeed@brightery.com','e10adc3949ba59abbe56e057f20f883e','12573689_1013948888650843_3048583811480267127_n.jpg',1,NULL,NULL,NULL,NULL,'pending','male',NULL);
 
 /*Table structure for table `visibility_status` */
-
-DROP TABLE IF EXISTS `visibility_status`;
 
 CREATE TABLE `visibility_status` (
   `visibility_status_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -2140,8 +1898,6 @@ CREATE TABLE `visibility_status` (
 insert  into `visibility_status`(`visibility_status_id`,`name`) values (1,'Visible'),(2,'Invisible');
 
 /*Table structure for table `zones` */
-
-DROP TABLE IF EXISTS `zones`;
 
 CREATE TABLE `zones` (
   `zone_id` int(11) NOT NULL AUTO_INCREMENT,
