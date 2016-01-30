@@ -1,6 +1,6 @@
 <!-- faq section 
    ================================================== -->
-
+{#
 <section class="about-section main-section-page">
     <div class="container">
         <h2 style="color:#fab000;">{{lang.faqs}}</h2>
@@ -19,18 +19,93 @@
             </div>
         {% endfor %}
     </div>
+</sectio#}n>
+<!-- faq page start -->
+<section id="faq-page about-section" class="main-section-page">
+    <div class="container">
+        <div class="row">
+            <!-- faq start -->
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <h3 class="widget-title">
+                    {{lang.faqs}}
+                </h3>
+
+                <div class="panel-group" id="accordion">
+                    {% for item in items %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne_{{item.faq_id}}"> {{item.question}}</a> </h4>
+                            </div>
+                            <div id="collapseOne_{{item.faq_id}}" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p>{{item.answer}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div><!-- Toggle start -->
+
+            </div><!-- faq col end -->
+
+            <!-- sidebar start -->
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="widget-title">
+                            Ask A Question
+                        </h3>
+                        <p class="faq-form-text">Couldn't find an answer to your question?<br>
+                            No problem, just ask it here and we'll get back to your soon.
+                            <a class="send-faq" href="{{ helper.uri.url('contactus') }}">HERE !</a>
+                        </p>
+                    </div>
+                </div>
+           
+
+            </div><!-- sidebar end -->
+        </div><!--/ row end -->
+    </div><!--/ container end -->
 </section>
+<!-- Faq page end -->
 
 <!-- End faq section -->
 
 <script>
-    $(document).ready(function () {
+    {#$(document).ready(function () {
 
         $(".toshow_faq").click(function () {
             $(".show_faq").not($(this).find(".show_faq")).hide();
             $(this).next(".show_faq").slideToggle();
         });
-    });
+    });#}
+           // Custom Navigation Events
+    var owl = $("#testimonial-carousel");
+
+
+    // Custom Navigation Events
+    $(".next").click(function(){
+      owl.trigger('owl.next');
+    })
+    $(".prev").click(function(){
+      owl.trigger('owl.prev');
+    })
+    $(".play").click(function(){
+      owl.trigger('owl.play',1000); //owl.play event accept autoPlay speed as second parameter
+    })
+    $(".stop").click(function(){
+      owl.trigger('owl.stop');
+    })
+     $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('#back-to-top').fadeIn();
+            } else {
+                $('#back-to-top').fadeOut();
+            }
+        });
+         $('#blog-gallary').bxSlider({
+        mode: 'fade',
+        autoControls: false
+      });
 </script>
 <style>
     .about-section {

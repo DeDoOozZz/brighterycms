@@ -812,8 +812,8 @@ a.button-one {
   background: rgba(34, 34, 34, 0.8);
 }
 .news-section {
-  padding: 50px 0 30px;
-  background: #f1f1f1;
+/*  padding: 50px 0 30px;
+  background: #f1f1f1;*/
 }
 .news-section h2 {
   color: #222222;
@@ -2202,8 +2202,14 @@ footer p.copyright {
     height: 200px;
   }
 }
-.post-new-img{
-    height: 300px;
+.post-new-img {
+    height: 263px;
     overflow: hidden;
     margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #dedede;
+   
+}
+.post-new-img:hover{
+     background-color: #fab000;
 }

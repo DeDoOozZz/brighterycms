@@ -1,6 +1,6 @@
 <!-- projects-page section 
                   ================================================== -->
-<section class="main-section-page news-section">
+{#<section class="main-section-page news-section">
     <div class="container">
         <div class="news-title">
             <h2>Our Portfolio</h2>
@@ -20,8 +20,69 @@
             </div>
         </div>
     </div>
+</section>#}
+<!-- Portfolio page start -->
+<section id="portfolio" class="main-section-page news-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class='text-center'>
+                    <h2 class="title"><span>Our Projects</span></h2>
+                </div>
+            </div>
+        </div>
+         <div class="row text-center">
+             <div class="col-md-12"  id="isotope-filter">
+                 <a data-filter="*" href="#" class="active">Show All</a> &nbsp; / 
+                 {% for cat in categories %}
+                     <a class="" href="#" data-filter=".cat_{{ cat.portfolio_category_id }}">{{cat.title}}</a> &nbsp; / 
+                 {% endfor %}
+             </div>
+         </div><!--Portfolio filter end -->
+ 
+        <!-- Isotope row start --> 
+         <div class="row">
+             <div id="isotope" class="isotope portfolio-page-items">
+                 {% for item in portfolio %} 
+                     <div class="col-sm-3 cat_{{ item.portfolio_category_id }}">
+                         <div class="portfolio-overlay">
+                             <div class="portfolio-overlay-btn">
+                                 <a href="{{ helper.uri.url('portfolio/portfolio_item', item.seo) }}"><i class="fa fa-link"></i></a>
+                             </div>
+                         </div>
+                         <div class="image-thumb">
+                             <img src="{{helper.uri.cdn('portfolio', item.image )}}" alt="">
+                         </div>
+                     </div><!-- col-sm-3 end -->
+                 {% endfor %}
+             </div><!-- Isotope end -->
+         </div><!-- Isotope row start -->
+    </div><!-- Portfolio page container end -->
 </section>
+<!-- Portfolio page end -->
 <!-- End projects-page section -->
+<script>
+     $(window).load(function () {
+
+        var $isotope_selectors = $('#isotope-filter>a');
+
+        if ($isotope_selectors != 'undefined') {
+            var $portfolio = $('.isotope');
+            $portfolio.isotope({
+                itemSelector: '.col-sm-3',
+                layoutMode: 'fitRows'
+            });
+
+            $isotope_selectors.on('click', function () {
+                $isotope_selectors.removeClass('active');
+                $(this).addClass('active');
+                var selector = $(this).attr('data-filter');
+                $portfolio.isotope({filter: selector});
+                return false;
+            });
+        }
+    });
+</script>
 <style>
     section.projects-page-section {
         margin-top: 120px;

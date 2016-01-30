@@ -97,33 +97,40 @@
 
 <!-- news-section 
         ================================================== -->
-<section class="news-section">
+<section class="">
     <div class="container">
-        <div class="news-title">
-            <h2>{{lang.our_latest_news}}</h2>
-        </div>
-        <div class="news-box">
-            <div class="row">
-                {% for post in post %} 
-                    <div class="col-md-3 col-sm-6">
-                        <div class="news-post"> 
-                            <div class="post-new-img">
-                                <img src="{{helper.uri.cdn('blog', post.image )}}" alt="">
-                            </div>
-                            <h2><a href="{{ helper.uri.url('blog/post', post.seo) }}">{{post.title}}</a></h2>
-                            <span>{{ post.created|date("d F Y")}}</span></br>
-                            {{post.short_content}}</br>
-                            <a href="{{ helper.uri.url('blog/post', post.seo) }}">Continue Reading...</a>
-                        </div>
-                    </div>
-                {% endfor %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class='text-center'>
+                    <h2 class="title"><span>Latest News</span></h2>
+                </div>
             </div>
         </div>
+        <div class="news-section">
+            <div class="news-box">
+                <div class="row">
+                    {% for post in post %} 
+                        <div class="col-md-3 col-sm-6">
+                            <div class="news-post"> 
+                                <div class="post-new-img">
+                                    <img src="{{helper.uri.cdn('blog', post.image )}}" alt="">
+                                </div>
+                                <h2><a href="{{ helper.uri.url('blog/post', post.seo) }}">{{post.title}}</a></h2>
+                                <span>{{ post.created|date("d F Y")}}</span></br>
+                                {{post.short_content}}</br>
+                                <a href="{{ helper.uri.url('blog/post', post.seo) }}">Continue Reading...</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
 
     </div>
 </section>
 <!-- Portfolio page start -->
-<section id="portfolio-page">
+<section id="portfolio">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -132,37 +139,93 @@
                 </div>
             </div>
         </div>
-        <div class="row text-center">
-            <div class="col-md-12"  id="isotope-filter">
-                <a data-filter="*" href="#" class="active">Show All</a>/ 
-                {#<a data-filter=".web-design" href="#" class="">Web Design</a>/ 
-                <a data-filter=".development" href="#" class="">Development</a>/ 
-                <a data-filter=".joomla" href="#" class="">Joomla</a>/ 
-                <a data-filter=".wordpress" href="#" class="">Wordpress</a>/ #}
-                {% for cat in portfolio_category %}
-                    <a class="" href="#" data-filter=".cat_{{ cat.portfolio_category_id }}">{{cat.title}}</a>/ 
-                {% endfor %}
-            </div>
-        </div><!--Portfolio filter end -->
+        {# <div class="row text-center">
+             <div class="col-md-12"  id="isotope-filter">
+                 <a data-filter="*" href="#" class="active">Show All</a>/ 
+                 {% for cat in portfolio_category %}
+                     <a class="" href="#" data-filter=".cat_{{ cat.portfolio_category_id }}">{{cat.title}}</a>/ 
+                 {% endfor %}
+             </div>
+         </div><!--Portfolio filter end -->
+ #}
+        <div class='row wow fadeInUp'>
+            <div class='col-lg-12'>
+                <div class="carousel slide" id="portfolio-carousel">
+                    <div class="carousel-inner">
+                        <div class="item  active">
+                            <div class="row">
+                                {% for item in recent_portfolio %} 
+                                    <div class="col-xs-6 col-sm-3 col-md-3">   
+                                        <div class="thumbnail">
+                                            <div class="caption">
+                                                <div class="caption-content">
+                                                    <span>
+                                                        <a data-rel="prettyPhoto" href="{{helper.uri.cdn('portfolio', item.image )}}">
+                                                            <i class="fa fa-search"></i>              
+                                                        </a>
+                                                        <a href="{{ helper.uri.url('portfolio/portfolio_item', item.seo) }}" class=""><i class="fa fa-link"></i></a>
+                                                    </span>
+                                                    <h3>{{item.title}}</h3>
+                                                    <p>{{item.description}}</p>
+                                                </div>
+                                            </div>
+                                            <img src="{{helper.uri.cdn('portfolio', item.image )}}" alt="portfolio">
+                                        </div>
+                                    </div> 
+                                {% endfor %}
 
-
-        <!-- Isotope row start --> 
-        <div class="row">
-            <div id="isotope" class="isotope portfolio-page-items">
-                {% for item in recent_portfolio %} 
-                    <div class="col-sm-3 cat_{{ item.portfolio_category_id }}">
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-overlay-btn">
-                                <a href="portfolio-item.html"><i class="fa fa-link"></i></a>
                             </div>
-                        </div>
-                        <div class="image-thumb">
-                            <img src="{{helper.uri.cdn('portfolio', item.image )}}" alt="">
-                        </div>
-                    </div><!-- col-sm-3 end -->
-                {% endfor %}
-            </div><!-- Isotope end -->
-        </div><!-- Isotope row start -->
+                        </div><!--/ Item active end -->
+                        <div class="item">
+                            <div class="row">
+                                {% for item in recent_portfolio_ %}
+                                    <div class="col-xs-6 col-sm-3 col-md-3">   
+                                        <div class="thumbnail">
+                                            <div class="caption">
+                                                <div class="caption-content">
+                                                    <span>
+                                                        <a data-rel="prettyPhoto" href="{{helper.uri.cdn('portfolio', item.image )}}">
+                                                            <i class="fa fa-search"></i>              
+                                                        </a>
+                                                        <a href="{{ helper.uri.url('portfolio/portfolio_item', item.seo) }}" class=""><i class="fa fa-link"></i></a>
+                                                    </span>
+                                                    <h3>{{item.title}}</h3>
+                                                    <p>{{item.description}}</p>
+                                                </div>
+                                            </div>
+                                            <img src="{{helper.uri.cdn('portfolio', item.image )}}" alt="portfolio">
+                                        </div>
+                                    </div>          
+                                {% endfor %}
+                            </div>
+                        </div><!--/ Item end -->
+                    </div><!-- Carousel inner end -->
+
+                    <div class="dart-carousel-controller">
+                        <a data-slide="prev" href="#portfolio-carousel" class="left"><i class="fa fa-chevron-left"></i></a>
+                        <a data-slide="next" href="#portfolio-carousel" class="right"><i class="fa fa-chevron-right"></i></a>
+                    </div><!-- Controller end -->
+
+                </div><!-- Carousel end -->                          
+            </div><!-- Main Col end -->
+        </div><!--/ Main row end -->
+        <!-- Isotope row start --> 
+        {# <div class="row">
+             <div id="isotope" class="isotope portfolio-page-items">
+                 {% for item in recent_portfolio %} 
+                     <div class="col-sm-3 cat_{{ item.portfolio_category_id }}">
+                         <div class="portfolio-overlay">
+                             <div class="portfolio-overlay-btn">
+                                 <a href="portfolio-item.html"><i class="fa fa-link"></i></a>
+                             </div>
+                         </div>
+                         <div class="image-thumb">
+                             <img src="{{helper.uri.cdn('portfolio', item.image )}}" alt="">
+                         </div>
+                     </div><!-- col-sm-3 end -->
+                 {% endfor %}
+             </div><!-- Isotope end -->
+         </div>#}<!-- Isotope row start -->
     </div><!-- Portfolio page container end -->
 </section>
 <!-- Portfolio page end -->
@@ -232,6 +295,7 @@
     </div><!-- Main container end -->
 </section><!-- Clients end -->
 
+
 <script type="text/javascript" src="{{ constant("STYLE_JS") }}/new_js/owl.carousel.js"></script>
 <!-- PrettyPhoto -->
 <script type="text/javascript" src="{{ constant("STYLE_JS") }}/new_js/jquery.prettyPhoto.js"></script>
@@ -245,7 +309,12 @@
 <script type="text/javascript" src="{{ constant("STYLE_JS") }}/new_js/jquery.easy-pie-chart.js"></script>
 
 <script type="text/javascript">
+    $('#portfolio-slider').bxSlider({
+        mode: 'fade',
+        autoControls: false
+    });
     // portfolio filter
+    new WOW().init();
     $(window).load(function () {
 
         var $isotope_selectors = $('#isotope-filter>a');

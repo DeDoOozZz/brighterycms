@@ -57,16 +57,20 @@ class HomeController extends Brightery_Controller {
         $clients->_select = 'client_id, name, image';
         $client = $clients->get();
         //      ----------end clients home------------
-                $this->Language->load('portfolio_categories');
-
-                $portfolio_categories = new \modules\portfolio\models\Portfolio_categories();
-                $portfolio_categories->_select = 'portfolio_category_id, title';
+        
+        $this->Language->load('portfolio_categories');
+        $portfolio_categories = new \modules\portfolio\models\Portfolio_categories();
+        $portfolio_categories->_select = 'portfolio_category_id, title';
         $portfolio_categories = $portfolio_categories->get();
 
-       $recent_portfolio = $this->Database->query("SELECT portfolio.*,`portfolio_categories`.`title` as category, `portfolio_categories`.`portfolio_category_id`"
+        
+        $recent_portfolio = $this->Database->query("SELECT portfolio.*"
                         . "FROM `portfolio` "
-                        . "JOIN `portfolio_categories` ON `portfolio_categories`.`portfolio_category_id`=`portfolio`.`portfolio_category_id` "
-                        . "ORDER BY portfolio.portfolio_id DESC LIMIT 20")->result();
+                        . "ORDER BY portfolio.portfolio_id DESC LIMIT 4")->result();
+        
+        $recent_portfolio_ = $this->Database->query("SELECT portfolio.*"
+                        . "FROM `portfolio` "
+                        . "ORDER BY portfolio.portfolio_id ASC LIMIT 4")->result();
 
         return $this->render('home', [
                     'slides' => $slides->get(),
@@ -74,6 +78,7 @@ class HomeController extends Brightery_Controller {
                     'testimonial' => $testimonial,
                     'client' => $client,
                     'recent_portfolio' => $recent_portfolio,
+                    'recent_portfolio_' => $recent_portfolio_,
                     'portfolio_category' => $portfolio_categories,
         ]);
     }

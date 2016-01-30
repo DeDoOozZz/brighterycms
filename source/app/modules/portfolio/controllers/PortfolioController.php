@@ -29,7 +29,7 @@ class PortfolioController extends Brightery_Controller {
         $categories = new \modules\portfolio\models\Portfolio_categories();
         if ($seo) {
             $categories->seo = $seo;
-            $categories->_select = 'blog_category_id';
+            $categories->_select = 'blog_category_id, title';
             $cat = $categories->get();
             if (!$cat)
                 return Brightery::error404();
