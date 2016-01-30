@@ -37,7 +37,6 @@ class UsergroupsController extends Brightery_Controller {
 
     public function manageAction($id = false) {
         $this->permission('manage');
-//        print_r($_POST);
         $model = new \modules\usergroups\models\Usergroups('management');
         $model->attributes = $this->input->post();
         $permissions_management = $this->config->get('Permissions.management');
@@ -48,43 +47,40 @@ class UsergroupsController extends Brightery_Controller {
         $module_checked->_select = "permission , usergroup_zone_id , usergroup_id , module";
         $module_checked->usergroup_id = $id;
 
-        print_r($module_checked->get());
-
-//        if ($id){
-//            $model->usergroup_id = $id;
-//            foreach ($model as $row) {
-//
-//                $selected_permissions[$row->module][] = $row->permission;
-//            }
-//        }
 
         $model->language_id = $this->language->getDefaultLanguage();
-
 
         if (!$id)
             $model->created = date("Y-m-d H:i:s");
 
+//        $checked[] = array ;
+        $check = $module_checked->get() ;
+        foreach($check as $value){
+            $checked[] = $value->permission .'_'. $value->module ;
+        }
+                
+        if ($id)
+            $model->usergroup_id = $id;
         if ($id = $model->save()) {
             $modules_user_zone->usergroup_id = "$id";
             $modules_user_zone->delete();
             foreach ($this->input->post('checkbox') as $key => $value) {
-                $array = explode('-', $value);
+                $array = explode('_', $value, 2);
                 $q['permission'] = $array[0];
                 $q['module'] = $array[1];
                 $q['usergroup_id'] = $id;
                 $modules_user_zone->attributes = $q;
                 $modules_user_zone->save();
             }
-
-            print_r($permissions_frontend);
-            print_r($permissions_management);
+//            exit();
             Uri_helper::redirect("management/usergroups");
         } else
             return $this->render('usergroups/manage', [
-                        'item' => $id ? $model->get() : null,
+//                        'item' => $id ? $model->get() : null,
+                        'item' => $model->get(),
                         'per_management' => $permissions_management,
                         'per_frontend' => $permissions_frontend,
-                        'checked' => $module_checked->get()
+                        'checked' => $checked
             ]);
     }
 
