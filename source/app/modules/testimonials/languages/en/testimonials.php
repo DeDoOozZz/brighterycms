@@ -7,4 +7,5 @@
 		'message' => "Message",
 		'visibility_status' => "Visibility Status",
 		'operations' => "Opertaions",
+		'image' => "Image",
 ]; 

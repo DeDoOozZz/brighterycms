@@ -1,4 +1,6 @@
-<?php defined('ROOT') OR exit('No direct script access allowed');
+<?php
+
+defined('ROOT') OR exit('No direct script access allowed');
 
 /**
  * Home Controller
@@ -14,19 +16,19 @@
  * @controller HomeController
  *
  * */
-class HomeController extends Brightery_Controller
-{
+class HomeController extends Brightery_Controller {
+
     protected $layout = 'default';
 
     public function __construct() {
         parent::__construct();
         // CHECK THE SUITABLE HOME PAGE
-        if($setting = $this->module->getSettings($this->_module))
-            if(isset($setting->default_home_page) && $setting->default_home_page != 'home')
+        if ($setting = $this->module->getSettings($this->_module))
+            if (isset($setting->default_home_page) && $setting->default_home_page != 'home')
                 Uri_helper::redirect($setting->default_home_page);
     }
 
-    public function indexAction(){
+    public function indexAction() {
         $this->language->load('welcome');
 
 //      --------start sliders---------
@@ -35,7 +37,6 @@ class HomeController extends Brightery_Controller
         $slides->_select = 'slide_id, title, caption, url, image';
         $slides->where('slider_id', '1');
 //      -----------end sliders--------------
-
 //      ----------start news home-----------
         $this->Language->load('blog_posts');
         $posts = new \modules\blog\models\Blog_posts();
@@ -44,27 +45,36 @@ class HomeController extends Brightery_Controller
 //        $posts->_orderby = 4;
         $post = $posts->get();
 //      ----------end news home------------
-
 //      -------start testonmials home------
         $this->Language->load('testimonials');
         $testimonials = new \modules\testimonials\models\Testimonials();
-        $testimonials->_select = 'testimonial_id,client_name,client_position,message';
+        $testimonials->_select = 'testimonial_id,client_name,client_position,message,image';
         $testimonial = $testimonials->get();
 //      --------end testonmials home-------
-
 //      ----------start clients home-----------
-//        $this->Language->load('clients');
-//        $clients = new \modules\clients\models\Clients();
-//        $clients->_select = 'client_id,name,image';
-//        $clients = $clients->get();
+        $this->Language->load('clients');
+        $clients = new \modules\clients\models\Clients();
+        $clients->_select = 'client_id, name, image';
+        $client = $clients->get();
         //      ----------end clients home------------
+                $this->Language->load('portfolio_categories');
 
+                $portfolio_categories = new \modules\portfolio\models\Portfolio_categories();
+                $portfolio_categories->_select = 'portfolio_category_id, title';
+        $portfolio_categories = $portfolio_categories->get();
+
+       $recent_portfolio = $this->Database->query("SELECT portfolio.*,`portfolio_categories`.`title` as category, `portfolio_categories`.`portfolio_category_id`"
+                        . "FROM `portfolio` "
+                        . "JOIN `portfolio_categories` ON `portfolio_categories`.`portfolio_category_id`=`portfolio`.`portfolio_category_id` "
+                        . "ORDER BY portfolio.portfolio_id DESC LIMIT 20")->result();
 
         return $this->render('home', [
-            'slides' => $slides->get(),
-            'post' => $post,
-            'testimonial' => $testimonial,
-//            'client'=>$client
+                    'slides' => $slides->get(),
+                    'post' => $post,
+                    'testimonial' => $testimonial,
+                    'client' => $client,
+                    'recent_portfolio' => $recent_portfolio,
+                    'portfolio_category' => $portfolio_categories,
         ]);
     }
 

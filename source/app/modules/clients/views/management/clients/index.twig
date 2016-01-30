@@ -1,9 +1,9 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">{{lang.testimonials}}</h3>
+        <h3 class="panel-title">{{lang.clients}}</h3>
 
         <div class="panel-options">
-            <a href="{{ helper.uri.url('management/testimonials/manage') }}" class="btn btn-secondary" style="color: #FFF;">{{lang.add}}</a>
+            <a href="{{ helper.uri.url('management/clients/manage') }}" class="btn btn-secondary" style="color: #FFF;">{{lang.add}}</a>
         </div>
     </div>
     <div class="panel-body">
@@ -11,8 +11,7 @@
         <table class="table table-bordered table-striped" >
             <thead>
                 <tr>
-                    <th>{{lang.client_name}}</th>
-                    <th>{{lang.client_position}}</th>
+                    <th>{{lang.name}}</th>
                     <th>{{lang.image}}</th>
                     <th>{{lang.operations}}</th>
                 </tr>
@@ -20,12 +19,11 @@
             <tbody class="middle-align">
                 {% for item in items %}
                     <tr>
-                        <td>{{ item.client_name }}</td>
-                        <td>{{ item.client_position }}</td>
-                        <td><img src="{{helper.uri.cdn()}}testimonials/{{item.image}}" height="42" width="42"></td>
+                        <td>{{ item.name }}</td>
+                        <td><img src="{{helper.uri.cdn()}}clients/{{item.image}}" height="42" width="42"></td>
                         <td>
-                            <a class="btn btn-info btn-sm" href="{{ helper.uri.url('management/testimonials/manage', item.testimonial_id ) }}">{{ lang.edit }}</a>
-                            <a class="btn btn-danger btn-sm delete_msg" data-url_id="{{ helper.uri.url('management/testimonials/delete', item.testimonial_id ) }}" data-toggle="modal" data-target="#deleteMsg" style="color:#fff;">{{lang.delete}}</a>
+                            <a class="btn btn-info btn-sm" href="{{ helper.uri.url('management/clients/manage', item.client_id ) }}">{{ lang.edit }}</a>
+                            <a class="btn btn-danger btn-sm delete_msg" data-url_id="{{ helper.uri.url('management/clients/delete', item.client_id ) }}" data-toggle="modal" data-target="#deleteMsg" style="color:#fff;">{{lang.delete}}</a>
                         </td>
                     </tr>
                 {% endfor %}

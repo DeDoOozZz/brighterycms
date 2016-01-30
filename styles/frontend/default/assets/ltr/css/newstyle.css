@@ -41,6 +41,7 @@ p.show_faq {
 }
 .navbar-brand {
     width: 200px;
+    padding: 10px;
 }
 .navbar-brand>img {
     width: 100%;
@@ -320,3 +321,211 @@ section.main-section-page {
     margin-bottom: 20px;
 }
 /*end login home*/
+
+/* Testimonial
+================================================== */
+
+.testimonial-slide .testimonial-thumb img{
+	width: 152px;
+	height: 152px;
+	border: 5px solid rgba(0, 0, 0, .09);
+}
+
+.testimonial-slide .testimonial-content h3.name{
+	font-size: 26px;
+	color: #ffba00;
+	font-weight: 400;
+}
+
+.testimonial-slide .testimonial-content h3 span{
+	display: block;
+	font-size: 16px;
+	color: #636363;
+}
+
+.testimonial-slide .owl-buttons{
+	display: none;
+}
+
+.testimonial-slide .testimonial-text{
+	font-size: 16px;
+	line-height: 24px;
+	max-width: 800px;
+	padding-top: 20px;
+	display: inline-block;
+	position: relative;
+	color: #636363;
+}
+
+.testimonial-slide .testimonial-text:before{
+	content: '\f10d';
+	font-family: FontAwesome;
+	padding-right: 10px;
+	color: #ffba00;
+}
+.testimonial-slide .testimonial-text:after{
+	content: '\f10e';
+	font-family: FontAwesome;
+	padding-left: 10px;
+	color: #ffba00;
+}
+
+.text-center {
+    text-align: center;
+}
+h2.title {
+    font-size: 24px;
+    font-weight: 300;
+    padding: 20px 15px 40px;
+    position: relative;
+    left: 0;
+    line-height: normal;
+}
+h2.title:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    height: 1px;
+    width: 100%;
+    left: 0;
+    z-index: -1;
+    border-bottom: 1px solid #cecece;
+}
+h2.title span {
+    background: #fff;
+    z-index: 1;
+    padding: 10px 15px;
+}
+.dart-carousel-controller .left, .dart-carousel-controller .right, .owl-controls .owl-prev, .owl-controls .owl-next {
+    cursor: pointer;
+    background: #f6f6f6;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    color: #989898;
+    opacity: 1;
+    top: auto;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    border-radius: 100%;
+}
+.customNavigation.dart-carousel-controller {
+    text-align: center;
+}
+section#testimonial, #clients {
+    margin-bottom: 20px;
+}
+
+/* Clients
+================================================== */
+
+#clients{
+	padding: 40px 0;
+}
+
+.client-carousel .owl-wrapper-outer{
+	background: #f2f2f2;
+	border: 1px solid #d7d7d7;
+	padding: 60px 0;
+	border-radius: 2px;
+	margin-bottom: 40px;
+	position: initial !important
+}
+/*-- Portfolio page --*/
+
+#portfolio-page div[class*='col-sm-'] {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+#portfolio-page .col-sm-3 .image-thumb {
+	height: 300px;
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-position: center center;
+}
+
+#portfolio-page .post-img-lg {
+	margin-bottom: 60px;
+}
+
+.portfolio-overlay{
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	background: rgba(235, 44, 51, 0.75);
+	color: #FFF;
+	opacity: 0;
+	z-index: 10;
+    -webkit-transition: all 0.3s;
+	 -moz-transition: all 0.3s;
+	 -o-transition: all 0.3s;
+	 transition: all 0.3s;
+}
+
+.portfolio-overlay:hover{
+	opacity: 1;
+}
+
+.portfolio-overlay-btn {
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	margin-top: -20px;
+	color: #FFF;
+	-webkit-transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	transition: all 0.2s;
+}
+
+.portfolio-overlay-btn a{
+	border: 2px solid #FFFFFF;
+	border-radius: 100%;
+	color: #FFFFFF;
+	display: inline-block;
+	font-size: 18px;
+	margin: 0 6px;
+	width: 48px;
+	height: 48px;
+	line-height: 44px;
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	-o-transition: all 0.2s ease-out;
+	-ms-transition: all 0.2s ease-out;
+	transition: all 0.2s ease-out;
+}
+
+.portfolio-overlay-btn a:hover{
+	background: #fff;
+	color: #eb2c33;
+}
+
+.project-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+#isotope-filter {
+    margin-bottom: 40px;
+}
+#isotope-filter a {
+    color: #959595;
+    font-size: 16px;
+    font-weight: 400;
+}
+#isotope-filter a.active, #isotope-filter a:hover {
+    color: #eb2c33;
+}
+section#portfolio-page {
+    margin-top: 30px;
+}

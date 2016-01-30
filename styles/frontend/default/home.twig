@@ -107,7 +107,9 @@
                 {% for post in post %} 
                     <div class="col-md-3 col-sm-6">
                         <div class="news-post"> 
-                            <img src="{{helper.uri.cdn('blog', post.image )}}" alt="">
+                            <div class="post-new-img">
+                                <img src="{{helper.uri.cdn('blog', post.image )}}" alt="">
+                            </div>
                             <h2><a href="{{ helper.uri.url('blog/post', post.seo) }}">{{post.title}}</a></h2>
                             <span>{{ post.created|date("d F Y")}}</span></br>
                             {{post.short_content}}</br>
@@ -120,62 +122,186 @@
 
     </div>
 </section>
-<!-- End news section -->
-<!-- testimonial-section 
-        ================================================== -->
-<section class="testimonial-section">
+<!-- Portfolio page start -->
+<section id="portfolio-page">
     <div class="container">
-        <div class="title-section">
-            <h1>{{lang.clients}} <span>{{lang.testimonials}}</span></h1>
+        <div class="row">
+            <div class="col-md-12">
+                <div class='text-center'>
+                    <h2 class="title"><span>Latest Projects</span></h2>
+                </div>
+            </div>
         </div>
-
-        <div class="testimonial-box">
-            <ul class="bxslider">
-                {% for testimonial in testimonial %} 
-                    <li>
-                        <h2>{{testimonial.client_name}}</h2>
-                        <span>{{testimonial.client_position}}</span> </br>
-                        <p>{{testimonial.message}}</p>
-                    </li>
+        <div class="row text-center">
+            <div class="col-md-12"  id="isotope-filter">
+                <a data-filter="*" href="#" class="active">Show All</a>/ 
+                {#<a data-filter=".web-design" href="#" class="">Web Design</a>/ 
+                <a data-filter=".development" href="#" class="">Development</a>/ 
+                <a data-filter=".joomla" href="#" class="">Joomla</a>/ 
+                <a data-filter=".wordpress" href="#" class="">Wordpress</a>/ #}
+                {% for cat in portfolio_category %}
+                    <a class="" href="#" data-filter=".cat_{{ cat.portfolio_category_id }}">{{cat.title}}</a>/ 
                 {% endfor %}
-            </ul>
-        </div>
-    </div>
-</section>
-<!-- End testimonial section -->
+            </div>
+        </div><!--Portfolio filter end -->
 
-<!-- clients-section 
-        ================================================== -->
-{#<section class="clients-section">
+
+        <!-- Isotope row start --> 
+        <div class="row">
+            <div id="isotope" class="isotope portfolio-page-items">
+                {% for item in recent_portfolio %} 
+                    <div class="col-sm-3 cat_{{ item.portfolio_category_id }}">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-overlay-btn">
+                                <a href="portfolio-item.html"><i class="fa fa-link"></i></a>
+                            </div>
+                        </div>
+                        <div class="image-thumb">
+                            <img src="{{helper.uri.cdn('portfolio', item.image )}}" alt="">
+                        </div>
+                    </div><!-- col-sm-3 end -->
+                {% endfor %}
+            </div><!-- Isotope end -->
+        </div><!-- Isotope row start -->
+    </div><!-- Portfolio page container end -->
+</section>
+<!-- Portfolio page end -->
+<!-- End news section -->
+<section id="testimonial" class="wow fadeInUp animated">
     <div class="container">
-        <div class="clients-title">
-            <h2>{{lang.clients}} {{lang.our_parents}}</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+        <div class="row">
+            <div class="col-md-12">
+                <div class='text-center'>
+                    <h2 class="title"><span>Customers Feedback</span></h2>
+                </div>
+            </div>
         </div>
         <div class="row">
-            <div class="col-md-5">
-                <ul class="client-list">
-                    {% for client in clients %} 
-                        <li>
-                            <a href="#"><img src="{{helper.uri.cdn('clients', item.image)}}" alt=""></a>
-                                {{client.name}}
-                        </li>
-                    {% endfor %}
-                </ul>
+            <div id="testimonial-carousel" class="owl-carousel owl-theme text-center testimonial-slide">
+                {% for testimonial in testimonial %} 
+
+                    <div class="item">
+
+                        <div class="testimonial-thumb">
+                            <img class="img-circle" src="{{helper.uri.cdn('testimonials', testimonial.image )}}" alt="testimonial">
+                        </div>
+                        <div class="testimonial-content">
+                            <h3 class="name">{{testimonial.client_name}} <span>{{testimonial.client_position}}</span></h3>
+                            <p class="testimonial-text">
+                                {{testimonial.message}}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-            <div class="col-md-6">
-                <blockquote>
-                    <p>There are some of <span>our partners</span> and <span>customers</span>, who are very satisfied with our work. <br>Do you want to be <span>next one</span> ?</p>
-                </blockquote>
+
+            <!-- Navigation start -->
+            <div class="customNavigation dart-carousel-controller">
+                <a class="prev left">
+                    <i class="fa fa-chevron-left"></i>
+                </a>
+                <a class="next right">
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div><!--/ Navigation end -->
+        </div><!--/ Main row end-->
+    </div><!--/ Main container end-->
+</section><!-- Testimonial end-->
+<!-- Clients start -->
+<section id="clients">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class='text-center'>
+                    <h2 class="title"><span>Clients</span></h2>
+                </div>
             </div>
         </div>
-    </div>
-</section>#}
-<!-- End clients section -->
-<script type="text/javascript">
+        <div class="row wow fadeInLeft">
+            <div id="client-carousel" class="col-sm-12 owl-carousel owl-theme text-center client-carousel">
 
+                {% for item in client %} 
+                    <figure class="item client_logo">
+                        <a href="#">
+                            <img src="{{helper.uri.cdn('clients', item.image )}}" alt="{{item.name}}">
+                        </a>
+                    </figure>
+                {% endfor %}
+            </div><!-- Owl carousel end -->
+        </div><!-- Main row end -->
+    </div><!-- Main container end -->
+</section><!-- Clients end -->
+
+<script type="text/javascript" src="{{ constant("STYLE_JS") }}/new_js/owl.carousel.js"></script>
+<!-- PrettyPhoto -->
+<script type="text/javascript" src="{{ constant("STYLE_JS") }}/new_js/jquery.prettyPhoto.js"></script>
+<!-- Isotope -->
+<script type="text/javascript" src="{{ constant("STYLE_JS") }}/new_js/jquery.isotope.min.js"></script>
+<!-- Wow Animation -->
+<script type="text/javascript" src="{{ constant("STYLE_JS") }}/new_js/wow.min.js"></script>
+<!-- SmoothScroll -->
+<script type="text/javascript" src="{{ constant("STYLE_JS") }}/new_js/smoothscroll.js"></script>
+<!-- Animated Pie -->
+<script type="text/javascript" src="{{ constant("STYLE_JS") }}/new_js/jquery.easy-pie-chart.js"></script>
+
+<script type="text/javascript">
+    // portfolio filter
+    $(window).load(function () {
+
+        var $isotope_selectors = $('#isotope-filter>a');
+
+        if ($isotope_selectors != 'undefined') {
+            var $portfolio = $('.isotope');
+            $portfolio.isotope({
+                itemSelector: '.col-sm-3',
+                layoutMode: 'fitRows'
+            });
+
+            $isotope_selectors.on('click', function () {
+                $isotope_selectors.removeClass('active');
+                $(this).addClass('active');
+                var selector = $(this).attr('data-filter');
+                $portfolio.isotope({filter: selector});
+                return false;
+            });
+        }
+    });
+    $("#client-carousel").owlCarousel({
+        navigation: true, // Show next and prev buttons
+        navigationText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
+        slideSpeed: 800,
+        pagination: false,
+        items: 5,
+        rewindNav: true,
+        itemsDesktop: [1199, 3],
+        itemsDesktopSmall: [979, 3],
+        stopOnHover: true
+
+    });
+
+    $("#testimonial-carousel").owlCarousel({
+        navigation: true, // Show next and prev buttons
+        slideSpeed: 600,
+        pagination: false,
+        singleItem: true
+
+    });
+    var owl = $("#testimonial-carousel");
+    $("a[data-rel^='prettyPhoto']").prettyPhoto();
+
+    // Custom Navigation Events
+    $(".next").click(function () {
+        owl.trigger('owl.next');
+    })
+    $(".prev").click(function () {
+        owl.trigger('owl.prev');
+    })
+    $(".play").click(function () {
+        owl.trigger('owl.play', 1000); //owl.play event accept autoPlay speed as second parameter
+    })
+    $(".stop").click(function () {
+        owl.trigger('owl.stop');
+    })
     jQuery(document).ready(function () {
 
         jQuery('.tp-banner').show().revolution(
@@ -211,7 +337,7 @@
                     stopAtSlide: -1,
                     shuffle: "off",
                     autoHeight: "off",
-    forceFullWidth: "off",
+                    forceFullWidth: "off",
                     hideThumbsOnMobile: "off",
                     hideNavDelayOnMobile: 1500,
                     hideBulletsOnMobile: "off",
@@ -225,5 +351,6 @@
                 });
 
     });	//ready
+
 
 </script>

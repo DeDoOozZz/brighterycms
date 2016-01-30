@@ -27,7 +27,7 @@ class TestimonialsController extends Brightery_Controller {
     public function indexAction($offset = 0) {
         $this->permission('index');
         $model = new \modules\testimonials\models\Testimonials();
-        $model->_select = "testimonial_id,client_name,client_position,message,visibility_status_id";
+        $model->_select = "testimonial_id,client_name,client_position,message,image";
         $this->load->library('pagination');
         $model->_limit = $this->config->get('limit');
         $model->_offset = $offset;

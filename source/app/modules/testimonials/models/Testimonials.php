@@ -14,6 +14,7 @@ class Testimonials extends \Model {
         'client_position' => ['varchar', 200],
         'message' => ['text'],
         'visibility_status_id' => ['int', 1],
+        'image' => ['varchar', 150],
     ];
 
     public function rules() {
@@ -24,6 +25,24 @@ class Testimonials extends \Model {
                 'message' => ['required'],
                 'visibility_status_id' => ['required', 'numeric'],
             ],
+             'add' => [
+                'image' => ['file' => [
+                        [
+                            'upload_path' => "./cdn/testimonials/",
+                            'allowed_types' => "gif|jpg|png|jpeg|pdf",
+                            'required' => TRUE
+                        ]
+                    ]],
+            ],
+            'edit' => [
+                'image' => ['file' => [
+                        [
+                            'upload_path' => "./cdn/testimonials/",
+                            'allowed_types' => "gif|jpg|png|jpeg|pdf",
+                            'required' => FALSE
+                        ]
+                    ]],
+            ]
         ];
     }
 
@@ -33,6 +52,7 @@ class Testimonials extends \Model {
             'client_position' => 'Client Position',
             'message' => 'Message',
             'visibility_status_id' => 'Visibility',
+            'image' => 'Image',
         ];
     }
 

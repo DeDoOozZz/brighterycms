@@ -24,12 +24,22 @@ class ClientsController extends Brightery_Controller {
         $this->language->load('clients');
     }
 
-    public function indexAction() {
+   public function indexAction($offset = 0) {
         $this->permission('index');
         $model = new \modules\clients\models\Clients();
-        $model->_select = "client_id, name, image ";
+        $model->_select = "client_id, name, image";
+        $this->load->library('pagination');
+        $model->_limit = $this->config->get('limit');
+        $model->_offset = $offset;
+        $config = [
+            'url' => Uri_helper::url('management/clients/index'),
+            'total' => $model->get(true),
+            'limit' => $model->_limit,
+            'offset' => $model->_offset
+        ];
         return $this->render('clients/index', [
-                    'items' => $model->get()
+                    'items' => $model->get(),
+                    'pagination' => $this->Pagination->generate($config)
         ]);
     }
 
@@ -48,7 +58,7 @@ class ClientsController extends Brightery_Controller {
             Uri_helper::redirect("management/clients");
         }
         return $this->render('clients/manage', [
-                    'item' => $id ? $model->get() : null
+                    'item' => $id ? $model->get() : null,
         ]);
     }
 

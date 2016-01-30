@@ -13,6 +13,7 @@ class Clients extends \Model
     public $_fields = [
         'client_id' => ['int', 11, 'PRI'],
         'name' => ['varchar'],
+        'image' => ['text'],
         
     ];
 
@@ -20,20 +21,35 @@ class Clients extends \Model
     {
         return [
             'all' => [
-                'question' => ['required'],
-                'answer' => ['required'],
-                'visibility_status_id' => ['required'],
+                'name' => ['required'],
             ],
+             'add' => [
+                'image' => ['file' => [
+                        [
+                            'upload_path' => "./cdn/clients/",
+                            'allowed_types' => "gif|jpg|png|jpeg|pdf",
+                            'required' => TRUE
+                        ]
+                    ]],
+            ],
+            'edit' => [
+                'image' => ['file' => [
+                        [
+                            'upload_path' => "./cdn/clients/",
+                            'allowed_types' => "gif|jpg|png|jpeg|pdf",
+                            'required' => FALSE
+                        ]
+                    ]],
+            ]
         ];
     }
 
     public function fields()
     {
         return [
-            'question' => 'Question',
-            'answer' => 'Answer',
-            'created' => 'Created',
-            'visibility_status_id' => 'Visibility',
+            'name' => 'Name',
+            'image' => 'Image',
+          
         ];
     }
 
