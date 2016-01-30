@@ -30,11 +30,10 @@ class HomeController extends Brightery_Controller
         $this->language->load('welcome');
 
 //      --------start sliders---------
-//        $this->language->load('sliders');
-//        $sliders = new \modules\sliders\models\Sliders();
-//        $sliders->_select = 'slider_id, title, caption, url';
-//        $slides = $sliders->get();
-        $slides = null;
+        $this->language->load('sliders');
+        $slides = new \modules\sliders\models\Slides();
+        $slides->_select = 'slide_id, title, caption, url, image';
+        $slides->where('slider_id', '1');
 //      -----------end sliders--------------
 
 //      ----------start news home-----------
@@ -55,14 +54,14 @@ class HomeController extends Brightery_Controller
 
 //      ----------start clients home-----------
 //        $this->Language->load('clients');
-//        $clients = new \modules\blog\models\Clients();
+//        $clients = new \modules\clients\models\Clients();
 //        $clients->_select = 'client_id,name,image';
-//        $client = $clients->get();
+//        $clients = $clients->get();
         //      ----------end clients home------------
 
 
         return $this->render('home', [
-            'slides' => $slides,
+            'slides' => $slides->get(),
             'post' => $post,
             'testimonial' => $testimonial,
 //            'client'=>$client

@@ -13,7 +13,7 @@
                 {% for item in slides %}  
                     <li data-transition="fade" data-slotamount="7" data-masterspeed="500" data-saveperformance="on"  data-title="Intro Slide">
                         <!-- MAIN IMAGE -->
-                        <img src="{{helper.uri.cdn('sliders', item.image )}}"  alt="slidebg1" data-lazyload="{{helper.uri.cdn('sliders', item.image )}}" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+                        <img src="{{helper.uri.cdn('sliders', item.image)}}"  alt="slidebg1" data-lazyload="{{helper.uri.cdn('sliders', item.image )}}" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
                         <!-- LAYERS -->
 
                         <!-- LAYER NR. 1 -->
@@ -43,7 +43,7 @@
                              data-splitout="none"
                              data-elementdelay="0.05"
                              data-endelementdelay="0.1"
-                             style="z-index: 7; max-width: auto; max-height: auto; white-space: nowrap; right: 104.5px;">{{item.caprion}}
+                             style="z-index: 7; max-width: auto; max-height: auto; white-space: nowrap; right: 104.5px;">{{item.caption}}
                         </div>
 
                         <!-- LAYER NR. 3 -->
@@ -59,11 +59,11 @@
                              data-elementdelay="0.1"
                              data-endelementdelay="0.1"
                              data-linktoslide="next"
-                             style="z-index: 10; max-width: auto; max-height: auto; white-space: nowrap; right: 104.5px;"><a href="#" class='trans-btn'>{{lang.link}}</a>
+                             style="z-index: 10; max-width: auto; max-height: auto; white-space: nowrap; right: 104.5px;"><a href="{{item.url}}" class='trans-btn'>{{lang.link}}</a>
                         </div>
 
                         <!-- LAYER NR. 4 -->
-                        <div class="tp-caption lfr tp-resizeme rs-parallaxlevel-0"
+                        {#<div class="tp-caption lfr tp-resizeme rs-parallaxlevel-0"
                              data-x="200"
                              data-y="510" 
                              data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
@@ -76,7 +76,7 @@
                              data-endelementdelay="0.1"
                              data-linktoslide="next"
                              style="z-index: 11; max-width: auto; max-height: auto; white-space: nowrap; right: 304.5px;"><a href='#' class='trans-btn2'>{{lang.link}}</a>
-                        </div>
+                        </div>#}
                     </li> 
                 {% endfor %}
             </ul>
@@ -90,7 +90,7 @@
         ================================================== -->
 <section class="banner-section">
     <div class="container">
-        <h2>All You Need for building Creative &amp; Professional<a href="projects.html" class="button-one">click here</a></h2>
+        <h2>All You Need for building Creative &amp; Professional<a href="{{ helper.uri.url('contactus') }}" class="button-one">click here</a></h2>
     </div>
 </section>
 <!-- End banner section -->
@@ -146,7 +146,7 @@
 
 <!-- clients-section 
         ================================================== -->
-<section class="clients-section">
+{#<section class="clients-section">
     <div class="container">
         <div class="clients-title">
             <h2>{{lang.clients}} {{lang.our_parents}}</h2>
@@ -157,9 +157,9 @@
         <div class="row">
             <div class="col-md-5">
                 <ul class="client-list">
-                    {% for client in client %} 
+                    {% for client in clients %} 
                         <li>
-                            <a href="#"><img src="{{ constant("CDN") }}/clients/{{client.image}}" alt=""></a>
+                            <a href="#"><img src="{{helper.uri.cdn('clients', item.image)}}" alt=""></a>
                                 {{client.name}}
                         </li>
                     {% endfor %}
@@ -172,7 +172,7 @@
             </div>
         </div>
     </div>
-</section>
+</section>#}
 <!-- End clients section -->
 <script type="text/javascript">
 
