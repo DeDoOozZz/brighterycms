@@ -14,12 +14,12 @@
                         </div>
                     </div>
                     <div class="comment-section">
-                        <h2>4 Comments</h2>
+                        <h2>{{comments_no}} Comments</h2>
                         <ul class="comment-tree">
                             {% for comment in comments %}
                                 <li>
                                     <div class="comment-box">
-                                        <img alt="" src="{{ constant("STYLE_IMAGES") }}/upload/team/2.jpg">
+                                        <img alt="" src="{{helper.uri.cdn_image('users', comment.image )}}">
                                         <div class="comment-content">
                                             <h4>{{comment.name}}</h4>
                                             <span>{{ comment.created|date("d F Y")}}</span>

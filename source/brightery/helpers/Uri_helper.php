@@ -33,6 +33,15 @@ class Uri_helper
         return BASE_URL . "cdn/" . $url;
     }
 
+    static function cdn_image($module, $image)
+    {
+        $file = "cdn/" . $module .  '/' . $image;
+     if($image && file_exists($file))
+        return BASE_URL . $file;
+     else
+         return BASE_URL . 'cdn/'. $module .'/'. 'default.png';
+    }
+
     static function current($lang = null)
     {
         if (!$lang)
