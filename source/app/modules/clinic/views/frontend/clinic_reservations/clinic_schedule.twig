@@ -1,137 +1,4 @@
-<style>
-    table{
-        width:100%;
-    }
-    thead {
-        border-bottom: 1px solid #dedede;
-    }
-    th.fc-header {
-        width: 12.5%;
-        color: #555;
-        font-size: 14px;
-        font-weight: normal;
-        line-height: 40px;
-        text-align: center;
-    }
-    tr {
-        line-height: 50px;
-        text-align: center;
-        border-bottom: 1px solid #dedede;
-    }
-    .fc-record {
-        border-left:  1px solid #dedede;
-    }
-    .last-record{
-        border-right: 1px solid #dedede;
-    }
-    .reserved {
-        background-color: #f5f5f5;
-        color:silver !important;
-    }
-    .vacation{
-        background-color: #f5f5f5;
-    }
-    span.reservation-day {
-        color: #888;
-        font-size: 12px;
-    }
-    .times{
-        color:#555;
-    }
-    td.fc-record {
-        color: #666;
-        font-size: 14px;
-    }
-    .reservation-header h2 {
-        float: left;
-        color: #666;
-        font-weight: normal;
-        font-size: 18px;
-    }
-    .reservation-header .form-group {
-        float: right;
-    }
-    .date-and-time {
-        display: inline;
-    }
-    .date-and-time {
-        display: inline;
-    }
-    input#datepicker {
-        border: 1px solid #dedede;
-        line-height: 36px;
-        width: 200px;
-        margin-right: -5px;
-        padding-left: 5px;
-    }
-    .calendar-date {
-        background-color: #dedede;
-        line-height: 40px;
-        width: 30px;
-        text-align: center;
-        color:#666;
-    }
-    .control-label {
-        color: #999;
-        font-size: 14px;
-        font-weight: normal;
-    }
-    input.submit {
-        background-color: #ffab00;
-        border: none;
-        color: #fff;
-        line-height: 30px;
-        width: 100px;
-    }
-    .available{
-        cursor: pointer;
-    }
-    select.form-control {
-        border: 1px solid #dedede;
-        box-shadow: none;
-        border-radius: 0;
-        color: #666;
-    }
-    form .form-group-separator {
-        height: 1px;
-        background: #eee;
-        margin-bottom: 15px;
-    }
-    h2.sub-title-reservation {
-        font-size: 18px;
-        color: #777;
-        margin-top: 0;
-        margin-left: 10px;
-    }
-    input.form-control {
-        border: 1px solid #dedede;
-        border-radius: 0;
-        box-shadow: none;
-    }
-    a.register-new-patient {
-        line-height: 32px;
-        color: #fff;
-        background-color: #8dc63f;
-        text-decoration: none;
-        display: block;
-        text-align: center;
-        float: left;
-        margin-left: 20px;
-        font-size: 12px;
-    }
-    label.remember-me {
-        color: #999;
-        font-weight: normal;
-    }
-    a.forget-password {
-        float: right;
-        color: #999;
-        text-decoration: underline;
-    }
-    a.forget-password:hover{
-        color: #ffab00;
-    }
-</style>
+
 <!-- End page-banner section -->
 {%set i = 1 %}
 <section class="main-section-page">
@@ -204,6 +71,9 @@
                 </table>
             {%else%}
                 {# //////////////////////////////////     low el DR malosh Schedule      #}
+                <div class="message">
+                    <p>Sorry, The Doctor Hasn't Schedule</p>
+                </div>
             {%endif %}
         </div>
     </div>
@@ -348,3 +218,147 @@
                             $("#time").attr('value', time);
                         });
 </script>
+<style>
+    table{
+        width:100%;
+    }
+    thead {
+        border-bottom: 1px solid #dedede;
+    }
+    th.fc-header {
+        width: 12.5%;
+        color: #555;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 40px;
+        text-align: center;
+    }
+    tr {
+        line-height: 50px;
+        text-align: center;
+        border-bottom: 1px solid #dedede;
+    }
+    .fc-record {
+        border-left:  1px solid #dedede;
+    }
+    .last-record{
+        border-right: 1px solid #dedede;
+    }
+    .reserved {
+        background-color: #f5f5f5;
+        color:silver !important;
+    }
+    .vacation{
+        background-color: #f5f5f5;
+    }
+    span.reservation-day {
+        color: #888;
+        font-size: 12px;
+    }
+    .times{
+        color:#555;
+    }
+    td.fc-record {
+        color: #666;
+        font-size: 14px;
+    }
+    .reservation-header h2 {
+        float: left;
+        color: #666;
+        font-weight: normal;
+        font-size: 18px;
+    }
+    .reservation-header .form-group {
+        float: right;
+    }
+    .date-and-time {
+        display: inline;
+    }
+    .date-and-time {
+        display: inline;
+    }
+    input#datepicker {
+        border: 1px solid #dedede;
+        line-height: 36px;
+        width: 200px;
+        margin-right: -5px;
+        padding-left: 5px;
+    }
+    .calendar-date {
+        background-color: #dedede;
+        line-height: 40px;
+        width: 30px;
+        text-align: center;
+        color:#666;
+    }
+    .control-label {
+        color: #999;
+        font-size: 14px;
+        font-weight: normal;
+    }
+    input.submit {
+        background-color: #ffab00;
+        border: none;
+        color: #fff;
+        line-height: 30px;
+        width: 100px;
+    }
+    .available{
+        cursor: pointer;
+    }
+    select.form-control {
+        border: 1px solid #dedede;
+        box-shadow: none;
+        border-radius: 0;
+        color: #666;
+    }
+    form .form-group-separator {
+        height: 1px;
+        background: #eee;
+        margin-bottom: 15px;
+    }
+    h2.sub-title-reservation {
+        font-size: 18px;
+        color: #777;
+        margin-top: 0;
+        margin-left: 10px;
+    }
+    input.form-control {
+        border: 1px solid #dedede;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    a.register-new-patient {
+        line-height: 32px;
+        color: #fff;
+        background-color: #8dc63f;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        float: left;
+        margin-left: 20px;
+        font-size: 12px;
+    }
+    label.remember-me {
+        color: #999;
+        font-weight: normal;
+    }
+    a.forget-password {
+        float: right;
+        color: #999;
+        text-decoration: underline;
+    }
+    a.forget-password:hover{
+        color: #ffab00;
+    }
+
+    .message {
+        background-color: #ffbba4;
+        border: 1px solid #ff7c72;
+        margin-top: 115px;
+        margin-bottom: 115px;
+        padding: 20px;
+        text-align: center;
+    }
+    .message p {font-size: 20px;}
+</style>

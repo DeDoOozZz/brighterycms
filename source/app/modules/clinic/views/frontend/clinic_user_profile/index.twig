@@ -10,15 +10,15 @@
                     <div class="col-sm-3">
                         <!-- User Info Sidebar -->
                         <div class="user-info-sidebar">
-                            <a href="#" class="user-img">
+                            <a href="#" data-toggle="modal" data-target="#image-edit" class="user-img">
                                 <img src="{{ helper.uri.cdn() }}users/{{ item.image }}" alt="user-img" class="img-cirlce img-responsive img-thumbnail" />
+                                <div>Edit Image</div>
                             </a>
                             <span class="user-name">
                                 {{item.fullname}}
                             </span>
                         </div>
                     </div>
-
                     <div class="col-sm-9">
                         <div class="tabs-vertical-env tabs-vertical-bordered"><!-- add class "right-aligned" for the right aligned tabs -->
 
@@ -138,7 +138,6 @@
 
                         </div>
                     </div>
-
                 </div>
             </section>
         </div>
@@ -287,31 +286,10 @@
                         <div class="modal_errors"></div>
                         {{ helper.form.open(null,false,true,'role="for1" id="rootwizard" class="form-wizard validate" novalidate') }}
                         {{ error }}
-                        {#<ul class="tabs">
-                            <li class="active">
-                                <a href="#fwv-1" data-toggle="tab">
-                                    Old password
-                                    <span>1</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#fwv-2" data-toggle="tab">
-                                    New Password
-                                    <span>2</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#fwv-3" data-toggle="tab">
-                                    Retype New Password
-                                    <span>3</span>
-                                </a>
-                            </li>
-                        </ul>#}
                         <div class="progress-indicator">
                             <span></span>
                         </div>
                         <div class="tab-content no-margin">
-
                             <!-- Old Password -->
                             <div class="tab-pane with-bg active" id="old">
                                 <div class="row">
@@ -344,39 +322,41 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- retype new Password -->
-                            {#<div class="tab-pane with-bg row" id="new-conf" hidden>
-                                <strong>New Password</strong>
-                                <br />
-                                <br />
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="control-label" for="new">Retype New Password</label>
-                                            <input class="form-control" name="password-conf" id="new" data-validate="required" placeholder="Enter your New Password again" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>#}
-
-                            <!-- Tabs Pager -->
-
                             <ul class="pager wizard">
-                                {#<li class="previous">
-                                    <a href="#"><i class="entypo-left-open"></i> Previous</a>
-                                </li>#}
-
-                                <input type="button" id="next" class="next" value="Next">
+                                <input type="button" id="next" class="next btn btn-secondary" value="Next">
                                 <input type="button" id="next-conf" class="next" value="Submit" hidden>
-                                {#<li class="next" id="next-new">
-                                    <a id='next' href="#">Next <i class="entypo-right-open"></i></a>
-                                </li>
-                                <li class="next" id="next-conf" hidden>
-                                    <a id='next-con' href="#">Next <i class="entypo-right-open"></i></a>
-                                </li>#}
                             </ul>
 
+                        </div>
+                        {#--------------submit----------#}
+                        <div class="form-group" hidden id="submit">
+                            <label for="field-5" class="col-sm-2 control-label"></label>
+                            <div class="col-sm-9">
+                                <input type="submit" value="Change" class="form-control submit-edit" style="line-height: normal;">
+                            </div>
+                        </div>
+                        {{ helper.form.close() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="image-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <a type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+                    <h4 class="modal-title " id="myModalLabel">{{ lang.edit_image }}Upload new image</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="for-show-personal-info">
+                        <div class="modal_errors"></div>
+                        {{ helper.form.open(null,false,true,'role="for1" id="rootwizard" class="form-wizard validate" novalidate') }}
+                        {{ error }}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="image">{{ lang.image }}upload image</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="image" placeholder="{{ lang.image }}" name="image"></div>
                         </div>
                         {#--------------submit----------#}
                         <div class="form-group" hidden id="submit">
@@ -398,8 +378,13 @@
 <script src="{{ constant('STYLE_JS') }}/jquery-validate/jquery.validate.min.js"></script>
 <script src="{{ constant('STYLE_JS') }}/formwizard/jquery.bootstrap.wizard.min.js"></script>
 <script src="{{ constant('STYLE_JS') }}/jquery-ui/jquery-ui.min.js"></script>
-
 <script>
+//    $(function () {
+//        $("#datepicker").datepicker({
+//                    dateFormat: "yy-mm-dd"
+//                }
+//        );
+//    });
     $(document).ready(function () {
         $(".add-another-option-phone ").click(function () {
             $(".show-phone-option").append('<label class="control-label primary">' + 'Primary {{ lang.primary }}</label>' + '<input type="radio" class="primary" value="primary" name="primary_phone" style="position: relative;right: 90px;">' + '<input name="phone[]" id="phone" type="text" placeholder="add another phone" class="form-control">' + ' <span class="delete-option col-sm-1" style="position: relative; top:-27px;"><i class="fa fa-close"></i></span>' + '<div class="form-group-separator"></div>');
@@ -541,7 +526,6 @@
 //        });
 //    }
 </script>
-
 <style>
     a:hover {
         text-decoration: none;
@@ -570,5 +554,18 @@
         position: relative;
         right: 413px;
         top: 63px;
+    }
+    .user-img img {display:block}
+    /*.user-img div {visibility: hidden;}*/
+    .user-img div {
+        opacity: 0;
+        position: absolute;
+        top: 185px;
+        right: 0px;
+        left: 0px;
+        color: #ddd;
+        background: rgba(34, 34, 34, 0.72);
+        border-radius: 0;
+        padding: 16px;
     }
 </style>

@@ -45,23 +45,23 @@
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label time-hide" for="time">{{ lang.time }}</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-10 test">
                         {% verbatim %}
                             <!--<div class="col-sm-12"  ng-repeat="x in result">-->
                                 <div class="col-sm-3"  ng-repeat="x in result">
                                     <div class="time-block not-available" ng-if="x.status == 'reserved'">
-                                        <i class="fa fa-lock"></i> {{x.time}}
+                                        <i class="fa fa-lock icon"></i> {{x.time}}
                                     </div>
 
                                     <div class="time-block not-available" ng-if="x.status == 'except'">
-                                        <i class="fa fa-lock"></i> {{x.time}}
+                                        <i class="fa fa-lock icon"></i> {{x.time}}
                                     </div>
 
                                     <div class="time-block available" data-time='{{x.time}}' id='search_click' ng-click='reserve($index)' data-toggle="modal" data-target="#myModal" ng-if="! x.status">
-                                        <i class="fa fa-unlock available"></i> {{x.time}}
+                                        <i class="fa fa-unlock icon available"></i> {{x.time}}
                                     </div>
                                 </div>
-                            {% endverbatim %}
+                          {% endverbatim %}
 
                         </div>
                     </div>
@@ -181,10 +181,21 @@ $http({
     else{
         if(new Date($scope.form.date) < new Date())
             {
-{#                $(".time-block").removeClass("available").addClass("not-available");#}
-                $('.time-block').removeClass('available');
-{#                $('.time-block').switchClass('available','not-available');#}
+
+//                $(".test").css("background-color", "yellow");
+
+           $("div.time-block").removeClass('available').addClass('not-available');
+           $('.time-block').removeAttr( "data-toggle" );
+           $('i.icon').addClass('fa-lock').removeClass('fa-unlock');
+
 {#                $('.time-block').val();#}
+                {#                $(".time-block").removeClass("available").addClass("not-available");#}
+//                $('.time-block').removeClass('available');
+//                $('.time-block').addClass('not-available');
+//            alert('old date');
+//            $('.time-block').addClass('not-available').removeClass('available');
+//            $('.icon').addClass('fa-lock').removeClass('fa-unlock');
+//            $('.time-block').switchClass('available','not-available');
             }
             $('#search-result').show();
 }
