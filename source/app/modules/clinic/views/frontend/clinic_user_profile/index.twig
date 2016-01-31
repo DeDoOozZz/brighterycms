@@ -297,6 +297,9 @@
                                         <div class="form-group">
                                             <label class="control-label" for="old-pass">Old Password</label>
                                             <input type="password" class="form-control" name="old-password" id="old-pass" data-validate="required" placeholder="Your old password" />
+                                            <div class="message">
+                                                <p id="error-pass" hidden>Error Password</p>
+                                            </div>
                                             {#                                            <input type="text" id="status" value>#}
                                         </div>
                                     </div>
@@ -318,12 +321,15 @@
                                         <div class="form-group">
                                             <label class="control-label" for="new">Retype New Password</label>
                                             <input type="password" class="form-control" name="password-conf" id="password-conf" data-validate="required" placeholder="Enter your New Password again" />
+                                            <div class="message">
+                                                <p id="error-match" hidden>Error, the password you have just typed doesn't match. Please retype it!</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <ul class="pager wizard">
-                                <input type="button" id="next" class="next btn btn-secondary" value="Next">
+                                <input type="button" id="next" class="next  btn btn-warning " value="Next">
                                 <input type="button" id="next-conf" class="next" value="Submit" hidden>
                             </ul>
 
@@ -332,7 +338,7 @@
                         <div class="form-group" hidden id="submit">
                             <label for="field-5" class="col-sm-2 control-label"></label>
                             <div class="col-sm-9">
-                                <input type="submit" value="Change" class="form-control submit-edit" style="line-height: normal;">
+                                <input type="submit" value="Change" class="form-control btn btn-warning submit-edit" style="line-height: normal;">
                             </div>
                         </div>
                         {{ helper.form.close() }}
@@ -359,7 +365,7 @@
                                 <input type="file" class="form-control" id="image" placeholder="{{ lang.image }}" name="image"></div>
                         </div>
                         {#--------------submit----------#}
-                        <div class="form-group" hidden id="submit">
+                        <div class="form-group" id="submit">
                             <label for="field-5" class="col-sm-2 control-label"></label>
                             <div class="col-sm-9">
                                 <input type="submit" value="Change" class="form-control submit-edit" style="line-height: normal;">
@@ -462,8 +468,10 @@
                             $('#new').show();
                             $('#next').hide();
                             $('#next-conf').show();
-                        } else 
-                            alert('Error Password');
+                            $('#next-conf').addClass('btn btn-warning');
+                        } else
+                            $('#error-pass').show();
+                            $('#error-pass').removeAttr("hidden");
                     });
             return false;
         });
@@ -483,7 +491,8 @@
                         });
             }
             else
-                alert('Tow Word Does Not Match');
+                $('#error-match').show();
+                $('#error-match').removeAttr("hidden");
             return false;
         });
 
@@ -567,5 +576,10 @@
         background: rgba(34, 34, 34, 0.72);
         border-radius: 0;
         padding: 16px;
+    }
+    .message p {
+        color: red;
+        font-weight: bold;
+        margin-top: 10px;
     }
 </style>

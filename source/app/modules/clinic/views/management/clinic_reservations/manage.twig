@@ -149,73 +149,62 @@
 <script src="{{ constant('STYLE_JS') }}/timepicker/bootstrap-timepicker.min.js"></script>
 
 <script>
-                                            var app = angular.module('myApp', []);
-                                            app.controller('customersCtrl', function ($scope, $http) {
-                                                $scope.draw = function () {
-    {#$http({
-        url: "{{helper.uri.url('management/clinic_reservations/getdoctorTypes')}}",
-        method: "get",
-        params: {user_id: $scope.form.user_id}
-    }).then(function (response) {
-        $scope.result = response.data.reservation_type;
-        if ($scope.result == 0)
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function ($scope, $http) {
+$scope.draw = function () {
+{#$http({
+url: "{{helper.uri.url('management/clinic_reservations/getdoctorTypes')}}",
+method: "get",
+params: {user_id: $scope.form.user_id}
+}).then(function (response) {
+$scope.result = response.data.reservation_type;
+if ($scope.result == 0)
+{
+console.log($scope.result);
+$('#message').modal('show');
+$('.time-hide').hide();
+}
+else if ($scope.result == 1)
+{
+console.log($scope.result);
+$('#search-result').show();
+}
+});#}
+$http({
+    url: "{{helper.uri.url('management/clinic_reservations/getSearch')}}",
+    method: "get",
+    params: {date: $scope.form.date, user_id: $scope.form.user_id}
+}).then(function (response) {
+    $scope.result = response.data.result;
+    if ($scope.result == 0)
+    {
+        $('.time-hide').hide();
+        $('#message').modal('show');
+    }
+    else {
+        if (new Date($scope.form.date) < new Date())
         {
-            console.log($scope.result);
-            $('#message').modal('show');
-            $('.time-hide').hide();
+
+            $("div.time-block").removeClass('available').addClass('not-available');
+            $('.time-block').removeAttr("data-toggle");
+            $('i.icon').addClass('fa-lock').removeClass('fa-unlock');
         }
-        else if ($scope.result == 1)
-        {
-            console.log($scope.result);
             $('#search-result').show();
         }
-    });#}
-                                                    $http({
-                                                        url: "{{helper.uri.url('management/clinic_reservations/getSearch')}}",
-                                                        method: "get",
-                                                        params: {date: $scope.form.date, user_id: $scope.form.user_id}
-                                                    }).then(function (response) {
-                                                        $scope.result = response.data.result;
-                                                        if ($scope.result == 0)
-                                                        {
-                                                            $('.time-hide').hide();
-                                                            $('#message').modal('show');
-                                                        }
-                                                        else {
-                                                            if (new Date($scope.form.date) < new Date())
-                                                            {
-
-//                $(".test").css("background-color", "yellow");
-
-                                                                $("div.time-block").removeClass('available').addClass('not-available');
-                                                                $('.time-block').removeAttr("data-toggle");
-                                                                $('i.icon').addClass('fa-lock').removeClass('fa-unlock');
-
-    {#                $('.time-block').val();#}
-    {#                $(".time-block").removeClass("available").addClass("not-available");#}
-//                $('.time-block').removeClass('available');
-//                $('.time-block').addClass('not-available');
-//            alert('old date');
-//            $('.time-block').addClass('not-available').removeClass('available');
-//            $('.icon').addClass('fa-lock').removeClass('fa-unlock');
-//            $('.time-block').switchClass('available','not-available');
-                                    }
-                                    $('#search-result').show();
-                                }
-                            });
-                        };
-                        $scope.reserve = function (idx) {
-                            $http({
-                                url: "{{helper.uri.url('management/clinic_reservations/manage/save')}}",
-                                method: "get",
-                                params: {time: $scope.result[idx].time, date: $scope.result[idx].date, patient_id: $scope.patient_id, status: $scope.status, type: $scope.type}
-                            }).then(function (response) {
-                                $scope.result = response.data.result;
-                                //console.log($scope.result);
-                                //$('#search-result').show();
-                            });
-                        };
-                    });
+        });
+    };
+    $scope.reserve = function (idx) {
+        $http({
+            url: "{{helper.uri.url('management/clinic_reservations/manage/save')}}",
+            method: "get",
+            params: {time: $scope.result[idx].time, date: $scope.result[idx].date, patient_id: $scope.patient_id, status: $scope.status, type: $scope.type}
+        }).then(function (response) {
+            $scope.result = response.data.result;
+            //console.log($scope.result);
+            //$('#search-result').show();
+        });
+    };
+});
 </script>
 <script type="text/javascript">
     jQuery(document).ready(function ($)

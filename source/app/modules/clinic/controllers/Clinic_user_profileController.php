@@ -204,9 +204,8 @@ class Clinic_user_profileController extends Brightery_Controller {
         $user = new \modules\users\models\Users();
         $user->user_id = $id;
         $user->password = md5($new_password);
-//        $user->password = md5($this->input->post('password'));
 //        print_r($user->attributes);
-//        print_r($user->get());
+        print_r($user->get());
         if ($user->save())
             return true;
     }
