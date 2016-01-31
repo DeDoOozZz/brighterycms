@@ -167,6 +167,12 @@ class Clinic_reservationsController extends Brightery_Controller {
 
         $time = $model_date->get_time($from, $to, $average_time, $doctor_id);
         $final = $model_date->get_searchResult($date, $time, $doctor_id);
+            if (strtotime($date) < strtotime(date("Y-0n-j"))) {
+                foreach($final as $key => $value){
+                    if(!$final[$key]->status)
+                        $final[$key]->status = 'old';
+                }
+            }
         return json_encode([ 'result' => $final]);
     }
 

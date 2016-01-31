@@ -2,7 +2,7 @@
 <div class="panel panel-default" ng-app="myApp" ng-controller="customersCtrl">
     <div class="panel-heading">
         <h3 class="panel-title">{{ lang.clinic_reservations }}</h3>
-{#        <button class="btn btn-secondary" onclick="goBack()" style="float: right;">{{ lang.back }}</button>#}
+        {#        <button class="btn btn-secondary" onclick="goBack()" style="float: right;">{{ lang.back }}</button>#}
 
         <script>
             function goBack() {
@@ -41,90 +41,93 @@
         </form>
         <div class="search-result" id="search-result">
 
-                {#<div class="form-group-separator"></div>#}
+            {#<div class="form-group-separator"></div>#}
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label time-hide" for="time">{{ lang.time }}</label>
-                    <div class="col-sm-10 test">
-                        {% verbatim %}
-                            <!--<div class="col-sm-12"  ng-repeat="x in result">-->
-                                <div class="col-sm-3"  ng-repeat="x in result">
-                                    <div class="time-block not-available" ng-if="x.status == 'reserved'">
-                                        <i class="fa fa-lock icon"></i> {{x.time}}
-                                    </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label time-hide" for="time">{{ lang.time }}</label>
+                <div class="col-sm-10 test">
+                    {% verbatim %}
+                        <!--<div class="col-sm-12"  ng-repeat="x in result">-->
+                        <div class="col-sm-3"  ng-repeat="x in result">
+                            <div class="time-block not-available" ng-if="x.status == 'reserved'">
+                                <i class="fa fa-lock icon"></i> {{x.time}}
+                            </div>
 
-                                    <div class="time-block not-available" ng-if="x.status == 'except'">
-                                        <i class="fa fa-lock icon"></i> {{x.time}}
-                                    </div>
+                            <div class="time-block not-available" ng-if="x.status == 'except'">
+                                <i class="fa fa-lock icon"></i> {{x.time}}
+                            </div>
 
-                                    <div class="time-block available" data-time='{{x.time}}' id='search_click' ng-click='reserve($index)' data-toggle="modal" data-target="#myModal" ng-if="! x.status">
-                                        <i class="fa fa-unlock icon available"></i> {{x.time}}
-                                    </div>
-                                </div>
-                          {% endverbatim %}
+                            <div class="time-block not-available" ng-if="x.status == 'old'">
+                                <i class="fa fa-unlock icon available"></i> {{x.time}}
+                            </div>
 
+                            <div class="time-block available" data-time='{{x.time}}' id='search_click' ng-click='reserve($index)' data-toggle="modal" data-target="#myModal" ng-if="! x.status">
+                                <i class="fa fa-unlock icon available"></i> {{x.time}}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group-separator"></div>
-                <div class="form-group">
-                        <label class="col-sm-2 control-label"></label>
-
-                        <div class="col-sm-10 time-hide">
-                            <a href="{{ helper.uri.url('management/clinic_reservations/index') }}" class="btn btn-danger cancel-button">{{lang.cancel}}</a>
-                            <button type="submit"class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
-                        </div>
-                    </div>
+                    {% endverbatim %}
+                </div>
             </div>
+            <div class="form-group-separator"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+
+                <div class="col-sm-10 time-hide">
+                    <a href="{{ helper.uri.url('management/clinic_reservations/index') }}" class="btn btn-danger cancel-button">{{lang.cancel}}</a>
+                    <button type="submit"class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="modal fade reservation-schedule-details" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content ">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title " id="myModalLabel">{{lang.reservation_details}}</h4>
+    <div class="modal-dialog">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title " id="myModalLabel">{{lang.reservation_details}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="clinic_patient_id">{{ lang.clinic_patient_id }}</label>
+                    <div class="col-sm-10">
+                        {{ helper.form.dropdown('clinic_patient_id', patient, helper.form.value('clinic_patient_id', item.clinic_patient_id), 'class="form-control select" id="patient_id" ng-model="patient_id"') }} 
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="clinic_patient_id">{{ lang.clinic_patient_id }}</label>
-                        <div class="col-sm-10">
-                            {{ helper.form.dropdown('clinic_patient_id', patient, helper.form.value('clinic_patient_id', item.clinic_patient_id), 'class="form-control select" id="patient_id" ng-model="patient_id"') }} 
-                        </div>
+                <div class="form-group-separator"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="clinic_reservation_status_id">{{ lang.clinic_reservation_status_id }}</label>
+                    <div class="col-sm-10">
+                        {{ helper.form.dropdown('clinic_reservation_status', clinic_reservation_status, helper.form.value('clinic_reservation_status', item.clinic_reservation_status), 'id="status" ng-model="status" class="form-control select" ') }}
                     </div>
-                    <div class="form-group-separator"></div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="clinic_reservation_status_id">{{ lang.clinic_reservation_status_id }}</label>
-                        <div class="col-sm-10">
-                            {{ helper.form.dropdown('clinic_reservation_status', clinic_reservation_status, helper.form.value('clinic_reservation_status', item.clinic_reservation_status), 'id="status" ng-model="status" class="form-control select" ') }}
-                        </div>
+                </div>
+                <div class="form-group-separator"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="clinic_doctor_reservation_types">{#{{ lang.clinic_doctor_reservation_id }}#}Type</label>
+                    <div class="col-sm-10">
+                        {{ helper.form.dropdown('reservation_type_id', reservation_type, helper.form.value('reservation_type', item.title), 'id="type" ng-model="type" class="form-control select" ') }}
                     </div>
-                    <div class="form-group-separator"></div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="clinic_doctor_reservation_types">{#{{ lang.clinic_doctor_reservation_id }}#}Type</label>
-                        <div class="col-sm-10">
-                            {{ helper.form.dropdown('reservation_type_id', reservation_type, helper.form.value('reservation_type', item.title), 'id="type" ng-model="type" class="form-control select" ') }}
-                        </div>
-                    </div>
-                    <input type='hidden' value name='doctor_id' ng-model="clinic_doctor_id" id='doctor_id'>
-                    <input type='hidden' value name='time_re' id='time_re'>
-                    <div class="form-group-separator"></div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label"></label>
-                        <div class="col-sm-10">
-                            <input type="button" id='save_reserve' class="btn btn-secondary" value='{{lang.submit}}' style="float: right;">
-                            {#<a href="{{ helper.uri.url('management/users/manage') }}" class="btn btn-warning" style="color: #FFF;">#}
-                                {#Add New User#}
-                            {#</a>#}
-                            <a href="{{ helper.uri.url('management/users/manage') }}" class="btn btn-warning btn-icon btn-icon-standalone col-sm-5 add-patient-option">
-                                <i class="fa fa-user"></i>
-                                <span>{{ lang.add_new_user }}Add a new User</span>
-                            </a>
-                        </div>
+                </div>
+                <input type='hidden' value name='doctor_id' ng-model="clinic_doctor_id" id='doctor_id'>
+                <input type='hidden' value name='time_re' id='time_re'>
+                <div class="form-group-separator"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"></label>
+                    <div class="col-sm-10">
+                        <input type="button" id='save_reserve' class="btn btn-secondary" value='{{lang.submit}}' style="float: right;">
+                        {#<a href="{{ helper.uri.url('management/users/manage') }}" class="btn btn-warning" style="color: #FFF;">#}
+                        {#Add New User#}
+                        {#</a>#}
+                        <a href="{{ helper.uri.url('management/users/manage') }}" class="btn btn-warning btn-icon btn-icon-standalone col-sm-5 add-patient-option">
+                            <i class="fa fa-user"></i>
+                            <span>{{ lang.add_new_user }}Add a new User</span>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 <div class="modal fade" id="message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -146,73 +149,73 @@
 <script src="{{ constant('STYLE_JS') }}/timepicker/bootstrap-timepicker.min.js"></script>
 
 <script>
-var app = angular.module('myApp', []);
-app.controller('customersCtrl', function ($scope, $http) {
-$scope.draw = function () {
-{#$http({
-    url: "{{helper.uri.url('management/clinic_reservations/getdoctorTypes')}}",
-    method: "get",
-    params: {user_id: $scope.form.user_id}
-}).then(function (response) {
-    $scope.result = response.data.reservation_type;
-    if ($scope.result == 0)
-    {
-        console.log($scope.result);
-        $('#message').modal('show');
-        $('.time-hide').hide();
-    }
-    else if ($scope.result == 1)
-    {
-        console.log($scope.result);
-        $('#search-result').show();
-    }
-});#}
-$http({
-    url: "{{helper.uri.url('management/clinic_reservations/getSearch')}}",
-    method: "get",
-    params: {date: $scope.form.date, user_id: $scope.form.user_id}
-}).then(function (response) {
-    $scope.result = response.data.result;
-    if ($scope.result == 0)
-    {
-        $('.time-hide').hide();
-        $('#message').modal('show');
-    }
-    else{
-        if(new Date($scope.form.date) < new Date())
-            {
+                                            var app = angular.module('myApp', []);
+                                            app.controller('customersCtrl', function ($scope, $http) {
+                                                $scope.draw = function () {
+    {#$http({
+        url: "{{helper.uri.url('management/clinic_reservations/getdoctorTypes')}}",
+        method: "get",
+        params: {user_id: $scope.form.user_id}
+    }).then(function (response) {
+        $scope.result = response.data.reservation_type;
+        if ($scope.result == 0)
+        {
+            console.log($scope.result);
+            $('#message').modal('show');
+            $('.time-hide').hide();
+        }
+        else if ($scope.result == 1)
+        {
+            console.log($scope.result);
+            $('#search-result').show();
+        }
+    });#}
+                                                    $http({
+                                                        url: "{{helper.uri.url('management/clinic_reservations/getSearch')}}",
+                                                        method: "get",
+                                                        params: {date: $scope.form.date, user_id: $scope.form.user_id}
+                                                    }).then(function (response) {
+                                                        $scope.result = response.data.result;
+                                                        if ($scope.result == 0)
+                                                        {
+                                                            $('.time-hide').hide();
+                                                            $('#message').modal('show');
+                                                        }
+                                                        else {
+                                                            if (new Date($scope.form.date) < new Date())
+                                                            {
 
 //                $(".test").css("background-color", "yellow");
 
-           $("div.time-block").removeClass('available').addClass('not-available');
-           $('.time-block').removeAttr( "data-toggle" );
-           $('i.icon').addClass('fa-lock').removeClass('fa-unlock');
+                                                                $("div.time-block").removeClass('available').addClass('not-available');
+                                                                $('.time-block').removeAttr("data-toggle");
+                                                                $('i.icon').addClass('fa-lock').removeClass('fa-unlock');
 
-{#                $('.time-block').val();#}
-                {#                $(".time-block").removeClass("available").addClass("not-available");#}
+    {#                $('.time-block').val();#}
+    {#                $(".time-block").removeClass("available").addClass("not-available");#}
 //                $('.time-block').removeClass('available');
 //                $('.time-block').addClass('not-available');
 //            alert('old date');
 //            $('.time-block').addClass('not-available').removeClass('available');
 //            $('.icon').addClass('fa-lock').removeClass('fa-unlock');
 //            $('.time-block').switchClass('available','not-available');
-            }
-            $('#search-result').show();
-}
-});
-};
-$scope.reserve = function (idx) {
-$http({
-    url: "{{helper.uri.url('management/clinic_reservations/manage/save')}}",
-    method: "get",
-    params: {time: $scope.result[idx].time, date: $scope.result[idx].date, patient_id: $scope.patient_id, status: $scope.status, type: $scope.type}
-}).then(function (response) {
-    $scope.result = response.data.result;
-    //console.log($scope.result);
-    //$('#search-result').show();
-});
-};
-});
+                                    }
+                                    $('#search-result').show();
+                                }
+                            });
+                        };
+                        $scope.reserve = function (idx) {
+                            $http({
+                                url: "{{helper.uri.url('management/clinic_reservations/manage/save')}}",
+                                method: "get",
+                                params: {time: $scope.result[idx].time, date: $scope.result[idx].date, patient_id: $scope.patient_id, status: $scope.status, type: $scope.type}
+                            }).then(function (response) {
+                                $scope.result = response.data.result;
+                                //console.log($scope.result);
+                                //$('#search-result').show();
+                            });
+                        };
+                    });
 </script>
 <script type="text/javascript">
     jQuery(document).ready(function ($)
