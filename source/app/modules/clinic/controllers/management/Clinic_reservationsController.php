@@ -139,6 +139,12 @@ class Clinic_reservationsController extends Brightery_Controller {
         $this->layout = 'ajax';
         $doctor_id = $this->input->get('user_id');
         $date = $this->input->get('date');
+//        if ($this->input->get('date')) {
+//            if (strtotime($this->input->get('date')) <= strtotime(date("Y-0n-j")))
+//                $date = date("Y-0n-j");
+//            else
+//                $date = $this->input->get('date');
+//        }
         $model_period = new \modules\clinic\models\Clinic_doctors();
         $model_period->_select = 'period_average ';
         $model_period->clinic_doctor_id = $doctor_id;
@@ -153,7 +159,7 @@ class Clinic_reservationsController extends Brightery_Controller {
         $model_date->status = 'on';
         $model_date->day = $day;
         $period = $model_date->get();
-        if (!$period)
+            if (!$period)
             return json_encode(['result' => 0]);
 
         $from = $period[0]->from_time;

@@ -61,7 +61,6 @@ class Users extends \Model {
             ],
             'register' => [
                 'fullname' => ['required'],
-//                'phone' => ['required', 'numeric'],
                 'image' => ['file' => [
                         [
                             'upload_path' => "./cdn/users/",

@@ -23,7 +23,7 @@ class Clinic_patients_notesController extends Brightery_Controller {
     protected $auth = true;
 
     public function manageAction($op = null, $id = null) {
-        if (!$id or ! $op)
+        if (!$id and ! $op)
             Brightery::error404();
 
         $this->layout = 'ajax';
@@ -32,20 +32,18 @@ class Clinic_patients_notesController extends Brightery_Controller {
         $this->language->load('clinic_patients');
         $notes = new \modules\clinic\models\Clinic_patients_notes();
         if ($op == 'add') {
-            $notes->attributes['user_id'] = $id;
-        } else {
+            $notes->user_id = $id;
+        } else if($op == 'edit') {
             $notes->clinic_patient_note_id = $id;
             $data['note'] = $notes->get();
         }
 
-        $notes->attributes['note'] = $this->input->post('note');
+        $notes->note = $this->input->post('note');
         $data['op'] = $op;
         $data['id'] = $id;
         if (!$_POST) {
             return $this->render('clinic_patients/notes', $data);
         } else
-
-
         if ($sid = $notes->save())
             return json_encode(['sucess' => 1, 'id' => $sid, 'note' => $this->input->post('note')]);
         else

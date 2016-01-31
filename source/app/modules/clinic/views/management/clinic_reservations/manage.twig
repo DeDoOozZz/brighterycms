@@ -178,8 +178,16 @@ $http({
         $('.time-hide').hide();
         $('#message').modal('show');
     }
-    else
-        $('#search-result').show();
+    else{
+        if(new Date($scope.form.date) < new Date())
+            {
+{#                $(".time-block").removeClass("available").addClass("not-available");#}
+                $('.time-block').removeClass('available');
+{#                $('.time-block').switchClass('available','not-available');#}
+{#                $('.time-block').val();#}
+            }
+            $('#search-result').show();
+}
 });
 };
 $scope.reserve = function (idx) {
