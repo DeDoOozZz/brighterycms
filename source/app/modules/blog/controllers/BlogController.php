@@ -54,6 +54,10 @@ class BlogController extends Brightery_Controller {
         $categories = new \modules\blog\models\Blog_categories();
         
         $comments = new \modules\blog\models\Blog_post_comments($userInfo? 'registered': 'unregistered');
+        
+        $comments->_joins = [
+            'users' => ['users.user_id = blog_post_comments.user_id', 'left']
+        ];
         $model->seo = $seo;
         $item = $model->get();
         if (!$item)
@@ -63,7 +67,6 @@ class BlogController extends Brightery_Controller {
         $comments->set([
             'name' => $userInfo->fullname,
             'email' => $userInfo->email,
-            'image' => $userInfo->image,
             'user_id' => $userInfo->user_id,
             'comment' => $this->input->post('comment'),
             'datetime' => date('Y-m-d H:i:s'),
@@ -81,6 +84,7 @@ class BlogController extends Brightery_Controller {
                     'item' => $item,
                     'categories' => $categories->get(),
                     'comments' => $comments->get(),
+                    'comments_no' => $comments->get(1),
                     'user' => $userInfo
         ]);
     }
