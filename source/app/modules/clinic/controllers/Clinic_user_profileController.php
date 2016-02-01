@@ -102,6 +102,7 @@ class Clinic_user_profileController extends Brightery_Controller {
             $model->email = $this->input->post('email');
             $model->password = md5($this->input->post('password'));
             $model->gender = $this->input->post('gender');
+            $model->image = $this->input->post('image');
             $model->save();
             $address = $this->input->post('address');
             $user_phone_id = $this->input->post('user_phone_id');
@@ -201,13 +202,46 @@ class Clinic_user_profileController extends Brightery_Controller {
     }
 
     public function changePasswordAction($id, $new_password) {
-        $user = new \modules\users\models\Users();
-        $user->user_id = $id;
-        $user->password = md5($new_password);
+//        $user = new \modules\users\models\Users(false);
+//        $user->user_id = $id;
+//        $user->password = md5($new_password);
+        if ($conect = new mysqli('localhost', 'root', '')) {
+            if ($conect->select_db('brighterycms')) {
+                $query = "UPDATE users SET  password = md5($new_password) WHERE user_id='$id'";
+                $fetch = $conect->query($query);
+                if ($fetch or trigger_error($conect->error . '   in   ' . $query)) {
+//                    return true;
+                        json_encode(['sucess' => 1, 'id' => $id,
+                    ]);
+                }
+                else
+                    return json_encode(['sucess' => 0, 'errors' => $this->validation->errors()]);
+            }
+        }
 //        print_r($user->attributes);
-        print_r($user->get());
-        if ($user->save())
-            return true;
+//        print_r($user->get());
+//print_r($user->save());
+//        if ($user->save())
+//        $user->save();
+//            return true;
+////
+//        if ($user->save())
+//            return json_encode(['sucess' => 1,
+//                'item' => $user,
+//                'id' => $id,
+//            ]);
+//        else
+//            return json_encode(['sucess' => 0, 'errors' => $this->validation->errors()]);
     }
+
+//    public function changeImageAction($id, $new_image) {
+//        $user = new \modules\users\models\Users('edit');
+//        $user->user_id = $id;
+//        $user->image = $new_image;
+//        print_r($user->attributes);
+////        print_r($user->get());
+//        if ($user->save())
+//            return true;
+//    }
 
 }

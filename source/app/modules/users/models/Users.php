@@ -28,51 +28,51 @@ class Users extends \Model {
         return [
             'all' => [
             ],
-//            'add' => [
-//                'fullname' => ['required'],
-//                'phone' => ['required', 'numeric'],
-//                'image' => ['file' => [
-//                        [
-//                            'upload_path' => "./cdn/users",
-//                            'allowed_types' => "gif|jpg|png|jpeg",
-//                            'required' => TRUE
-//                        ]
-//                    ]],
-//                'email' => ['required', 'email'],
-//                'password' => ['required'],
-//             'gender' => ['required']
-//            ],
-//            'edit' => [
-//                'fullname' => ['required'],
-//                'image' => ['file' => [
-//                        [
-//                            'upload_path' => "./cdn/users/",
-//                            'allowed_types' => "gif|jpg|png|jpeg",
-//                            'required' => FALSE
-//                        ]
-//                    ]],
-//                'phone' => ['required', 'numeric'],
-//                'email' => ['required', 'email'],
-//                'gender' => ['required']
-//            ],
-//            'login' => [
-//                'username' => ['required'],
-//                'password' => ['required', 'checkPasswordValidity'],
-//            ],
-//            'register' => [
-//                'fullname' => ['required'],
-//                'image' => ['file' => [
-//                        [
-//                            'upload_path' => "./cdn/users/",
-//                            'allowed_types' => "gif|jpg|png|jpeg",
-//                            'required' => TRUE
-//                        ]
-//                    ]],
-//                'email' => ['required', 'email', 'unique' => ['users', 'email']],
-//                'password' => ['required'],
-//                'confirm_password' => ['required', 'matches' =>['password']],
-//                'gender' => ['required']
-//            ],
+            'add' => [
+                'fullname' => ['required'],
+                'phone' => ['required', 'numeric'],
+                'image' => ['file' => [
+                        [
+                            'upload_path' => "./cdn/users",
+                            'allowed_types' => "gif|jpg|png|jpeg",
+                            'required' => TRUE
+                        ]
+                    ]],
+                'email' => ['required', 'email'],
+                'password' => ['required'],
+             'gender' => ['required']
+            ],
+            'edit' => [
+                'fullname' => ['required'],
+                'image' => ['file' => [
+                        [
+                            'upload_path' => "./cdn/users/",
+                            'allowed_types' => "gif|jpg|png|jpeg",
+                            'required' => FALSE
+                        ]
+                    ]],
+                'phone' => ['required', 'numeric'],
+                'email' => ['required', 'email'],
+                'gender' => ['required']
+            ],
+            'login' => [
+                'username' => ['required'],
+                'password' => ['required', 'checkPasswordValidity'],
+            ],
+            'register' => [
+                'fullname' => ['required'],
+                'image' => ['file' => [
+                        [
+                            'upload_path' => "./cdn/users/",
+                            'allowed_types' => "gif|jpg|png|jpeg",
+                            'required' => TRUE
+                        ]
+                    ]],
+                'email' => ['required', 'email', 'unique' => ['users', 'email']],
+                'password' => ['required'],
+                'confirm_password' => ['required', 'matches' =>['password']],
+                'gender' => ['required']
+            ],
         ];
     }
 
