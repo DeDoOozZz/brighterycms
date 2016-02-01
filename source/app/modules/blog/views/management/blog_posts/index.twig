@@ -16,7 +16,7 @@
                     <th>{{ lang.title }}</th>
                     <th>{{ lang.user }}</th>
                     <th>{{ lang.category }}</th>
-                    <th>{{ lang.created }}</th>
+{#                    <th>{{ lang.created }}</th>#}
 
                     <th class="no-sorting">{{ lang.operations }}</th>
                 </tr>
@@ -29,7 +29,7 @@
                         <td>{{ item.title }}</td>
                         <td>{{ item.fullname }}</td> 
                         <td>{{ item.category }}</td> 
-                        <td>{{ item.created }}</td> 
+{#                        <td>{{ item.created }}</td> #}
                         <td>
                             <a class="btn btn-info btn-sm"
                                href="{{ helper.uri.url('management/blog_posts/manage', item.blog_post_id ) }}">{{ lang.edit }}</a>

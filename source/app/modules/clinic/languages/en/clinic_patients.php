@@ -26,5 +26,6 @@ return [
     'patient_note' => 'Patient Note',
     'profile' => 'Profile',
     'edit_user' => 'Edit User',
-    'back' => "Go Back"
+    'back' => "Go Back",
+    'details' => "Details"
 ];

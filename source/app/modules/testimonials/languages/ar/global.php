@@ -1,5 +1,5 @@
-<?php
+﻿<?php
 
 return [
-    'menu_testimonials' => '????????',
+    'menu_testimonials' => 'اراء العملاء',
 ];

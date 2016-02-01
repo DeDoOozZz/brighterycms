@@ -1,8 +1,10 @@
-<?php
+﻿<?php
 return [
-    'usergroups' => "??????? ????????",
-    'name' => "?????",
-    'opertaions' => "????????",
-    'modules' => "???????",
-    'permissions' => "?????",
+    'usergroups' => "المجموعات",
+    'name' => "الاسم",
+    'opertaions' => "العمليات",
+    'modules' => "الموديول",
+    'permissions' => "الصلاحيات",
+    'frontend'=> "الواجهة",
+    'management' => "الادارة"
 ];

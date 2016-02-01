@@ -1,12 +1,12 @@
-<?php
+﻿<?php
       return [ 
-        'title' => "???????",
-        'parent' => "??????? ???????",
+        'title' => "العنوان",
+        'parent' => "الفرع الرئيسي",
         'seo' => "SEO", 
-        'main_category' => "??????? ??????",
-        'commerce_categories' => "???????",
-        'commerce_category' => "???????",
-        'image' => "????",
-        'featured' => "?????",
-        'description' => "?????",
+        'main_category' => "الفرع الرئيسي",
+        'commerce_categories' => "التصنيفات",
+        'commerce_category' => "التصنيف",
+        'image' => "الصورة",
+        'featured' => "مميز",
+        'description' => "الوصف",
 ]; 

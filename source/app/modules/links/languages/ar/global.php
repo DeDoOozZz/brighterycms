@@ -1,5 +1,5 @@
-<?php
+﻿<?php
 
 return [
-    'menu_menus' => '???????',
+    'menu_menus' => 'القائمة الرئيسية',
 ];

@@ -1,11 +1,11 @@
-<?php
+﻿<?php
 
 return [
-    'commerce_invoices' => "??????",
-    'commerce_invoice_id' => "?????? #",
-    'commerce_order_id' => "??? #",
-    'status' => "??????",
-    'total' => "??????? ?????",
-    'user_id' => "??? ????????",
-    'created' => "Created",
+    'commerce_invoices' => "فواتير",
+    'commerce_invoice_id' => "# الفاتورة",
+    'commerce_order_id' => "# الطلب ",
+    'status' => "الحالة",
+    'total' => "الاجمالي",
+    'user_id' => "رقم المستخدم",
+    'created' => "تم الأنشاء",
 ];

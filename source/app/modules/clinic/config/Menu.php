@@ -3,7 +3,7 @@
 return [
     'management' => [
         'clinic' => [
-            'title' => 'Clinic',
+            'title' => 'clinic',
             'icon' => 'fa fa-stethoscope',
             'sub' => [
                 'branches' => [
@@ -41,11 +41,11 @@ return [
                     'url' => 'management/clinic_reservations/manage',
                     'icon' => 'fa fa-hospital-o'
                 ],
-                'reservation_types' => [
-                    'title' => 'reservation_types',
-                    'url' => 'management/clinic_doctor_reservation_types',
-                    'icon' => 'fa fa-sitemap'
-                ],
+//                'reservation_types' => [
+//                    'title' => 'reservation_types',
+//                    'url' => 'management/clinic_doctor_reservation_types',
+//                    'icon' => 'fa fa-sitemap'
+//                ],
 //                'welcome_screen' => [
 //                    'title' => 'welcome_screen',
 //                    'url' => 'management/clinic/clinic_welcome_screen/index',

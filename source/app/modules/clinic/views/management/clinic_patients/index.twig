@@ -24,7 +24,7 @@
                     <tr>
                         <td>{{ item.fullname }}</td>
                         <td>
-                            <a class="btn btn-secondary btn-sm show-patient-details" href="{{ helper.uri.url('management/clinic_patients/details', item.user_id) }}">Details</a>  
+                            <a class="btn btn-secondary btn-sm show-patient-details" href="{{ helper.uri.url('management/clinic_patients/details', item.user_id) }}">{{ lang.details }}</a>  
                         </td>
                     </tr>
                 {% endfor %}

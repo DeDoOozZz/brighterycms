@@ -1,5 +1,5 @@
-<?php
+﻿<?php
       return [ 
-        'user_id' => "????????",
-        'commerce_product_id' => "??????",
+        'user_id' => "رقم المستخدم",
+        'commerce_product_id' => "رقم المنتج",
 ]; 

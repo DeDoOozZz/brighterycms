@@ -1,6 +1,6 @@
-<?php
-
+﻿<?php
 return [
+    'menu_clinic' => 'إدارة العيادات',
     'menu_branches' => 'الفروع',
     'menu_specifications' => 'التخصصات',
     'menu_doctors' => 'الاطباء',
@@ -9,21 +9,21 @@ return [
     'menu_reservations' => 'الحجوزات',
     'menu_reservation_types' => 'نوع الحجز',
     'menu_doctor_reviews' => 'التقيمات',
-    'permissions_manage_branch' => 'إذن إدارة الفروع',
-    'permissions_manage_specification' => 'إذن إدارة التخصصات',
-    'permissions_manage_doctor' => 'إذن إدارة الأطباء',
-    'permissions_doctor_schedule' => 'إذن إدارة جداول الأطباء',
-    'permissions_doctor_schedule_exceptions' => 'إذن إدارة استثناءات جداول الأطباء',
-    'permissions_manage_users' => 'إذن إدارة المستخدمين',
-    'permissions_manage_patient_disease' => 'إذن إدارة أمراض المرضى',
-    'permissions_manage_patient_xray' => 'إذن إدارة إشاعات المرضى',
-    'permissions_manage_patient_notes' => 'إذن إدارة الملاحاظات الخاصة بالمرضى',
-    'permissions_manage_diseases' => 'إدارة الأمراض',
-    'permissions_reservations' => 'إدارة الحجوزات',
-    'permissions_reservation_types' => 'إدارة انواع الحجوزات',
-    'permissions_frontend_edit_user_profile' => 'تعديل الصفحة الشخصية ',
-    'permissions_frontend_reservations' => 'إدارة الحجوزات',
-    'permissions_frontend_doctor_schedule' => 'إدارة جداول مواعيد الأطباء',
-    'permissions_manage_welcome_screen'  => 'الشاشة الترحيبية'
-
+    'module_clinic' => "ادارة العيادات",
+    'permission_manage_branch' => 'إذن إدارة الفروع',
+    'permission_manage_specification' => 'إذن إدارة التخصصات',
+    'permission_manage_doctor' => 'إذن إدارة الأطباء',
+    'permission_doctor_schedule' => 'إذن إدارة جداول الأطباء',
+    'permission_doctor_schedule_exceptions' => 'إذن إدارة استثناءات جداول الأطباء',
+    'permission_manage_users' => 'إذن إدارة المستخدمين',
+    'permission_manage_patient_disease' => 'إذن إدارة أمراض المرضى',
+    'permission_manage_patient_xray' => 'إذن إدارة إشاعات المرضى',
+    'permission_manage_patient_notes' => 'إذن إدارة الملاحاظات الخاصة بالمرضى',
+    'permission_manage_diseases' => 'إدارة الأمراض',
+    'permission_reservations' => 'إدارة الحجوزات',
+    'permission_reservation_types' => 'إدارة انواع الحجوزات',
+    'permission_frontend_edit_user_profile' => 'تعديل الصفحة الشخصية ',
+    'permission_frontend_reservations' => 'إدارة الحجوزات',
+    'permission_frontend_doctor_schedule' => 'إدارة جداول مواعيد الأطباء',
+    'permission_manage_welcome_screen' => 'الشاشة الترحيبية'
 ];

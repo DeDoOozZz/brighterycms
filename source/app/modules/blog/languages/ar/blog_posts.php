@@ -11,4 +11,8 @@ return [
     'description' => "وصف",
     'leave_comment' => "ضع تعليق",
     'language_id' => "اللغة",
+    'user' => "المستخدم",
+    'category' => "التصنيف",
+    'created' => "اُنشأ",
+    'blog_posts' => "المدونات",
 ];

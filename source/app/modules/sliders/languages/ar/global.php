@@ -1,5 +1,5 @@
-<?php
+﻿<?php
 
 return [
-    'menu_sliders' => 'Sliders',
+    'menu_sliders' => 'سلايدر',
 ];

@@ -27,5 +27,6 @@ return [
     'cancel_upload' => 'Cancel upload',
     'custom_permalink' => 'Custom Permalink',
     'edit_profile' => 'Edit Profile',
+    'cancel' => 'Cancel',
 
 ];

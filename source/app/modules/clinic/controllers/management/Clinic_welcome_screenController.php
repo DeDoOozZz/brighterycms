@@ -1,4 +1,6 @@
-<?php defined('ROOT') OR exit('No direct script access allowed');
+<?php
+
+defined('ROOT') OR exit('No direct script access allowed');
 
 /**
  * Clinic_welcome_screenController
@@ -12,12 +14,13 @@
  * @link http://store.brightery.com/module/general/Clinic
  * @controller Clinic_welcome_screen
  * */
-class Clinic_welcome_screenController extends Brightery_Controller
-{
+class Clinic_welcome_screenController extends Brightery_Controller {
+
     protected $layout = 'ajax';
 
-    public function indexAction($doctor_id)
-    {
+    public function indexAction($doctor_id) {
+        $this->language->load("clinic_doctors");
+
         $date = date("Y-m-d");
 
         $this->database->query("SET @x := 0;")->update();
@@ -46,26 +49,27 @@ class Clinic_welcome_screenController extends Brightery_Controller
         // GETTING TIME FROM DOCTOR SCHEDULE 
         $model_time = new \modules\clinic\models\Clinic_schedules();
         $model_time->_select = "from_time , to_time ";
-        $model_time->clinic_doctor_id = $doctor_id ;
-        $model_time->day = date('l') ;
+        $model_time->clinic_doctor_id = $doctor_id;
+        $model_time->day = date('l');
         $time = $model_time->get();
         $from_time = $time[0]->from_time;
         $to_time = $time[0]->to_time;
 
 
         return $this->render('clinic_welcome_screen/main', [
-            'from_time' => $from_time,
-            'to_time' => $to_time,
-            'day' => $date,
-            'names' => $queue,
-            'late' => $late,
-            'doctor_id' => $doctor_id,
-            'assets_url' => BASE_URL . 'source/app/modules/clinic/assets/'
+                    'from_time' => $from_time,
+                    'to_time' => $to_time,
+                    'day' => $date,
+                    'names' => $queue,
+                    'late' => $late,
+                    'doctor_id' => $doctor_id,
+                    'assets_url' => BASE_URL . 'source/app/modules/clinic/assets/'
         ]);
     }
 
-    public function cancelAction()
-    {
+    public function cancelAction() {
+        $this->language->load("clinic_doctors");
+
         $user_id = $this->input->post('user_id');
         $date = $this->input->post('date');
         $time = $this->input->post('time');
@@ -91,8 +95,9 @@ class Clinic_welcome_screenController extends Brightery_Controller
             return false;
     }
 
-    public function lateAction()
-    {
+    public function lateAction() {
+        $this->language->load("clinic_doctors");
+
         print_r($_POST);
         $user_id = $this->input->post('user_id');
         $date = $this->input->post('date');
@@ -117,8 +122,9 @@ class Clinic_welcome_screenController extends Brightery_Controller
             return false;
     }
 
-    public function enterAction()
-    {
+    public function enterAction() {
+        $this->language->load("clinic_doctors");
+
         $user_id = $this->input->post('user_id');
         $date = $this->input->post('date');
         $time = $this->input->post('time');
@@ -141,8 +147,9 @@ class Clinic_welcome_screenController extends Brightery_Controller
             return false;
     }
 
-    public function attendAction()
-    {
+    public function attendAction() {
+        $this->language->load("clinic_doctors");
+
         $user_id = $this->input->post('user_id');
         $date = $this->input->post('date');
         $time = $this->input->post('time');

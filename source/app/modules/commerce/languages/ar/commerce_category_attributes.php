@@ -1,7 +1,7 @@
-<?php
+﻿<?php
 
 return [
-    'category' => "???????",
-    'name' => "?????",
-    'catergory_attributes' => "Catergory Attributes",
+    'category' => "التصنيف",
+    'name' => "الأسم",
+    'catergory_attributes' => "مواصفات التصنيف",
 ];

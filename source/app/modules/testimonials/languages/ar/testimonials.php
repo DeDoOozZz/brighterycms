@@ -1,10 +1,11 @@
-<?php
+﻿<?php
       return [ 
 
-               'testimonials' => "????????",
-		'client_name' => "??? ??????",
-		'client_position' => "???? ??????",
-		'message' => "?????",
-		'visibility_status' => "???? ??????",
-		'operations' => "??????",
+               'testimonials' => "اراء العملاء",
+		'client_name' => "اسم العميل",
+		'client_position' => "المهنه",
+		'message' => "الرسالة",
+		'visibility_status' => "حالة الظهور",
+		'image' => "الصورة",
+		'operations' => "العمليات",
 ]; 
