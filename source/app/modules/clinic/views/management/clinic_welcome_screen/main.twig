@@ -18,9 +18,9 @@
                     <div class="calender-time">
                         <img src="{{ constant("STYLE_IMAGES") }}/time.png">
                         <span class="calender-time-content">
-                            From 
+                            {{lang.from}} 
                             <span>{{ from_time }}</span>
-                            To
+                            {{lang.to}}
                             <span>{{ to_time }}</span>
                         </span>
                     </div>
@@ -31,11 +31,11 @@
             <div class="sub-container">
 
                 <div class="patient_list" id="patient_list">
-                    <h2 class="patient_list_title"> List Of Patient</h2>
+                    <h2 class="patient_list_title"> {{lang.list_of_patients}}</h2>
                     <table>
                         <thead>
-                        <th class="min-col">No</th>
-                        <th>Name</th>
+                        <th class="min-col">{{lang.no}}</th>
+                        <th>{{lang.name}}</th>
                             {#<th class="min-col">Attend</th>
                             <th class="min-col">Entered</th>#}
                         </thead>
@@ -70,11 +70,11 @@
                     </table>
                 </div>
                 <div class="late_patients" id="late_patients">
-                    <h2 class="late_patient_title">Late Patients</h2>
+                    <h2 class="late_patient_title">{{lang.late_patients}}</h2>
                     <table>
                         <thead>
-                        <th>No</th>
-                        <th>Name</th>
+                        <th>{{lang.no}}</th>
+                        <th>{{lang.name}}</th>
                         </thead>
                         {% set i = 0 %}
                         <tbody id="sortable2">
@@ -90,7 +90,7 @@
                     </table>
                     <div class="guide-note">
                         <div class="reservation-note">
-                            <h2>Take care !</h2>
+                            <h2>{{lang.take_care}}</h2>
                             <img src="{{ constant("STYLE_IMAGES") }}/warning.png">
 
                             <div class="reservation-note-content">
@@ -107,15 +107,15 @@
 
                         <div class="gide-note-content">
                             <span class="gide attend"></span>
-                            <span>Patient Who Attend</span>
+                            <span>{{lang.patient_who_attend}}</span>
                         </div>
                         <div class="gide-note-content">
                             <span class="gide entered"></span>
-                            <span>Patient Who Attend And Entered</span>
+                            <span>{{lang.patient_who_attend_and_entered}}</span>
                         </div>
                         <div class="gide-note-content">
                             <span class="gide late"></span>
-                            <span>Patient Who Isn't Attend Yet In His Time</span>
+                            <span>{{lang.patient_who_isnt_attend_yet}}</span>
                         </div>
                     </div>
                 </div>

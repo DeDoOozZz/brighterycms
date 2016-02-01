@@ -17,5 +17,17 @@
         'period_average'=>'مدة الكشف',
         'doctor_name'=>'اسم الدكتور',
         'search_by_doctor'=>'البحث بإسم الطبيب',
-        'back' => "رجوع"
+        'back' => "رجوع",
+        'welcome_screen' => "الشاشة الترحيبية",
+        'exceptions' => "مواعيد استثنائية",
+        'from' => "من",
+        'to' => "الي",
+        'no' => "رقم التسلسل",
+        'name' => "الأسم",
+        'take_care' => "احذر!",
+        'patient_who_attend' => "مرضى دخلوا",
+        'patient_who_attend_and_entered' => "مرضى حضروا و لم يدخلوا بعد",
+        'patient_who_isnt_attend_yet' => "مرضى لم يأتوا بعد",
+        'late_patients' => "مرضى لم يأتوا بعد",
+        'list_of _patients' => "قائمة المرضى",
 ]; 

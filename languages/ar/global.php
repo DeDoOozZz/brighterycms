@@ -25,5 +25,6 @@ return [
     'add_files' => 'اعرض الملفات ...',
     'start_upload' => 'بدأ التحميل',
     'cancel_upload' => 'إلغاء التحميل',
+    'cancel' => 'الغاء',
 
 ];

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
       return [ 
         'branches' => "الفروع",
         'clinic_branch' => "اسم الفرع",

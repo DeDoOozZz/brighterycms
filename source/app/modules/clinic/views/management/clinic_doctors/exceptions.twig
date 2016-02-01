@@ -1,13 +1,13 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">{{ lang.exceptions }} Exceptions</h3>
+        <h3 class="panel-title">{{ lang.exceptions }}</h3>
     </div>
     <div class="panel-body">
         {{ helper.form.open(null,false,true,'role="form" class="form-horizontal" id="schedule_exceptions"') }}
         {{ error }}
         <div class="row">
             <div class="col-sm-11"></div>
-            <button class="btn btn-secondary col-sm-1"  onclick="return add_new_exception();">Add</button>
+            <button class="btn btn-secondary col-sm-1"  onclick="return add_new_exception();">{{lang.add}}</button>
         </div>
         {#{% for item in exp_schedule %}#}
         <div class="main-manage-schedule-exception ">

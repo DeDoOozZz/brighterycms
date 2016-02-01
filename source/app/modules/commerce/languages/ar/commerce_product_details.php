@@ -1,7 +1,7 @@
-<?php
+﻿<?php
 return [
-    'commerce_product_details' => "?????? ??????",
-    'commerce_product_detail_id' => "?????? ??????",
-    'name' => "?????",
-    'commerce_product_id' => "??????",
+    'commerce_product_details' => "تفاصيل المنتج",
+    'commerce_product_detail_id' => "تفاصيل المنتج",
+    'name' => "الأسم",
+    'commerce_product_id' => "رقم المنتج",
 ];

@@ -1,7 +1,8 @@
 <?php
-      return [ 
 
-         'clients' => "???????",
-		'name' => "?????",
-		'image' => "????",
-]; 
+return [
+
+    'clients' => "العملاء",
+    'name' => "الأسم",
+    'image' => "الصورة",
+];

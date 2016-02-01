@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'management' => [
+//    'management' => [
 //        'pm' => [
 //            'title' => 'pm',
 //            'icon' => 'fa fa-clipboard',
@@ -65,5 +65,5 @@ return [
 //
 //            ],
 //        ],
-    ],
+//    ],
 ];

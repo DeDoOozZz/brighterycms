@@ -26,5 +26,6 @@ return [
     'patient_note' => 'ملحوظة',
     'profile' => 'الصفحة الشخصية',
     'edit_user' => 'تعديل',
-    'back' => "رجوع"
+    'back' => "رجوع",
+    'details' => "التفاصيل"
 ];

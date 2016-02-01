@@ -131,11 +131,12 @@ class Clinic_doctorsController extends Brightery_Controller {
         return $this->render('clinic_doctors/doctor_schedule', [
                     'item' => $schedule,
                     'id' => $id
-
         ]);
     }
 
     public function exceptionsAction($id = false) {
+        $this->language->load("clinic_doctors");
+
         if ($_POST) {
             $date = $this->input->post('exc_date');
             $from_time = $this->input->post('exc_from');
@@ -153,7 +154,7 @@ class Clinic_doctorsController extends Brightery_Controller {
                 $exceptions->save();
             }
             if ($exceptions->save())
-                Uri_helper::redirect("management/clinic_doctors/doctor_schedule/".$id);
+                Uri_helper::redirect("management/clinic_doctors/doctor_schedule/" . $id);
         }
         if (!$_POST) {
             $exception = new \modules\clinic\models\Clinic_schedule_exceptions();

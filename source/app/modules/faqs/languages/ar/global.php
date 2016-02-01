@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'menu_faqs' => 'Faqs',
+    'menu_faqs' => 'الأسئلة المتكررة',
 ];
