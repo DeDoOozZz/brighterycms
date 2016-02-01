@@ -23,7 +23,7 @@ class Clinic_reservationController extends Brightery_Controller {
         $this->language->load("clinic_reservations");
         $branches = Form_helper::queryToDropdown('clinic_branches', 'clinic_branch_id', 'clinic_branch');
         $specification = Form_helper::queryToDropdown('clinic_specifications', 'clinic_specification_id', 'specification');
-        $doctors = new \modules\clinic\models\clinic_doctors();
+        $doctors = new \modules\clinic\models\Clinic_doctors();
         $doctors->_select = "clinic_doctor_id,(SELECT users.fullname FROM users WHERE users.user_id = clinic_doctors.user_id)
          AS doctor_name";
 
