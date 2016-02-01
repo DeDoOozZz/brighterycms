@@ -12,7 +12,7 @@
                         <div class="user-info-sidebar">
                             <a href="#" data-toggle="modal" data-target="#image-edit" class="user-img">
                                 <img src="{{ helper.uri.cdn() }}users/{{ item.image }}" alt="user-img" class="img-cirlce img-responsive img-thumbnail" />
-                                <div>Edit Image</div>
+                                <div class="edit-img-div" hidden>Edit Image</div>
                             </a>
                             <span class="user-name">
                                 {{item.fullname}}
@@ -426,7 +426,7 @@
         });
         return false;
     });
-    $('#edit').submit(function () {
+    $('#edit-form').submit(function () {
         $.post('{{ helper.uri.url('clinic_user_profile/manage/')}}{{ item.user_id }}', $(this).serialize(), function (response) {
             obj = jQuery.parseJSON(response);
             if (obj.sucess == 1) {
@@ -495,18 +495,14 @@
                 $('#error-match').show();
                 $('#error-match').removeAttr("hidden");
             }
-//            alert('error match');
-
             return false;
         });
-    $('#image-form').submit(function (){
-        var new_img = $('#new-image').val();
-        $.post('{{ helper.uri.url('clinic_user_profile/changeImage/')}}{{ item.user_id }}'+ '/' + new_img, function (response){
-            if (response == 1) {
-                $('#image-edit').modal('hide');
-            }
-        });
-        return false;
+    $(document).ready(function(){
+        $('.user-info-sidebar').hover(function(){
+            $('.edit-img-div').fadeIn(0.03);
+        },function(){
+            $('.edit-img-div').fadeOut(0.03);
+        })
     });
 
 
@@ -590,6 +586,7 @@
         background: rgba(34, 34, 34, 0.72);
         border-radius: 0;
         padding: 16px;
+        display:none;
     }
     .message p {
         color: red;
