@@ -1,7 +1,7 @@
 <div class="modal_errors"></div>
 {{ helper.form.open(null,false,false,'role="form" class="form-horizontal" id="manage_patient_disese" ') }}
 <div class="form-group">
-    <label class="col-sm-2 control-label">{{lang.disease}}</label>
+    <label class="col-sm-2 control-label">{{ lang.disease }}</label>
 
     <div class="col-sm-10">
         {{ helper.form.dropdown('clinic_disease_template_id', disease, helper.form.value('clinic_disease_template_id',disease.clinic_disease_template_id), 'class="form-control " id="s2example-1" ') }}
@@ -9,68 +9,68 @@
 </div>
 
 <div class="form-group">
-    <label class="col-sm-2 control-label">{{lang.note}}</label>
+    <label class="col-sm-2 control-label">{{ lang.note }}</label>
 
     <div class="col-sm-10">
-        <textarea class="form-control" id="note" placeholder="{{ lang.note }}" name="note">{{ helper.form.value('note', disease.note) }}</textarea>
+        <textarea class="form-control" id="note" placeholder="{{ lang.note }}"
+                  name="note">{{ helper.form.value('note', disease.note) }}</textarea>
     </div>
 </div>
 <div class="patient-group-separator"></div>
 
 <div class="form-group">
     <label class="col-sm-2 control-label"></label>
+
     <div class="col-sm-10">
         <a onclick="$('#myModal').modal('hide')" class="btn btn-danger cancel-button">{{ lang.cancel }}</a>
-        <button type="submit" class="btn btn-secondary" style="float: right;">{{lang.submit}}</button>
+        <button type="submit" class="btn btn-secondary" style="float: right;">{{ lang.submit }}</button>
     </div>
 </div>
-{{ helper.form.close()}}
+{{ helper.form.close() }}
 <script src="{{ constant('STYLE_JS') }}/select2/select2.min.js"></script>
 <script type="text/javascript">
-            jQuery(document).ready(function ($)
-            {
-                $("#s2example-1").select2({
-                    placeholder: 'Select Disease...',
-                    allowClear: true
-                }).on('select2-open', function ()
-                {
-                    // Adding Custom Scrollbar
-                    $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                });
+    jQuery(document).ready(function ($) {
+        $("#s2example-1").select2({
+            placeholder: 'Select Disease...',
+            allowClear: true
+        }).on('select2-open', function () {
+            // Adding Custom Scrollbar
+            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+        });
 
-                $("#manage_patient_disese").submit(function () {
-                    $.post('{{ helper.uri.url('management/clinic_patient_diseases/manage')}}/{{ op }}/{{ id }}', $(this).serialize(), function (res) {
-                        obj = jQuery.parseJSON(res);
-                        if (obj.sucess == 0) {
-                            $('.modal_errors').html(obj.errors);
-                        } else {
-                            $('#myModal').modal('hide');
-                            if ('{{ op }}' == 'add') {
-                                $('.data_diseases tbody').append('<tr class="disease_' + obj.id + '">'
-                                        + '<td>' + obj.title + '</td>'
-                                        + '<td>' + obj.note + '</td>'
-                                        + '<td>'
-                                        + '<a href="{{ helper.uri.url('management/clinic_patient_diseases/manage') }}/' + obj.id + '" class="btn btn-secondary btn-sm show-diseases"  data-toggle="modal" data-target="#myModal" rel="edit" data-id="' + obj.id + '">{{lang.edit}}</a>'
-                                        + '<a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patient_diseases/delete') }}/' + obj.id + '">{{ lang.delete }}</a>'
-                                        + '</td></tr>');
-                            }
-                            else
-                            {
-                                $('.data_diseases tbody tr.disease_' + obj.id).html(
-                                        +'<td>' + obj.title + '</td>'
-                                        + '<td>' + obj.title + '</td>'
-                                        + '<td>' + obj.note + '</td>'
-                                        + '<td>'
-                                        + '<a href="{{ helper.uri.url('management/clinic_patient_diseases/manage') }}/' + obj.id + '" class="btn btn-secondary btn-sm show-diseases" href="#" data-toggle="modal" data-target="#myModal" rel="edit" data-id="' + obj.id + '">{{lang.edit}}</a>'
-                                        + '<a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patient_diseases/delete') }}/' + obj.id + '">{{ lang.delete }}</a>'
-                                        + '</td>');
+        $("#manage_patient_disese").submit(function () {
+            $.post('{{ helper.uri.url('management/clinic_patient_diseases/manage')}}/{{ op }}/{{ id }}', $(this).serialize(), function (res) {
+                obj = jQuery.parseJSON(res);
+                if (obj.sucess == 0) {
+                    $('.modal_errors').html(obj.errors);
+                } else {
+                    $('#myModal').modal('hide');
+                    if ('{{ op }}' == 'add') {
+                        $('.data_diseases tbody').append('<tr class="disease_' + obj.id + '">'
+                                + '<td>' + $("#s2example-1 option:selected").text() + '</td>'
+                                + '<td>' + obj.note + '</td>'
+                                + '<td>'
+                                + '<a href="{{ helper.uri.url('management/clinic_patient_diseases/manage') }}/' + obj.id + '" class="btn btn-secondary btn-sm show-diseases"  data-toggle="modal" data-target="#myModal" rel="edit" data-id="' + obj.id + '">{{lang.edit}}</a>'
+                                + '<a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patient_diseases/delete') }}/' + obj.id + '">{{ lang.delete }}</a>'
+                                + '</td></tr>');
+                    }
+                    else {
 
-                            }
-                        }
+                        $('.data_diseases tbody tr.disease_' + obj.id).html(
+                                +'<td>' + $("#s2example-1 option:selected").text()+ '</td>'
+//                                + '<td>' + $("#s2example-1 option:selected").text() + '</td>'
+                                + '<td>' + obj.note + '</td>'
+                                + '<td>'
+                                + '<a href="{{ helper.uri.url('management/clinic_patient_diseases/manage') }}/' + obj.id + '" class="btn btn-secondary btn-sm show-diseases" href="#" data-toggle="modal" data-target="#myModal" rel="edit" data-id="' + obj.id + '">{{lang.edit}}</a>'
+                                + '<a class="btn btn-danger btn-sm delete" href="{{ helper.uri.url('management/clinic_patient_diseases/delete') }}/' + obj.id + '">{{ lang.delete }}</a>'
+                                + '</td>');
 
-                    });
-                    return false;
+                    }
+                }
 
-                });
             });
+            return false;
+
+        });
+    });
 </script>

@@ -491,21 +491,24 @@
                             }
                         });
             }
-            else
-            alert('error match');
-//                $('#error-match').show();
-//                $('#error-match').removeAttr("hidden");
+            else {
+                $('#error-match').show();
+                $('#error-match').removeAttr("hidden");
+            }
+//            alert('error match');
+
             return false;
         });
-    {#$('#image-form').submit(function (){#}
-        {#var new_img = $('#new-image').val();#}
-        {#$.post('{{ helper.uri.url('clinic_user_profile/changeImage/')}}{{ item.user_id }}'+ '/' + new_img, function (response){#}
-            {#if (response == 1) {#}
-                {#$('#image-edit').modal('hide');#}
-            {#}#}
-        {#});#}
-        {#return false;#}
-    {#});#}
+    $('#image-form').submit(function (){
+        var new_img = $('#new-image').val();
+        $.post('{{ helper.uri.url('clinic_user_profile/changeImage/')}}{{ item.user_id }}'+ '/' + new_img, function (response){
+            if (response == 1) {
+                $('#image-edit').modal('hide');
+            }
+        });
+        return false;
+    });
+
 
 //    if($.isFunction($.fn.datepicker)) {
 //        $(".datepicker").each(function(i, el)
