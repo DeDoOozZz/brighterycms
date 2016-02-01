@@ -57,15 +57,14 @@
                                             <li class="phone"> <i class="fa fa-phone"></i></li>
                                             {%endif%}
                                         <li class="email"> <i class="fa fa-envelope"></i> {{ item.email }} </li>
-                                        <li class="password"> <i class="fa fa-lock"></i>
-                                            {#                                            <input type="password" value="{{ item.password }}"style="border: medium none; background-color: #fff;" disabled>#}
                                             {%if id == idlog%}
-                                            <a href="#" data-toggle="modal" data-target="#edit-pass" style="margin-left:10px;">
-                                                <i class="fa fa-pencil-square-o"></i>
-                                                <span>{{ lang.edit }} Password</span>
-                                            </a>
-                                            {%endif%}
-                                        </li>
+                                            <li class="password"> <i class="fa fa-lock"></i>
+                                                <a href="#" data-toggle="modal" data-target="#edit-pass" style="margin-left:10px;">
+                                                    <i class="fa fa-pencil-square-o"></i>
+                                                    <span>{{ lang.edit }} Password</span>
+                                                </a>
+                                            </li>
+                                        {%endif%}
                                         <li class="gender"> <i class="fa fa-user"></i> {{ item.gender }} </li>
                                         <li class="birthdate"> <i class="fa fa-calendar"></i> {{ item.birthdate }} </li>
                                     </ul>
@@ -300,7 +299,6 @@
                                             <div class="message">
                                                 <p id="error-pass" hidden>Error Password</p>
                                             </div>
-                                            {#                                            <input type="text" id="status" value>#}
                                         </div>
                                     </div>
                                 </div>
@@ -471,11 +469,11 @@
                             $('#next-conf').addClass('btn btn-warning');
                         } else
                             $('#error-pass').show();
-                            $('#error-pass').removeAttr("hidden");
+                        $('#error-pass').removeAttr("hidden");
                     });
             return false;
         });
-    $('#next-conf').click(function () {
+        $('#next-conf').click(function () {
             var password_new = $('#password-new').val();
             var password_conf = $('#password-conf').val();
             if (password_new === password_conf) {
@@ -491,21 +489,20 @@
                             }
                         });
             }
-            else
-            alert('error match');
-//                $('#error-match').show();
+            else{#            alert('error match');#}
+                $('#error-match').show();
 //                $('#error-match').removeAttr("hidden");
             return false;
         });
     {#$('#image-form').submit(function (){#}
-        {#var new_img = $('#new-image').val();#}
-        {#$.post('{{ helper.uri.url('clinic_user_profile/changeImage/')}}{{ item.user_id }}'+ '/' + new_img, function (response){#}
-            {#if (response == 1) {#}
-                {#$('#image-edit').modal('hide');#}
-            {#}#}
-        {#});#}
-        {#return false;#}
-    {#});#}
+    {#var new_img = $('#new-image').val();#}
+    {#$.post('{{ helper.uri.url('clinic_user_profile/changeImage/')}}{{ item.user_id }}'+ '/' + new_img, function (response){#}
+    {#if (response == 1) {#}
+    {#$('#image-edit').modal('hide');#}
+    {#}#}
+    {#}); #}
+    {#return false;#}
+    {#}); #}
 
 //    if($.isFunction($.fn.datepicker)) {
 //        $(".datepicker").each(function(i, el)
