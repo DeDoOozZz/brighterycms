@@ -63,6 +63,7 @@ class BlogController extends Brightery_Controller {
         $comments->set([
             'name' => $userInfo->fullname,
             'email' => $userInfo->email,
+            'image' => $userInfo->image,
             'user_id' => $userInfo->user_id,
             'comment' => $this->input->post('comment'),
             'datetime' => date('Y-m-d H:i:s'),

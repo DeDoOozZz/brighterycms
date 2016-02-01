@@ -40,7 +40,7 @@ class HomeController extends Brightery_Controller {
 //      ----------start news home-----------
         $this->Language->load('blog_posts');
         $posts = new \modules\blog\models\Blog_posts();
-        $posts->_select = 'blog_post_id,title,image,short_content,seo';
+        $posts->_select = 'blog_post_id,title,image,short_content,seo,created';
         $posts->_limit = 4;
 //        $posts->_orderby = 4;
         $post = $posts->get();
