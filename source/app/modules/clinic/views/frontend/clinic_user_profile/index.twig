@@ -60,7 +60,7 @@
                                         <li class="password"> <i class="fa fa-lock"></i>
                                             {#                                            <input type="password" value="{{ item.password }}"style="border: medium none; background-color: #fff;" disabled>#}
                                             {%if id == idlog%}
-                                            <a href="#" data-toggle="modal" data-target="#edit-pass" style="margin-left:10px;">
+                                            <a href="#" data-toggle="modal" data-target="#edit-pass" id="edit-pass-btn" style="margin-left:10px;">
                                                 <i class="fa fa-pencil-square-o"></i>
                                                 <span>{{ lang.edit }} Password</span>
                                             </a>
@@ -391,6 +391,7 @@
 //                }
 //        );
 //    });
+
     $(document).ready(function () {
         $(".add-another-option-phone ").click(function () {
             $(".show-phone-option").append('<label class="control-label primary">' + 'Primary {{ lang.primary }}</label>' + '<input type="radio" class="primary" value="primary" name="primary_phone" style="position: relative;right: 90px;">' + '<input name="phone[]" id="phone" type="text" placeholder="add another phone" class="form-control">' + ' <span class="delete-option col-sm-1" style="position: relative; top:-27px;"><i class="fa fa-close"></i></span>' + '<div class="form-group-separator"></div>');
@@ -497,15 +498,15 @@
 //                $('#error-match').removeAttr("hidden");
             return false;
         });
-    {#$('#image-form').submit(function (){#}
-        {#var new_img = $('#new-image').val();#}
-        {#$.post('{{ helper.uri.url('clinic_user_profile/changeImage/')}}{{ item.user_id }}'+ '/' + new_img, function (response){#}
-            {#if (response == 1) {#}
-                {#$('#image-edit').modal('hide');#}
-            {#}#}
-        {#});#}
-        {#return false;#}
-    {#});#}
+    $('#image-form').submit(function (){
+        var new_img = $('#new-image').val();
+        $.post('{{ helper.uri.url('clinic_user_profile/changeImage/')}}{{ item.user_id }}'+ '/' + new_img, function (response){
+            if (response == 1) {
+                $('#image-edit').modal('hide');
+            }
+        });
+        return false;
+});
 
 //    if($.isFunction($.fn.datepicker)) {
 //        $(".datepicker").each(function(i, el)

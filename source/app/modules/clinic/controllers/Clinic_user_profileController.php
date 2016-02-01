@@ -234,7 +234,7 @@ class Clinic_user_profileController extends Brightery_Controller {
 //            return json_encode(['sucess' => 0, 'errors' => $this->validation->errors()]);
     }
 
-//    public function changeImageAction($id, $new_image) {
+    public function changeImageAction($id, $new_image) {
 //        $user = new \modules\users\models\Users('edit');
 //        $user->user_id = $id;
 //        $user->image = $new_image;
@@ -242,6 +242,20 @@ class Clinic_user_profileController extends Brightery_Controller {
 ////        print_r($user->get());
 //        if ($user->save())
 //            return true;
-//    }
+        if ($conect = new mysqli('localhost', 'root', '')) {
+            if ($conect->select_db('brighterycms')) {
+                $query = "UPDATE users SET  image =$new_image WHERE user_id='$id'";
+                $fetch = $conect->query($query);
+//                print_r($query->attributes);
+//                exit();
+                if ($fetch or trigger_error($conect->error . '   in   ' . $query)) {
+                     return json_encode(['sucess' => 1, 'id' => $id,
+                    ]);
+                }
+                else
+                    return json_encode(['sucess' => 0, 'errors' => $this->validation->errors()]);
+            }
+        }
+    }
 
 }
