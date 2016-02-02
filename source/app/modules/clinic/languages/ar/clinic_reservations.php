@@ -1,4 +1,5 @@
 <?php
+
 return [
 
     'clinic_reservations' => "الحجوزات",
@@ -13,16 +14,23 @@ return [
     'reservation_type' => "نوع الحجز",
     'confirmed' => "تأكيد",
     'canceled' => "إلغاء",
-    'pending'=>"قيد الانتظار",
-    'status'=>'الحالة',
-    'doctor'=>'الطبيب',
-    'attend'=>'حضر',
-    'late'=>'متأخر',
-    'entered'=>'دخل',
-    'reservation_details'=>'التفاصيل',
-    'list_of_doctors' => 'List of Doctors',
-    'specification' => 'Specification',
-    'location' => 'Location',
-    'schedule' => 'Schedule',
-    'back' => "رجوع"
-]; 
+    'pending' => "قيد الانتظار",
+    'status' => 'الحالة',
+    'doctor' => 'الطبيب',
+    'attend' => 'حضر',
+    'late' => 'متأخر',
+    'entered' => 'دخل',
+    'reservation_details' => 'التفاصيل',
+    'list_of_doctors' => 'قائمة الأطباء',
+    'specification' => 'التخصص',
+    'location' => 'الموقع',
+    'schedule' => 'جدول المواعيد',
+    'back' => "رجوع",
+    'branch' => "الفرع",
+    'schedule' => " جدول المواعيد",
+    'queue' => "الشاشة الترحيبية",
+    'select_day' => "اختار اليوم",
+    'dr' => "د",
+    'reserve' => "احجز الآن",
+    'sorry_no_schedule' => "عفواً، هذا الطبيب ليس لدية جدول مواعيد حالية",
+];

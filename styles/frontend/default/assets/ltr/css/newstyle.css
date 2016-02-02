@@ -707,3 +707,53 @@ h4.panel-title a.collapsed:after {
     font-weight: bold;
     font-size: 16px;
 }
+#portfolio .fa-chevron-left:before {
+    content: "\f054";
+}
+#portfolio .fa-chevron-right:before {
+    content: "\f053";
+}
+.blog-posts-img{
+    height:350px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.blog-posts-img img{
+    width: 100%;
+}
+.view-doctor-schedule:hover{
+    color:#fff;
+    text-decoration: none;
+}
+.queue-screen:hover{
+    color: #fff;
+    text-decoration: none;
+}
+.registration-form label{
+    display: block;
+}
+.registration-form input[type="password"] {
+    line-height: 35px;
+    border: 1px solid #dedede;
+    padding-left: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.registration-form input[type="submit"]{
+    width: 100%;
+    line-height: 35px;
+}
+.registration-form input#datepicker {
+    position: relative;
+}
+.registration-form i.fa.fa-calendar.calendar-registration {
+    position: absolute;
+    right: 15px;
+    bottom: 20px;
+    padding: 0 0;
+    background-color: #dedede;
+    color: #7f7f7f;
+}
+.registration-form span.add-another-option-phone, span.add-another-option-address {
+    margin-top: 35px;
+}

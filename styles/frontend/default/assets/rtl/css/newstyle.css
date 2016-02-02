@@ -1,5 +1,18 @@
+@font-face {
+    font-family: JF;
+    src: url('font/JF-Flat-regular.eot');
+    src: url('JF-Flat-regular.eot?#iefix') format('embedded-opentype'),
+        url('font/JF-Flat-regular.woff') format('woff'),
+        url('font/JF-Flat-regular.otf') format("opentype");
+}
+body{
+    font-family:"JF","lucida grande",verdana,helvetica,arial,sans-serif;
+    direction: rtl;
+}
+
 ul, ol {
     padding-left: 0;
+    padding-right: 0;
 }
 li.error_message {
     list-style: none;
@@ -13,7 +26,6 @@ li.error_message {
     padding: 0 10px;
 }
 li.error_message .fa-times-circle {
-    font-family: 'Montserrat', sans-serif;
     font-size:13px;
 }
 li.error_message .fa-times-circle:before {
@@ -72,7 +84,6 @@ span.add-another-option-phone:hover{
     transition: all 0.2s ease-in-out;
     color: #666666;
     font-size: 13px;
-    font-family: 'Montserrat', sans-serif;
     background-color: #fff !important;
 }
 #contact-form input[type="password"]:focus,
@@ -83,7 +94,6 @@ span.add-another-option-phone:hover{
 #contact-form label{
     display: block;
     color:#666;
-    font-family: 'Montserrat', sans-serif;
 }
 input[type="radio"] {
     margin-bottom: 20px;
@@ -91,7 +101,6 @@ input[type="radio"] {
 .registration-title {
     color: #222222;
     font-size: 17px;
-    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     margin: 0 0 15px;
     font-size: 16px;
@@ -125,8 +134,10 @@ i.fa.fa-sort-asc.drop-login {
     color:#fff;
 }
 
-.login-home{
+.login-home {
     cursor: pointer;
+    position: relative;
+    padding-right: 20px;
 }
 select.form-control {
     border: 1px solid #dedede;
@@ -163,10 +174,11 @@ label.remember-me {
     font-weight: normal;
     margin-bottom: 20px;
     font-size: 14px;
+    /*float: right;*/
 
 }
 a.forget-password {
-    float: right;
+    /*float: left;*/
     color: #999;
     text-decoration: underline;
     margin-bottom: 20px;
@@ -191,7 +203,6 @@ input.form-control {
 .login-box label,
 .login-box h4{
     color:#666;
-    font-family: 'Montserrat', sans-serif;
     font-weight: normal;
 }
 .header-user_image{
@@ -212,12 +223,13 @@ p.logout-user {
 }
 span.header-user_image {
     position: absolute;
-    left: 0;
+    right: 0;
     top: -5px;
 }
-.logout-user a{
-    color:#fff;
+.logout-user a {
+    color: #fff;
     text-decoration: none;
+    padding-right: 40px;
 }
 section.main-section-page {
     margin-top: 165px;
@@ -629,6 +641,17 @@ section#portfolio-page {
 .dart-carousel-controller{
     text-align: center;
 }
+.dart-carousel-controller a{
+    position: relative;;
+}
+.dart-carousel-controller a i {
+    position: absolute;
+    top: 13px;
+    right: 15px;
+}
+.dart-carousel-controller{
+    text-align: center;
+}
 .panel-default{
     border-color: #cfcfcf;
 }
@@ -668,7 +691,7 @@ h4.panel-title a:after {
     background: #fab000;
     color: #fff;
     font-size: 14px;
-    right: 20px;
+    left: 20px;
     position: absolute;
     z-index: 111;
     width: 28px;
@@ -688,7 +711,7 @@ h4.panel-title a.collapsed:after {
     background: #fab000;
     color: #fff;
     font-size: 14px;
-    right: 20px;
+    left: 20px;
     position: absolute;
     z-index: 111;
     width: 28px;
@@ -706,4 +729,114 @@ h4.panel-title a.collapsed:after {
     color: #fab000;
     font-weight: bold;
     font-size: 16px;
+}
+#home-section .tp-caption.finewide_medium_white span {
+    color: #ffba00 !important;
+    text-align: center;
+    float: right;
+}
+.fa-chevron-left:before {
+    content: "\f053" !important;
+}
+.fa-chevron-right:before {
+    content: "\f054" !important;
+}
+#testimonial, #clients{
+    direction: ltr;
+}
+.owl-prev {
+    position: relative;
+}
+.owl-prev i {
+    position: absolute;
+    top: 11px;
+    right: 14px;
+}
+.owl-next {
+    position: relative;
+}
+.owl-next i{
+    position: absolute;
+    top: 11px;
+    right: 14px;
+}
+.portfolio-overlay-btn a{
+    position: relative;
+}
+.portfolio-overlay-btn i {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+}
+.blog-posts-img{
+    height:350px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.blog-posts-img img{
+    width: 100%;
+}
+.blog-section .blog-box .comment-section ul li .comment-box .comment-content {
+    margin-right: 120px;
+}
+.blog-section .blog-box .comment-section ul li .comment-box img {
+    float: right;
+}
+.contact-section ul.information-list li i {
+    float: right;
+}
+.contact-section ul.information-list li a {
+    margin-right: 25px;
+}
+.contact-section ul.information-list li span {
+    margin-right: 25px;
+}
+.select2, .main-block input {
+    width: 100% !important;
+    padding-right: 10%;
+}
+.view-doctor-schedule:hover{
+    color:#fff;
+    text-decoration: none;
+}
+.select-day{
+    margin-left: 10px;
+}
+input#datepicker {  
+    margin-left: -5px;
+}
+.queue-screen:hover{
+    color: #fff;
+    text-decoration: none;
+}
+input#datepicker {
+    padding-right: 35px;
+}
+.registration-form label{
+    display: block;
+}
+.registration-form input[type="password"] {
+    line-height: 35px;
+    border: 1px solid #dedede;
+    padding-right: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.registration-form input[type="submit"]{
+    width: 100%;
+    line-height: 35px;
+}
+.registration-form input#datepicker {
+    position: relative;
+}
+.registration-form i.fa.fa-calendar.calendar-registration {
+    position: absolute;
+    right: 15px;
+    bottom: 20px;
+    padding: 0 0;
+    background-color: #dedede;
+    color: #7f7f7f;
+}
+.registration-form span.add-another-option-phone, span.add-another-option-address {
+    margin-top: 35px;
 }

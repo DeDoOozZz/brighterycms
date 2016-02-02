@@ -29,7 +29,7 @@ class HomeController extends Brightery_Controller {
     }
 
     public function indexAction() {
-        $this->language->load('welcome');
+        $this->language->load('home');
 
 //      --------start sliders---------
         $this->language->load('sliders');

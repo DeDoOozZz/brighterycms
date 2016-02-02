@@ -26,5 +26,16 @@ return [
     'start_upload' => 'بدأ التحميل',
     'cancel_upload' => 'إلغاء التحميل',
     'cancel' => 'الغاء',
+    'remember_me' => 'تذكرني',
+    'forget_password' => 'نسيت كلمة المرور؟',
+    'you_can_contact_or_visit_us_during_time_work' => 'يمكنك الاتصال أو زيارة لنا خلال وقت العمل',
+     'working_hour' => 'ساعات العمل',
+    'tel' => 'الهاتف',
+    'tags' => 'ما يخص الموقع',
+    'info' => 'معلومات الاتصال',
+    'aboutus' => 'من نحن',
+    'important_links' => 'روابط تهمك',
+    'continue_reading' => 'قراءة المزيد ...',
+  
 
 ];

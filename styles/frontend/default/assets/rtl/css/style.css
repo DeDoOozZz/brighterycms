@@ -98,7 +98,6 @@ website:    http://www.themepunch.com
   -o-transition: all 0.2s ease-in-out;
   color: #222222;
   font-size: 30px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 900;
   margin: 0 0 30px;
   text-transform: uppercase;
@@ -124,19 +123,28 @@ website:    http://www.themepunch.com
 .top-line p {
   color: #ffffff;
   margin-bottom: 0;
+  font-size: 12px;
 }
 .top-line p span {
-  margin-right: 20px;
+  margin-left: 20px;
 }
 .top-line p span i {
-  font-size: 13px;
-  color: #ffba00;
-  margin-right: 10px;
+    font-size: 13px;
+    color: #ffba00;
+    margin-left: 10px;
+}
+.login-home i {
+    position: absolute;
+    right: 0px;
+    top: 4px;
+}
+button.close {
+    float: left;
 }
 .top-line ul.social-icons {
   margin: 0;
   padding: 0;
-  text-align: right;
+  text-align: left;
 }
 .top-line ul.social-icons li {
   display: inline-block;
@@ -164,7 +172,6 @@ website:    http://www.themepunch.com
 .navbar-nav > li > a {
   color: #222222 !important;
   font-size: 14px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   text-transform: uppercase;
   transition: all 0.2s ease-in-out;
@@ -223,7 +230,6 @@ website:    http://www.themepunch.com
   display: block;
   color: #222222;
   font-size: 13px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   text-transform: uppercase;
   padding: 10px 20px;
@@ -288,7 +294,6 @@ header.active .navbar-nav > li > a.active {
 .form-search input[type="search"] {
   font-size: 14px;
   color: #666666;
-  font-family: 'Lato', sans-serif;
   font-weight: 400;
   line-height: 20px;
   margin: 0 0 10px;
@@ -332,7 +337,6 @@ header.active .navbar-nav > li > a.active {
 p {
   font-size: 14px;
   color: #666666;
-  font-family: 'Lato', sans-serif;
   font-weight: 400;
   line-height: 20px;
   margin: 0 0 10px;
@@ -347,7 +351,6 @@ p {
 .title-section h1 {
   color: #222222;
   font-size: 30px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 900;
   margin: 0 0 30px;
   text-transform: uppercase;
@@ -362,7 +365,6 @@ p {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-family: 'Montserrat', sans-serif;
   margin: 0px;
   border-width: 0px;
   border-style: none;
@@ -381,7 +383,6 @@ p {
   font-size: 48px;
   line-height: 48px;
   font-weight: 900;
-  font-family: 'Montserrat', sans-serif;
   background-color: none;
   text-decoration: none;
   text-transform: uppercase;
@@ -399,7 +400,6 @@ p {
   background: transparent;
   font-size: 12px;
   font-weight: 700;
-  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   border: 2px solid #ffffff;
   -webkit-border-radius: 2px;
@@ -415,7 +415,6 @@ p {
 #home-section .tp-caption a.trans-btn2 {
   font-size: 12px;
   font-weight: 700;
-  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   border: 2px solid transparent;
   -webkit-border-radius: 2px;
@@ -448,7 +447,6 @@ a.button-one {
   background: transparent;
   font-size: 12px;
   font-weight: 700;
-  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   border: 2px solid #ffffff;
   -webkit-border-radius: 2px;
@@ -465,7 +463,6 @@ a.button-one {
 .banner-section h2 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   margin-bottom: 0;
@@ -501,7 +498,6 @@ a.button-one {
 .services-offer-section .offer-post h2 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   font-size: 16px;
@@ -530,7 +526,6 @@ a.button-one {
   margin-bottom: 5px;
   color: #222222;
   font-size: 13px;
-  font-family: 'Montserrat', sans-serif;
 }
 .services-offer-section .offer-post ul.offer-list li i {
   font-size: 14px;
@@ -553,7 +548,6 @@ a.button-one {
 .projects-section .project-title h2 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   text-transform: uppercase;
@@ -581,7 +575,6 @@ a.button-one {
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
   color: #222222;
-  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   letter-spacing: 1.3px;
   padding-bottom: 3px;
@@ -615,7 +608,6 @@ a.button-one {
 .project-box .project-post .hover-box h2 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   font-size: 15px;
@@ -637,7 +629,6 @@ a.button-one {
 .project-box .project-post .hover-box span {
   font-size: 14px;
   color: #666666;
-  font-family: 'Lato', sans-serif;
   font-weight: 400;
   line-height: 20px;
   margin: 0 0 10px;
@@ -657,7 +648,6 @@ a.button-one {
 .about-section h2 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   font-size: 16px;
@@ -691,7 +681,6 @@ a.button-one {
   border-radius: 0px;
   color: #222222;
   font-size: 13px;
-  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   font-weight: 700;
   border: none;
@@ -715,7 +704,6 @@ a.button-one {
 .tab-posts-box .tab-pane h3 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   font-size: 13px;
@@ -751,7 +739,6 @@ a.button-one {
 .testimonial-section .title-section h1 {
   color: #222222;
   font-size: 30px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 900;
   margin: 0 0 30px;
   text-transform: uppercase;
@@ -780,7 +767,6 @@ a.button-one {
 .testimonial-section .testimonial-box h2 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   color: #ffba00;
@@ -790,7 +776,6 @@ a.button-one {
 .testimonial-section .testimonial-box span {
   font-size: 14px;
   color: #666666;
-  font-family: 'Lato', sans-serif;
   font-weight: 400;
   line-height: 20px;
   margin: 0 0 10px;
@@ -818,7 +803,6 @@ a.button-one {
 .news-section h2 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   text-transform: uppercase;
@@ -856,7 +840,6 @@ a.button-one {
   color: #666666;
   font-size: 11px;
   font-weight: 400;
-  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   margin: 0 0 20px;
 }
@@ -870,7 +853,6 @@ a.button-one {
   color: #666666;
   font-size: 13px;
   font-weight: 700;
-  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
 }
 .news-section .news-post > a:hover {
@@ -882,7 +864,6 @@ a.button-one {
 .clients-section h2 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   text-transform: uppercase;
@@ -951,7 +932,6 @@ a.button-one {
   background: #f7f7f7;
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   font-size: 13px;
@@ -995,7 +975,6 @@ a.button-one {
 .accord-title p {
   font-size: 14px;
   color: #666666;
-  font-family: 'Lato', sans-serif;
   font-weight: 400;
   line-height: 20px;
   margin: 0 0 10px;
@@ -1023,7 +1002,6 @@ a.button-one {
 .accord-content p {
   font-size: 14px;
   color: #666666;
-  font-family: 'Lato', sans-serif;
   font-weight: 400;
   line-height: 20px;
   margin: 0 0 10px;
@@ -1052,7 +1030,6 @@ a.button-one {
 .page-banner-section h2 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   margin-bottom: 0;
@@ -1074,7 +1051,6 @@ a.button-one {
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
   font-size: 13px;
-  font-family: 'Montserrat', sans-serif;
   color: #222222;
 }
 .page-banner-section ul.page-depth li a:hover {
@@ -1083,7 +1059,6 @@ a.button-one {
 .page-banner-section ul.page-depth li:before {
   content: '-';
   font-size: 13px;
-  font-family: 'Montserrat', sans-serif;
   color: #666666;
   margin-right: 5px;
 }
@@ -1113,7 +1088,6 @@ a.button-one {
 .team-section .team-post h2 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   font-size: 16px;
@@ -1123,7 +1097,6 @@ a.button-one {
   display: inline-block;
   font-size: 14px;
   color: #666666;
-  font-family: 'Lato', sans-serif;
   font-weight: 400;
   line-height: 20px;
   margin: 0 0 10px;
@@ -1156,7 +1129,6 @@ a.button-one {
   display: block;
   color: #222222;
   font-size: 13px;
-  font-family: 'Montserrat', sans-serif;
   padding: 15px 25px;
   background: #f7f7f7;
   position: relative;
@@ -1189,7 +1161,6 @@ a.button-one {
 .services-page-section .contact-info h2 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   font-size: 16px;
@@ -1217,7 +1188,6 @@ a.button-one {
   display: block;
   font-size: 14px;
   color: #666666;
-  font-family: 'Lato', sans-serif;
   font-weight: 400;
   line-height: 20px;
   margin: 0 0 10px;
@@ -1228,7 +1198,6 @@ a.button-one {
 .services-page-section .contact-info ul.information-list li a {
   font-size: 14px;
   color: #666666;
-  font-family: 'Lato', sans-serif;
   font-weight: 400;
   line-height: 20px;
   margin: 0 0 10px;
@@ -1250,7 +1219,6 @@ a.button-one {
 .services-page-section .services-wrapp .services-post h2 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   font-size: 16px;
@@ -1269,7 +1237,6 @@ a.button-one {
   color: #666666;
   font-size: 13px;
   font-weight: 700;
-  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
 }
 .services-page-section .services-wrapp .services-post a:hover {
@@ -1299,7 +1266,6 @@ a.button-one {
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
   color: #222222;
-  font-family: 'Montserrat', sans-serif;
   font-size: 13px;
   letter-spacing: 1.3px;
   padding-bottom: 3px;
@@ -1342,7 +1308,6 @@ a.button-one {
 .blog-section h2 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   text-transform: uppercase;
@@ -1362,7 +1327,6 @@ a.button-one {
 .blog-section .blog-box .blog-post h2 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   text-transform: uppercase;
@@ -1386,7 +1350,6 @@ a.button-one {
   color: #666666;
   font-size: 11px;
   font-weight: 400;
-  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   margin: 0 0 25px;
 }
@@ -1400,7 +1363,6 @@ a.button-one {
   color: #666666;
   font-size: 13px;
   font-weight: 700;
-  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
 }
 .blog-section .blog-box .blog-post .post-content-text > a:hover {
@@ -1425,7 +1387,6 @@ a.button-one {
   color: #666666;
   font-size: 14px;
   font-weight: 700;
-  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
 }
 .blog-section .blog-box ul.pagination-list li a:hover,
@@ -1435,7 +1396,6 @@ a.button-one {
 .blog-section .blog-box .single-post h1 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   text-transform: uppercase;
@@ -1458,7 +1418,6 @@ a.button-one {
 }
 .blog-section .blog-box .single-post blockquote p span {
   color: #666666;
-  font-family: 'Lato', sans-serif;
   font-weight: 400;
   line-height: 20px;
   margin: 0 0 10px;
@@ -1486,7 +1445,6 @@ a.button-one {
   display: inline-block;
   color: #666666;
   font-size: 13px;
-  font-family: 'Montserrat', sans-serif;
   margin-bottom: 15px;
 }
 .blog-section .blog-box .comment-section {
@@ -1519,7 +1477,6 @@ a.button-one {
 .blog-section .blog-box .comment-section ul li .comment-box .comment-content h4 {
   color: #222222;
   font-size: 13px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   margin: 0;
@@ -1542,7 +1499,6 @@ a.button-one {
 .blog-section .blog-box .comment-section ul li .comment-box .comment-content span {
   font-size: 14px;
   color: #666666;
-  font-family: 'Lato', sans-serif;
   line-height: 20px;
   margin: 0 0 10px;
   font-size: 11px;
@@ -1560,7 +1516,6 @@ a.button-one {
 .sidebar h2 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   text-transform: uppercase;
@@ -1592,7 +1547,6 @@ a.button-one {
   color: #222222;
   font-size: 13px;
   font-weight: 400;
-  font-family: 'Montserrat', sans-serif;
   padding-bottom: 10px;
 }
 .sidebar ul.category-list li a:hover,
@@ -1624,7 +1578,6 @@ a.button-one {
   color: #ffffff;
   background: #222222;
   font-size: 12px;
-  font-family: 'Montserrat', sans-serif;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -o-border-radius: 3px;
@@ -1667,7 +1620,6 @@ a.button-one {
 .single-page-section .project-content-box h2 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   font-size: 16px;
@@ -1682,7 +1634,6 @@ a.button-one {
   list-style: none;
   font-size: 14px;
   color: #666666;
-  font-family: 'Lato', sans-serif;
   font-weight: 400;
   line-height: 20px;
   margin: 0 0 10px;
@@ -1711,7 +1662,6 @@ a.button-one {
 .contact-section h2 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   font-size: 16px;
@@ -1742,7 +1692,6 @@ a.button-one {
   display: block;
   font-size: 14px;
   color: #666666;
-  font-family: 'Lato', sans-serif;
   font-weight: 400;
   line-height: 20px;
   margin: 0 0 10px;
@@ -1753,7 +1702,6 @@ a.button-one {
 .contact-section ul.information-list li a {
   font-size: 14px;
   color: #666666;
-  font-family: 'Lato', sans-serif;
   font-weight: 400;
   line-height: 20px;
   margin: 0 0 10px;
@@ -1782,7 +1730,6 @@ a.button-one {
   -o-transition: all 0.2s ease-in-out;
   color: #666666;
   font-size: 13px;
-  font-family: 'Montserrat', sans-serif;
 }
 #contact-form input[type="text"]:focus,
 .comment-form input[type="text"]:focus,
@@ -1804,7 +1751,6 @@ a.button-one {
   background: #ffba00;
   color: #ffffff;
   font-size: 13px;
-  font-family: 'Montserrat', sans-serif;
   transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
@@ -1819,7 +1765,6 @@ a.button-one {
 .comment-form .message {
   padding: 10px 20px;
   font-size: 13px;
-  font-family: 'Montserrat', sans-serif;
 }
 #contact-form .message.error,
 .comment-form .message.error {
@@ -1857,7 +1802,6 @@ a.button-one {
 .error-section h1 {
   color: #222222;
   font-size: 30px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 900;
   margin: 0 0 30px;
   text-transform: uppercase;
@@ -1910,7 +1854,6 @@ footer .up-footer {
 footer .up-footer h2 {
   color: #222222;
   font-size: 17px;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0 0 15px;
   font-size: 15px;
@@ -1944,7 +1887,6 @@ footer .up-footer ul.tag-list li a {
   color: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.8);
   font-size: 12px;
-  font-family: 'Lato', sans-serif;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -o-border-radius: 3px;
@@ -1970,7 +1912,6 @@ footer .up-footer ul.navigation li a {
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
   font-size: 12px;
-  font-family: 'Montserrat', sans-serif;
   color: rgba(255, 255, 255, 0.9);
 }
 footer .up-footer ul.navigation li a:hover {
@@ -2003,7 +1944,6 @@ footer .up-footer .info-widget p {
   margin-bottom: 5px;
 }
 footer .up-footer .info-widget p span {
-  font-family: 'Montserrat', sans-serif;
   color: #ffba00;
 }
 footer .up-footer .info-widget p.first-par {
@@ -2015,7 +1955,6 @@ footer p.copyright {
   border-top: 1px dotted #717173;
   text-transform: uppercase;
   font-size: 13px;
-  font-family: 'Montserrat', sans-serif;
   color: #ffffff;
   text-align: center;
   margin: 0;

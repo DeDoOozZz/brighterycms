@@ -68,12 +68,12 @@
                                     {% if input.cookie('fullname') %}
                                         <p class="logout-user">
                                             <span class="user-header-home"> <span class="header-user_image"><img src="{{ helper.uri.cdn('users', input.cookie('image')) }}"></span><a href="#">{{ input.cookie('fullname') }}</a></span>
-                                            <span class="logout-home"><a href="{{ helper.uri.url('users/logout') }}">{{ lang.logout }}</a> <i class="fa fa-sign-out"></i> </span>
+                                            <span class="logout-home"><a href="{{ helper.uri.url('users/logout') }}"><i class="fa fa-sign-out"></i> {{ lang.logout }}</a>  </span>
                                         </p>
                                     {% else %}
                                         <p class="login-user">
                                             <span class="login-home" data-toggle="modal" data-target="#myModal"><i class="fa fa-sign-in"></i> {{ lang.login }} </span>
-                                            <span class="login-home"><i class="fa fa-user"></i><a href="{{ helper.uri.url('users/register') }}" style="color:#fff; text-decoration: none;">{{ lang.register }}</a></span>
+                                            <span class="login-home"><a href="{{ helper.uri.url('users/register') }}" style="color:#fff; text-decoration: none;"><i class="fa fa-user"></i> {{ lang.register }}</a></span>
                                         </p>
                                     {% endif %}
 
@@ -108,8 +108,8 @@
                                                         <div class="form-group">
                                                             <label for="field-5" class="col-sm-3 control-label"></label>
                                                             <div class="col-sm-9">
-                                                                <label class="remember-me"><input type="checkbox"> Remember me</label>
-                                                                <a href="#" class="forget-password">Forget Password ?</a><br>
+                                                                <label class="col-sm-6 remember-me"><input type="checkbox"> {{lang.remember_me}}</label>
+                                                                <a href="#" class="col-sm-6 forget-password">{{lang.forget_password}}</a><br>
                                                                 <input type="submit" class="submit reservation-login-submit" value="{{lang.login}}" >
                                                                 <a href="{{ helper.uri.url('users/register') }}" class="register-new-patient">{{lang.register}}</a>
                                                             </div>
@@ -186,13 +186,13 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="footer-widget" style="color:#fff;">
-                                    <h2>About Us</h2>
+                                    <h2>{{lang.aboutus}}</h2>
                                     Brightery is a fast-growing agency offering various digital services to facilitate work. We are specialized in web/mobile development, branding, UX design, digital marketing, and startup services.
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="footer-widget">
-                                    <h2>Tags</h2>
+                                    <h2>{{lang.tags}}</h2>
                                     <ul class="menu-links">
                                         {% for item in this.Menu.getCustomMenu('1') %}
                                             <li>
@@ -206,7 +206,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="footer-widget">
-                                    <h2>Important Links</h2>
+                                    <h2>{{lang.important_links}}</h2>
                                     <ul class="menu-links">
                                          {% for item in this.Menu.getCustomMenu('1') %}
                                             <li>
@@ -220,15 +220,15 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="footer-widget info-widget">
-                                    <h2>Info</h2>
+                                    <h2>{{lang.info}}</h2>
 
-                                    <p class="first-par">You can contact or visit us during working time.</p>
+                                    <p class="first-par">{{lang.you_can_contact_or_visit_us_during_time_work}}</p>
 
-                                    <p><span>Tel: </span> +(20) 115-891-5061</p>
+                                    <p><span>{{lang.tel}}: </span> +(20) 115-891-5061</p>
 
-                                    <p><span>Email: </span> INFO@BRIGHTERY.COM</p>
+                                    <p><span>{{lang.email}}: </span> INFO@BRIGHTERY.COM</p>
 
-                                    <p><span>Working Hours: </span> 8:00 a.m - 17:00 a.m</p>
+                                    <p><span>{{lang.working_hour}}: </span> 8:00 a.m - 17:00 a.m</p>
                                 </div>
                             </div>
                         </div>

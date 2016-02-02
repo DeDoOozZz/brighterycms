@@ -9,4 +9,6 @@
 		'image' => "Image",
 		'description' => "Description",
 		'created' => "Created",
+		'our_portfolio' => "Our Portfolio",
+		'show_all' => "Show All",
 	  ];

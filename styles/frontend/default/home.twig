@@ -90,7 +90,7 @@
         ================================================== -->
 <section class="banner-section">
     <div class="container">
-        <h2>All You Need for building Creative &amp; Professional<a href="{{ helper.uri.url('contactus') }}" class="button-one">click here</a></h2>
+        <h2>{{lang.all_you_need_here}} <a href="{{ helper.uri.url('contactus') }}" class="button-one">{{lang.click_here}}</a></h2>
     </div>
 </section>
 <!-- End banner section -->
@@ -102,7 +102,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class='text-center'>
-                    <h2 class="title"><span>Latest News</span></h2>
+                    <h2 class="title"><span>{{lang.latest_blog_posts}}</span></h2>
                 </div>
             </div>
         </div>
@@ -118,7 +118,7 @@
                                 <h2><a href="{{ helper.uri.url('blog/post', post.seo) }}">{{post.title}}</a></h2>
                                 <span>{{ post.created|date("d F Y")}}</span></br>
                                 {{post.short_content}}</br>
-                                <a href="{{ helper.uri.url('blog/post', post.seo) }}">Continue Reading...</a>
+                                <a href="{{ helper.uri.url('blog/post', post.seo) }}">{{lang.continue_reading}}</a>
                             </div>
                         </div>
                     {% endfor %}
@@ -135,7 +135,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class='text-center'>
-                    <h2 class="title"><span>Latest Projects</span></h2>
+                    <h2 class="title"><span>{{lang.lastest_projects}}</span></h2>
                 </div>
             </div>
         </div>
@@ -202,8 +202,9 @@
                     </div><!-- Carousel inner end -->
 
                     <div class="dart-carousel-controller">
-                        <a data-slide="prev" href="#portfolio-carousel" class="left"><i class="fa fa-chevron-left"></i></a>
                         <a data-slide="next" href="#portfolio-carousel" class="right"><i class="fa fa-chevron-right"></i></a>
+
+                        <a data-slide="prev" href="#portfolio-carousel" class="left"><i class="fa fa-chevron-left"></i></a>
                     </div><!-- Controller end -->
 
                 </div><!-- Carousel end -->                          
@@ -235,7 +236,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class='text-center'>
-                    <h2 class="title"><span>Customers Feedback</span></h2>
+                    <h2 class="title"><span>{{lang.customer_feedback}}</span></h2>
                 </div>
             </div>
         </div>
@@ -276,7 +277,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class='text-center'>
-                    <h2 class="title"><span>Clients</span></h2>
+                    <h2 class="title"><span>{{lang.clients}}</span></h2>
                 </div>
             </div>
         </div>

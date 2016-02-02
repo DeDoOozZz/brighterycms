@@ -34,10 +34,10 @@
                             {{ error }}
                             <h2>{{lang.leave_comment}}</h2>
                             {% if not user %}
-                            <input name="name" id="name" type="text" placeholder="name" value="{{ helper.form.value('name') }}">
-                            <input name="email" id="email" type="text" placeholder="email" value="{{ helper.form.value('email') }}">
+                            <input name="name" id="name" type="text" placeholder="{{lang.name}}" value="{{ helper.form.value('name') }}">
+                            <input name="email" id="email" type="text" placeholder="{{lang.email}}" value="{{ helper.form.value('email') }}">
                             {% endif %}
-                            <textarea name="comment" id="comment" placeholder="comment"></textarea>
+                            <textarea name="comment" id="comment" placeholder="{{lang.comment}}"></textarea>
                             <input type="submit" value="{{lang.leave_comment}}">
                         {{ helper.form.close() }}
                     </div>

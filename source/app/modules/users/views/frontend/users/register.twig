@@ -5,8 +5,8 @@
     <div class="container">
         {{ helper.form.open(null,false,true,'role="form" class="comment-form"') }}
         {{ error }}
-        <h2 class="registration-title" style="color:#fab000;">{{lang.register}}</h2>
-        <div class="row">
+        <h2 class="registration-title" style="color:#fab000;">{{lang.registeration}}</h2>
+        <div class="row registration-form">
             <div class="col-md-4">
                 <label>{{lang.fullname}}</label>
                 <input name="fullname" id="name" type="text" placeholder="{{lang.fullname}}" value="{{ helper.form.value('fullname') }}">
@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row registration-form">
             <div class="col-md-4 date-and-time">
                 <label>{{lang.birthdate}}</label>
                 <input type="text" id="datepicker" class="datepicker-registration" placeholder="{{lang.birthdate}}" name="birthdate" value="{{ helper.form.value('birthdate') }}">
@@ -28,12 +28,12 @@
                 <input name="image" type="file" placeholder="{{lang.image}}">
             </div>
         </div>
-        <div class="row">
+        <div class="row registration-form">
             <div class="col-md-4">
                 <label>{{ lang.gender }}</label>
             </div>
         </div>
-        <div class="row">
+        <div class="row registration-form">
             <div class="col-md-2">
                 <input type="radio" name="gender" value="male" {{ helper.form.checked('gender', 'male') }}> {{lang.male}}
             </div>
@@ -41,7 +41,7 @@
                 <input type="radio" name="gender" value="female" {{ helper.form.checked('gender', 'female') }}> {{lang.female}} 
             </div>
         </div>
-        <div class="row">
+        <div class="row registration-form">
             <div class="col-md-4">
                 <label>{{lang.phone}}</label>
                 <input name="phone[]" type="text" placeholder="{{lang.phone}}" value="{{ helper.form.value('phone') }}"><br />
@@ -51,7 +51,7 @@
                 <span class="add-another-option-phone"> {{lang.add_another_phone}}</span>
             </div>
         </div>
-        <div class="row">
+        <div class="row registration-form">
             <div class="col-md-4">
                 <label>{{lang.address}}</label>
                 <input name="address[]" type="text" placeholder="{{lang.address}}" value="{{ helper.form.value('address') }}"><br />
@@ -61,7 +61,7 @@
                 <span class="add-another-option-address"> {{lang.add_another_address}}</span>
             </div>
         </div>
-        <div class="row">
+        <div class="row registration-form">
             <div class="col-md-4">
                 <label>{{lang.password}}</label>
                 <input name="password" type="password" placeholder="{{lang.password}}">
@@ -71,7 +71,7 @@
                 <input name="confirm_password" type="password" placeholder="{{lang.confirm_password}}">
             </div>
         </div>
-        <div class="row">
+        <div class="row registration-form">
             <div class="col-md-4">
                 <input type="submit" value="{{ lang.register }}">
             </div>
@@ -98,33 +98,3 @@
         });
     });
 </script>
-<style>
-    label{
-        display: block;
-    }
-    input[type="password"]{
-        line-height: 35px;
-        border:1px solid #dedede;
-        padding-left: 10px;
-        width: 100%;
-        margin-bottom: 20px;
-    }
-    input[type="submit"]{
-        width: 100%;
-        line-height: 35px;
-    }
-    input#datepicker {
-        position: relative;
-    }
-    i.fa.fa-calendar.calendar-registration {
-        position: absolute;
-        right: 15px;
-        bottom: 20px;
-        padding: 0 0;
-        background-color: #dedede;
-        color: #7f7f7f;
-    }
-    span.add-another-option-phone, span.add-another-option-address {
-        margin-top: 35px;
-    }
-</style>

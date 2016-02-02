@@ -28,5 +28,14 @@ return [
     'custom_permalink' => 'Custom Permalink',
     'edit_profile' => 'Edit Profile',
     'cancel' => 'Cancel',
-
+    'remember_me' => 'Remember me',
+    'forget_password' => 'Forget Password ?',
+    'you_can_contact_or_visit_us_during_time_work' => 'You can contact or visit us during working time.',
+    'working_hour' => 'Working Hour',
+    'tel' => 'Tel',
+    'tags' => 'Tags',
+    'info' => 'Info',
+    'aboutus' => 'About Us',
+    'important_links' => 'Important Links',
+    'continue_reading' => 'Continue Reading...',
 ];

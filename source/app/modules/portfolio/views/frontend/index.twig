@@ -27,13 +27,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div class='text-center'>
-                    <h2 class="title"><span>Our Projects</span></h2>
+                    <h2 class="title"><span>{{lang.our_portfolio}}</span></h2>
                 </div>
             </div>
         </div>
          <div class="row text-center">
              <div class="col-md-12"  id="isotope-filter">
-                 <a data-filter="*" href="#" class="active">Show All</a> &nbsp; / 
+                 <a data-filter="*" href="#" class="active">{{lang.show_all}}</a> &nbsp; / 
                  {% for cat in categories %}
                      <a class="" href="#" data-filter=".cat_{{ cat.portfolio_category_id }}">{{cat.title}}</a> &nbsp; / 
                  {% endfor %}

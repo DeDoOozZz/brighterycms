@@ -78,7 +78,7 @@ class Clinic_reservationController extends Brightery_Controller {
     }
 
     public function get_scheduleAction($id) {
-
+        $this->language->load("clinic_reservations");
         $userInfo = $this->permissions->checkUserCredentials();
         $model_id = new \modules\clinic\models\Clinic_doctors();
         $model_id->_select = 'user_id';

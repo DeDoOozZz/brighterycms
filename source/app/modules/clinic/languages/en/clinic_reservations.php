@@ -24,6 +24,13 @@ return [
     'specification' => 'Specification',
     'location' => 'Location',
     'schedule' => 'Schedule',
-    'back' => "Go Back"
+    'back' => "Go Back",
+    'branch' => "Branch",
+    'schedule' => "Schedule",
+    'queue' => "Queue",
+    'select_day' => "Select Day",
+    'dr' => "DR",
+    'reserve' => "Reserve",
+    'sorry_no_schedule' => "Sorry, The Doctor Hasn't Schedule",
 
 ]; 

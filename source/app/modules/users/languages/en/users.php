@@ -23,5 +23,5 @@ return [
     'add_another_address' => '+ Add another address',
     'add_another_phone' => '+ Add another phone',
     'confirm_password' => 'Confirm Password',
-    
+    'registeration' => 'Registration',
 ];

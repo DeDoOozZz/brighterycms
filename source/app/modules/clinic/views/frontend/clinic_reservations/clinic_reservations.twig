@@ -2,7 +2,7 @@
 <section class="main-section-page">
     <div class="container">
         <div class="row">
-            <h4 class="reseravtion-search-title">Reservation</h4>
+            <h4 class="reseravtion-search-title">{{lang.clinic_reservations}}</h4>
 
             <form method="get" action="{{ helper.uri.url('clinic_reservation/index') }}"
                   class="reservation-search-form">
@@ -32,7 +32,7 @@
                 <div class="col-md-3">
                     <div class="main-block submit-block">
                         <i class="fa fa-search main-block-icon"></i>
-                        <input type="submit" value="Search">
+                        <input type="submit" value="{{lang.search}}">
                     </div>
                 </div>
             </form>
@@ -54,22 +54,22 @@
 
                         <div class="reservation-details">
                             <span class="reservation-details-title"><i
-                                    class="fa fa-stethoscope"></i> Specification:</span>
+                                    class="fa fa-stethoscope"></i> {{lang.specification}}: </span>
                             <span class="reservation-details-content">{{ item.specification }}</span>
                         </div>
                         <div class="reservation-details">
-                            <span class="reservation-details-title"><i class="fa fa-map-marker"></i> Branch:</span>
+                            <span class="reservation-details-title"><i class="fa fa-map-marker"></i> {{lang.branch}}: </span>
                             <span class="reservation-details-content">{{ item.clinic_branch }}</span>
                         </div>
                         <div class="reservation-doctors">
                             <a class="view-doctor-schedule"
                                href="{{ helper.uri.url('clinic_reservation/get_schedule',item.clinic_doctor_id) }}"><i
-                                    class="fa fa-calendar" style="text-decoration: none;color: #fff;"></i> View Schedule</a>
+                                    class="fa fa-calendar" style="text-decoration: none;color: #fff;"></i> {{lang.schedule}}</a>
                         </div>
                         
                         <div class="reservation-doctors">
                             <a class="view-doctor-schedule queue-screen" href="{{ helper.uri.url('clinic_welcome_screen/index',item.clinic_doctor_id) }}" target="_blank">
-                                <i class="fa fa-desktop" style="text-decoration: none;color: #fff;"></i> View Queue</a>
+                                <i class="fa fa-desktop" style="text-decoration: none;color: #fff;"></i> {{lang.queue}}</a>
                         </div>
                     </div>
 

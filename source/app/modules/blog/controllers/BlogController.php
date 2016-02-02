@@ -22,6 +22,7 @@ class BlogController extends Brightery_Controller {
         parent::__construct();
         $this->language->load('blog_categories');
         $this->language->load('blog_posts');
+        $this->language->load('blog_post_comments');
     }
 
     public function indexAction($seo = null) {
