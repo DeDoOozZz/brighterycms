@@ -31,7 +31,7 @@ class Clinic_patient_diseasesController extends Brightery_Controller {
         if ($op == 'add') {
             $diseases->attributes['user_id'] = $id;
         } else if ($op == 'edit') {
-            echo $diseases->clinic_patient_disease_id = $id;
+             $diseases->clinic_patient_disease_id = $id;
             $data['disease'] = $diseases->get();
         }
 
