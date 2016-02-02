@@ -456,13 +456,13 @@
             /*outline:none;*/
         }
         input[type="submit"] {
-          background-color: #ffba00;
-          border: none;
-          color: #fff;
-          line-height: 35px;
-          width: 100%;
-          text-align: center;
-        }
+               background-color: #ffba00;
+               border: none;
+               color: #fff;
+               line-height: 35px;
+               width: 100%;
+               text-align: center;
+             }
         .submit-block .main-block-icon {
           color: #fff;
           font-size: 15px;

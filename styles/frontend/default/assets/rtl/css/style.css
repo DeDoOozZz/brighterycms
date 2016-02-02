@@ -253,11 +253,11 @@ header.active .navbar-brand {
   padding: 18px 15px;
 }
 header.active .navbar-nav > li > a {
-  color: #222222 !important;
-  padding: 25px 15px;
+    color: #222222 !important;
+    padding: 40px 15px;
 }
 header.active .navbar-nav a.open-search {
-  padding: 25px 15px;
+    padding: 40px 15px;
 }
 header.active .navbar-nav a.open-search i {
   color: #666666;
@@ -812,8 +812,8 @@ a.button-one {
   background: rgba(34, 34, 34, 0.8);
 }
 .news-section {
-  padding: 50px 0 30px;
-  background: #f1f1f1;
+/*  padding: 50px 0 30px;
+  background: #f1f1f1;*/
 }
 .news-section h2 {
   color: #222222;
@@ -2201,4 +2201,15 @@ footer p.copyright {
   #map {
     height: 200px;
   }
+}
+.post-new-img {
+    height: 263px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #dedede;
+   
+}
+.post-new-img:hover{
+     background-color: #fab000;
 }

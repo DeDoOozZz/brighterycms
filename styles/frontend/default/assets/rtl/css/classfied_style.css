@@ -172,16 +172,12 @@ input#tags:focus{
     margin: 5px 0;
     display: block;
 }
-.post-job-link-responsive{
-    display: none;
-}
 .post-job-link{
     padding: 10px;
     background-color: #f49616;
     color: #fff;
     float: left;
     border-radius: 5px;
-    display: block;
 }
 .post-job-link:hover{
     color: #fff;
